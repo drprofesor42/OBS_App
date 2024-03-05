@@ -63,11 +63,11 @@ namespace OBS_App.Controllers
                         }
                         if (User.IsInRole("Ogretmen"))
                         {
-                            return RedirectToAction("Index", "Ogretmen");
+                            return RedirectToAction("Index", "Ogretmen", new { area = "Ogretmen" });
                         }
                         if (User.IsInRole("Ogrenci"))
                         {
-                            return RedirectToAction("Index", "Ogrenci");
+                            return RedirectToAction("Index", "Ogrenci", new { area = "Ogrenci" });
                         }
 
                         ModelState.AddModelError("", "*Lütfen Yöneticiniz İle Görüşünüz");
