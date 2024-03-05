@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using NuGet.Common;
 using OBS_App.Models;
 using OBS_App.ViewsModel;
-using OBS_App.ViewsModel;
 using System.Security.Cryptography.X509Certificates;
 
 
-namespace OBS_App.Controllers.Yönetim
+namespace OBS_App.Controllers
 {
     public class AccountController : Controller
     {
@@ -30,9 +29,9 @@ namespace OBS_App.Controllers.Yönetim
 
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
-
             return View();
         }
 
@@ -116,7 +115,7 @@ namespace OBS_App.Controllers.Yönetim
             return View();
         }
 
-        public  IActionResult ForgotPassword()
+        public IActionResult ForgotPassword()
         {
 
             return View();
@@ -159,7 +158,7 @@ namespace OBS_App.Controllers.Yönetim
             return View(model);
         }
 
-        
+
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewsModel model)
         {

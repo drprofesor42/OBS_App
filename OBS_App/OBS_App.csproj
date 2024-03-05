@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Ogrenci\Data\" />
+    <Folder Include="Areas\Ogrenci\Models\" />
+    <Folder Include="Areas\Ogretmen\Data\" />
+    <Folder Include="Areas\Ogretmen\Models\" />
     <Folder Include="Data\" />
   </ItemGroup>
 
