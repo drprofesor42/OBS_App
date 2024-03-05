@@ -12,13 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240305133727_asd.Designer.cs
-    [Migration("20240305133727_asd")]
-    partial class asd
-========
-    [Migration("20240305130010_init")]
-    partial class init
->>>>>>>> master:OBS_App/Migrations/20240305130010_init.Designer.cs
+    [Migration("20240305144332_deneme")]
+    partial class deneme
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
