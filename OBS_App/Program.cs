@@ -1,9 +1,6 @@
 using identy_user.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 using OBS_App.Models;
 
 
@@ -60,8 +57,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 //Authorization  configuration files ayarlarýný yapýlandýrýr(Giriþ)
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    //Kullanýcý authorize olduðunda gelecek sayfa
-    options.LoginPath = "/Account/Login";
+    //Kullanýcýnýn authorize olmasý için gelecek sayfa
+    options.LoginPath = "~/Account/Login";
     //yetkisiz giriþlerde gönderilen sayfa  
     options.AccessDeniedPath = "/Account/Accessdenied";
     //eðer kullanýcý sitede aktif ise cookie süresi sýfýrlanýr
@@ -89,7 +86,19 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Admin}/{action=Index}/{id?}");
+    pattern: "{area=Admin}/{controller=Admin}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Ogretmen",
+    pattern: "{area:exists}/{controller=Ogretmen}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Ogrenci",
+    pattern: "{area:exists}/{controller=Ogrenci}/{action=Index}/{id?}");
 
 //IdentitySeed Verisini çalýþtýrýr
 IdentityUserSeed.IdentityTestUser(app);

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OBS_App.Controllers
+namespace OBS_App.Areas.Admin.Controllers
 {
-    public class OgretmenController : Controller
+    [Area("Admin")]
+    [Authorize(Roles ="Admin")]
+    public class AdminController : Controller
     {
-        [Authorize(Roles ="Ogretmen")]
         public IActionResult Index()
         {
             return View();
