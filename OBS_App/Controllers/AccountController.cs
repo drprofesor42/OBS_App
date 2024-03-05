@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Common;
+using OBS_App.Data;
 using OBS_App.Models;
 using OBS_App.ViewsModel;
 using System.Security.Cryptography.X509Certificates;
@@ -29,7 +30,7 @@ namespace OBS_App.Controllers
 
         }
 
-        [HttpGet]
+        
         public IActionResult Login()
         {
             return View();
@@ -58,7 +59,7 @@ namespace OBS_App.Controllers
                     {
                         if (User.IsInRole("Admin"))
                         {
-                            return RedirectToAction("Index", "Admin");
+                            return RedirectToAction("Index", "Admin", new { area = "Admin" });
                         }
                         if (User.IsInRole("Ogretmen"))
                         {

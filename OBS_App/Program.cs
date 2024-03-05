@@ -58,7 +58,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     //Kullanýcýnýn authorize olmasý için gelecek sayfa
-    options.LoginPath = "~/Account/Login";
+    options.LoginPath = "/Account/Login";
     //yetkisiz giriþlerde gönderilen sayfa  
     options.AccessDeniedPath = "/Account/Accessdenied";
     //eðer kullanýcý sitede aktif ise cookie süresi sýfýrlanýr
@@ -84,9 +84,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{area=Admin}/{controller=Admin}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "Admin",
@@ -99,6 +96,10 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "Ogrenci",
     pattern: "{area:exists}/{controller=Ogrenci}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 //IdentitySeed Verisini çalýþtýrýr
 IdentityUserSeed.IdentityTestUser(app);
