@@ -8,6 +8,7 @@ namespace OBS_App.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
+        }
         public DbSet<Admin> Adminler { get; set; }
         public DbSet<AkademikTakvim> AkademikTakvimler { get; set; }
         public DbSet<Bolum> Bolumler { get; set; }
