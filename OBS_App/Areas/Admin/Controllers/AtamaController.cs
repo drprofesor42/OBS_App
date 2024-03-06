@@ -2,25 +2,21 @@
 
 namespace OBS_App.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class OgrenciController : Controller
+    public class AtamaController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Ekle_Guncelle()
+        public IActionResult DersAta_Sil()
         {
             return View();
         }
 
-        public IActionResult Sil()
+        public IActionResult BolumAta_Sil()
         {
             return View();
         }
-
-       
-
     }
 }
