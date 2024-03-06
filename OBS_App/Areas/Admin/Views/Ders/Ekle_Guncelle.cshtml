@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Ekle_Guncelle";
+}
+@model Ders
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				<form asp-controller="Ders" asp-action="Ekle_Guncelle" method="post">
+					@if (Model != null)
+					{
+						<input name="dersId" id="dersId" type="hidden" value="@Model.dersId">
+					}
+
+					<div class="row">
+						<div class="col-12">
+							<h5 class="form-title"><span>Ders Detayları</span></h5>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="form-group local-forms">
+								<label>Ders Adı <span class="login-danger">*</span></label>
+								<input name="dersIsim" type="text" class="form-control" value="@Model?.dersIsim">
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="form-group local-forms">
+								<label>Ders Hocası <span class="login-danger">*</span></label>
+								<input name="profesorId" type="number" class="form-control" value="@Model?.profesorId">
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="form-group local-forms">
+								<label>Ders Kodu <span class="login-danger">*</span></label>
+								<input name="dersKod" type="text" class="form-control" value="@Model?.dersKod">
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="form-group local-forms">
+								<label>Ders Kredisi <span class="login-danger">*</span></label>
+								<input name="dersKredi" type="number" class="form-control" value="@Model?.dersKredi">
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div class="form-group local-forms">
+								<label>Ders AKTS <span class="login-danger">*</span></label>
+								<input name="dersAkts" type="number" class="form-control" value="@Model?.dersAkts">
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="student-submit">
+								@if (Model == null)
+								{
+									<input name="type" id="type" type="hidden" value="0">
+								}
+								else
+								{
+									<input name="type" id="type" type="hidden" value="1">
+								}
+								<button type="submit" class="btn btn-primary">Onayla</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+

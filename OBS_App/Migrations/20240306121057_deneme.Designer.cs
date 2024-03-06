@@ -12,8 +12,13 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
+<<<<<<<< HEAD:OBS_App/Migrations/20240306121057_deneme.Designer.cs
     [Migration("20240306121057_deneme")]
     partial class deneme
+========
+    [Migration("20240306135418_init")]
+    partial class init
+>>>>>>>> master:OBS_App/Migrations/20240306135418_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,16 +241,16 @@ namespace OBS_App.Migrations
                     b.Property<int>("dersKredi")
                         .HasColumnType("int");
 
-                    b.Property<int>("dersProfId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("dersId");
 
+<<<<<<<< HEAD:OBS_App/Migrations/20240306121057_deneme.Designer.cs
                     b.HasIndex("ProfesorId");
 
+========
+>>>>>>>> master:OBS_App/Migrations/20240306135418_init.Designer.cs
                     b.ToTable("Dersler");
                 });
 
@@ -703,6 +708,7 @@ namespace OBS_App.Migrations
                         .IsRequired();
                 });
 
+<<<<<<<< HEAD:OBS_App/Migrations/20240306121057_deneme.Designer.cs
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
                     b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
@@ -714,6 +720,8 @@ namespace OBS_App.Migrations
                     b.Navigation("Profesor");
                 });
 
+========
+>>>>>>>> master:OBS_App/Migrations/20240306135418_init.Designer.cs
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
                     b.HasOne("OBS_App.Data.Ogretmens", "Profesor")

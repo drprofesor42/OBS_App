@@ -3,8 +3,8 @@
     public class Ders
     {
         public int dersId { get; set; }
-        public int dersProfId { get; set; }
-        public Ogretmens Profesor { get; set; } = null!;
+		public int profesorId { get; set; }
+		/*public Profesor Profesor { get; set; } = null!;*/
         public string dersIsim { get; set; }
         public string dersKod { get; set; }
         public int dersKredi { get; set; }

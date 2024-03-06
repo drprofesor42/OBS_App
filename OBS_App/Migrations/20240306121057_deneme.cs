@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class deneme : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -123,6 +123,27 @@ namespace OBS_App.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bolumler", x => x.bolumId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Dersler",
+                columns: table => new
+                {
+                    dersId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    profesorId = table.Column<int>(type: "int", nullable: false),
+                    dersIsim = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    dersKod = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    dersKredi = table.Column<int>(type: "int", nullable: false),
+                    dersAkts = table.Column<int>(type: "int", nullable: false),
+                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dersler", x => x.dersId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -313,6 +334,7 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+<<<<<<<< HEAD:OBS_App/Migrations/20240306121057_deneme.cs
                 name: "Dersler",
                 columns: table => new
                 {
@@ -341,6 +363,8 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+========
+>>>>>>>> master:OBS_App/Migrations/20240306135418_init.cs
                 name: "Duyurular",
                 columns: table => new
                 {
@@ -563,11 +587,14 @@ namespace OBS_App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:OBS_App/Migrations/20240306121057_deneme.cs
                 name: "IX_Dersler_ProfesorId",
                 table: "Dersler",
                 column: "ProfesorId");
 
             migrationBuilder.CreateIndex(
+========
+>>>>>>>> master:OBS_App/Migrations/20240306135418_init.cs
                 name: "IX_DuyuruAlicilar_duyuruId",
                 table: "DuyuruAlicilar",
                 column: "duyuruId");
