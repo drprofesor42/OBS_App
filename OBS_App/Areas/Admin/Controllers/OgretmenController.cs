@@ -17,10 +17,11 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var ogretmenler = await _context.Ogretmenler.ToListAsync();
 
-            return View();
+            return View(ogretmenler);
         }
 
         public IActionResult Ekle_Guncelle()
@@ -31,6 +32,7 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogretmens model)
         {
+            
             if (ModelState.IsValid)
             {
                 await _context.Ogretmenler.AddAsync(model);
