@@ -3,7 +3,7 @@
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class Admin_OgretmenController : Controller
+    public class OgretmenController : Controller
     {
         public IActionResult Index()
         {
