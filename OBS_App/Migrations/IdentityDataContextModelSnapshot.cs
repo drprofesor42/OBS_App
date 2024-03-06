@@ -230,9 +230,6 @@ namespace OBS_App.Migrations
                     b.Property<int>("dersKredi")
                         .HasColumnType("int");
 
-                    b.Property<int>("dersProfId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 

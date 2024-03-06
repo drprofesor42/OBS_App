@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240306063554_init")]
+    [Migration("20240306092400_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -231,9 +231,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int>("dersKredi")
-                        .HasColumnType("int");
-
-                    b.Property<int>("dersProfId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("olusturmaTarihi")
