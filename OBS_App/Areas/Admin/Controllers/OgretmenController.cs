@@ -30,15 +30,27 @@ namespace OBS_App.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model)
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int Id)
         {
-            
-            if (ModelState.IsValid)
+            if (Id == 1)
             {
-                await _context.Ogretmenler.AddAsync(model);
-                await _context.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    await _context.Ogretmenler.AddAsync(model);
+                    await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+            }
+            if (Id == 2)
+            {
+                if (ModelState.IsValid)
+                {
+                    await _context.Ogretmenler.AddAsync(model);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Index");
+                }
             }
             return View(model);
 
