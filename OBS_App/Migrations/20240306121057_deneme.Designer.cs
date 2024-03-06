@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240306052522_deneme")]
+    [Migration("20240306121057_deneme")]
     partial class deneme
     {
         /// <inheritdoc />
@@ -219,6 +219,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("dersId"));
 
+                    b.Property<int>("ProfesorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("dersAkts")
                         .HasColumnType("int");
 
@@ -239,12 +242,9 @@ namespace OBS_App.Migrations
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("profesorId")
-                        .HasColumnType("int");
-
                     b.HasKey("dersId");
 
-                    b.HasIndex("profesorId");
+                    b.HasIndex("ProfesorId");
 
                     b.ToTable("Dersler");
                 });
@@ -257,6 +257,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruId"));
 
+                    b.Property<int>("ProfesorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("duyuruGonderici")
                         .HasColumnType("int");
 
@@ -267,12 +270,9 @@ namespace OBS_App.Migrations
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("profesorId")
-                        .HasColumnType("int");
-
                     b.HasKey("duyuruId");
 
-                    b.HasIndex("profesorId");
+                    b.HasIndex("ProfesorId");
 
                     b.ToTable("Duyurular");
                 });
@@ -314,6 +314,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("fakulteId"));
 
+                    b.Property<int>("ProfesorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("fakulteIsim")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -324,12 +327,9 @@ namespace OBS_App.Migrations
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("profesorId")
-                        .HasColumnType("int");
-
                     b.HasKey("fakulteId");
 
-                    b.HasIndex("profesorId");
+                    b.HasIndex("ProfesorId");
 
                     b.ToTable("Fakulteler");
                 });
@@ -369,6 +369,9 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ogrenciId"));
+
+                    b.Property<int>("ProfesorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("bolumId")
                         .HasColumnType("int");
@@ -413,16 +416,13 @@ namespace OBS_App.Migrations
                     b.Property<int>("ogrenciTc")
                         .HasColumnType("int");
 
-                    b.Property<int>("profesorId")
-                        .HasColumnType("int");
-
                     b.HasKey("ogrenciId");
+
+                    b.HasIndex("ProfesorId");
 
                     b.HasIndex("bolumId");
 
                     b.HasIndex("ogrenciMesajId");
-
-                    b.HasIndex("profesorId");
 
                     b.ToTable("Ogrenciler");
                 });
@@ -489,48 +489,77 @@ namespace OBS_App.Migrations
                     b.ToTable("ogrenciMesajlar");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.Profesor", b =>
+            modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
-                    b.Property<int>("profesorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("profesorId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("olusturmaTarihi")
+                    b.Property<string>("OgretmenAd")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OgretmenAdres")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("OgretmenBaslamaTarihi")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("profesorEposta")
+                    b.Property<bool>("OgretmenCinsiyet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("OgretmenDogumTarihi")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("OgretmenEposta")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("profesorGorusmeSaatleri")
+                    b.Property<string>("OgretmenGorusme")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("profesorIsim")
+                    b.Property<int>("OgretmenNumarasi")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OgretmenOfis")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("profesorOfisAdresi")
+                    b.Property<string>("OgretmenParola")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("profesorParola")
+                    b.Property<string>("OgretmenParolaOnayla")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("profesorSoyad")
+                    b.Property<string>("OgretmenSehir")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("profesorUnvan")
+                    b.Property<string>("OgretmenSoyad")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("profesorId");
+                    b.Property<string>("OgretmenUlke")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.ToTable("Profesorler");
+                    b.Property<string>("OgretmenUnvan")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OgretmenUsername")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ogretmenler");
                 });
 
             modelBuilder.Entity("OBS_App.Models.AppRole", b =>
@@ -676,9 +705,9 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
-                    b.HasOne("OBS_App.Data.Profesor", "Profesor")
+                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
                         .WithMany()
-                        .HasForeignKey("profesorId")
+                        .HasForeignKey("ProfesorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -687,9 +716,9 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
-                    b.HasOne("OBS_App.Data.Profesor", "Profesor")
+                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
                         .WithMany()
-                        .HasForeignKey("profesorId")
+                        .HasForeignKey("ProfesorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -717,9 +746,9 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
-                    b.HasOne("OBS_App.Data.Profesor", "Profesor")
+                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
                         .WithMany()
-                        .HasForeignKey("profesorId")
+                        .HasForeignKey("ProfesorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -743,6 +772,12 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ogrenci", b =>
                 {
+                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
+                        .WithMany()
+                        .HasForeignKey("ProfesorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany()
                         .HasForeignKey("bolumId")
@@ -752,12 +787,6 @@ namespace OBS_App.Migrations
                     b.HasOne("OBS_App.Data.OgrenciMesaj", "OgrenciMesaj")
                         .WithMany()
                         .HasForeignKey("ogrenciMesajId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OBS_App.Data.Profesor", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("profesorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

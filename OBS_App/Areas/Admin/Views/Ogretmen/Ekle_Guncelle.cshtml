@@ -1,0 +1,160 @@
+﻿@model Ogretmens
+@{
+    ViewData["Title"] = "Ekle";
+}
+
+
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="page-title">Add Teachers</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="teachers.html">Teachers</a></li>
+                <li class="breadcrumb-item active">Add Teachers</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Ekle_Guncelle" asp-controller="Ogretmen" method="post">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Öğretmen Ekle</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ad<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenAd" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Soyad<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenSoyad" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Cinsiyet<span class="login-danger">*</span></label>
+                                <select asp-for="OgretmenCinsiyet" class="form-control select">
+                                    <option>Seçiniz</option>
+                                    <option>Erkek</option>
+                                    <option>Kadın</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms calendar-icon">
+                                <label>Doğum Tarihi<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenDogumTarihi" class="form-control datetimepicker" type="text" placeholder="DD-MM-YYYY">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Telefon Numarası<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenNumarasi" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms calendar-icon">
+                                <label>Başlama Tarihi<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenBaslamaTarihi" class="form-control datetimepicker" type="text" placeholder="DD-MM-YYYY">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group  local-forms">
+                                <label>Ünvan<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenUnvan" class="form-control" type="text" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>E-Posta<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenEposta" type="email" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Görüşme Saati<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenGorusme" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ofis Adresi<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenOfis" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Giriş Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Kullanıcı Adı<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenUsername" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şifre<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenParola" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şifre Tekrarı<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenParolaOnayla" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Adres</span></h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group local-forms">
+                                <label>Adres<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenAdres" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ülke<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenUlke" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şehir<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenSehir" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="student-submit">
+                                <button type="submit" value="1" class="btn btn-primary">Kaydet</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="student-submit">
+                                <button type="submit" value="2" class="btn btn-primary">Güncelle</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="student-submit">
+                                <button type="submit" class="btn btn-primary">Getir</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

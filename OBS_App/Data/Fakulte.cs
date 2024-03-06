@@ -5,7 +5,7 @@
         public int fakulteId { get; set; }
         public FakulteBolum FakulteBolum { get; set; } = null!;
         public int fakulteProfId { get; set; }
-        public Profesor Profesor { get; set; } = null!;
+        public Ogretmens Profesor { get; set; } = null!;
         public string fakulteIsim { get; set; }
         public DateTime olusturmaTarihi { get; set; }
     }

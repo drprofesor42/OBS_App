@@ -6,7 +6,7 @@
         public OgrenciMesaj OgrenciMesaj { get; set; } = null!;
         public OgrenciDers OgrenciDers { get; set; } = null!;
         public int ogrenciDanisman { get; set; }
-        public Profesor Profesor { get; set; } = null!;
+        public Ogretmens Profesor { get; set; } = null!;
         public int ogrenciTc { get; set; }
         public int ogrenciNo { get; set; }
         public DateTime ogrenciDogumTarihi { get; set; }
