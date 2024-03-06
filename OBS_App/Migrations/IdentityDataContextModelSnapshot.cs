@@ -238,8 +238,6 @@ namespace OBS_App.Migrations
 
                     b.HasKey("dersId");
 
-                    b.HasIndex("profesorId");
-
                     b.ToTable("Dersler");
                 });
 
@@ -666,17 +664,6 @@ namespace OBS_App.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OBS_App.Data.Ders", b =>
-                {
-                    b.HasOne("OBS_App.Data.Profesor", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("profesorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profesor");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>

@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240306092400_init")]
+    [Migration("20240306135418_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -240,8 +240,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("dersId");
-
-                    b.HasIndex("profesorId");
 
                     b.ToTable("Dersler");
                 });
@@ -669,17 +667,6 @@ namespace OBS_App.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OBS_App.Data.Ders", b =>
-                {
-                    b.HasOne("OBS_App.Data.Profesor", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("profesorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profesor");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>

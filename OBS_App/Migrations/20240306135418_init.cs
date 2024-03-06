@@ -127,6 +127,27 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Dersler",
+                columns: table => new
+                {
+                    dersId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    profesorId = table.Column<int>(type: "int", nullable: false),
+                    dersIsim = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    dersKod = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    dersKredi = table.Column<int>(type: "int", nullable: false),
+                    dersAkts = table.Column<int>(type: "int", nullable: false),
+                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dersler", x => x.dersId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "ogrenciMesajlar",
                 columns: table => new
                 {
@@ -295,33 +316,6 @@ namespace OBS_App.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Dersler",
-                columns: table => new
-                {
-                    dersId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    profesorId = table.Column<int>(type: "int", nullable: false),
-                    dersIsim = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    dersKod = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    dersKredi = table.Column<int>(type: "int", nullable: false),
-                    dersAkts = table.Column<int>(type: "int", nullable: false),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dersler", x => x.dersId);
-                    table.ForeignKey(
-                        name: "FK_Dersler_Profesorler_profesorId",
-                        column: x => x.profesorId,
-                        principalTable: "Profesorler",
-                        principalColumn: "profesorId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -547,11 +541,6 @@ namespace OBS_App.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Dersler_profesorId",
-                table: "Dersler",
-                column: "profesorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DuyuruAlicilar_duyuruId",
