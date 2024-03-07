@@ -277,7 +277,7 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruAliciId"));
 
-                    b.Property<int>("OgrenciId")
+                    b.Property<int>("OgrencisId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("duyuruAliciOlusturmaTarihi")
@@ -291,7 +291,7 @@ namespace OBS_App.Migrations
 
                     b.HasKey("duyuruAliciId");
 
-                    b.HasIndex("OgrenciId");
+                    b.HasIndex("OgrencisId");
 
                     b.HasIndex("duyuruId");
 
@@ -477,15 +477,15 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenBaslamaTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenDogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")
                         .IsRequired()
@@ -689,9 +689,9 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.DuyuruAlici", b =>
                 {
-                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrenci")
+                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
                         .WithMany()
-                        .HasForeignKey("OgrenciId")
+                        .HasForeignKey("OgrencisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -703,7 +703,7 @@ namespace OBS_App.Migrations
 
                     b.Navigation("Duyuru");
 
-                    b.Navigation("Ogrenci");
+                    b.Navigation("Ogrencis");
                 });
 
             modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
