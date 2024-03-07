@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/panel/plugins/feather/feather.css">
     <link rel="stylesheet" href="~/panel/plugins/icons/flags/flags.css">
+    <link href="~/panel/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/panel/plugins/select2/css/select2.min.css">
@@ -173,7 +174,7 @@
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Öğrenciler</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Ogrenci" asp-action="Index">Öğrenci Listesi</a></li>
-                                <li><a asp-controller="Ogrenci" asp-action="Ekle_Guncelle">Öğrenci Ekle</a></li>
+                                <li><a asp-controller="Ogrenci" asp-action="Ekle_Guncelle" asp-route-id="0">Öğrenci Ekle</a></li>
                             </ul>
                         </li>
 
@@ -251,7 +252,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="~/panel/plugins/select2/js/select2.min.js"></script>
     <script src="~/panel/js/feather.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
     <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
     <script src="~/panel/plugins/apexchart/apexcharts.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
