@@ -306,9 +306,6 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("fakulteId"));
 
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("fakulteIsim")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -320,8 +317,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("fakulteId");
-
-                    b.HasIndex("ProfesorId");
 
                     b.ToTable("Fakulteler");
                 });
@@ -346,9 +341,6 @@ namespace OBS_App.Migrations
                     b.HasKey("fakulteBolumId");
 
                     b.HasIndex("bolumId")
-                        .IsUnique();
-
-                    b.HasIndex("fakulteId")
                         .IsUnique();
 
                     b.ToTable("FakulteBolumler");
@@ -714,28 +706,11 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogrenci");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
-                {
-                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("ProfesorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profesor");
-                });
-
             modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
                 {
                     b.HasOne("OBS_App.Data.Bolum", null)
                         .WithOne("FakulteBolum")
                         .HasForeignKey("OBS_App.Data.FakulteBolum", "bolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OBS_App.Data.Fakulte", null)
-                        .WithOne("FakulteBolum")
-                        .HasForeignKey("OBS_App.Data.FakulteBolum", "fakulteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -752,12 +727,6 @@ namespace OBS_App.Migrations
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
-                {
-                    b.Navigation("FakulteBolum")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
                     b.Navigation("FakulteBolum")
                         .IsRequired();

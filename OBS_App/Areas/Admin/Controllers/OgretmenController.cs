@@ -24,40 +24,84 @@ namespace OBS_App.Areas.Admin.Controllers
             return View(ogretmenler);
         }
 
-        public IActionResult Ekle_Guncelle()
+        public async Task<IActionResult> Ekle_Guncelle(int id)
         {
+            if (id == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var ogrt = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id == id);
+                return View(ogrt);
 
-            return View();
+            }
+
+
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int Id)
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int? Kaydet )
         {
-            if (Id == 1)
+            if (Kaydet == null)
             {
-                if (ModelState.IsValid)
-                {
-                    await _context.Ogretmenler.AddAsync(model);
-                    await _context.SaveChangesAsync();
-
-                    return RedirectToAction("Index");
-                }
+                // hata
+                return View();
             }
-            if (Id == 2)
+            else
             {
-                if (ModelState.IsValid)
+                //ekleme
+                if (Kaydet == 1)
                 {
-                    await _context.Ogretmenler.AddAsync(model);
-                    await _context.SaveChangesAsync();
+                    if (ModelState.IsValid)
+                    {
+                        await _context.Ogretmenler.AddAsync(model);
+                        await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        //hata mesajı
+                    }
                 }
-            }
-            return View(model);
+                //Güncelleme işlemi
+                if (Kaydet == 2)
+                {
+                    if (ModelState.IsValid)
+                    {
+                       
+                            _context.Update(model);
+                            await _context.SaveChangesAsync();
 
+                            return RedirectToAction("Index");
+                        
+                    }
+                }
+                return View(model);
+            }
         }
 
-        public IActionResult Sil()
+        public async Task<IActionResult> Sil(int? id)
         {
+            if (id != null)
+            {
+                var user = await _context.Ogretmenler.FirstOrDefaultAsync(u => u.Id == id);
+                if (user != null)
+                {
+                    _context.Remove(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //Kullanıcı bulunamadı
+                }
+            }
+            else
+            {
+                //hata mesajı
+            }
+
             return View();
         }
 

@@ -85,11 +85,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
 
-                                @foreach (var ogr in Model)
-                                {
 
+                            @foreach (var ogr in Model)
+                            {
+                                <tr>
                                     <td>
                                         <div class="form-check check-tables">
                                             <input class="form-check-input" type="checkbox" value="something">
@@ -118,16 +118,16 @@
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <form asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" method="post">
-                                                <button  type="submit" class="btn btn-sm bg-danger-light">
-                                                    <i class="feather-edit" ></i>
-                                                </button>
-                                            </form>
+                                            <a asp-action="Ekle_Guncelle" asp-controller="Ogretmen" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a asp-action="Sil" asp-controller="Ogretmen" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-trash-2"></i>
+                                            </a>
                                         </div>
                                     </td>
-                                }
-                            </tr>
-
+                                </tr>
+                            }
 
                         </tbody>
                     </table>

@@ -23,7 +23,7 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
         // Id 0 gelirse ders ekleme sayfasına, 1 gelirse güncelleme sayfasına yönlendirir (aynı sayfalar ama model gönderiyor)
-		public IActionResult Ekle_Guncelle(int? id)
+		public IActionResult Ekle_Guncelle(int id)
         {
             if (id == 0)
             {
@@ -31,11 +31,10 @@ namespace OBS_App.Areas.Admin.Controllers
 			}
             else
             {
-				Console.WriteLine("Ders Güncelle");
-				Console.WriteLine(id);
 				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
 				if (ders == null)
 				{
+                    // Hata Gönder
 					return NotFound();
 				}
 				return View(ders);
@@ -49,28 +48,24 @@ namespace OBS_App.Areas.Admin.Controllers
             if (model == null || type == null)
             {
                 // TempData Hata Gönder
-                return RedirectToAction("Index");
             }
             else if (type == "0")
             {
                 _identityDataContext.Add(model);
                 _identityDataContext.SaveChanges();
 
-                return RedirectToAction("Index");
             }
             else if (type == "1")
             {
                 _identityDataContext.Update(model);
                 _identityDataContext.SaveChanges();
-
-				return RedirectToAction("Index");
             }
             else
             {
-                Console.WriteLine("How it possible?");
-                return RedirectToAction("Index");
+				// TempData Hata Gönder
 			}
 
+			return RedirectToAction("Index");
         }
 
         // id ye göre db'den kayıt siliyor
@@ -80,7 +75,6 @@ namespace OBS_App.Areas.Admin.Controllers
             if (ders == null)
             {
                 // TempData Hata Gönder
-				return RedirectToAction("Index");
 			}
             else
             {
