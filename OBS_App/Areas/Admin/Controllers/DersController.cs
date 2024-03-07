@@ -31,8 +31,6 @@ namespace OBS_App.Areas.Admin.Controllers
 			}
             else
             {
-				Console.WriteLine("Ders Güncelle");
-				Console.WriteLine(id);
 				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
 				if (ders == null)
 				{
