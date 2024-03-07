@@ -48,9 +48,9 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms calendar-icon">
+                                <div class="form-group local-forms">
                                     <label>Doğum Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="DogumTarihi" class="form-control datetimepicker" value="@Model?.DogumTarihi" type="text" placeholder="GG.AA.YYYY" pattern="\d{2}.\d{2}.\d{4}" title="Gün.Ay.Yıl formatında giriniz (GG.AA.YYYY)">
+                                    <input asp-for="DogumTarihi" class="form-control" value="@Model?.DogumTarihi" type="date" placeholder="">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
@@ -105,13 +105,10 @@
                                     <input asp-for="ogrenciParola" class="form-control" value="@Model?.ogrenciParola" type="password" placeholder="">
                                 </div>
                             </div>
-
                             <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms calendar-icon">
+                                <div class="form-group local-forms">
                                     <label>Kayıt Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="kayitTarihi" class="form-control datetimepicker" value="@Model?.kayitTarihi" type="text" placeholder="GG.AA.YYYY" pattern="\d{2}.\d{2}.\d{4}" title="Gün.Ay.Yıl formatında giriniz (GG.AA.YYYY)">
-                                    <!-- pattern="\d{2}-\d{2}-\d{4}" ifadesi, gün-ay-yıl formatını kontrol eder -->
-                                    <!-- title="Gün-Ay-Yıl formatında giriniz (GG-AA-YYYY)" ifadesi, kullanıcıya istenilen formatta giriş yapması gerektiğini belirtir -->
+                                    <input asp-for="kayitTarihi" class="form-control" value="@Model?.kayitTarihi" type="date" placeholder="">                                  
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">

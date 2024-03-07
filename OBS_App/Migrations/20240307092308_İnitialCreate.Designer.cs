@@ -12,13 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240307083442_İnitialCreate.Designer.cs
-    [Migration("20240307083442_İnitialCreate")]
+    [Migration("20240307092308_İnitialCreate")]
     partial class İnitialCreate
-========
-    [Migration("20240307083630_deneme")]
-    partial class deneme
->>>>>>>> master:OBS_App/Migrations/20240307083630_deneme.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -314,9 +309,6 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("fakulteId"));
 
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("fakulteIsim")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -329,11 +321,6 @@ namespace OBS_App.Migrations
 
                     b.HasKey("fakulteId");
 
-<<<<<<<< HEAD:OBS_App/Migrations/20240307083442_İnitialCreate.Designer.cs
-                    b.HasIndex("ProfesorId");
-
-========
->>>>>>>> master:OBS_App/Migrations/20240307083630_deneme.Designer.cs
                     b.ToTable("Fakulteler");
                 });
 
@@ -493,15 +480,15 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenBaslamaTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenDogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")
                         .IsRequired()
@@ -722,20 +709,6 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogrenci");
                 });
 
-<<<<<<<< HEAD:OBS_App/Migrations/20240307083442_İnitialCreate.Designer.cs
-            modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
-                {
-                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("ProfesorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profesor");
-                });
-
-========
->>>>>>>> master:OBS_App/Migrations/20240307083630_deneme.Designer.cs
             modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
                 {
                     b.HasOne("OBS_App.Data.Bolum", null)

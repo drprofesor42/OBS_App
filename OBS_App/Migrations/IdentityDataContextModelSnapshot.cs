@@ -477,15 +477,15 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenBaslamaTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenDogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")
                         .IsRequired()
