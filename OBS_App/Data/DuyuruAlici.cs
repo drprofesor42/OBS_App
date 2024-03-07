@@ -6,7 +6,7 @@
         public int duyuruId { get; set; }
         public Duyuru Duyuru { get; set; } = null!;
         public int duyuruAlici_ogrenci { get; set; }
-        public Ogrencis Ogrenci { get; set; } = null!;
+        public Ogrencis Ogrencis { get; set; } = null!;
         public DateTime duyuruAliciOlusturmaTarihi { get; set; }
     }
 }

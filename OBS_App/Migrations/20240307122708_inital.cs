@@ -7,11 +7,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
+<<<<<<< HEAD:OBS_App/Migrations/20240307092308_İnitialCreate.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240307092308_İnitialCreate.cs
     public partial class İnitialCreate : Migration
 ========
     public partial class deneme : Migration
 >>>>>>>> parent of b532fc4 (Önemsiz):OBS_App/Migrations/20240307083630_deneme.cs
+=======
+    public partial class inital : Migration
+>>>>>>> e7175afe2a6f90a17888dca283901485261e5fae:OBS_App/Migrations/20240307122708_inital.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -465,7 +469,7 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     duyuruId = table.Column<int>(type: "int", nullable: false),
                     duyuruAlici_ogrenci = table.Column<int>(type: "int", nullable: false),
-                    OgrenciId = table.Column<int>(type: "int", nullable: false),
+                    OgrencisId = table.Column<int>(type: "int", nullable: false),
                     duyuruAliciOlusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
@@ -478,8 +482,8 @@ namespace OBS_App.Migrations
                         principalColumn: "duyuruId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DuyuruAlicilar_Ogrenciler_OgrenciId",
-                        column: x => x.OgrenciId,
+                        name: "FK_DuyuruAlicilar_Ogrenciler_OgrencisId",
+                        column: x => x.OgrencisId,
                         principalTable: "Ogrenciler",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -529,9 +533,9 @@ namespace OBS_App.Migrations
                 column: "duyuruId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DuyuruAlicilar_OgrenciId",
+                name: "IX_DuyuruAlicilar_OgrencisId",
                 table: "DuyuruAlicilar",
-                column: "OgrenciId");
+                column: "OgrencisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Duyurular_ProfesorId",
