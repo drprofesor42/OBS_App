@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240307093257_DenemeMigration")]
-    partial class DenemeMigration
+    [Migration("20240307122708_inital")]
+    partial class inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -416,8 +416,8 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("DogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("Eposta")
                         .HasColumnType("longtext");
@@ -425,8 +425,8 @@ namespace OBS_App.Migrations
                     b.Property<int>("TelefonNo")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("kayitTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("kayitTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("ogrenciAd")
                         .IsRequired()

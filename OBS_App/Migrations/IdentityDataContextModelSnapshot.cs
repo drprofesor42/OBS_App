@@ -413,8 +413,8 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("DogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("Eposta")
                         .HasColumnType("longtext");
@@ -422,8 +422,8 @@ namespace OBS_App.Migrations
                     b.Property<int>("TelefonNo")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("kayitTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("kayitTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("ogrenciAd")
                         .IsRequired()

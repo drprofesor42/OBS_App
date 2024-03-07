@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class DenemeMigration : Migration
+    public partial class inital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -176,7 +176,7 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ogrenciSoyad = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DogumTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DogumTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     Eposta = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ogrenciCinsiyet = table.Column<string>(type: "longtext", nullable: false)
@@ -187,7 +187,7 @@ namespace OBS_App.Migrations
                     ogrenciParola = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ogrenciDanisman = table.Column<int>(type: "int", nullable: false),
-                    kayitTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    kayitTarihi = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
