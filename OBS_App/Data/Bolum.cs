@@ -2,10 +2,11 @@
 {
     public class Bolum
     {
-        public int bolumId { get; set; }
-        public FakulteBolum FakulteBolum { get; set; } = null!;
-        public int bolumProfId { get; set; }
-        public string bolumIsim { get; set; }
-        public DateTime olusturmaTarihi { get; set; }
+        public int Id { get; set; }
+        public string BolumIsmi { get; set; }
+        public string BolumBaskani { get; set; }
+        public int OgrenciSayisi { get; set; }
+        //public int bolumProfId { get; set; }
+        //public FakulteBolum FakulteBolum { get; set; } = null!;
     }
 }

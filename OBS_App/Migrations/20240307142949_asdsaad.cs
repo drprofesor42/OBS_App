@@ -7,15 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-<<<<<<< HEAD:OBS_App/Migrations/20240307092308_İnitialCreate.cs
-<<<<<<<< HEAD:OBS_App/Migrations/20240307092308_İnitialCreate.cs
-    public partial class İnitialCreate : Migration
-========
-    public partial class deneme : Migration
->>>>>>>> parent of b532fc4 (Önemsiz):OBS_App/Migrations/20240307083630_deneme.cs
-=======
-    public partial class inital : Migration
->>>>>>> e7175afe2a6f90a17888dca283901485261e5fae:OBS_App/Migrations/20240307122708_inital.cs
+    public partial class asdsaad : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -121,16 +113,17 @@ namespace OBS_App.Migrations
                 name: "Bolumler",
                 columns: table => new
                 {
-                    bolumId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    bolumProfId = table.Column<int>(type: "int", nullable: false),
-                    bolumIsim = table.Column<string>(type: "longtext", nullable: false)
+                    BolumIsmi = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    BolumBaskani = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgrenciSayisi = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bolumler", x => x.bolumId);
+                    table.PrimaryKey("PK_Bolumler", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -152,6 +145,22 @@ namespace OBS_App.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dersler", x => x.dersId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "FakulteBolumler",
+                columns: table => new
+                {
+                    fakulteBolumId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    fakulteId = table.Column<int>(type: "int", nullable: false),
+                    bolumId = table.Column<int>(type: "int", nullable: false),
+                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FakulteBolumler", x => x.fakulteBolumId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -252,10 +261,10 @@ namespace OBS_App.Migrations
                     OgretmenGorusme = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgretmenNumarasi = table.Column<int>(type: "int", nullable: false),
-                    OgretmenDogumTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    OgretmenDogumTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     OgretmenCinsiyet = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenBaslamaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    OgretmenBaslamaTarihi = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -391,28 +400,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "FakulteBolumler",
-                columns: table => new
-                {
-                    fakulteBolumId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    fakulteId = table.Column<int>(type: "int", nullable: false),
-                    bolumId = table.Column<int>(type: "int", nullable: false),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FakulteBolumler", x => x.fakulteBolumId);
-                    table.ForeignKey(
-                        name: "FK_FakulteBolumler_Bolumler_bolumId",
-                        column: x => x.bolumId,
-                        principalTable: "Bolumler",
-                        principalColumn: "bolumId",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "OgrenciDersler",
                 columns: table => new
                 {
@@ -543,12 +530,6 @@ namespace OBS_App.Migrations
                 column: "ProfesorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FakulteBolumler_bolumId",
-                table: "FakulteBolumler",
-                column: "bolumId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OgrenciDersler_dersId",
                 table: "OgrenciDersler",
                 column: "dersId");
@@ -579,6 +560,9 @@ namespace OBS_App.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bolumler");
+
+            migrationBuilder.DropTable(
                 name: "DuyuruAlicilar");
 
             migrationBuilder.DropTable(
@@ -604,9 +588,6 @@ namespace OBS_App.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ogrenciler");
-
-            migrationBuilder.DropTable(
-                name: "Bolumler");
 
             migrationBuilder.DropTable(
                 name: "Dersler");

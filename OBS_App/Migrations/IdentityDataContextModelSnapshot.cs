@@ -187,23 +187,24 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
                 {
-                    b.Property<int>("bolumId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("bolumId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("bolumIsim")
+                    b.Property<string>("BolumBaskani")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("bolumProfId")
+                    b.Property<string>("BolumIsmi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("OgrenciSayisi")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("olusturmaTarihi")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("bolumId");
+                    b.HasKey("Id");
 
                     b.ToTable("Bolumler");
                 });
@@ -340,9 +341,6 @@ namespace OBS_App.Migrations
 
                     b.HasKey("fakulteBolumId");
 
-                    b.HasIndex("bolumId")
-                        .IsUnique();
-
                     b.ToTable("FakulteBolumler");
                 });
 
@@ -477,15 +475,15 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenBaslamaTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenDogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")
                         .IsRequired()
@@ -706,15 +704,6 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogrencis");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
-                {
-                    b.HasOne("OBS_App.Data.Bolum", null)
-                        .WithOne("FakulteBolum")
-                        .HasForeignKey("OBS_App.Data.FakulteBolum", "bolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("OBS_App.Data.OgrenciDers", b =>
                 {
                     b.HasOne("OBS_App.Data.Ders", "Ders")
@@ -724,12 +713,6 @@ namespace OBS_App.Migrations
                         .IsRequired();
 
                     b.Navigation("Ders");
-                });
-
-            modelBuilder.Entity("OBS_App.Data.Bolum", b =>
-                {
-                    b.Navigation("FakulteBolum")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
