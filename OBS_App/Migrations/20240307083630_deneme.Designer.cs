@@ -12,12 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.Designer.cs
-    [Migration("20240307073834_init")]
-========
-    [Migration("20240307053646_init")]
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.Designer.cs
-    partial class init
+    [Migration("20240307083630_deneme")]
+    partial class deneme
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -313,9 +309,6 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("fakulteId"));
 
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("fakulteIsim")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -328,11 +321,6 @@ namespace OBS_App.Migrations
 
                     b.HasKey("fakulteId");
 
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.Designer.cs
-========
-                    b.HasIndex("ProfesorId");
-
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.Designer.cs
                     b.ToTable("Fakulteler");
                 });
 
@@ -721,20 +709,6 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogrenci");
                 });
 
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.Designer.cs
-========
-            modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
-                {
-                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("ProfesorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profesor");
-                });
-
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.Designer.cs
             modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
                 {
                     b.HasOne("OBS_App.Data.Bolum", null)

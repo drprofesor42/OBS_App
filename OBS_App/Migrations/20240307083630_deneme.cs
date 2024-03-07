@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class deneme : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -148,7 +148,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.cs
                 name: "Fakulteler",
                 columns: table => new
                 {
@@ -166,8 +165,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-========
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.cs
                 name: "Ogrenciler",
                 columns: table => new
                 {
@@ -386,7 +383,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.cs
                 name: "FakulteBolumler",
                 columns: table => new
                 {
@@ -409,8 +405,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-========
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.cs
                 name: "OgrenciDersler",
                 columns: table => new
                 {
@@ -460,33 +454,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.cs
-========
-                name: "Fakulteler",
-                columns: table => new
-                {
-                    fakulteId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    fakulteProfId = table.Column<int>(type: "int", nullable: false),
-                    ProfesorId = table.Column<int>(type: "int", nullable: false),
-                    fakulteIsim = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fakulteler", x => x.fakulteId);
-                    table.ForeignKey(
-                        name: "FK_Fakulteler_Ogretmenler_ProfesorId",
-                        column: x => x.ProfesorId,
-                        principalTable: "Ogretmenler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.cs
                 name: "DuyuruAlicilar",
                 columns: table => new
                 {
@@ -574,20 +541,6 @@ namespace OBS_App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:OBS_App/Migrations/20240307073834_init.cs
-========
-                name: "IX_FakulteBolumler_fakulteId",
-                table: "FakulteBolumler",
-                column: "fakulteId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fakulteler_ProfesorId",
-                table: "Fakulteler",
-                column: "ProfesorId");
-
-            migrationBuilder.CreateIndex(
->>>>>>>> 2f63b429fc95d7307459558e05f0b41ff1e03999:OBS_App/Migrations/20240307053646_init.cs
                 name: "IX_OgrenciDersler_dersId",
                 table: "OgrenciDersler",
                 column: "dersId");

@@ -16,9 +16,9 @@
         public string OgretmenSehir { get; set; }
         public string OgretmenGorusme { get; set; }
         public int OgretmenNumarasi { get; set; }
-        public DateTime OgretmenDogumTarihi { get; set; }
+        public DateOnly OgretmenDogumTarihi { get; set; }
         public string OgretmenCinsiyet { get; set; }
-        public DateTime OgretmenBaslamaTarihi { get; set; }
+        public DateOnly OgretmenBaslamaTarihi { get; set; }
 
 
     }

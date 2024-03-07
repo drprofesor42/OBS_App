@@ -81,8 +81,27 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Sil()
+        public async Task<IActionResult> Sil(int? id)
         {
+            if (id != null)
+            {
+                var user = await _context.Ogretmenler.FirstOrDefaultAsync(u => u.Id == id);
+                if (user != null)
+                {
+                    _context.Remove(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //Kullanıcı bulunamadı
+                }
+            }
+            else
+            {
+                //hata mesajı
+            }
+
             return View();
         }
 
