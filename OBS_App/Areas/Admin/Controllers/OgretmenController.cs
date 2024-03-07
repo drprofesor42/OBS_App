@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OBS_App.Models;
 using OBS_App.Data;
+using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
@@ -40,7 +40,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int? Kaydet )
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int? Kaydet)
         {
             if (Kaydet == null)
             {
@@ -69,12 +69,12 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                       
-                            _context.Update(model);
-                            await _context.SaveChangesAsync();
 
-                            return RedirectToAction("Index");
-                        
+                        _context.Update(model);
+                        await _context.SaveChangesAsync();
+
+                        return RedirectToAction("Index");
+
                     }
                 }
                 return View(model);

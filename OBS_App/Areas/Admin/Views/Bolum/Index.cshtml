@@ -79,18 +79,18 @@
                                     </h2>
                                 </td>
                                 <td>@bolum.BolumBaskani</td>
+                                <td>@bolum.OgrenciSayisi</td>
                                 <td>Bölüm Dersleri</td>
                                 <td>Bölüm Öğretmenleri</td>
-                                <td>@bolum.OgrenciSayisi</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
                                             <i class="feather-eye"></i>
                                         </a>
-                                        <a href="edit-department.html" class="btn btn-sm bg-danger-light">
+                                        <a asp-action="Ekle_Guncelle" asp-controller="Bolum" asp-route-id="@bolum.Id" class="btn btn-sm bg-danger-light">
                                             <i class="feather-edit"></i>
                                         </a>
-                                        <a href="edit-department.html" class="btn btn-sm bg-danger-light">
+                                        <a asp-action="Sil" asp-controller="Bolum" asp-route-id="@bolum.Id"  class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
                                     </div>

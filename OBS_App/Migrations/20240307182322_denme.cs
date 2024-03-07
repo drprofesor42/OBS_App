@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class asdsaad : Migration
+    public partial class denme : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
