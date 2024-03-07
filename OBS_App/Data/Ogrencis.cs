@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace OBS_App.Data
 {
@@ -10,7 +11,7 @@ namespace OBS_App.Data
         public int ogrenciNo { get; set; }
         public string ogrenciAd { get; set; } = null!;
         public string ogrenciSoyad { get; set; } = null!;
-        public DateTime DogumTarihi { get; set; }
+        public DateOnly DogumTarihi { get; set; }
 
         public string? Eposta { get; set; } 
 
@@ -26,6 +27,6 @@ namespace OBS_App.Data
 
         public int ogrenciDanisman { get; set; }
         
-        public DateTime kayitTarihi { get; set; }
+        public DateOnly kayitTarihi { get; set; }
     }
 }
