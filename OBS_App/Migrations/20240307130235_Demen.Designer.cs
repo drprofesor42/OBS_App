@@ -12,13 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240307092308_İnitialCreate.Designer.cs
-    [Migration("20240307092308_İnitialCreate")]
-    partial class İnitialCreate
-========
-    [Migration("20240307083630_deneme")]
-    partial class deneme
->>>>>>>> parent of b532fc4 (Önemsiz):OBS_App/Migrations/20240307083630_deneme.Designer.cs
+    [Migration("20240307130235_Demen")]
+    partial class Demen
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -485,15 +480,15 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenBaslamaTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("OgretmenDogumTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                        .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")
                         .IsRequired()
