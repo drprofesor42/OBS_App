@@ -62,7 +62,8 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-				// TempData Hata Gönder
+                Console.WriteLine("How it possible?");
+                return RedirectToAction("Index");
 			}
 
 			return RedirectToAction("Index");
