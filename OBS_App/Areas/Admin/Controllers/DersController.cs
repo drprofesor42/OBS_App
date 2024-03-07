@@ -31,6 +31,8 @@ namespace OBS_App.Areas.Admin.Controllers
 			}
             else
             {
+				Console.WriteLine("Ders Güncelle");
+				Console.WriteLine(id);
 				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
 				if (ders == null)
 				{
@@ -62,7 +64,8 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-				// TempData Hata Gönder
+                Console.WriteLine("How it possible?");
+                return RedirectToAction("Index");
 			}
 
 			return RedirectToAction("Index");
