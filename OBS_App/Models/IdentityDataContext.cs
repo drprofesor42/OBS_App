@@ -17,7 +17,7 @@ namespace OBS_App.Models
         }
 
         public DbSet<Admin> Adminler { get; set; }
-        public DbSet<AkademikTakvim> AkademikTakvimler { get; set; }
+        public DbSet<AkademikTakvims> AkademikTakvimler { get; set; }
         public DbSet<Bolum> Bolumler { get; set; }
         public DbSet<Ders> Dersler { get; set; }
         public DbSet<Duyuru> Duyurular { get; set; }
