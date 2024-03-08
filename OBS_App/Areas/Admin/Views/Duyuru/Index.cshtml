@@ -6,13 +6,10 @@
 
 <div class="row">
 	<div class="col-md-9">
-		<ul class="list-links mb-4">
-			<li class="active"><a href="blog.html">Aktif Duyuru</a></li>
-			<li><a href="pending-blog.html">Bekliyen Duyuru</a></li>
-		</ul>
+		<h3>Tüm Duyurular</h3>
 	</div>
 	<div class="col-md-3 text-md-end">
-		<a href="add-blog.html" class="btn btn-primary btn-blog mb-3"><i class="feather-plus-circle me-1"></i> Yeni Ekle</a>
+		<a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary btn-blog mb-3"><i class="feather-plus-circle me-1"></i> Yeni Ekle</a>
 	</div>
 </div>
 
@@ -22,7 +19,7 @@
 		<div class="col-md-6 col-xl-4 col-sm-12 d-flex">
 			<div class="blog grid-blog flex-fill">
 				<div class="blog-image">
-					<a href="blog-details.html"><img style="height: 250px; width:600px" class="img-fluid" src="https://pbs.twimg.com/profile_images/2861121762/8b50471dbedc1b0968bdb9d79a894ba3_400x400.jpeg" alt="Ana Resim"></a>
+					<a href="blog-details.html"><img style="height: 250px; width:600px" class="img-fluid" src="https://www.creativefabrica.com/wp-content/uploads/2019/04/University-icon-by-marco.livolsi2014-5-580x386.jpg" alt="Ana Resim"></a>
 					@* <div class="blog-views">
 				<i class="feather-eye me-1"></i> 225
 				</div> *@
@@ -32,9 +29,9 @@
 						<li>
 							<div class="post-author">
 								<a href="profile.html">
-									<img src="https://pbs.twimg.com/profile_images/2861121762/8b50471dbedc1b0968bdb9d79a894ba3_400x400.jpeg" alt="Yazar Resim">
+									<img src="https://webupload.gazi.edu.tr/upload/30/2022/8/12/1e7b0909-dabc-49c6-8ae3-b03b3fd19928-ogrenci-bilgi-sistemi.png" alt="Yazar Resim">
 									<span>
-										<span class="post-title">@duyuru.duyuruGondericiAdmin</span>
+										<span class="post-title">@duyuru.duyuruGonderici</span>
 										<span class="post-date"><i class="far fa-clock"></i> @duyuru.olusturmaTarihi</span>
 									</span>
 								</a>
@@ -47,8 +44,8 @@
 				<div class="row">
 					<div class="edit-options">
 						<div class="edit-delete-btn">
-							<a href="edit-blog.html" class="text-success"><i class="feather-edit-3 me-1"></i> Düzenle</a>
-							<a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="feather-trash-2 me-1"></i> Sil</a>
+							<a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="@duyuru.duyuruId" class="text-success"><i class="feather-edit-3 me-1"></i> Düzenle</a>
+							<a asp-controller="Duyuru" asp-action="Sil" asp-route-id=@duyuru.duyuruId class="text-danger" ><i class="feather-trash-2 me-1"></i> Sil</a>
 						</div>
 					</div>
 				</div>

@@ -9,11 +9,9 @@ namespace OBS_App.Areas.Admin.Controllers
     public class DuyuruController : Controller
     {
         private readonly IdentityDataContext _identityDataContext;
-        private readonly UserManager<AppUser> _userManager;
         public DuyuruController(IdentityDataContext identityDataContext, UserManager<AppUser> userManager)
         {
             _identityDataContext = identityDataContext;
-            _userManager = userManager;
         }
 
 
@@ -25,13 +23,9 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
-            var user = await _userManager.GetUserId();
-			var user_id = user.Id;
-			ViewBag.UserId = user_id;
-
 			if (id == 0)
             {
-                return View(user_id);
+                return View();
             }
             else
             {
@@ -65,9 +59,19 @@ namespace OBS_App.Areas.Admin.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult Sil()
+		public IActionResult Sil(int id)
         {
-            return View();
+            var duyuru = _identityDataContext.Duyurular.FirstOrDefault(x => x.duyuruId == id);
+            if (duyuru == null)
+            {
+                // Hata gönder
+            }
+            else
+            {
+                _identityDataContext.Remove(duyuru);
+                _identityDataContext.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
     }

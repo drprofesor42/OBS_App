@@ -253,10 +253,7 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("duyuruGondericiAdmin")
-                        .HasColumnType("int");
-
-                    b.Property<int>("duyuruGondericiProf")
+                    b.Property<int>("duyuruGonderici")
                         .HasColumnType("int");
 
                     b.Property<string>("duyuruMesaj")

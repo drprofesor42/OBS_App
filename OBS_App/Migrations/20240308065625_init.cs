@@ -169,8 +169,7 @@ namespace OBS_App.Migrations
                 {
                     duyuruId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    duyuruGondericiAdmin = table.Column<int>(type: "int", nullable: false),
-                    duyuruGondericiProf = table.Column<int>(type: "int", nullable: false),
+                    duyuruGonderici = table.Column<int>(type: "int", nullable: false),
                     duyuruBaslık = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     duyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
