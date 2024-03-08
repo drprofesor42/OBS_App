@@ -204,15 +204,13 @@
                                 <li><a href="add-subject.html">Duyuru Yayınla</a></li>
                             </ul>
                         </li>
-
-                        <li>
-                            <a href="index-2.html"><i class="fas fa-calendar-day"></i> <span>Etkinlikler</span></a>
-                        </li>
-
-                        <li>
-                            <a href="index-2.html"><i class="fas fa-table"></i> <span>Akademik Takvim</span></a>
-                        </li>
-
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-calendar-alt"></i> <span>Akademik Takvim</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-controller="Takvim" asp-action="Index">Akademik Takvim</a></li>
+                                <li><a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0">Akademik Takvim Ekle</a></li>
+                            </ul>
+                        </li>         
                         <li>
                             <a href="settings.html"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
                         </li>

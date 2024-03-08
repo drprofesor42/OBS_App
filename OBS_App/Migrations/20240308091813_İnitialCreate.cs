@@ -41,17 +41,16 @@ namespace OBS_App.Migrations
                 name: "AkademikTakvimler",
                 columns: table => new
                 {
-                    akademikTakvimId = table.Column<int>(type: "int", nullable: false)
+                    akademikTakvimsId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    akademikTakvimBaslangic = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    akademikTakvimBitis = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    akademikTakvimBaslangic = table.Column<DateOnly>(type: "date", nullable: false),
+                    akademikTakvimBitis = table.Column<DateOnly>(type: "date", nullable: false),
                     akademikTakvimAktivite = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AkademikTakvimler", x => x.akademikTakvimId);
+                    table.PrimaryKey("PK_AkademikTakvimler", x => x.akademikTakvimsId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

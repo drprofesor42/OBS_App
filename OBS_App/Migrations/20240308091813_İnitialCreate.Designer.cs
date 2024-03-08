@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240307092308_İnitialCreate")]
+    [Migration("20240308091813_İnitialCreate")]
     partial class İnitialCreate
     {
         /// <inheritdoc />
@@ -163,27 +163,24 @@ namespace OBS_App.Migrations
                     b.ToTable("Adminler");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.AkademikTakvim", b =>
+            modelBuilder.Entity("OBS_App.Data.AkademikTakvims", b =>
                 {
-                    b.Property<int>("akademikTakvimId")
+                    b.Property<int>("akademikTakvimsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("akademikTakvimId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("akademikTakvimsId"));
 
                     b.Property<string>("akademikTakvimAktivite")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("akademikTakvimBaslangic")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("akademikTakvimBaslangic")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("akademikTakvimBitis")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("akademikTakvimBitis")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("olusturmaTarihi")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("akademikTakvimId");
+                    b.HasKey("akademikTakvimsId");
 
                     b.ToTable("AkademikTakvimler");
                 });
