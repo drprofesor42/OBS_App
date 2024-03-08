@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240307182322_denme")]
-    partial class denme
+    [Migration("20240308081512_asda")]
+    partial class asda
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -203,9 +203,6 @@ namespace OBS_App.Migrations
                     b.Property<string>("BolumIsmi")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("OgrenciSayisi")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -414,6 +411,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BolumId")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("DogumTarihi")
                         .HasColumnType("date");
 
@@ -459,6 +459,8 @@ namespace OBS_App.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BolumId");
+
                     b.ToTable("Ogrenciler");
                 });
 
@@ -469,6 +471,9 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BolumId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OgretmenAd")
                         .IsRequired()
@@ -532,6 +537,8 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BolumId");
 
                     b.ToTable("Ogretmenler");
                 });
@@ -716,6 +723,35 @@ namespace OBS_App.Migrations
                         .IsRequired();
 
                     b.Navigation("Ders");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
+                {
+                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                        .WithMany("Ogrencileri")
+                        .HasForeignKey("BolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bolum");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
+                {
+                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                        .WithMany("Ogretmenleri")
+                        .HasForeignKey("BolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bolum");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Bolum", b =>
+                {
+                    b.Navigation("Ogrencileri");
+
+                    b.Navigation("Ogretmenleri");
                 });
 #pragma warning restore 612, 618
         }
