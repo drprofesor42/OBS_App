@@ -19,7 +19,7 @@ namespace OBS_App.Areas.Admin.Controllers
 		}
 		public IActionResult Index()
 		{
-			var bolum =_context.Bolumler.Include(x => x.Ogrencileri).Include(x => x.Ogretmenleri).ToList();
+			var bolum =_context.Bolumler.Include(x => x.Ogretmenleri).Include(x => x.Ogrencileri).ToList();
 			return View(bolum);
 		}
 
