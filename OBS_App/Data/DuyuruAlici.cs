@@ -4,9 +4,9 @@
     {
         public int duyuruAliciId { get; set; }
         public int duyuruId { get; set; }
-        public Duyuru Duyuru { get; set; } = null!;
+        /*public Duyuru Duyuru { get; set; } = null!;*/
         public int duyuruAlici_ogrenci { get; set; }
-        public Ogrencis Ogrencis { get; set; } = null!;
-        public DateTime duyuruAliciOlusturmaTarihi { get; set; }
+        /*public Ogrencis Ogrenci { get; set; } = null!;*/
+        public DateOnly duyuruAliciOlusturmaTarihi { get; set; }
     }
 }
