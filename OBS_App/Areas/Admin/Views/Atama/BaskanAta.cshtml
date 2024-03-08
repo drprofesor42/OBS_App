@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "BaskanAta";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card comman-shadow">
+            <div class="card-body">
+                <form asp-action="BaskanAta" asp-controller="Atama" method="post">
+                    <div asp-validation-summary="All" class="text-danger">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title student-info">Başkan Ata<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Bölüm Ata<span class="login-danger">*</span></label>
+                                    <select class="form-control select">
+                                        <option>Bölüm Atama Seç</option>
+                                        <option>2</option>
+                                        <option>4</option>
+                                        <option>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Başkan Ata<span class="login-danger">*</span></label>
+                                    <select class="form-control select">
+                                        <option>Başkan Atama Seç</option>
+                                        <option>2</option>
+                                        <option>4</option>
+                                        <option>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="student-submit">
+                                    @if (Model == null)
+                                    {
+                                        <input name="type" id="type" type="hidden" value="0">
+                                    }
+                                    else
+                                    {
+                                        <input name="type" id="type" type="hidden" value="1">
+                                    }
+                                    <button type="submit" class="btn btn-primary">Onayla</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

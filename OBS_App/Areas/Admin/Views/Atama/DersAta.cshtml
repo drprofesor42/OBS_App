@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "DersAta";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card comman-shadow">
+            <div class="card-body">
+                <form asp-action="DersAta" asp-controller="Atama" method="post">
+                    <div asp-validation-summary="All" class="text-danger">                    
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title student-info">Ders Ata<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Öğrenci Ata<span class="login-danger">*</span></label>
+                                    <select class="form-control select">
+                                        <option>Öğrenci Atama Seç</option>
+                                        <option>2</option>
+                                        <option>4</option>
+                                        <option>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Ders Ata<span class="login-danger">*</span></label>
+                                    <select class="form-control select">
+                                        <option>Ders Atama Seç</option>
+                                        <option>2</option>
+                                        <option>4</option>
+                                        <option>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="student-submit">
+                                    @if (Model == null)
+                                    {
+                                        <input name="type" id="type" type="hidden" value="0">
+                                    }
+                                    else
+                                    {
+                                        <input name="type" id="type" type="hidden" value="1">
+                                    }
+                                    <button type="submit" class="btn btn-primary">Onayla</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card card-table comman-shadow">
+                                    <div class="card-body">
+
+                                        <div class="page-header">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h3 class="page-title">Öğrenciler</h3>
+                                                </div>
+                                                <div class="col-auto text-end float-end ms-auto download-grp">
+                                                    <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
+                                                    <a asp-controller="" asp-action=""  class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="table-responsive">
+                                        <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                                            <thead class="student-thread">
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-check check-tables">
+                                                            <input class="form-check-input" type="checkbox" value="something">
+                                                        </div>
+                                                    </th>
+                                                    <th>ID</th>
+                                                    <th>Öğrenciler</th>
+                                                    <th>Dersler</th>
+                                                    <th>İşlemler</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>                                               
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-end">
+                                                            <div class="actions ">
+                                                                <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                                                    <i class="feather-eye"></i>
+                                                                </a>
+                                                                <a asp-action="Ekle_Guncelle" class="btn btn-sm bg-danger-light">
+                                                                    <i class="feather-edit"></i>
+                                                                </a>
+                                                                <a asp-controller="Ogrenci" asp-action="Sil"  class="btn btn-sm bg-success-light" onclick="return confirm('Silmek istediğinizden emin misiniz?')">
+                                                                    <i class="feather-trash-2"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
