@@ -4,8 +4,9 @@
     {
         public int duyuruId { get; set; }
         public int duyuruGonderici { get; set; }
-        public Ogretmens Profesor { get; set; } = null!;
+		public string duyuruBaslık { get; set; }
         public string duyuruMesaj { get; set; }
-        public DateTime olusturmaTarihi { get; set; }
+        public DateOnly olusturmaTarihi { get; set; }
+        /*public Ogretmens Profesor { get; set; } = null!;*/
     }
 }

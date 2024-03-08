@@ -20,6 +20,9 @@
         public string OgretmenCinsiyet { get; set; }
         public DateOnly OgretmenBaslamaTarihi { get; set; }
 
+        public int BolumId { get; set; }
+        public Bolum Bolum { get; set; }
+
 
     }
 }

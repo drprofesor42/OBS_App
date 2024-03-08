@@ -20,7 +20,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <form asp-action="Ekle_Guncelle" asp-controller="Ogretmen"  method="post">
+                <form asp-action="Ekle_Guncelle" asp-controller="Ogretmen" method="post">
                     <div asp-validation-summary="All" class="text-danger">
                         <div class="row">
                             <div class="col-12">
@@ -42,16 +42,17 @@
                                 <div class="form-group local-forms">
                                     <label>Cinsiyet<span class="login-danger">*</span></label>
                                     <select asp-for="OgretmenCinsiyet" class="form-control select">
-                                        <option>Seçiniz</option>
+                                        <option>Select Class</option>
                                         <option>Erkek</option>
                                         <option>Kadın</option>
+                                        
                                     </select>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms calendar-icon">
+                                <div class="form-group local-forms">
                                     <label>Doğum Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenDogumTarihi" class="form-control datetimepicker" type="text" placeholder="DD-MM-YYYY">
+                                    <input asp-for="OgretmenDogumTarihi" type="date" class="form-control">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
@@ -61,9 +62,9 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms calendar-icon">
+                                <div class="form-group local-forms">
                                     <label>Başlama Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenBaslamaTarihi" class="form-control datetimepicker" type="text" placeholder="DD-MM-YYYY">
+                                    <input asp-for="OgretmenBaslamaTarihi" type="date" class="form-control">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-4">
@@ -145,10 +146,10 @@
                                     {
                                         <button name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
                                     }
-                                    
+
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </form>
