@@ -75,7 +75,7 @@
 										<input class="form-check-input" type="checkbox" value="something">
 									</div>
 								</td>
-								<td>@ders.dersId</td>
+								<td>@ders.Id</td>
 								<td>@ders.dersKod</td>
 								<td>
 									<h2>
@@ -91,10 +91,10 @@
 										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
 											<i class="feather-eye"></i>
 										</a>
-										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.dersId" class="btn btn-sm bg-danger-light me-2">
+										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
 											<i class="feather-edit"></i>
 										</a>
-										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.dersId" class="btn btn-sm bg-success-light">
+										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
 											<i class="feather-trash-2"></i>
 										</a>
 									</div>

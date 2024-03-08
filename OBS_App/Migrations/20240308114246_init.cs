@@ -131,7 +131,7 @@ namespace OBS_App.Migrations
                 name: "Dersler",
                 columns: table => new
                 {
-                    dersId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     profesorId = table.Column<int>(type: "int", nullable: false),
                     dersIsim = table.Column<string>(type: "longtext", nullable: false)
@@ -144,7 +144,7 @@ namespace OBS_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dersler", x => x.dersId);
+                    table.PrimaryKey("PK_Dersler", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -168,7 +168,7 @@ namespace OBS_App.Migrations
                 name: "Duyurular",
                 columns: table => new
                 {
-                    duyuruId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     duyuruGonderici = table.Column<int>(type: "int", nullable: false),
                     duyuruBaslık = table.Column<string>(type: "longtext", nullable: false)
@@ -179,7 +179,7 @@ namespace OBS_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Duyurular", x => x.duyuruId);
+                    table.PrimaryKey("PK_Duyurular", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -203,7 +203,7 @@ namespace OBS_App.Migrations
                 name: "Fakulteler",
                 columns: table => new
                 {
-                    fakulteId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     fakulteProfId = table.Column<int>(type: "int", nullable: false),
                     fakulteIsim = table.Column<string>(type: "longtext", nullable: false)
@@ -212,7 +212,7 @@ namespace OBS_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fakulteler", x => x.fakulteId);
+                    table.PrimaryKey("PK_Fakulteler", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -454,7 +454,7 @@ namespace OBS_App.Migrations
                         name: "FK_OgrenciDersler_Dersler_dersId",
                         column: x => x.dersId,
                         principalTable: "Dersler",
-                        principalColumn: "dersId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");

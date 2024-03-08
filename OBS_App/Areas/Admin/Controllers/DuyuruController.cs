@@ -29,7 +29,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                var duyuru = _identityDataContext.Duyurular.FirstOrDefault(x => x.duyuruId == id);
+                var duyuru = _identityDataContext.Duyurular.FirstOrDefault(x => x.Id == id);
                 if (duyuru == null)
                 {
                     // Hata Gönder
@@ -61,7 +61,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
 		public IActionResult Sil(int id)
         {
-            var duyuru = _identityDataContext.Duyurular.FirstOrDefault(x => x.duyuruId == id);
+            var duyuru = _identityDataContext.Duyurular.FirstOrDefault(x => x.Id == id);
             if (duyuru == null)
             {
                 // Hata gönder
