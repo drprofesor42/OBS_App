@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class DanismanController : Controller
     {
-        public IActionResult Index()
+
+		public IActionResult Index()
         {
             return View();
         }
