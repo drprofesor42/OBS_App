@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/panel/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/panel/css/ckeditor.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
 </head>
 
@@ -39,7 +41,7 @@
                 </a>
             </div>
 
-
+           
 
 
             <a class="mobile_btn" id="mobile_btn">
@@ -199,8 +201,8 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-book-reader"></i> <span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="subjects.html">Duyurular</a></li>
-                                <li><a href="add-subject.html">Duyuru Yayınla</a></li>
+                                <li><a asp-controller="Duyuru" asp-action="Index">Duyurular</a></li>
+                                <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0">Duyuru Yayınla</a></li>
                             </ul>
                         </li>
 
@@ -240,13 +242,14 @@
 
             </div>
         </div>
-
+        <footer>
+            <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
-    </footer>
+   
 
+    @* <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -256,7 +259,7 @@
     <script src="~/panel/plugins/apexchart/apexcharts.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
     <script src="~/panel/plugins/apexchart/chart-data.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
 
-    <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
 
 </body>

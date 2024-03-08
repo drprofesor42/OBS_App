@@ -247,8 +247,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruId"));
 
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("int");
+                    b.Property<string>("duyuruBaslık")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("duyuruGonderici")
                         .HasColumnType("int");
@@ -257,12 +258,10 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("olusturmaTarihi")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("olusturmaTarihi")
+                        .HasColumnType("date");
 
                     b.HasKey("duyuruId");
-
-                    b.HasIndex("ProfesorId");
 
                     b.ToTable("Duyurular");
                 });
@@ -275,11 +274,16 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruAliciId"));
 
+<<<<<<< HEAD
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("duyuruAliciOlusturmaTarihi")
                         .HasColumnType("datetime(6)");
+=======
+                    b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
+                        .HasColumnType("date");
+>>>>>>> kagan
 
                     b.Property<int>("duyuruAlici_ogrenci")
                         .HasColumnType("int");
@@ -289,10 +293,13 @@ namespace OBS_App.Migrations
 
                     b.HasKey("duyuruAliciId");
 
+<<<<<<< HEAD
                     b.HasIndex("OgrencisId");
 
                     b.HasIndex("duyuruId");
 
+=======
+>>>>>>> kagan
                     b.ToTable("DuyuruAlicilar");
                 });
 
@@ -681,6 +688,7 @@ namespace OBS_App.Migrations
                         .IsRequired();
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
                     b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
@@ -709,6 +717,15 @@ namespace OBS_App.Migrations
                     b.Navigation("Duyuru");
 
                     b.Navigation("Ogrencis");
+=======
+            modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
+                {
+                    b.HasOne("OBS_App.Data.Bolum", null)
+                        .WithOne("FakulteBolum")
+                        .HasForeignKey("OBS_App.Data.FakulteBolum", "bolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+>>>>>>> kagan
                 });
 
             modelBuilder.Entity("OBS_App.Data.OgrenciDers", b =>
