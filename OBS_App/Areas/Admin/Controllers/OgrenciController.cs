@@ -29,8 +29,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                Console.WriteLine("Ogrenci Güncelle");
-                Console.WriteLine(id);
+
                 var ogrenci = _identityDataContext.Ogrenciler.FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {

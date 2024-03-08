@@ -1,0 +1,99 @@
+﻿@model IEnumerable<AkademikTakvims>
+@{
+    ViewData["Title"] = "Liste";
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-sub-header">
+                <h3 class="page-title">Takvimler</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="students.html">Takvimler</a></li>
+                    <li class="breadcrumb-item active">Tüm Takvimler</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="col-12 col-sm-4">
+        <div class="form-group local-forms">
+            <label>Dönem Seçiniz</label>
+            <select class="form-control select">
+                <option>2019-2020</option>
+                <option>2020-2021</option>
+                <option>2021-2022</option>
+            </select>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table comman-shadow">
+            <div class="card-body">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Takvim Listesi</h3>
+                        </div>
+                        <div class="col-auto text-end float-end ms-auto download-grp">
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
+                            <a asp-action="Ekle_Guncelle" asp-controller="Takvim" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle	</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                        <thead class="student-thread">
+                            <tr>
+                                <th>
+                                    <div class="form-check check-tables">
+                                        <input class="form-check-input" type="checkbox" value="something">
+                                    </div>
+                                </th>
+                                <th>Id</th>
+                                <th>Başlangıç Tarihi</th>
+                                <th>Bitiş Tarihi</th>
+                                <th>Aktivite</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var tak in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="form-check check-tables">
+                                            <input class="form-check-input" type="checkbox" value="something">
+                                        </div>
+                                    </td>
+                                    <td>@tak.akademikTakvimsId</td>
+                                    <td>@tak.akademikTakvimBaslangic</td>
+                                    <td>@tak.akademikTakvimBitis</td>
+                                    <td>@tak.akademikTakvimAktivite</td>
+                                    <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a asp-action="Ekle_Guncelle" asp-controller="Takvim" asp-route-id="@tak.akademikTakvimsId" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a asp-action="Sil" asp-controller="Takvim" asp-route-id="@tak.akademikTakvimsId" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-trash-2"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
