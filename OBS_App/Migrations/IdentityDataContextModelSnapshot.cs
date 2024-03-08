@@ -277,16 +277,8 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruAliciId"));
 
-<<<<<<< HEAD
-                    b.Property<int>("OgrencisId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("duyuruAliciOlusturmaTarihi")
-                        .HasColumnType("datetime(6)");
-=======
                     b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
                         .HasColumnType("date");
->>>>>>> kagan
 
                     b.Property<int>("duyuruAlici_ogrenci")
                         .HasColumnType("int");
@@ -296,13 +288,6 @@ namespace OBS_App.Migrations
 
                     b.HasKey("duyuruAliciId");
 
-<<<<<<< HEAD
-                    b.HasIndex("OgrencisId");
-
-                    b.HasIndex("duyuruId");
-
-=======
->>>>>>> kagan
                     b.ToTable("DuyuruAlicilar");
                 });
 
@@ -679,46 +664,6 @@ namespace OBS_App.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-<<<<<<< HEAD
-            modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
-                {
-                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
-                        .WithMany()
-                        .HasForeignKey("ProfesorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profesor");
-                });
-
-            modelBuilder.Entity("OBS_App.Data.DuyuruAlici", b =>
-                {
-                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
-                        .WithMany()
-                        .HasForeignKey("OgrencisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OBS_App.Data.Duyuru", "Duyuru")
-                        .WithMany()
-                        .HasForeignKey("duyuruId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Duyuru");
-
-                    b.Navigation("Ogrencis");
-=======
-            modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
-                {
-                    b.HasOne("OBS_App.Data.Bolum", null)
-                        .WithOne("FakulteBolum")
-                        .HasForeignKey("OBS_App.Data.FakulteBolum", "bolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
->>>>>>> kagan
                 });
 
             modelBuilder.Entity("OBS_App.Data.OgrenciDers", b =>
