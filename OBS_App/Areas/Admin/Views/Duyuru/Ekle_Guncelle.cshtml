@@ -1,5 +1,4 @@
 ﻿
-
 @{
     ViewData["Title"] = "Ekle_Guncelle";
 }
@@ -43,19 +42,16 @@
 			<div class="bank-details-btn ">
 				@if (Model == null)
 				{
-					<input name="type" id="type" type="hidden" value="0">
-					<input name="duyuruGondericiAdmin" type="hidden" value="@ViewBag.UserId">
-					<input name="duyuruGondericiProf" type="hidden" value=0>
+					<input name="type" type="hidden" value="0">
 				}
 				else
 				{
-					<input name="type" id="type" type="hidden" value="1">
-					<input name="duyuruId" type="hidden" value="@Model.duyuruId">
-					<input name="duyuruGondericiAdmin" type="hidden" value="@Model.duyuruGondericiAdmin">
-					<input name="duyuruGondericiProf" type="hidden" value=0>
+					<input name="type" type="hidden" value="1">
 				}
+				<input name="duyuruGonderici" type="hidden" value="0">
+				<input asp-for="olusturmaTarihi" type="hidden" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
 
-				<button type="submit"  class="btn bank-cancel-btn me-2">Duyuru Gönder</button>
+				<button type="submit" class="btn bank-cancel-btn me-2">Duyuru Gönder</button>
 			</div>
 		</div>
 	</form>

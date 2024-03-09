@@ -41,7 +41,7 @@
                 </a>
             </div>
 
-
+           
 
 
             <a class="mobile_btn" id="mobile_btn">
@@ -147,7 +147,7 @@
                             <a href="#"><i class="fas fa-building"></i> <span> Fakülteler</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Fakulte" asp-action="Index">Fakülte Listesi</a></li>
-                                <li><a href="add-department.html">Fakülte Ekle</a></li>
+                                <li><a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="0">Fakülte Ekle</a></li>
                                 <li><a href="add-department.html">Fakülte Öğretmenleri</a></li>
 
                             </ul>
@@ -190,7 +190,7 @@
                             <a href="#"><i class="fas fa-user"></i> <span> Danışman İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Danisman" asp-action="Index">Danışman Listesi</a></li>
-                                <li><a href="add-teacher.html">Danışman Atama</a></li>
+                                <li><a asp-controller="Danisman" asp-action="Ata_Guncelle">Danışman Atama</a></li>
                             </ul>
                         </li>
 
@@ -205,15 +205,13 @@
                                 <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0">Duyuru Yayınla</a></li>
                             </ul>
                         </li>
-
-                        <li>
-                            <a href="index-2.html"><i class="fas fa-calendar-day"></i> <span>Etkinlikler</span></a>
-                        </li>
-
-                        <li>
-                            <a href="index-2.html"><i class="fas fa-table"></i> <span>Akademik Takvim</span></a>
-                        </li>
-
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-calendar-alt"></i> <span>Akademik Takvim</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-controller="Takvim" asp-action="Index">Akademik Takvim</a></li>
+                                <li><a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0">Akademik Takvim Ekle</a></li>
+                            </ul>
+                        </li>         
                         <li>
                             <a href="settings.html"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
                         </li>
@@ -242,21 +240,25 @@
 
             </div>
         </div>
-
+        <footer>
+            <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
-    </footer>
+   
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/panel/plugins/select2/js/select2.min.js"></script>
-    <script src="~/panel/js/feather.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/apexcharts.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/chart-data.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/feather.min.js" ></script>
+    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
+    <script src="~/panel/plugins/apexchart/apexcharts.min.js" ></script>
+    <script src="~/panel/plugins/apexchart/chart-data.js" ></script>
+>>>>>>>>> Temporary merge branch 2
+>>>>>>>>> Temporary merge branch 2
+>>>>>>>>> Temporary merge branch 2
+
 
     <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>

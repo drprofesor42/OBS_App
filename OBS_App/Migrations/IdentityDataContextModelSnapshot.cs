@@ -211,11 +211,11 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
-                    b.Property<int>("dersId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("dersId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("dersAkts")
                         .HasColumnType("int");
@@ -237,27 +237,24 @@ namespace OBS_App.Migrations
                     b.Property<int>("profesorId")
                         .HasColumnType("int");
 
-                    b.HasKey("dersId");
+                    b.HasKey("Id");
 
                     b.ToTable("Dersler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
-                    b.Property<int>("duyuruId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("duyuruBaslık")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("duyuruGondericiAdmin")
-                        .HasColumnType("int");
-
-                    b.Property<int>("duyuruGondericiProf")
+                    b.Property<int>("duyuruGonderici")
                         .HasColumnType("int");
 
                     b.Property<string>("duyuruMesaj")
@@ -267,7 +264,7 @@ namespace OBS_App.Migrations
                     b.Property<DateOnly>("olusturmaTarihi")
                         .HasColumnType("date");
 
-                    b.HasKey("duyuruId");
+                    b.HasKey("Id");
 
                     b.ToTable("Duyurular");
                 });
@@ -281,6 +278,7 @@ namespace OBS_App.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruAliciId"));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");
 
@@ -290,6 +288,10 @@ namespace OBS_App.Migrations
                     b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
                         .HasColumnType("date");
 >>>>>>> kagan
+=======
+                    b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
+                        .HasColumnType("date");
+>>>>>>> Profesor
 
                     b.Property<int>("duyuruAlici_ogrenci")
                         .HasColumnType("int");
@@ -300,22 +302,25 @@ namespace OBS_App.Migrations
                     b.HasKey("duyuruAliciId");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     b.HasIndex("OgrencisId");
 
                     b.HasIndex("duyuruId");
 
 =======
 >>>>>>> kagan
+=======
+>>>>>>> Profesor
                     b.ToTable("DuyuruAlicilar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
-                    b.Property<int>("fakulteId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("fakulteId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("fakulteIsim")
                         .IsRequired()
@@ -327,7 +332,7 @@ namespace OBS_App.Migrations
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("fakulteId");
+                    b.HasKey("Id");
 
                     b.ToTable("Fakulteler");
                 });
@@ -685,6 +690,7 @@ namespace OBS_App.Migrations
                 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
                     b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
@@ -724,6 +730,8 @@ namespace OBS_App.Migrations
 >>>>>>> kagan
                 });
 
+=======
+>>>>>>> Profesor
             modelBuilder.Entity("OBS_App.Data.OgrenciDers", b =>
                 {
                     b.HasOne("OBS_App.Data.Ders", "Ders")

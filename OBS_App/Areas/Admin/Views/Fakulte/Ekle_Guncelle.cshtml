@@ -9,10 +9,6 @@
 		<div class="card">
 			<div class="card-body">
 				<form asp-controller="Fakulte" asp-action="Ekle_Guncelle" method="post">
-					@if (Model != null)
-					{
-						<input name="fakulteId" type="hidden" value="@Model.fakulteId">
-					}
 
 					<div class="row">
 						<div class="col-12">

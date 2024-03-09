@@ -31,7 +31,7 @@ namespace OBS_App.Areas.Admin.Controllers
 			}
             else
             {
-				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
+				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.Id == id);
 				if (ders == null)
 				{
                     // Hata Gönder
@@ -72,7 +72,7 @@ namespace OBS_App.Areas.Admin.Controllers
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {
-            var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
+            var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.Id == id);
             if (ders == null)
             {
                 // TempData Hata Gönder
