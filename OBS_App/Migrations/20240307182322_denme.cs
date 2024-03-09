@@ -41,16 +41,17 @@ namespace OBS_App.Migrations
                 name: "AkademikTakvimler",
                 columns: table => new
                 {
-                    akademikTakvimsId = table.Column<int>(type: "int", nullable: false)
+                    akademikTakvimId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    akademikTakvimBaslangic = table.Column<DateOnly>(type: "date", nullable: false),
-                    akademikTakvimBitis = table.Column<DateOnly>(type: "date", nullable: false),
+                    akademikTakvimBaslangic = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    akademikTakvimBitis = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     akademikTakvimAktivite = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AkademikTakvimler", x => x.akademikTakvimsId);
+                    table.PrimaryKey("PK_AkademikTakvimler", x => x.akademikTakvimId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -183,7 +184,8 @@ namespace OBS_App.Migrations
                 {
                     duyuruId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    duyuruGonderici = table.Column<int>(type: "int", nullable: false),
+                    duyuruGondericiAdmin = table.Column<int>(type: "int", nullable: false),
+                    duyuruGondericiProf = table.Column<int>(type: "int", nullable: false),
                     duyuruBaslık = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     duyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
@@ -193,7 +195,7 @@ namespace OBS_App.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Duyurular", x => x.duyuruId);
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -457,7 +459,7 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
                 name: "OgrenciDersler",
                 columns: table => new
                 {
@@ -537,7 +539,7 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
 ========
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -595,7 +597,7 @@ namespace OBS_App.Migrations
                 table: "FakulteBolumler",
                 column: "bolumId",
                 unique: true);
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_OgrenciDersler_dersId",
@@ -668,7 +670,7 @@ namespace OBS_App.Migrations
                 name: "Ogrenciler");
 ========
                 name: "Bolumler");
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
 
             migrationBuilder.DropTable(
                 name: "Dersler");

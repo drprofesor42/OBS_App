@@ -12,18 +12,18 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240308091813_İnitialCreate.Designer.cs
-    [Migration("20240308091813_İnitialCreate")]
-    partial class İnitialCreate
-========
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
     [Migration("20240307182322_denme")]
     partial class denme
 ========
-    [Migration("20240308065625_init")]
+    [Migration("20240307141739_init")]
     partial class init
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.Designer.cs
->>>>>>>> master:OBS_App/Migrations/20240308065625_init.Designer.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+=======
+    [Migration("20240308114246_init")]
+    partial class init
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,24 +173,27 @@ namespace OBS_App.Migrations
                     b.ToTable("Adminler");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.AkademikTakvims", b =>
+            modelBuilder.Entity("OBS_App.Data.AkademikTakvim", b =>
                 {
-                    b.Property<int>("akademikTakvimsId")
+                    b.Property<int>("akademikTakvimId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("akademikTakvimsId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("akademikTakvimId"));
 
                     b.Property<string>("akademikTakvimAktivite")
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("akademikTakvimBaslangic")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("akademikTakvimBaslangic")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateOnly>("akademikTakvimBitis")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("akademikTakvimBitis")
+                        .HasColumnType("datetime(6)");
 
-                    b.HasKey("akademikTakvimsId");
+                    b.Property<DateTime>("olusturmaTarihi")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("akademikTakvimId");
 
                     b.ToTable("AkademikTakvimler");
                 });
@@ -221,11 +224,11 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
-                    b.Property<int>("dersId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("dersId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("dersAkts")
                         .HasColumnType("int");
@@ -247,18 +250,18 @@ namespace OBS_App.Migrations
                     b.Property<int>("profesorId")
                         .HasColumnType("int");
 
-                    b.HasKey("dersId");
+                    b.HasKey("Id");
 
                     b.ToTable("Dersler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
-                    b.Property<int>("duyuruId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("duyuruBaslık")
                         .IsRequired()
@@ -274,7 +277,7 @@ namespace OBS_App.Migrations
                     b.Property<DateOnly>("olusturmaTarihi")
                         .HasColumnType("date");
 
-                    b.HasKey("duyuruId");
+                    b.HasKey("Id");
 
                     b.ToTable("Duyurular");
                 });
@@ -287,6 +290,7 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruAliciId"));
 
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");
@@ -296,7 +300,11 @@ namespace OBS_App.Migrations
 ========
                     b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
                         .HasColumnType("date");
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.Designer.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+=======
+                    b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
+                        .HasColumnType("date");
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
 
                     b.Property<int>("duyuruAlici_ogrenci")
                         .HasColumnType("int");
@@ -306,23 +314,26 @@ namespace OBS_App.Migrations
 
                     b.HasKey("duyuruAliciId");
 
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
                     b.HasIndex("OgrencisId");
 
                     b.HasIndex("duyuruId");
 
 ========
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.Designer.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+=======
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
                     b.ToTable("DuyuruAlicilar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
-                    b.Property<int>("fakulteId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("fakulteId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("fakulteIsim")
                         .IsRequired()
@@ -334,7 +345,7 @@ namespace OBS_App.Migrations
                     b.Property<DateTime>("olusturmaTarihi")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("fakulteId");
+                    b.HasKey("Id");
 
                     b.ToTable("Fakulteler");
                 });
@@ -691,6 +702,7 @@ namespace OBS_App.Migrations
                         .IsRequired();
                 });
 
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
@@ -728,9 +740,11 @@ namespace OBS_App.Migrations
                         .HasForeignKey("OBS_App.Data.FakulteBolum", "bolumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
->>>>>>>> kagan:OBS_App/Migrations/20240308065625_init.Designer.cs
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
                 });
 
+=======
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
             modelBuilder.Entity("OBS_App.Data.OgrenciDers", b =>
                 {
                     b.HasOne("OBS_App.Data.Ders", "Ders")

@@ -2,7 +2,7 @@
 {
     public class Ders
     {
-        public int dersId { get; set; }
+        public int Id { get; set; }
 		public int profesorId { get; set; }
 		/*public Profesor Profesor { get; set; } = null!;*/
         public string dersIsim { get; set; }
