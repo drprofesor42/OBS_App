@@ -125,6 +125,34 @@
                         <div class="col-12">
                             <h5 class="form-title"><span>Adres</span></h5>
                         </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group local-forms">
+                                <label>Adres<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.AcıkAdres" type="text" class="form-control">
+                                <span asp-validation-for="Adres.AcıkAdres" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ülke<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.Ulke" type="text" class="form-control">
+                                <span asp-validation-for="Adres.Ulke" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şehir<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.Sehir" type="text" class="form-control">
+                                <span asp-validation-for="Adres.Sehir" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>İlçe<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.Ilce" type="text" class="form-control">
+                                <span asp-validation-for="Adres.Ilce" class="text-danger"></span>
+                            </div>
+                        </div>
                         <div class="col-12 col-sm-4">
                         </div>
                         <div class="form-group students-up-files">

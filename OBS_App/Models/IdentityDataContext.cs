@@ -13,6 +13,7 @@ namespace OBS_App.Models
         {
         }
         public DbSet<AkademikTakvim> AkademikTakvimler { get; set; }
+        public DbSet<Adres> Adresler { get; set; }
         public DbSet<Bolum> Bolumler { get; set; }
         public DbSet<Ders> Dersler { get; set; }
         public DbSet<Duyuru> Duyurular { get; set; }

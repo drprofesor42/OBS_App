@@ -10,8 +10,6 @@ namespace OBS_App.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class OgretmenController : Controller
     {
-
-
         private readonly IdentityDataContext _context;
         public OgretmenController(IdentityDataContext context)
         {
@@ -19,7 +17,7 @@ namespace OBS_App.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var ogretmenler = await _context.Ogretmenler.ToListAsync();
+            var ogretmenler = await _context.Ogretmenler.Include(x =>x.Adres).ToListAsync();
 
             return View(ogretmenler);
         }
