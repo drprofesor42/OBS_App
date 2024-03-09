@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240309204101_Muhammed")]
-    partial class Muhammed
+    [Migration("20240309211817_asd")]
+    partial class asd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -269,7 +269,7 @@ namespace OBS_App.Migrations
 
                     b.HasIndex("OgrencisId");
 
-                    b.ToTable("DersOgrenci");
+                    b.ToTable("DersOgrenciler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
@@ -284,9 +284,16 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DuyuruGonderen")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("DuyuruMesaj")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("OgretmensId")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly>("OlusturmaTarihi")
                         .HasColumnType("date");
@@ -466,6 +473,9 @@ namespace OBS_App.Migrations
                     b.Property<int>("DuyuruId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DuyuruId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("FakulteId")
                         .HasColumnType("int");
 
@@ -521,7 +531,7 @@ namespace OBS_App.Migrations
 
                     b.HasIndex("BolumId");
 
-                    b.HasIndex("DuyuruId");
+                    b.HasIndex("DuyuruId1");
 
                     b.HasIndex("FakulteId");
 
@@ -788,7 +798,7 @@ namespace OBS_App.Migrations
 
                     b.HasOne("OBS_App.Data.Duyuru", "Duyuru")
                         .WithMany()
-                        .HasForeignKey("DuyuruId")
+                        .HasForeignKey("DuyuruId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

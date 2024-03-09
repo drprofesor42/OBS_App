@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class Muhammed : Migration
+    public partial class asd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -113,11 +113,14 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DuyuruGonderen = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     DuyuruBaslik = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DuyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false)
+                    OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
+                    OgretmensId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -404,6 +407,7 @@ namespace OBS_App.Migrations
                     OgretmenBaslamaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     AdresId = table.Column<int>(type: "int", nullable: false),
                     DuyuruId = table.Column<int>(type: "int", nullable: false),
+                    DuyuruId1 = table.Column<int>(type: "int", nullable: false),
                     FakulteId = table.Column<int>(type: "int", nullable: false),
                     BolumId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -423,8 +427,8 @@ namespace OBS_App.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ogretmenler_Duyurular_DuyuruId",
-                        column: x => x.DuyuruId,
+                        name: "FK_Ogretmenler_Duyurular_DuyuruId1",
+                        column: x => x.DuyuruId1,
                         principalTable: "Duyurular",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -499,7 +503,7 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "DersOgrenci",
+                name: "DersOgrenciler",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -509,15 +513,15 @@ namespace OBS_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DersOgrenci", x => x.Id);
+                    table.PrimaryKey("PK_DersOgrenciler", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DersOgrenci_Dersler_DersId",
+                        name: "FK_DersOgrenciler_Dersler_DersId",
                         column: x => x.DersId,
                         principalTable: "Dersler",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DersOgrenci_Ogrenciler_OgrencisId",
+                        name: "FK_DersOgrenciler_Ogrenciler_OgrencisId",
                         column: x => x.OgrencisId,
                         principalTable: "Ogrenciler",
                         principalColumn: "Id",
@@ -578,13 +582,13 @@ namespace OBS_App.Migrations
                 column: "OgretmensId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DersOgrenci_DersId",
-                table: "DersOgrenci",
+                name: "IX_DersOgrenciler_DersId",
+                table: "DersOgrenciler",
                 column: "DersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DersOgrenci_OgrencisId",
-                table: "DersOgrenci",
+                name: "IX_DersOgrenciler_OgrencisId",
+                table: "DersOgrenciler",
                 column: "OgrencisId");
 
             migrationBuilder.CreateIndex(
@@ -618,9 +622,9 @@ namespace OBS_App.Migrations
                 column: "BolumId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ogretmenler_DuyuruId",
+                name: "IX_Ogretmenler_DuyuruId1",
                 table: "Ogretmenler",
-                column: "DuyuruId");
+                column: "DuyuruId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ogretmenler_FakulteId",
@@ -660,7 +664,7 @@ namespace OBS_App.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DersOgrenci");
+                name: "DersOgrenciler");
 
             migrationBuilder.DropTable(
                 name: "OgretmenOgrenciler");
