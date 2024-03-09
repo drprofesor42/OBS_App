@@ -25,6 +25,8 @@
         public Fakulte Fakulte { get; set; }
         public int BolumId { get; set; }
         public Bolum Bolum { get; set; }
+        public ICollection<DersOgrenci> DersOgrenci { get; set; } = new List<DersOgrenci>();
+        public ICollection<OgretmenOgrenci> OgretmenOgrenci { get; set; } = new List<OgretmenOgrenci>();
 
     }
 }

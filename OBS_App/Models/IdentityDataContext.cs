@@ -21,5 +21,7 @@ namespace OBS_App.Models
         public DbSet<Ogrencis> Ogrenciler { get; set; }
         public DbSet<Not> Notlar { get; set; }
         public DbSet<Ogretmens> Ogretmenler { get; set; }
+        public DbSet<OgretmenOgrenci> OgretmenOgrenciler { get; set; }
+        public DbSet<DersOgrenci> DersOgrenciler { get; set; }
     }
 }

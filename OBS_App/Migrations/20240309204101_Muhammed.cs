@@ -471,6 +471,60 @@ namespace OBS_App.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "OgretmenOgrenciler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OgrencisId = table.Column<int>(type: "int", nullable: false),
+                    OgretmensId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OgretmenOgrenciler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OgretmenOgrenciler_Ogrenciler_OgrencisId",
+                        column: x => x.OgrencisId,
+                        principalTable: "Ogrenciler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OgretmenOgrenciler_Ogretmenler_OgretmensId",
+                        column: x => x.OgretmensId,
+                        principalTable: "Ogretmenler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "DersOgrenci",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OgrencisId = table.Column<int>(type: "int", nullable: false),
+                    DersId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DersOgrenci", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DersOgrenci_Dersler_DersId",
+                        column: x => x.DersId,
+                        principalTable: "Dersler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DersOgrenci_Ogrenciler_OgrencisId",
+                        column: x => x.OgrencisId,
+                        principalTable: "Ogrenciler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -524,6 +578,16 @@ namespace OBS_App.Migrations
                 column: "OgretmensId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DersOgrenci_DersId",
+                table: "DersOgrenci",
+                column: "DersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DersOgrenci_OgrencisId",
+                table: "DersOgrenci",
+                column: "OgrencisId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ogrenciler_AdresId",
                 table: "Ogrenciler",
                 column: "AdresId");
@@ -562,6 +626,16 @@ namespace OBS_App.Migrations
                 name: "IX_Ogretmenler_FakulteId",
                 table: "Ogretmenler",
                 column: "FakulteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OgretmenOgrenciler_OgrencisId",
+                table: "OgretmenOgrenciler",
+                column: "OgrencisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OgretmenOgrenciler_OgretmensId",
+                table: "OgretmenOgrenciler",
+                column: "OgretmensId");
         }
 
         /// <inheritdoc />
@@ -586,16 +660,22 @@ namespace OBS_App.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Dersler");
+                name: "DersOgrenci");
 
             migrationBuilder.DropTable(
-                name: "Ogrenciler");
+                name: "OgretmenOgrenciler");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Dersler");
+
+            migrationBuilder.DropTable(
+                name: "Ogrenciler");
 
             migrationBuilder.DropTable(
                 name: "Ogretmenler");

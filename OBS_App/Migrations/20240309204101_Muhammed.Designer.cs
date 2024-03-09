@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240309203325_Muhammed")]
+    [Migration("20240309204101_Muhammed")]
     partial class Muhammed
     {
         /// <inheritdoc />
@@ -249,6 +249,29 @@ namespace OBS_App.Migrations
                     b.ToTable("Dersler");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.DersOgrenci", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrencisId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DersId");
+
+                    b.HasIndex("OgrencisId");
+
+                    b.ToTable("DersOgrenci");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
                     b.Property<int>("Id")
@@ -401,6 +424,29 @@ namespace OBS_App.Migrations
                     b.HasIndex("NotId");
 
                     b.ToTable("Ogrenciler");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.OgretmenOgrenci", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OgrencisId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgretmensId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OgrencisId");
+
+                    b.HasIndex("OgretmensId");
+
+                    b.ToTable("OgretmenOgrenciler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
@@ -653,6 +699,25 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogretmens");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.DersOgrenci", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ders", "Ders")
+                        .WithMany("DersOgrenci")
+                        .HasForeignKey("DersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
+                        .WithMany("DersOgrenci")
+                        .HasForeignKey("OgrencisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ders");
+
+                    b.Navigation("Ogrencis");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
                 {
                     b.HasOne("OBS_App.Data.Adres", "Adres")
@@ -686,6 +751,25 @@ namespace OBS_App.Migrations
                     b.Navigation("Fakulte");
 
                     b.Navigation("Not");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.OgretmenOgrenci", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
+                        .WithMany("OgretmenOgrenci")
+                        .HasForeignKey("OgrencisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
+                        .WithMany("OgretmenOgrenci")
+                        .HasForeignKey("OgretmensId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ogrencis");
+
+                    b.Navigation("Ogretmens");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
@@ -732,6 +816,11 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogretmens");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Ders", b =>
+                {
+                    b.Navigation("DersOgrenci");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
                     b.Navigation("Bolumler");
@@ -741,9 +830,18 @@ namespace OBS_App.Migrations
                     b.Navigation("Ogretmens");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
+                {
+                    b.Navigation("DersOgrenci");
+
+                    b.Navigation("OgretmenOgrenci");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
                     b.Navigation("Dersler");
+
+                    b.Navigation("OgretmenOgrenci");
                 });
 #pragma warning restore 612, 618
         }
