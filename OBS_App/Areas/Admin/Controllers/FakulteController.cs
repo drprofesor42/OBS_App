@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OBS_App.Data;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class FakulteController : Controller
     {
         private readonly IdentityDataContext _identityDataContext;
@@ -42,28 +44,34 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Ekle_Guncelle(string type, Fakulte model)
         {
-			if (model == null || type == null)
-			{
-				// TempData Hata Gönder
-			}
-			else if (type == "0")
+            if(ModelState.IsValid)
             {
-                _identityDataContext.Add(model);
-                _identityDataContext.SaveChanges();
+                if (model == null || type == null)
+                {
+                    return View(model);
+                    // TempData Hata Gönder
+                }
+                else if (type == "0")
+                {
+                    _identityDataContext.Add(model);
+                    _identityDataContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else if (type == "1")
+                {
+                    _identityDataContext.Update(model);
+                    _identityDataContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(model);
+                    // Hata Gönder
+                }
             }
-            else if (type == "1")
-            {
-                _identityDataContext.Update(model);
-                _identityDataContext.SaveChanges();
-            }
-            else
-            {
-                // Hata Gönder
-            }
-
-            return RedirectToAction("Index");
+			
+            return View(model);
         }
-
 
 		public IActionResult Sil(int id)
         {
@@ -80,11 +88,6 @@ namespace OBS_App.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult ProfAta_Sil()
-        {
-            return View();
         }
 
     }

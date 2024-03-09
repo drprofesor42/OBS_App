@@ -1,138 +1,152 @@
 ﻿@model Ogrencis
-
 @{
     ViewData["Title"] = "Ekle_Guncelle";
 }
-
 
 <div class="row">
     <div class="col-sm-12">
         <div class="card comman-shadow">
             <div class="card-body">
                 <form asp-action="Ekle_Guncelle" asp-controller="Ogrenci" method="post">
-                    <div asp-validation-summary="All" class="text-danger">
-                        @if (Model != null)
-                        {
-                            <input name="Id" id="Id" type="hidden" value="@Model.Id">
-                        }
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title student-info">Öğrenci Ekle<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>TC Kimlik Numarası<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciTc" class="form-control" type="number">
+                                <span asp-validation-for="OgrenciTc" class="text-danger"></span>
+                            </div>
+                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="form-title student-info">Öğrenci Ekle<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Öğrenci Numarası<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciNumara" class="form-control" type="number">
+                                <span asp-validation-for="OgrenciNumara" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Tc Kimlik Numarası<span class="login-danger">*</span></label>
-                                    <input asp-for="ogrenciTc" class="form-control" value="@Model?.ogrenciTc" type="text" placeholder="" pattern="[0-9]*" title="Sadece sayı giriniz">
-                                    <!-- pattern="[0-9]*" ifadesi, yalnızca sayıların girilmesini sağlar -->
-                                    <!-- title="Sadece sayı giriniz" ifadesi, kullanıcıya gereksiz bir karakter girdiğinde uyarı gösterir -->
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Adı<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciAd" class="form-control" type="text">
+                                <span asp-validation-for="OgrenciAd" class="text-danger"></span>
                             </div>
-
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Öğrenci Numarası<span class="login-danger">*</span></label>
-                                    <input asp-for="ogrenciNo" class="form-control" value="@Model?.ogrenciNo" type="text" placeholder="" pattern="[0-9]*" title="Sadece sayı giriniz">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Soyadı<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciSoyad" class="form-control" type="text">
+                                <span asp-validation-for="OgrenciSoyad" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Adı<span class="login-danger">*</span></label>
-                                    <input asp-for="ogrenciAd" class="form-control" value="@Model?.ogrenciAd" type="text" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Doğum Tarihi<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciDogumTarihi" class="form-control" type="date">
+                                <span asp-validation-for="OgrenciDogumTarihi" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Soyadı<span class="login-danger">*</span></label>
-                                    <input asp-for="ogrenciSoyad" class="form-control" value="@Model?.ogrenciSoyad" type="text" placeholder="">
-                                </div>
+                        </div>
+                        
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Cinsiyet<span class="login-danger">*</span></label>
+                                <select asp-for="OgrenciCinsiyet" class="form-control select">
+                                    <option>Cinsiyet Seç</option>
+                                    <option>Kız</option>
+                                    <option>Erkek</option>
+                                    <option>Diğerleri</option>
+                                </select>
+                                <span asp-validation-for="OgrenciCinsiyet" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Doğum Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="DogumTarihi" class="form-control" value="@Model?.DogumTarihi" type="date" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Sınıf<span class="login-danger">*</span></label>
+                                <select asp-for="OgrenciSinif" class="form-control select">
+                                    <option>Sınıf Seç</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <span asp-validation-for="OgrenciSinif" class="text-danger"></span>
+                                </select>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>E-Mail <span class="login-danger">*</span></label>
-                                    <input asp-for="Eposta" class="form-control" value="@Model?.Eposta" type="text" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Bölüm<span class="login-danger">*</span></label>
+                                <select asp-for="OgrenciBolum" class="form-control select">
+                                    <option>Bölüm Seç</option>
+                                </select>
+                                <span asp-validation-for="OgrenciBolum" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Cinsiyet<span class="login-danger">*</span></label>
-                                    <select asp-for="ogrenciCinsiyet" class="form-control select" value="@Model?.ogrenciCinsiyet">
-                                        <option>Cinsiyet Seç</option>
-                                        <option>Kız</option>
-                                        <option>Erkek</option>
-                                        <option>Diğerleri</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Telefon Numarası<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciTelefon" class="form-control" type="number" >
+                                <span asp-validation-for="OgrenciTelefon" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Sınıf<span class="login-danger">*</span></label>
-                                    <select asp-for="ogrenciSinif" class="form-control select" value="@Model?.ogrenciSinif">
-                                        <option>Sınıf Seç</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
+                        </div>
+                        
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Kayıt Tarihi<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciKayitTarihi" class="form-control" type="date">
+                                <span asp-validation-for="OgrenciKayitTarihi" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Bölüm<span class="login-danger">*</span></label>
-                                    <select asp-for="ogrenciBolum" class="form-control select" value="@Model?.ogrenciBolum">
-                                        <option>Bölüm Seç</option>
-                                        <option>2</option>
-                                        <option>4</option>
-                                        <option>6</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Giriş Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>E-Mail <span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciEposta" class="form-control" type="email">
+                                <span asp-validation-for="OgrenciEposta" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Telefon Numarası<span class="login-danger">*</span></label>
-                                    <input asp-for="TelefonNo" class="form-control" value="@Model?.TelefonNo" type="text" placeholder="" pattern="[0-9]*" title="Sadece sayı giriniz">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Parola<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciParola" class="form-control" type="password">
+                                <span asp-validation-for="OgrenciParola" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Parola<span class="login-danger">*</span></label>
-                                    <input asp-for="ogrenciParola" class="form-control" value="@Model?.ogrenciParola" type="password" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Parola<span class="login-danger">*</span></label>
+                                <input asp-for="OgrenciParolaOnayla" class="form-control" type="password">
+                                <span asp-validation-for="OgrenciParolaOnayla" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Kayıt Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="kayitTarihi" class="form-control" value="@Model?.kayitTarihi" type="date" placeholder="">                                  
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Adres</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                        </div>
+                        <div class="form-group students-up-files">
+                            <label>Öğrenci Fotoğrafını Yükle(150 X 150 piksel)</label>
+                            <div class="uplod">
+                                <label class="file-upload image-upbtn mb-0">
+                                    Dosya Seç <input type="file">
+                                </label>
                             </div>
-                            <div class="col-12 col-sm-4">
-                            </div>
-                            <div class="form-group students-up-files">
-                                <label>Öğrenci Fotoğrafını Yükle(150 X 150 piksel)</label>
-                                <div class="uplod">
-                                    <label class="file-upload image-upbtn mb-0">
-                                        Dosya Seç <input type="file">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="student-submit">
-                                    @if (Model == null)
-                                    {
-                                        <input name="type" id="type" type="hidden" value="0">
-                                    }
-                                    else
-                                    {
-                                        <input name="type" id="type" type="hidden" value="1">
-                                    }
-                                    <button type="submit" class="btn btn-primary">Onayla</button>
-                                </div>
+                        </div>
+                       
+                        <div class="col-12">
+                            <div class="student-submit">
+                                @if (Model == null)
+                                {
+                                    <input name="type" id="type" type="hidden" value="0">
+                                }
+                                else
+                                {
+                                    <input name="type" id="type" type="hidden" value="1">
+                                }
+                                <button  type="submit" class="btn btn-primary">Onayla</button>
                             </div>
                         </div>
                     </div>

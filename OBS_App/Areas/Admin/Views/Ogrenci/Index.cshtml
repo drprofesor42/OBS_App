@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "Liste";
 }
-
-
 <div class="student-group-form">
     <div class="row">
         <div class="col-lg-3 col-md-6">
@@ -29,7 +27,6 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-table comman-shadow">
@@ -57,15 +54,15 @@
                                     </div>
                                 </th>
                                 <th>ID</th>
-                                <th>Numarası</th>
                                 <th>Ad-Soyad</th>
+                                <th>Numarası</th>
                                 <th>Sınıfı</th>
                                 <th>Bölümü</th>
                                 <th>Doğum Tarihi</th>
                                 <th>E-Mail</th>
                                 <th>Telefon Numarası</th>
                                 <th>Kayıt Tarihi</th>
-                                <th>İşlemler</th>
+                                <th class="text-end">İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,19 +76,19 @@
                                         </div>
                                     </td>
                                     <th>@ogr.Id</th>
-                                    <td>@ogr.ogrenciNo</td>
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/panel/img/profiles/avatar-10.jpg" alt="User Image"></a>
-                                            <a href="student-details.html">@ogr.ogrenciAd @ogr.ogrenciSoyad</a>
+                                            <a href="student-details.html">@ogr.OgrenciAd @ogr.OgrenciSoyad</a>
                                         </h2>
                                     </td>
-                                    <td>@ogr.ogrenciSinif</td>
-                                    <td>@ogr.ogrenciBolum</td>
-                                    <td>@ogr.DogumTarihi</td>
-                                    <td>@ogr.Eposta</td>
-                                    <td>@ogr.TelefonNo</td>
-                                    <td>@ogr.kayitTarihi</td>
+                                    <td>@ogr.OgrenciNumara</td>
+                                    <td>@ogr.OgrenciSinif</td>
+                                    <td>@ogr.OgrenciBolum</td>
+                                    <td>@ogr.OgrenciDogumTarihi</td>
+                                    <td>@ogr.OgrenciEposta</td>
+                                    <td>@ogr.OgrenciTelefon</td>
+                                    <td>@ogr.OgrenciKayitTarihi</td>
                                     <td class="text-end">
                                         <div class="actions ">
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">

@@ -56,16 +56,15 @@
                             <th>ID</th>
                             <th>Bölüm Adı</th>
                             <th>Bölüm Başkanı</th>
+                            <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
                             <th>Ders Sayısı</th>
-                            <th>Öğretmen Sayısı</th>
                             <th class="text-end">İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var bolum in Model)
                         {
-
                             <tr>
                                 <td>
                                     <div class="form-check check-tables">
@@ -75,13 +74,13 @@
                                 <td>@bolum.Id</td>
                                 <td>
                                     <h2>
-                                        <a>@bolum.BolumIsmi</a>
+                                        <a>@bolum.BolumAd</a>
                                     </h2>
                                 </td>
                                 <td>@bolum.BolumBaskani</td>
-                                <td>@bolum.Ogrencileri.Count</td>
-                                <td>Ders Sayısı</td>
-                                <td>@bolum.Ogretmenleri.Count</td>
+                                <td>x</td>
+                                <td>x</td>
+                                <td>x</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
@@ -90,13 +89,12 @@
                                         <a asp-action="Ekle_Guncelle" asp-controller="Bolum" asp-route-id="@bolum.Id" class="btn btn-sm bg-danger-light">
                                             <i class="feather-edit"></i>
                                         </a>
-                                        <a asp-action="Sil" asp-controller="Bolum" asp-route-id="@bolum.Id"  class="btn btn-sm bg-danger-light">
+                                        <a asp-action="Sil" asp-controller="Bolum" asp-route-id="@bolum.Id" class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
-
                         }
                     </tbody>
                 </table>

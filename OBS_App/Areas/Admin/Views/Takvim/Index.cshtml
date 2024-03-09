@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AkademikTakvims>
+﻿@model IEnumerable<AkademikTakvim>
 @{
     ViewData["Title"] = "Liste";
 }
@@ -16,16 +16,16 @@
         </div>
     </div>
 </div>
-    <div class="col-12 col-sm-4">
-        <div class="form-group local-forms">
-            <label>Dönem Seçiniz</label>
-            <select class="form-control select">
-                <option>2019-2020</option>
-                <option>2020-2021</option>
-                <option>2021-2022</option>
-            </select>
-        </div>
+<div class="col-12 col-sm-4">
+    <div class="form-group local-forms">
+        <label>Dönem Seçiniz</label>
+        <select class="form-control select">
+            <option>2019-2020</option>
+            <option>2020-2021</option>
+            <option>2021-2022</option>
+        </select>
     </div>
+</div>
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-table comman-shadow">
@@ -56,11 +56,10 @@
                                 <th>Başlangıç Tarihi</th>
                                 <th>Bitiş Tarihi</th>
                                 <th>Aktivite</th>
-                                <th>İşlemler</th>
+                                <th class="text-end">İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach (var tak in Model)
                             {
                                 <tr>
@@ -69,26 +68,25 @@
                                             <input class="form-check-input" type="checkbox" value="something">
                                         </div>
                                     </td>
-                                    <td>@tak.akademikTakvimsId</td>
-                                    <td>@tak.akademikTakvimBaslangic</td>
-                                    <td>@tak.akademikTakvimBitis</td>
-                                    <td>@tak.akademikTakvimAktivite</td>
-                                    <td class="text-end">
-                                        <div class="actions ">
+                                    <td>@tak.Id</td>
+                                    <td>@tak.AkademikTakvimBaslangic</td>
+                                    <td>@tak.AkademikTakvimBitis</td>
+                                    <td>@tak.AkademikTakvimAktivite</td>
+                                    <td>
+                                        <div class="actions">
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a asp-action="Ekle_Guncelle" asp-controller="Takvim" asp-route-id="@tak.akademikTakvimsId" class="btn btn-sm bg-danger-light">
+                                            <a asp-action="Ekle_Guncelle" asp-controller="Takvim" asp-route-id="@tak.Id" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a asp-action="Sil" asp-controller="Takvim" asp-route-id="@tak.akademikTakvimsId" class="btn btn-sm bg-danger-light">
+                                            <a asp-action="Sil" asp-controller="Takvim" asp-route-id="@tak.Id" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 </div>

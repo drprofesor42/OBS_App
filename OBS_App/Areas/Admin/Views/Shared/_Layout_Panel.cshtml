@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/panel/plugins/feather/feather.css">
     <link rel="stylesheet" href="~/panel/plugins/icons/flags/flags.css">
-    <link href="~/panel/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -41,7 +39,7 @@
                 </a>
             </div>
 
-           
+
 
 
             <a class="mobile_btn" id="mobile_btn">
@@ -148,8 +146,6 @@
                             <ul>
                                 <li><a asp-controller="Fakulte" asp-action="Index">Fakülte Listesi</a></li>
                                 <li><a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="0">Fakülte Ekle</a></li>
-                                <li><a href="add-department.html">Fakülte Öğretmenleri</a></li>
-
                             </ul>
                         </li>
 
@@ -166,7 +162,6 @@
                             <ul>
                                 <li><a asp-controller="Ders" asp-action="Index">Ders Listesi</a></li>
                                 <li><a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0">Ders Ekle</a></li>
-                                <li><a href="add-subject.html">Ders Öğretmenleri</a></li>
                             </ul>
                         </li>
 
@@ -211,7 +206,7 @@
                                 <li><a asp-controller="Takvim" asp-action="Index">Akademik Takvim</a></li>
                                 <li><a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0">Akademik Takvim Ekle</a></li>
                             </ul>
-                        </li>         
+                        </li>
                         <li>
                             <a href="settings.html"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
                         </li>
@@ -224,17 +219,7 @@
         <div class="page-wrapper">
             <div class="content container-fluid">
 
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="page-title">X Page</h3>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a>X Page</a></li>
-                                <li class="breadcrumb-item active">X Page</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
 
                 @RenderBody()
 
@@ -245,23 +230,20 @@
         </footer>
     </div>
 
-   
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/panel/plugins/select2/js/select2.min.js"></script>
-    <script src="~/panel/js/feather.min.js" ></script>
-    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" ></script>
-    <script src="~/panel/plugins/apexchart/apexcharts.min.js" ></script>
-    <script src="~/panel/plugins/apexchart/chart-data.js" ></script>
->>>>>>>>> Temporary merge branch 2
->>>>>>>>> Temporary merge branch 2
->>>>>>>>> Temporary merge branch 2
-
-
-    <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
 
 </body>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/panel/plugins/select2/js/select2.min.js"></script>
+<script src="~/panel/js/feather.min.js"></script>
+<script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="~/panel/plugins/apexchart/apexcharts.min.js"></script>
+<script src="~/panel/plugins/apexchart/chart-data.js"></script>
+<script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+<script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
+
+
 </html>
