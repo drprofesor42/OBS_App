@@ -13,12 +13,16 @@ namespace OBS_App.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult DersAta_Sil()
+        public IActionResult OgrenciDers()
         {
             return View();
         }
 
-        public IActionResult BolumAta_Sil()
+        public IActionResult BolumGuncelleSil()
+        {
+            return View();
+        }
+        public IActionResult DanismanAtaGuncelle()
         {
             return View();
         }

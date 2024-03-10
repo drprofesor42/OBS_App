@@ -21,10 +21,10 @@ namespace OBS_App.Data
         public Adres Adres { get; set; }
         public int DuyuruId { get; set; }
         public Duyuru Duyuru { get; set; }
-        public int FakulteId { get; set; }
-        public Fakulte Fakulte { get; set; }
         public int BolumId { get; set; }
         public Bolum bolum { get; set; }
+        public int FakulteId { get; set; }
+        public Fakulte Fakulte { get; set; }
         public ICollection<OgretmenOgrenci> OgretmenOgrenci { get; set; } = new List<OgretmenOgrenci>();
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
 
