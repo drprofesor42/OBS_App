@@ -3,7 +3,62 @@
     ViewData["Title"] = "Liste";
 }
 
-<div class="page-header">
+@if (TempData["TakvimEkle_Guncelle"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        Swal.fire({
+            title: "İşlem Başarılı!",
+            text: "Güncelleme İşleminiz Gerçekleşti.",
+            icon: "success"
+        });
+    </script>
+}
+
+@if (TempData["TakvimKaydet"] != null)
+{
+
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "İşleminiz başarılı!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+}
+ @if (TempData["TakvimSil"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        Swal.fire({
+            title: "Emin misiniz?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    </script>
+
+} 
+
+ <div class="page-header">
     <div class="row">
         <div class="col-sm-12">
             <div class="page-sub-header">
@@ -62,6 +117,7 @@
                         <tbody>
                             @foreach (var tak in Model)
                             {
+
                                 <tr>
                                     <td>
                                         <div class="form-check check-tables">
@@ -95,3 +151,6 @@
     </div>
 </div>
 
+<section>
+
+</section>

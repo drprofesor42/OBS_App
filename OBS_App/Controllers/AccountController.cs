@@ -72,7 +72,6 @@ namespace OBS_App.Controllers
 
                         ModelState.AddModelError("", "*Lütfen Yöneticiniz İle Görüşünüz");
 
-
                     }
                     else
                     {
@@ -85,6 +84,8 @@ namespace OBS_App.Controllers
                 {
                     ModelState.AddModelError("", "*Bu Email Adresi İle Bir Hesap Bulunumadı");
                 }
+
+               
 
 
             }

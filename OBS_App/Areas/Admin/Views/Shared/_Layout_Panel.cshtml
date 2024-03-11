@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="~/panel/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="~/panel/css/ckeditor.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
+
 </head>
 
 <body>
@@ -200,6 +201,18 @@
                                 <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0">Duyuru Yayınla</a></li>
                             </ul>
                         </li>
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Atama İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-action="DersAta" asp-controller="Atama">Ders Atama </a></li>
+                                <li><a asp-action="DanismanAta" asp-controller="Atama">Danışman Atama </a></li>
+                                <li><a asp-action="BaskanAta" asp-controller="Atama">Başkan Atama </a></li>
+
+
+                            </ul>
+                        </li>
+
                         <li class="submenu">
                             <a href="#"><i class="fas fa-calendar-alt"></i> <span>Akademik Takvim</span> <span class="menu-arrow"></span></a>
                             <ul>
