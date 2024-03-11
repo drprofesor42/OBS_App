@@ -23,25 +23,10 @@ namespace OBS_App.Areas.Admin.Controllers
         // Fakülteler Listeleme Sayfası
         public async Task<IActionResult> Index()
         {
-            var fakultes = await _context.Fakulteler.ToListAsync();
-            var bolums = await _context.Bolumler.ToListAsync();
-            var ders = await _context.Dersler.ToListAsync();
-            var ogrencis = await _context.Ogrenciler.ToListAsync();
-            var ogretmens = await _context.Ogretmenler.ToListAsync();
 
-            var viewModel = new SayılarViewsModel
-            {
-                Fakultes = fakultes,
-                Bolums = bolums,
-                Derss = ders,
-                Ogrenciss = ogrencis,
-                Ogretmenss = ogretmens,
-            };
-            return View(viewModel);
-
-
-            //var fakulteler = await _context.Fakulteler.Include(f => f.OkulDonemDers).ThenInclude(x => x.Bolum).ToListAsync();
-            //return View(fakulteler);
+            
+            var fakulteler = await _context.Fakulteler.Include(f => f.Bolum).ToListAsync();
+            return View(fakulteler);
         }
 
         public async Task<IActionResult> Ekle_Guncelle(int id)

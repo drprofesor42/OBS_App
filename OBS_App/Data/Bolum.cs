@@ -6,7 +6,6 @@
         public string BolumAd { get; set; }
         public string BolumBaskani { get; set; }
         public int FakulteId { get; set; }
-        public ICollection<Fakulte> Fakulte { get; set; } = new List<Fakulte>();
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
         public ICollection<OgrenciNumara> OgrenciNumara { get; set; } = new List<OgrenciNumara>();
         public ICollection<Ogretmens> Ogretmens { get; set; } = new List<Ogretmens>();

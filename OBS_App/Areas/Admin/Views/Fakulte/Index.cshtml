@@ -1,4 +1,4 @@
-﻿@model SayılarViewsModel
+﻿@model  List<Fakulte>
 @{
     ViewData["Title"] = "Index";
 }
@@ -67,12 +67,13 @@
                             <th>Bölüm Sayısı</th>
                             <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
+                            <th>Kuruluş Tarihi</th>
                             <th class="text-end">İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach (var fakulte in Model.Fakultes)
+                        @foreach (var fakulte in Model)
                         {
                             <tr>
                                 <td>
@@ -80,17 +81,18 @@
                                         <input class="form-check-input" type="checkbox" value="something">
                                     </div>
                                 </td>
-                                <td>@fakulte.</td>
+                                <td>@fakulte.Id</td>
                                 <td>
                                     <h2>
-                                        <a>@fakulte.Id</a>
+                                        <a>@fakulte.FakulteAd</a>
                                     </h2>
                                 </td>
                                 <td>
-                                    
+                                    @fakulte.Bolum.Count
                                 </td>
                                 <td>Ogretmne sayısı</td>
                                 <td>Ogrenci sayısı</td>
+                                <td>@fakulte.OlusturmaTarihi</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">

@@ -22,21 +22,6 @@ namespace OBS_App.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("BolumFakulte", b =>
-                {
-                    b.Property<int>("BolumId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FakulteId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BolumId", "FakulteId");
-
-                    b.HasIndex("FakulteId");
-
-                    b.ToTable("BolumFakulte");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -215,6 +200,8 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FakulteId");
 
                     b.ToTable("Bolumler");
                 });
@@ -705,21 +692,6 @@ namespace OBS_App.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BolumFakulte", b =>
-                {
-                    b.HasOne("OBS_App.Data.Bolum", null)
-                        .WithMany()
-                        .HasForeignKey("BolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OBS_App.Data.Fakulte", null)
-                        .WithMany()
-                        .HasForeignKey("FakulteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("OBS_App.Models.AppRole", null)
@@ -769,6 +741,17 @@ namespace OBS_App.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Bolum", b =>
+                {
+                    b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
+                        .WithMany("Bolum")
+                        .HasForeignKey("FakulteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fakulte");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
@@ -979,6 +962,8 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
+                    b.Navigation("Bolum");
+
                     b.Navigation("OgrenciNumara");
 
                     b.Navigation("Ogrencis");
