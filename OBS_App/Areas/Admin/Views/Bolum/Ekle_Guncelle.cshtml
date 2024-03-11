@@ -28,6 +28,15 @@
                                 <span asp-validation-for="BolumBaskani" class="text-danger"></span>
                             </div>
                         </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Fakulte<span class="login-danger">*</span></label>
+                                <select asp-for="FakulteId" asp-items="ViewBag.Fakulteler" class="form-control select">
+                                    <option>Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="Fakulte" class="text-danger"></span>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="student-submit">
                                 @if (Model == null)

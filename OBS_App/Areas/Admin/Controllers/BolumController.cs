@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
@@ -27,7 +28,8 @@ namespace OBS_App.Areas.Admin.Controllers
 		{
 			if (id == 0)
 			{
-				return View();
+                ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(),"Id", "FakulteAd");
+                return View();
 
 			}
 			else

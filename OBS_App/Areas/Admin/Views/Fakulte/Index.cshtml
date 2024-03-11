@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Fakulte>
+﻿@model SayılarViewsModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -64,7 +64,6 @@
                             </th>
                             <th>ID</th>
                             <th>Fakülte İsim</th>
-                            <th>Fakülte Başkanı</th>
                             <th>Bölüm Sayısı</th>
                             <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
@@ -73,7 +72,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var fakulte in Model)
+                        @foreach (var fakulte in Model.Fakultes)
                         {
                             <tr>
                                 <td>
@@ -81,16 +80,17 @@
                                         <input class="form-check-input" type="checkbox" value="something">
                                     </div>
                                 </td>
-                                <td>@fakulte.Id</td>
+                                <td>@fakulte.</td>
                                 <td>
                                     <h2>
-                                        <a>@fakulte.FakulteAd</a>
+                                        <a>@fakulte.Id</a>
                                     </h2>
                                 </td>
-                                <td>Ogretmen İsmi</td>
-                                <td>X</td>
-                                <td>X</td>
-                                <td>X</td>
+                                <td>
+                                    
+                                </td>
+                                <td>Ogretmne sayısı</td>
+                                <td>Ogrenci sayısı</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
@@ -106,7 +106,6 @@
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
