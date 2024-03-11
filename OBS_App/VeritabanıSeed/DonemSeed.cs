@@ -32,13 +32,10 @@ namespace OBS_App.VeritabanıSeed
                     }
                 }
 
-
-
                 context.Ogrenciler.Add(new Ogrencis
                 {
                     OgrenciAd = "Kemal",
                     OgrenciTc = "13232132",
-                    OgrenciNumara = "3213212",
                     OgrenciSoyad = "Kılıç",
                     OgrenciEposta = "Ahmet@gmail.com",
                     OgrenciCinsiyet = "Erkek",
@@ -49,7 +46,7 @@ namespace OBS_App.VeritabanıSeed
                     OgrenciDanisman = 1,
                     OgrenciKayitTarihi = new DateOnly(2024, 05, 05),
                     OgrenciDogumTarihi = new DateOnly(2024, 05, 05),
-                   
+
                     Adres = new Adres
                     {
                         Ulke = "Türkiye",
@@ -57,31 +54,34 @@ namespace OBS_App.VeritabanıSeed
                         Ilce = "Merkez",
                         AcıkAdres = "No:15"
                     },
-                    Not = new Not
+                    OgrenciNumara = new OgrenciNumara
                     {
-                        NotFinal = 0,
-                        NotOdev = 0,
-                        NotVize = 0,
-                        NotTarihi = new DateOnly(2024, 05, 05),
-                    },
-                    Bolum = new Bolum
-                    {
-                        BolumAd = "Yönetim Bilişim Sistemleri",
-                        BolumBaskani = "Recep",
+                        OgrenciNumarasi= "2235431",
+                        Not = new Not
+                        {
+                            NotFinal = 0,
+                            NotOdev = 0,
+                            NotVize = 0,
+                            NotTarihi = new DateOnly(2024, 05, 05),
+                        },
+                        Bolum = new Bolum
+                        {
+                            BolumAd = "Yönetim Bilişim Sistemleri",
+                            BolumBaskani = "Recep",
+                            Fakulte = new Fakulte
+                            {
+
+                                FakulteAd = "Yönetim Bilişim Sistemleri",
+                                OlusturmaTarihi = new DateOnly(2024, 05, 05),
+                            }
+                        },
                         Fakulte = new Fakulte
                         {
 
                             FakulteAd = "Yönetim Bilişim Sistemleri",
                             OlusturmaTarihi = new DateOnly(2024, 05, 05),
                         }
-                    },
-                     Fakulte = new Fakulte
-                     {
-
-                         FakulteAd = "Yönetim Bilişim Sistemleri",
-                         OlusturmaTarihi = new DateOnly(2024, 05, 05),
-                     }
-
+                    }
 
                 });
 

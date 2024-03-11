@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public string OgrenciTc { get; set; }
-        public string OgrenciNumara { get; set; }
         public string OgrenciAd { get; set; }
         public string OgrenciSoyad { get; set; }
         public string OgrenciEposta { get; set; }
@@ -18,12 +17,8 @@
         public DateOnly OgrenciDogumTarihi { get; set; }
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
-        public int NotId { get; set; }
-        public Not Not { get; set; }
-        public int BolumId { get; set; }
-        public Bolum Bolum { get; set; }
-        public int FakulteId { get; set; }
-        public Fakulte Fakulte { get; set; }
+        public int OgrenciNumaraId { get; set; }
+        public OgrenciNumara OgrenciNumara { get; set; }
         public ICollection<DersOgrenci> DersOgrenci { get; set; } = new List<DersOgrenci>();
         public ICollection<OgretmenOgrenci> OgretmenOgrenci { get; set; } = new List<OgretmenOgrenci>();
 
