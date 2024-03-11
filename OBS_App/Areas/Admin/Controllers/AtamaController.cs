@@ -13,12 +13,12 @@ namespace OBS_App.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult OgrenciDers()
+        public IActionResult DersAtaGuncelle()
         {
             return View();
         }
 
-        public IActionResult BolumGuncelleSil()
+        public IActionResult BaskanAtaGuncelle()
         {
             return View();
         }
@@ -26,5 +26,6 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             return View();
         }
+
     }
 }
