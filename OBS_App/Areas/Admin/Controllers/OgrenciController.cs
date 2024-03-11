@@ -2,22 +2,24 @@
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 using OBS_App.Data;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class OgrenciController : Controller
     {
-        private readonly IdentityDataContext _identityDataContext;
-        public OgrenciController(IdentityDataContext identityDataContext)
+        private readonly IdentityDataContext _context;
+        public OgrenciController(IdentityDataContext context)
         {
-            _identityDataContext = identityDataContext;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var ogrenciler = await _identityDataContext.Ogrenciler.ToListAsync();
+            var ogrenciler = await _context.Ogrenciler.ToListAsync();
             return View(ogrenciler);
         }
 
@@ -30,7 +32,7 @@ namespace OBS_App.Areas.Admin.Controllers
             else
             {
 
-                var ogrenci = _identityDataContext.Ogrenciler.FirstOrDefault(x => x.Id == id);
+                var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {
                     return NotFound();
@@ -39,7 +41,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Ekle_Guncelle(Ogrencis model, string type)
+        public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
 
             if (ModelState.IsValid)
@@ -47,26 +49,24 @@ namespace OBS_App.Areas.Admin.Controllers
                 if (model == null || type == null)
                 {
                     // TempData Hata Gönder
-                    return RedirectToAction("Index");
+                    return View(model);
                 }
                 else if (type == "0")
                 {
-                    _identityDataContext.Add(model);
-                    _identityDataContext.SaveChanges();
-
+                    await _context.AddAsync(model);
+                    await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
                 else if (type == "1")
                 {
-                    _identityDataContext.Update(model);
-                    _identityDataContext.SaveChanges();
 
+                    _context.Update(model);
+                    _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    Console.WriteLine("How it possible?");
-                    return RedirectToAction("Index");
+                    return View(model);
                 }
             }
 
@@ -76,7 +76,7 @@ namespace OBS_App.Areas.Admin.Controllers
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {
-            var ogrenci = _identityDataContext.Ogrenciler.FirstOrDefault(x => x.Id == id);
+            var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);
             if (ogrenci == null)
             {
                 // TempData Hata Gönder
@@ -84,9 +84,8 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                _identityDataContext.Remove(ogrenci);
-                _identityDataContext.SaveChanges();
-
+                _context.Remove(ogrenci);
+                _context.SaveChanges();
             }
 
             return RedirectToAction("Index");

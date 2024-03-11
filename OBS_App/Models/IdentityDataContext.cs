@@ -9,25 +9,22 @@ namespace OBS_App.Models
     //VeriTabanı Bağlantı yeri, Veritabanından Role Ve User Bilgilerini Alıyor. Aynı Zamanda DbContext in Üst Sınıfı IdentityDbContext.
     public class IdentityDataContext : IdentityDbContext<AppUser, AppRole, string>
     {
-
         public IdentityDataContext(DbContextOptions<IdentityDataContext> options) : base(options)
         {
-
-
         }
-
-        public DbSet<Admin> Adminler { get; set; }
-        public DbSet<AkademikTakvims> AkademikTakvimler { get; set; }
+        public DbSet<AkademikTakvim> AkademikTakvimler { get; set; }
+        public DbSet<Adres> Adresler { get; set; }
         public DbSet<Bolum> Bolumler { get; set; }
         public DbSet<Ders> Dersler { get; set; }
         public DbSet<Duyuru> Duyurular { get; set; }
-        public DbSet<DuyuruAlici> DuyuruAlicilar { get; set; }
         public DbSet<Fakulte> Fakulteler { get; set; }
-        public DbSet<FakulteBolum> FakulteBolumler { get; set; }
         public DbSet<Ogrencis> Ogrenciler { get; set; }
-        public DbSet<OgrenciDers> OgrenciDersler { get; set; }
-        public DbSet<OgrenciMesaj> ogrenciMesajlar { get; set; }
+        public DbSet<Not> Notlar { get; set; }
         public DbSet<Ogretmens> Ogretmenler { get; set; }
-
+        public DbSet<OgretmenOgrenci> OgretmenOgrenciler { get; set; }
+        public DbSet<DersOgrenci> DersOgrenciler { get; set; }
+        public DbSet<OkulDonemDers> OkulDonemDersler { get; set; }
+        public DbSet<Donem> Donemler { get; set; }
+        public DbSet<OgrenciNumara> OgrenciNumaralar { get; set; }
     }
 }

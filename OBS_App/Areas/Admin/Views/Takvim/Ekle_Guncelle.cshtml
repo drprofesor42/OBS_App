@@ -1,4 +1,4 @@
-﻿@model AkademikTakvims
+﻿@model AkademikTakvim
 @{
     ViewData["Title"] = "Ekle";
 }
@@ -22,47 +22,42 @@
         <div class="card">
             <div class="card-body">
                 <form asp-action="Ekle_Guncelle" asp-controller="Takvim" method="post">
-                    <div asp-validation-summary="All" class="text-danger">
-                        @if (Model != null)
-                        {
-                            <input asp-for="akademikTakvimsId" type="hidden" >
-                        }
-
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="form-title"><span>Akademik Takvim Ekle</span></h5>
-                            </div>
-                            <div class="col-12 col-sm-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Akademik Takvim Ekle</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Başlangıç Tarihi<span class="login-danger">*</span></label>
-                                <input asp-for="akademikTakvimBaslangic" class="form-control" type="date" placeholder="">
+                                <input asp-for="AkademikTakvimBaslangic" class="form-control" type="date">
+                                <span asp-validation-for="AkademikTakvimBaslangic" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Bitiş Tarihi<span class="login-danger">*</span></label>
-                                <input asp-for="akademikTakvimBitis" class="form-control" type="date" placeholder="">
+                                <input asp-for="AkademikTakvimBitis" class="form-control" type="date">
+                                <span asp-validation-for="AkademikTakvimBitis" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Aktivite<span class="login-danger">*</span></label>
-                                <input asp-for="akademikTakvimAktivite" class="form-control" type="text" placeholder="">
+                                <input asp-for="AkademikTakvimAktivite" class="form-control" type="text">
+                                <span asp-validation-for="AkademikTakvimAktivite" class="text-danger"></span>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="student-submit">
 
-                            <div class="col-12">
-                                <div class="student-submit">
-
-                                    @if (Model == null)
-                                    {
-                                        <button name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
-                                    }
-                                    else
-                                    {
-                                        <button  name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
-                                    }
-                                </div>
+                                @if (Model == null)
+                                {
+                                    <button name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
+                                }
+                                else
+                                {
+                                    <button name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
+                                }
                             </div>
                         </div>
                     </div>

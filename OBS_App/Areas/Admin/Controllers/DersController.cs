@@ -1,24 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OBS_App.Data;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class DersController : Controller
     {
-        private readonly IdentityDataContext _identityDataContext;
+        private readonly IdentityDataContext _context;
 
-        public DersController(IdentityDataContext identityDataContext)
+        public DersController(IdentityDataContext context)
         {
-            _identityDataContext = identityDataContext;
+            _context = context;
         }
 
 
         // Dersleri Listeleme Sayfası
         public IActionResult Index()
         {
-            var dersler = _identityDataContext.Dersler.ToList();
+            var dersler = _context.Dersler.ToList();
             return View(dersler);
         }
 
@@ -31,7 +33,7 @@ namespace OBS_App.Areas.Admin.Controllers
 			}
             else
             {
-				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
+				var ders = _context.Dersler.FirstOrDefault(x => x.Id == id);
 				if (ders == null)
 				{
                     // Hata Gönder
@@ -45,42 +47,49 @@ namespace OBS_App.Areas.Admin.Controllers
 		[HttpPost]
         public IActionResult Ekle_Guncelle(Ders model, string type)
         {
-            if (model == null || type == null)
+
+            if (ModelState.IsValid)
             {
-                // TempData Hata Gönder
-            }
-            else if (type == "0")
-            {
-                _identityDataContext.Add(model);
-                _identityDataContext.SaveChanges();
+                if (model == null || type == null)
+                {
+                    return View(model);
+                    // TempData Hata Gönder
+                }
+                else if (type == "0")
+                {
+                    _context.Add(model);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else if (type == "1")
+                {
+                    _context.Update(model);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    return View(model);
+                }
 
             }
-            else if (type == "1")
-            {
-                _identityDataContext.Update(model);
-                _identityDataContext.SaveChanges();
-            }
-            else
-            {
-                Console.WriteLine("How it possible?");
-                return RedirectToAction("Index");
-			}
-
-			return RedirectToAction("Index");
+            
+			return View(model);
         }
 
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {
-            var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.dersId == id);
+            var ders = _context.Dersler.FirstOrDefault(x => x.Id == id);
             if (ders == null)
             {
                 // TempData Hata Gönder
 			}
             else
             {
-                _identityDataContext.Remove(ders);
-                _identityDataContext.SaveChanges();
+                _context.Remove(ders);
+                _context.SaveChanges();
             }
 
 			return RedirectToAction("Index");

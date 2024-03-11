@@ -2,11 +2,10 @@
 {
     public class Duyuru
     {
-        public int duyuruId { get; set; }
-        public int duyuruGonderici { get; set; }
-		public string duyuruBaslık { get; set; }
-        public string duyuruMesaj { get; set; }
-        public DateOnly olusturmaTarihi { get; set; }
-        /*public Ogretmens Profesor { get; set; } = null!;*/
+        public int Id { get; set; }
+        public string DuyuruGonderen { get; set; }
+        public string DuyuruBaslik { get; set; }
+        public string DuyuruMesaj { get; set; }
+        public DateOnly OlusturmaTarihi { get; set; }
     }
 }

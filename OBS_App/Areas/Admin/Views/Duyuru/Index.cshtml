@@ -1,9 +1,8 @@
-﻿
+﻿@model IEnumerable<Duyuru>
 @{
     ViewData["Title"] = "Index";
 }
-@model List<Duyuru>
-
+>
 <div class="row">
 	<div class="col-md-9">
 		<h3>Tüm Duyurular</h3>
@@ -16,7 +15,7 @@
 <div class="row">
 	@foreach (var duyuru in Model)
 	{
-		<div class="col-md-6 col-xl-4 col-sm-12 d-flex">
+		<div class="col-md-6 col-xl-3 col-sm-12 d-flex">
 			<div class="blog grid-blog flex-fill">
 				<div class="blog-image">
 					<a href="blog-details.html"><img style="height: 250px; width:600px" class="img-fluid" src="https://www.creativefabrica.com/wp-content/uploads/2019/04/University-icon-by-marco.livolsi2014-5-580x386.jpg" alt="Ana Resim"></a>
@@ -31,21 +30,21 @@
 								<a href="profile.html">
 									<img src="https://webupload.gazi.edu.tr/upload/30/2022/8/12/1e7b0909-dabc-49c6-8ae3-b03b3fd19928-ogrenci-bilgi-sistemi.png" alt="Yazar Resim">
 									<span>
-										<span class="post-title">@duyuru.duyuruGonderici</span>
-										<span class="post-date"><i class="far fa-clock"></i> @duyuru.olusturmaTarihi</span>
+										<span class="post-title">Gönderici İsmi Gelecek</span>
+										<span class="post-date"><i class="far fa-clock"></i> @duyuru.OlusturmaTarihi</span>
 									</span>
 								</a>
 							</div>
 						</li>
 					</ul>
-					<h3 class="blog-title"><a href="blog-details.html">@duyuru.duyuruBaslık </a></h3>
-					<p>@duyuru.duyuruMesaj</p>
+					<h3 class="blog-title"><a href="blog-details.html">@duyuru.DuyuruBaslik </a></h3>
+					<p>@duyuru.DuyuruMesaj</p>
 				</div>
 				<div class="row">
 					<div class="edit-options">
 						<div class="edit-delete-btn">
-							<a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="@duyuru.duyuruId" class="text-success"><i class="feather-edit-3 me-1"></i> Düzenle</a>
-							<a asp-controller="Duyuru" asp-action="Sil" asp-route-id=@duyuru.duyuruId class="text-danger" ><i class="feather-trash-2 me-1"></i> Sil</a>
+							<a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="@duyuru.Id" class="text-success"><i class="feather-edit-3 me-1"></i> Düzenle</a>
+							<a asp-controller="Duyuru" asp-action="Sil" asp-route-id=@duyuru.Id class="text-danger"><i class="feather-trash-2 me-1"></i> Sil</a>
 						</div>
 					</div>
 				</div>
