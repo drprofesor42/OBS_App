@@ -86,6 +86,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 _identityDataContext.Remove(ogrenci);
                 _identityDataContext.SaveChanges();
+
             }
 
             return RedirectToAction("Index");

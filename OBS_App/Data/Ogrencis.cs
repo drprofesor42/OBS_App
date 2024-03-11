@@ -16,12 +16,13 @@ namespace OBS_App.Data
         public int ogrenciSinif { get; set; } 
         public int ogrenciBolum { get; set; }
         public int TelefonNo { get; set; }
+
         public string ogrenciParola { get; set; } = null!;
         public int ogrenciDanisman { get; set; }
         public DateOnly kayitTarihi { get; set; }
 
-        public int BolumId { get; set; }
+        //public int BolumId { get; set; }
 
-        public Bolum Bolum  { get; set; }
+        //public Bolum Bolum  { get; set; }
     }
 }

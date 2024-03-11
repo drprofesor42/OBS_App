@@ -2,6 +2,9 @@
 
 namespace OBS_App.Areas.Admin.Controllers
 {
+
+    [Area("Admin")]
+
     public class AtamaController : Controller
     {
         public IActionResult Index()
@@ -9,12 +12,16 @@ namespace OBS_App.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult DersAta_Sil()
+        public IActionResult DersAta()
         {
             return View();
         }
 
-        public IActionResult BolumAta_Sil()
+        public IActionResult DanismanAta()
+        {
+            return View();
+        }
+        public IActionResult BaskanAta()
         {
             return View();
         }
