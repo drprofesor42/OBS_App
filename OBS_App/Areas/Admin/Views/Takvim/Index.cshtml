@@ -3,29 +3,17 @@
     ViewData["Title"] = "Liste";
 }
 
-<div class="page-header">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="page-sub-header">
-                <h3 class="page-title">Takvimler</h3>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="students.html">Takvimler</a></li>
-                    <li class="breadcrumb-item active">Tüm Takvimler</li>
-                </ul>
-            </div>
-        </div>
+
+<div class="col-12 col-sm-4">
+    <div class="form-group local-forms">
+        <label>Dönem Seçiniz</label>
+        <select class="form-control select">
+            <option>2019-2020</option>
+            <option>2020-2021</option>
+            <option>2021-2022</option>
+        </select>
     </div>
 </div>
-    <div class="col-12 col-sm-4">
-        <div class="form-group local-forms">
-            <label>Dönem Seçiniz</label>
-            <select class="form-control select">
-                <option>2019-2020</option>
-                <option>2020-2021</option>
-                <option>2021-2022</option>
-            </select>
-        </div>
-    </div>
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-table comman-shadow">
@@ -47,11 +35,6 @@
                     <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                         <thead class="student-thread">
                             <tr>
-                                <th>
-                                    <div class="form-check check-tables">
-                                        <input class="form-check-input" type="checkbox" value="something">
-                                    </div>
-                                </th>
                                 <th>Id</th>
                                 <th>Başlangıç Tarihi</th>
                                 <th>Bitiş Tarihi</th>
@@ -64,11 +47,6 @@
                             @foreach (var tak in Model)
                             {
                                 <tr>
-                                    <td>
-                                        <div class="form-check check-tables">
-                                            <input class="form-check-input" type="checkbox" value="something">
-                                        </div>
-                                    </td>
                                     <td>@tak.akademikTakvimsId</td>
                                     <td>@tak.akademikTakvimBaslangic</td>
                                     <td>@tak.akademikTakvimBitis</td>

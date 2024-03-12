@@ -41,13 +41,9 @@
                 </a>
             </div>
 
-           
-
-
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fas fa-bars"></i>
             </a>
-
 
             <ul class="nav user-menu">
                 <li class="nav-item dropdown language-drop me-2">
@@ -158,6 +154,7 @@
                             <ul>
                                 <li><a asp-controller="Bolum" asp-action="Index">Bölüm Listesi</a></li>
                                 <li><a asp-controller="Bolum" asp-action="Ekle_Guncelle" asp-route-id="0">Bölüm Ekle</a></li>
+                                <li><a asp-controller="Bolum" asp-action="Bolum_Ogretmenleri">Ders Öğretmenleri</a></li>
                             </ul>
                         </li>
 
@@ -166,7 +163,7 @@
                             <ul>
                                 <li><a asp-controller="Ders" asp-action="Index">Ders Listesi</a></li>
                                 <li><a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0">Ders Ekle</a></li>
-                                <li><a href="add-subject.html">Ders Öğretmenleri</a></li>
+                                <li><a asp-controller="Ders" asp-action="Ders_Ogretmenleri">Ders Öğretmenleri</a></li>
                             </ul>
                         </li>
 
@@ -199,7 +196,7 @@
                         </li>
 
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-book-reader"></i> <span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <a href="#"><i class="fas fa-bullhorn"></i> <span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Duyuru" asp-action="Index">Duyurular</a></li>
                                 <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0">Duyuru Yayınla</a></li>

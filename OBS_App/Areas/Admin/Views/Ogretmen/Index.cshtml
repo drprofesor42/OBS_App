@@ -26,7 +26,7 @@
         </div>
         <div class="col-lg-3 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="İsme Göre Ara ...">
+                <input type="text" class="form-control" placeholder="Öğretmen İsmine Göre Ara ...">
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
@@ -63,23 +63,18 @@
                     <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                         <thead class="student-thread">
                             <tr>
-                                <th>
-                                    <div class="form-check check-tables">
-                                        <input class="form-check-input" type="checkbox" value="something">
-                                    </div>
-                                </th>
                                 <th>Id</th>
-                                <th>Ad</th>
+                                <th>İsim-Soyisim</th>
                                 <th>Ünvan</th>
+                                <th>Cinsiyet</th>
+                                <th>Kullanıcı Adı</th>
                                 <th>E-Posta</th>
                                 <th>Ofis</th>
-                                <th>Username</th>
+                                <th>Numara</th>
                                 <th>Ülke</th>
                                 <th>Şehir</th>
                                 <th>Görüşme Saati</th>
-                                <th>Numara</th>
                                 <th>Doğum Tarihi</th>
-                                <th>Cinsiyet</th>
                                 <th>Başlama Tarihi</th>
                                 <th class="text-end">İşlem</th>
                             </tr>
@@ -90,11 +85,6 @@
                             @foreach (var ogr in Model)
                             {
                                 <tr>
-                                    <td>
-                                        <div class="form-check check-tables">
-                                            <input class="form-check-input" type="checkbox" value="something">
-                                        </div>
-                                    </td>
                                     <td>@ogr.Id</td>
                                     <td>
                                         <h2 class="table-avatar">
@@ -103,15 +93,15 @@
                                         </h2>
                                     </td>
                                     <td>@ogr.OgretmenUnvan</td>
+                                    <td>@ogr.OgretmenCinsiyet</td>
+                                    <td>@ogr.OgretmenUsername</td>
                                     <td>@ogr.OgretmenEposta</td>
                                     <td>@ogr.OgretmenOfis</td>
-                                    <td>@ogr.OgretmenUsername</td>
+                                    <td>@ogr.OgretmenNumarasi</td>
                                     <td>@ogr.OgretmenUlke</td>
                                     <td>@ogr.OgretmenSehir</td>
                                     <td>@ogr.OgretmenGorusme</td>
-                                    <td>@ogr.OgretmenNumarasi</td>
                                     <td>@ogr.OgretmenDogumTarihi</td>
-                                    <td>@ogr.OgretmenCinsiyet</td>
                                     <td>@ogr.OgretmenBaslamaTarihi</td>
                                     <td class="text-end">
                                         <div class="actions ">

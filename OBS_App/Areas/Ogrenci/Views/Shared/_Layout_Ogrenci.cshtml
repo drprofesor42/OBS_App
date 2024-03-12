@@ -1,6 +1,4 @@
-﻿@model LoginViewsModel
-
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,9 +12,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/panel/plugins/feather/feather.css">
     <link rel="stylesheet" href="~/panel/plugins/icons/flags/flags.css">
+    <link href="~/panel/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/panel/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/panel/css/ckeditor.css">
+    <link rel="stylesheet" href="~/panel/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/panel/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
 </head>
 
@@ -41,6 +44,8 @@
             </div>
 
 
+
+
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fas fa-bars"></i>
             </a>
@@ -60,7 +65,7 @@
 
                 <li class="nav-item dropdown noti-dropdown me-2">
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="~/panel/img/icons/header-icon-05.svg" alt>
+                        <img src="~/panel/img/icons/header-icon-05.svg">
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
@@ -127,7 +132,6 @@
 
         </div>
 
-
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
@@ -138,25 +142,22 @@
                         </li>
 
                         <li>
-                            <a asp-action="Index" asp-controller="Ogrenci"><i class="fas "></i> <span>Anasayfa</span></a>
+                            <a asp-action="Index" asp-controller="Ogrenci"><i class="fas fa-home"></i> <span>Anasayfa</span></a>
                         </li>
 
                         <li class="submenu">
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Ders İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="students.html">Aldığım Dersler</a></li>
-                                <li><a href="student-details.html">Ders Programı</a></li>
-                                <li><a href="add-student.html">Sınav Sonuçları</a></li>
-                                <li><a href="edit-student.html">Sınav Takvimi</a></li>
+                                <li><a asp-controller="Ders" asp-action="Derslerim">Aldığım Dersler</a></li>
+                                <li><a asp-controller="Ders" asp-action="DersProgramı">Ders Programı</a></li>
                             </ul>
                         </li>
 
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Danışman İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Sınav İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="teachers.html">Danışman Bilgileri</a></li>
-                                <li><a href="teacher-details.html">Danışman Mesaj </a></li>
-                                <li><a href="add-teacher.html">Danışman Talep </a></li>     
+                                <li><a asp-controller="Ders" asp-action="SınavSonuc">Sınav Sonuçları</a></li>
+                                <li><a asp-controller="Ders" asp-action="SınavTakvim">Sınav Takvimi</a></li>
                             </ul>
                         </li>
 
@@ -165,19 +166,16 @@
                         </li>
 
                         <li>
-                            <a href="index-2.html"><i class="fas fa-table"></i> <span>Akademik Takvim</span></a>
+                            <a asp-controller="Ogrenci" asp-action="AkademikTakvim"><i class="fas fa-table"></i> <span>Akademik Takvim</span></a>
                         </li>
-
                         <li>
-                            <a href="index-2.html"><i class="fas fa-table"></i> <span>Duyurular</span></a>
+                            <a asp-controller="Ogrenci" asp-action="Duyurular"><i class="fas fa-bullhorn"></i> <span>Duyurular</span></a>
                         </li>
-                        
                         <li>
-                            <a href="index-2.html"><i class="fas fa-calendar-day"></i> <span>Etkinlikler</span></a>
+                            <a asp-controller="Ogrenci" asp-action="Etkinlikler"><i class="fas fa-calendar-day"></i> <span>Etkinlikler</span></a>
                         </li>
-
                         <li>
-                            <a href="settings.html"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
+                            <a asp-controller="Ogrenci" asp-action="Ayarlar"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
                         </li>
 
                     </ul>
@@ -204,23 +202,31 @@
 
             </div>
         </div>
-
+        <footer>
+            <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
-    </footer>
 
+
+    @* <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/panel/plugins/select2/js/select2.min.js"></script>
+    <script src="~/panel/js/feather.min.js"></script>
+    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/panel/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="~/panel/plugins/apexchart/chart-data.js"></script>
 
-    <script src="~/panel/js/feather.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/apexcharts.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/chart-data.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/moment.min.js"></script>
+    <script src="~/panel/js/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/jquery-ui.min.js"></script>
+    <script src="~/panel/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/panel/plugins/fullcalendar/jquery.fullcalendar.js"></script>
+
+    <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
 
 </body>

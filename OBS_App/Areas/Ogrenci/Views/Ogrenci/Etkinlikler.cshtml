@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Etkinlikler";
+}
+@model List<Duyuru>
+
+<div class="row">
+	<div class="col-md-9">
+		<h3>Etkinlikler</h3>
+	</div>
+</div>
+
+<div class="row">
+	@foreach (var duyuru in Model)
+	{
+		<div class="col-md-6 col-xl-4 col-sm-12 d-flex">
+			<div class="blog grid-blog flex-fill">
+				<div class="blog-image">
+					<a href="blog-details.html"><img style="height: 250px; width:600px" class="img-fluid" src="https://www.creativefabrica.com/wp-content/uploads/2019/04/University-icon-by-marco.livolsi2014-5-580x386.jpg" alt="Ana Resim"></a>
+					@* <div class="blog-views">
+				<i class="feather-eye me-1"></i> 225
+				</div> *@
+				</div>
+				<div class="blog-content">
+					<ul class="entry-meta meta-item">
+						<li>
+							<div class="post-author">
+								<a href="profile.html">
+									<img src="https://webupload.gazi.edu.tr/upload/30/2022/8/12/1e7b0909-dabc-49c6-8ae3-b03b3fd19928-ogrenci-bilgi-sistemi.png" alt="Yazar Resim">
+									<span>
+										<span class="post-title">@duyuru.duyuruGonderici</span>
+										<span class="post-date"><i class="far fa-clock"></i> @duyuru.olusturmaTarihi</span>
+									</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+					<h3 class="blog-title"><a href="blog-details.html">@duyuru.duyuruBaslık </a></h3>
+					<p>@duyuru.duyuruMesaj</p>
+				</div>
+			</div>
+		</div>
+
+	}
+
+</div>
+

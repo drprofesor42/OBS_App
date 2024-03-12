@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 using OBS_App.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 
 namespace OBS_App.Areas.Admin.Controllers
@@ -10,9 +12,13 @@ namespace OBS_App.Areas.Admin.Controllers
     public class OgrenciController : Controller
     {
         private readonly IdentityDataContext _identityDataContext;
-        public OgrenciController(IdentityDataContext identityDataContext)
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
+        public OgrenciController(IdentityDataContext identityDataContext, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _identityDataContext = identityDataContext;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()
@@ -39,7 +45,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Ekle_Guncelle(Ogrencis model, string type)
+        public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
 
             if (ModelState.IsValid)
@@ -51,7 +57,15 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "0")
                 {
-                    _identityDataContext.Add(model);
+					var user = new AppUser
+					{
+						UserName = model.Eposta,
+						Email = model.Eposta,
+					};
+
+                    IdentityResult result = await _userManager.CreateAsync(user, model.ogrenciParola);
+
+					_identityDataContext.Add(model);
                     _identityDataContext.SaveChanges();
 
                     return RedirectToAction("Index");

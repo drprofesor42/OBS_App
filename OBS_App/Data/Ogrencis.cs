@@ -20,8 +20,8 @@ namespace OBS_App.Data
         public int ogrenciDanisman { get; set; }
         public DateOnly kayitTarihi { get; set; }
 
-        public int BolumId { get; set; }
+        /*public int BolumId { get; set; }*/
 
-        public Bolum Bolum  { get; set; }
+        /*public Bolum Bolum  { get; set; }*/
     }
 }

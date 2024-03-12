@@ -14,7 +14,7 @@
         </div>
         <div class="col-lg-3 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="İsme Göre Ara ...">
+                <input type="text" class="form-control" placeholder="Öğrenci İsmine Göre Ara ...">
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
@@ -51,16 +51,11 @@
                     <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                         <thead class="student-thread">
                             <tr>
-                                <th>
-                                    <div class="form-check check-tables">
-                                        <input class="form-check-input" type="checkbox" value="something">
-                                    </div>
-                                </th>
                                 <th>ID</th>
                                 <th>Numarası</th>
-                                <th>Ad-Soyad</th>
-                                <th>Sınıfı</th>
-                                <th>Bölümü</th>
+                                <th>İsim-Soyisim</th>
+                                <th>Sınıf</th>
+                                <th>Bölüm</th>
                                 <th>Doğum Tarihi</th>
                                 <th>E-Mail</th>
                                 <th>Telefon Numarası</th>
@@ -73,11 +68,6 @@
                             @foreach (var ogr in Model) // Modeldeki her öğrenci için döngü
                             {
                                 <tr>
-                                    <td>
-                                        <div class="form-check check-tables">
-                                            <input class="form-check-input" type="checkbox" value="something">
-                                        </div>
-                                    </td>
                                     <th>@ogr.Id</th>
                                     <td>@ogr.ogrenciNo</td>
                                     <td>

@@ -78,79 +78,110 @@ $(document).ready(function() {
 
 	// Bar chart
 	
-	if ($('#bar').length > 0) {
-	var optionsBar = {
-		chart: {
-			type: 'bar',
-			height: 350,
-			width: '100%',
-			stacked: false,
-			toolbar: {
-				show: false
-			},
-		},
-		dataLabels: {
-			enabled: false
-		},
-		plotOptions: {
-			bar: {
-				columnWidth: '55%',
-				endingShape: 'rounded'  
-			},
-		},
-		stroke: {
-			show: true,
-			width: 2,
-			colors: ['transparent']
-		},
-		series: [{
-			name: "Boys",
-			color: '#70C4CF',
-			data: [420, 532, 516, 575, 519, 517, 454, 392, 262, 383, 446, 551],
-		}, {
-			name: "Girls",
-			color: '#3D5EE1',
-			data: [336, 612, 344, 647, 345, 563, 256, 344, 323, 300, 455, 456],
-		}],
-		labels: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
-		xaxis: {
-			labels: {
-				show: false
-			},
-			axisBorder: {
-				show: false
-			},
-			axisTicks: {
-				show: false
-			},
-		},
-		yaxis: {
-			axisBorder: {
-				show: false
-			},
-			axisTicks: {
-				show: false
-			},
-			labels: {
-				style: {
-					colors: '#777'
-				}
-			}
-		},
-		title: {
-			text: '',
-			align: 'left',
-			style: {
-				fontSize: '18px'
-			}
-		}
+    if ($('#bar').length > 0) {
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/Admin/Data', // Controller ve Action adýný doðru þekilde ayarlayýn
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({}),
+            success: function (data) {
+                // Veri baþarýyla alýndýktan sonra chart'ý güncelle
+                chartBar.updateSeries([
+                    {
+                        name: "Erkekler",
+                        data: data.maleData
+                    },
+                    {
+                        name: "Kadinlar",
+                        data: data.femaleData
+                    }
+                ]);
 
-	}
-  
-	var chartBar = new ApexCharts(document.querySelector('#bar'), optionsBar);
-	chartBar.render();
-	}
-	
+                // Chart'ý yeniden render et
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+        var optionsBar = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                width: '100%',
+                stacked: false,
+                toolbar: {
+                    show: false
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            series: [
+                {
+                    name: "Erkekler",
+                    color: '#70C4CF',
+                    data: [] // Boþ dizi olarak baþlatýlýyor, veri AJAX isteði sonrasýnda buraya eklenecek
+                },
+                {
+                    name: "Kadinlar",
+                    color: '#3D5EE1',
+                    data: [] // Boþ dizi olarak baþlatýlýyor, veri AJAX isteði sonrasýnda buraya eklenecek
+                }
+            ],
+            labels: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+            xaxis: {
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+            },
+            yaxis: {
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: '#777'
+                    }
+                }
+            },
+            title: {
+                text: '',
+                align: 'left',
+                style: {
+                    fontSize: '18px'
+                }
+            }
+        };
+
+        var chartBar = new ApexCharts(document.querySelector('#bar'), optionsBar);
+        chartBar.render();
+    }
+
+
+
+    
 	// Simple Line
 	
     if($('#s-line').length > 0 ){
@@ -369,39 +400,65 @@ chart.render();
 }
 
 // Simple Bar
-if($('#s-bar').length > 0 ){
-var sBar = {
-    chart: {
-        height: 350,
-        type: 'bar',
-        toolbar: {
-          show: false,
+if ($('#s-bar').length > 0) {
+    $.ajax({
+        type: 'POST',
+        url: '/Admin/Admin/Data', // Controller ve Action adýný doðru þekilde ayarlayýn
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({}),
+        success: function (data) {
+            // Veri baþarýyla alýndýktan sonra chart'ý güncelle
+            chartBar.updateSeries([
+                {
+                    name: "Erkekler",
+                    data: data.maleData
+                },
+                {
+                    name: "Kadinlar",
+                    data: data.femaleData
+                }
+            ]);
+
+            // Chart'ý yeniden render et
+        },
+        error: function (error) {
+            console.log(error);
         }
-    },
-    // colors: ['#4361ee'],
-    plotOptions: {
-        bar: {
-            horizontal: true,
+    });
+
+    var sBar = {
+        chart: {
+            height: 350,
+            type: 'bar',
+            toolbar: {
+              show: false,
+            }
+        },
+        // colors: ['#4361ee'],
+        plotOptions: {
+            bar: {
+                horizontal: true,
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        series: [{
+            data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }],
+        xaxis: {
+            categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan', 'United States', 'China', 'Germany'],
         }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    series: [{
-        data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-    }],
-    xaxis: {
-        categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan', 'United States', 'China', 'Germany'],
     }
-}
 
-var chart = new ApexCharts(
-    document.querySelector("#s-bar"),
-    sBar
-);
+    var chart = new ApexCharts(
+        document.querySelector("#s-bar"),
+        sBar
+    );
 
-chart.render();
-}
+    chart.render();
+    }
 
 // Mixed Chart
 if($('#mixed-chart').length > 0 ){

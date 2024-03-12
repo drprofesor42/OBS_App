@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240308114246_init")]
+    [Migration("20240311122728_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -163,27 +163,24 @@ namespace OBS_App.Migrations
                     b.ToTable("Adminler");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.AkademikTakvim", b =>
+            modelBuilder.Entity("OBS_App.Data.AkademikTakvims", b =>
                 {
-                    b.Property<int>("akademikTakvimId")
+                    b.Property<int>("akademikTakvimsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("akademikTakvimId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("akademikTakvimsId"));
 
                     b.Property<string>("akademikTakvimAktivite")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("akademikTakvimBaslangic")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("akademikTakvimBaslangic")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("akademikTakvimBitis")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("akademikTakvimBitis")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("olusturmaTarihi")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("akademikTakvimId");
+                    b.HasKey("akademikTakvimsId");
 
                     b.ToTable("AkademikTakvimler");
                 });
@@ -203,9 +200,6 @@ namespace OBS_App.Migrations
                     b.Property<string>("BolumIsmi")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("OgrenciSayisi")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -406,6 +400,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BolumId")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("DogumTarihi")
                         .HasColumnType("date");
 
@@ -451,6 +448,8 @@ namespace OBS_App.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BolumId");
+
                     b.ToTable("Ogrenciler");
                 });
 
@@ -461,6 +460,9 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BolumId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OgretmenAd")
                         .IsRequired()
@@ -524,6 +526,8 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BolumId");
 
                     b.ToTable("Ogretmenler");
                 });
@@ -678,6 +682,31 @@ namespace OBS_App.Migrations
                         .IsRequired();
 
                     b.Navigation("Ders");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
+                {
+                    b.HasOne("OBS_App.Data.Bolum", null)
+                        .WithMany("Ogrencileri")
+                        .HasForeignKey("BolumId");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
+                {
+                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                        .WithMany("Ogretmenleri")
+                        .HasForeignKey("BolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bolum");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Bolum", b =>
+                {
+                    b.Navigation("Ogrencileri");
+
+                    b.Navigation("Ogretmenleri");
                 });
 #pragma warning restore 612, 618
         }

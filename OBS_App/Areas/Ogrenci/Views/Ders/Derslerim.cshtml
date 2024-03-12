@@ -1,28 +1,23 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Derslerim";
 }
-@model List<Ders>
+@model List<OgrenciDers>
 
 <div class="student-group-form">
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
+				<input type="text" class="form-control" placeholder="Ders İsmine Göre Ara ...">
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders İsmine Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Bölüm İsmine Göre Ara ...">
+				<input type="text" class="form-control" placeholder="Ders Hocasına Göre Ara ...">
 			</div>
 		</div>
 		<div class="col-lg-2">
-			<div class="search-student-btn">
+			<div class="search-student-btn text-end">
 				<button type="btn" class="btn btn-primary">Ara</button>
 			</div>
 		</div>
@@ -50,14 +45,18 @@
 				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
 					<thead class="student-thread">
 						<tr>
-							<th>ID</th>
-							<th>Ders Kod</th>
-							<th>Bölüm</th>
-							<th>Ders İsim</th>
+							<th>
+								<div class="form-check check-tables">
+									<input class="form-check-input" type="checkbox" value="something">
+								</div>
+							</th>
+							<th>Ders Adı</th>
 							<th>Ders Hocası</th>
 							<th>Ders Kredi</th>
 							<th>Ders Akts</th>
-							<th>Öğrenci Sayısı</th>
+							<th>Ders Vize</th>
+							<th>Ders Final</th>
+							<th>Ders Ödev</th>
 							<th class="text-end">İşlemler</th>
 						</tr>
 					</thead>
@@ -66,27 +65,31 @@
 						@foreach (var ders in Model)
 						{
 							<tr>
-								<td>@ders.Id</td>
-								<td>@ders.dersKod</td>
-								<td>*Bölüm Adı*</td>
+								<td>
+									<div class="form-check check-tables">
+										<input class="form-check-input" type="checkbox" value="something">
+									</div>
+								</td>
+								<td>@ders.dersId</td>
 								<td>
 									<h2>
-										<a>@ders.dersIsim</a>
+										<a>Hoca</a>
 									</h2>
 								</td>
-								<td>@ders.profesorId</td>
-								<td>@ders.dersKredi</td>
-								<td>@ders.dersAkts</td>
-								<td>X</td>
+								<td>Kredi</td>
+								<td>AKTS</td>
+								<td>@ders.dersSinavSonuc1</td>
+								<td>@ders.dersSinavSonuc2</td>
+								<td>@ders.dersFinalSonuc</td>
 								<td class="text-end">
 									<div class="actions">
 										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
 											<i class="feather-eye"></i>
 										</a>
-										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
+										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.ogrenciDersId" class="btn btn-sm bg-danger-light me-2">
 											<i class="feather-edit"></i>
 										</a>
-										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
+										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.ogrenciDersId" class="btn btn-sm bg-success-light">
 											<i class="feather-trash-2"></i>
 										</a>
 									</div>
@@ -100,6 +103,4 @@
 		</div>
 	</div>
 </div>
-
-
 

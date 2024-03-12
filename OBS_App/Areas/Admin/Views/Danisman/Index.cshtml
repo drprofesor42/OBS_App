@@ -25,12 +25,12 @@
 		</div>
 		<div class="col-lg-3 col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="İsme Göre Ara ...">
+				<input type="text" class="form-control" placeholder="Danışman İsmine Göre Ara ...">
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Öğrenciye Göre Ara ...">
+				<input type="text" class="form-control" placeholder="Bölüme Göre Ara ...">
 			</div>
 		</div>
 		<div class="col-lg-2">
@@ -60,52 +60,33 @@
 					<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
 						<thead class="student-thread">
 							<tr>
-								<th>
-									<div class="form-check check-tables">
-										<input class="form-check-input" type="checkbox" value="something">
-									</div>
-								</th>
 								<th>ID</th>
 								<th>İsim-Soyisim</th>								
-								<th>Danışmanı Olunan Öğrenciler</th>
 								<th>Bağlı Olduğu Bölüm</th>
+								<th>Danışmanı Olunan Öğrenciler</th>
 								<th class="text-end">İşlemler</th>
 							</tr>
 						</thead>
 						<tbody>
-						
-								<tr>
-									<td>
-										<div class="form-check check-tables">
-											<input class="form-check-input" type="checkbox" value="something">
-										</div>
-									</td>
-									<td></td>									
-									<td>Ad-Soyad</td>								
-									<td>Öğrencilerin Listesi</td>
-									<td>Bölümü</td>
-									<td class="text-end">
-										<div class="actions ">
-										<a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-											<i class="feather-eye"></i>
-										</a>
-										<a asp-action="Ata_Guncelle" class="btn btn-sm bg-danger-light">
-											<i class="feather-edit"></i>
-										</a>
-										<a asp-controller="Danisman" asp-action="Sil"  class="btn btn-sm bg-success-light" onclick="return confirm('Silmek istediğinizden emin misiniz?')">
-											<i class="feather-trash-2"></i>
-										</a>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="form-check check-tables">
-											<input class="form-check-input" type="checkbox" value="something">
-										</div>
-									</td>
-								</tr>
-						
+							<tr>
+								<td>*Id*</td>									
+								<td>Ad-Soyad</td>
+								<td>Bölümü</td>
+								<td>Öğrencilerin Listesi</td>
+								<td class="text-end">
+									<div class="actions ">
+									<a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+										<i class="feather-eye"></i>
+									</a>
+									<a asp-action="Ata_Guncelle" class="btn btn-sm bg-danger-light">
+										<i class="feather-edit"></i>
+									</a>
+									<a asp-controller="Danisman" asp-action="Sil"  class="btn btn-sm bg-success-light" onclick="return confirm('Silmek istediğinizden emin misiniz?')">
+										<i class="feather-trash-2"></i>
+									</a>
+									</div>
+								</td>
+							</tr>						
 						</tbody>
 					</table>
 				</div>
