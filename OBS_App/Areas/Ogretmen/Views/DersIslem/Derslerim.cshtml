@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "Derslerim";
+}
+@model List<Ders>
+
+<div class="student-group-form">
+	<div class="row">
+		<div class="col-lg-3 col-md-6">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Ders İsmine Göre Ara ...">
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Ders Hocasına Göre Ara ...">
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="search-student-btn text-end">
+				<button type="btn" class="btn btn-primary">Ara</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card card-table">
+			<div class="card-body">
+
+				<div class="page-header">
+					<div class="row align-items-center">
+						<div class="col">
+							<h3 class="page-title">Dersler</h3>
+						</div>
+						<div class="col-auto text-end float-end ms-auto download-grp">
+							<a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
+							<a asp-controller="x" asp-action="x" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+						</div>
+					</div>
+				</div>
+
+				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+					<thead class="student-thread">
+						<tr>
+							<th>
+								<div class="form-check check-tables">
+									<input class="form-check-input" type="checkbox" value="something">
+								</div>
+							</th>
+							<th>Ders Adı</th>
+							<th>Ders Kodu</th>
+							<th>Ders Kredi</th>
+							<th>Ders Akts</th>
+							<th class="text-end">İşlemler</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						@foreach (var ders in Model)
+						{
+							<tr>
+								<td>
+									<div class="form-check check-tables">
+										<input class="form-check-input" type="checkbox" value="something">
+									</div>
+								</td>
+								<td>@ders.dersIsim</td>
+								<td>@ders.dersKod</td>
+								<td>@ders.dersKredi</td>
+								<td>@ders.dersAkts</td>
+								<td class="text-end">
+									<div class="actions">
+										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+											<i class="feather-eye"></i>
+										</a>
+										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
+											<i class="feather-edit"></i>
+										</a>
+										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
+											<i class="feather-trash-2"></i>
+										</a>
+									</div>
+								</td>
+							</tr>
+						}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

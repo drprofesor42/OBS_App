@@ -690,13 +690,11 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
-                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                    b.HasOne("OBS_App.Data.Bolum", null)
                         .WithMany("Ogretmenleri")
                         .HasForeignKey("BolumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Bolum");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>

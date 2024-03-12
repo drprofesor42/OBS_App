@@ -21,7 +21,7 @@
         public DateOnly OgretmenBaslamaTarihi { get; set; }
 
         public int BolumId { get; set; }
-        public Bolum Bolum { get; set; }
+        /*public Bolum Bolum { get; set; }*/
 
 
     }

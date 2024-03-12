@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240311122728_init")]
+    [Migration("20240312094423_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -693,13 +693,11 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
-                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                    b.HasOne("OBS_App.Data.Bolum", null)
                         .WithMany("Ogretmenleri")
                         .HasForeignKey("BolumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Bolum");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
