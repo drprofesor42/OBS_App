@@ -53,11 +53,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
         }
 
-        public IActionResult Etkinlikler()
-        {
-            return View();
-        }
-
         public IActionResult Ayarlar()
         {
             return View();

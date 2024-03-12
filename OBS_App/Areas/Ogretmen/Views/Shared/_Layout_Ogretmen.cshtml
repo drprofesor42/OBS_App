@@ -1,5 +1,4 @@
-﻿@model LoginViewsModel
-
+﻿
 
 <!DOCTYPE html>
 <html lang="en">
@@ -148,27 +147,26 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Öğrenci İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a asp-controller="OgrenciIslem" asp-action="Ogrencilerim">Öğrenci Listem</a></li>
-                                <li><a asp-controller="OgrenciIslem" asp-action="Notlar">Not İşlemleri</a></li>
-                                <li><a asp-controller="OgrenciIslem" asp-action="Yoklama">Yoklama İşlemleri?</a></li>
+                                <li><a asp-controller="Ogrenci" asp-action="Ogrencilerim">Öğrenci Listem</a></li>
+                                <li><a asp-controller="Ogrenci" asp-action="Notlar">Not İşlemleri?</a></li>
+                                <li><a asp-controller="Ogrenci" asp-action="Yoklama">Yoklama İşlemleri?</a></li>
                             </ul>
                         </li>
 
                         <li class="submenu">
                             <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Ders İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a asp-controller="DersIslem" asp-action="Derslerim">Verilen Dersler</a></li>
-                                <li><a asp-controller="DersIslem" asp-action="DersProgramı">Ders Programı</a></li>
-                                <li><a asp-controller="DersIslem" asp-action="DersTalepleri">Ders Talepleri?</a></li>
+                                <li><a asp-controller="Ders" asp-action="Ogretmen_Derslerim">Verilen Dersler</a></li>
+                                <li><a asp-controller="Ders" asp-action="DersProgramı">Ders Programı</a></li>
+                                <li><a asp-controller="Ders" asp-action="DersTalepleri">Ders Talepleri?</a></li>
                             </ul>
                         </li>
 
                         <li class="submenu">
                             <a href="#"><i class="fas fa-building"></i> <span> Fakülte İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a asp-controller="FakulteIslem" asp-action="DanısmanOgrenciler">Danışmanı Olduğum Öğrenciler</a></li>
-                                <li><a asp-controller="FakulteIslem" asp-action="GorusmeSaatleri">Görüşme Saati İşlemLeri</a></li>
-                                <li><a asp-controller="FakulteIslem" asp-action="AkademikTakvim">Akademik Takvim</a></li>
+                                <li><a asp-controller="Fakulte" asp-action="DanısmanOgrenciler">Danışmanı Olduğum Öğrenciler</a></li>
+                                <li><a asp-controller="Fakulte" asp-action="AkademikTakvim">Akademik Takvim</a></li>
                             </ul>
                         </li>
 
@@ -227,13 +225,20 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/panel/plugins/select2/js/select2.min.js"></script>
+    <script src="~/panel/js/feather.min.js"></script>
+    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/panel/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="~/panel/plugins/apexchart/chart-data.js"></script>
 
-    <script src="~/panel/js/feather.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/apexcharts.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/chart-data.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/moment.min.js"></script>
+    <script src="~/panel/js/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/jquery-ui.min.js"></script>
+    <script src="~/panel/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/panel/plugins/fullcalendar/jquery.fullcalendar.js"></script>
+
+    <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
 
 </body>

@@ -431,7 +431,7 @@ namespace OBS_App.Migrations
                     OgretmenCinsiyet = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgretmenBaslamaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    BolumId = table.Column<int>(type: "int", nullable: false)
+                    BolumId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -440,8 +440,7 @@ namespace OBS_App.Migrations
                         name: "FK_Ogretmenler_Bolumler_BolumId",
                         column: x => x.BolumId,
                         principalTable: "Bolumler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

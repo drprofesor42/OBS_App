@@ -8,7 +8,9 @@
 	<div class="col-lg-4">
 		<div class="student-personals-grp">
 			<div class="card">
-				<div class="card-body">
+				@if (Model != null)
+				{
+					<div class="card-body">
 					<div style="text-align:center" class="heading-detail">
 						<h4>Danışman Bilgileri</h4>
 						<span class="avatar avatar-md flex-shrink-0">
@@ -86,7 +88,17 @@
 							<a asp-controller="Ogrenci" asp-action="DanismanMesaj" class="btn btn-info message-btns">Mesaj Gönder</a>
 						</div>
 					</div>
-				</div>
+					</div>
+				}
+				else
+				{
+					<div class="card-body">
+						<div style="text-align:center" class="heading-detail">
+							<h4>Danışman Bilgileri</h4>
+							<h5 class="text-danger">Henüz Danışman Atanmamıştır</h5>
+						</div>
+					</div>
+				}
 			</div>
 		</div>
 	</div>

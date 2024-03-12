@@ -5,30 +5,26 @@ using OBS_App.Models;
 namespace OBS_App.Areas.Ogretmen.Controllers
 {
     [Area("Ogretmen")]
-    public class DersIslemController : Controller
-    {       
-        private readonly IdentityDataContext _context;
+    public class DersController : Controller
+    {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IdentityDataContext _context;
 
-        public DersIslemController(IdentityDataContext context, UserManager<AppUser> userManager)
+        public DersController(UserManager<AppUser> userManager, IdentityDataContext context)
         {
-            _context = context;
             _userManager = userManager;
+            _context = context;
         }
 
-        public async Task<IActionResult> Derslerim()
+        public async Task<IActionResult> Ogretmen_Derslerim()
         {
             var kullanıcı = await _userManager.GetUserAsync(User);
             if (kullanıcı != null)
             {
-                // Kullanıcının derslerini çek
-                var ogretmen = _context.Ogretmenler.FirstOrDefault(d => d.OgretmenEposta == kullanıcı.Email);
+				var ogretmen = _context.Ogretmenler.FirstOrDefault(d => d.OgretmenEposta == kullanıcı.Email);
                 var dersler = _context.Dersler.Where(x => x.profesorId == ogretmen.Id).ToList();
-
                 return View(dersler);
             }
-
-            // Hata Gönder
             return View();
         }
 
@@ -37,9 +33,5 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             return View();
         }
 
-        public IActionResult DersTalepleri()
-        {
-            return View();
-        }
     }
 }

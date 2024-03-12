@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
@@ -11,12 +12,15 @@ namespace OBS_App.Areas.Admin.Controllers
     public class OgretmenController : Controller
     {
 
-
+        private readonly UserManager<AppUser> _userManager;
         private readonly IdentityDataContext _context;
-        public OgretmenController(IdentityDataContext context)
+
+        public OgretmenController(IdentityDataContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
         public async Task<IActionResult> Index()
         {
             var ogretmenler = await _context.Ogretmenler.ToListAsync();
@@ -54,8 +58,16 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        await _context.Ogretmenler.AddAsync(model);
-                        await _context.SaveChangesAsync();
+                        var user = new AppUser
+                        {
+                            UserName = model.OgretmenEposta,
+                            Email = model.OgretmenEposta,
+                        };
+
+                        IdentityResult result = await _userManager.CreateAsync(user, model.OgretmenParola);
+
+                        _context.Add(model);
+                        _context.SaveChanges();
 
                         return RedirectToAction("Index");
                     }

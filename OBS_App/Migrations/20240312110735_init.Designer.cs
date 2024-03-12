@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240312094423_init")]
+    [Migration("20240312110735_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -461,7 +461,7 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BolumId")
+                    b.Property<int?>("BolumId")
                         .HasColumnType("int");
 
                     b.Property<string>("OgretmenAd")
@@ -695,9 +695,7 @@ namespace OBS_App.Migrations
                 {
                     b.HasOne("OBS_App.Data.Bolum", null)
                         .WithMany("Ogretmenleri")
-                        .HasForeignKey("BolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BolumId");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
