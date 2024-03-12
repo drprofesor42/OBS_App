@@ -1,4 +1,4 @@
-﻿@model  List<Fakulte>
+﻿@model IEnumerable<Fakulte>
 @{
     ViewData["Title"] = "Index";
 }
@@ -87,9 +87,7 @@
                                         <a>@fakulte.FakulteAd</a>
                                     </h2>
                                 </td>
-                                <td>
-                                    @fakulte.Bolum.Count
-                                </td>
+                                <td>@fakulte.Bolumler.Count()</td>
                                 <td>Ogretmne sayısı</td>
                                 <td>Ogrenci sayısı</td>
                                 <td>@fakulte.OlusturmaTarihi</td>

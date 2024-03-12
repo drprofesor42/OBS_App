@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
@@ -17,8 +18,8 @@ namespace OBS_App.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var ogretmenler = await _context.Ogretmenler.Include(x =>x.Adres).ToListAsync();
 
+            var ogretmenler = await _context.Ogretmenler.Include(x => x.Adres).ToListAsync();
             return View(ogretmenler);
         }
 
@@ -26,11 +27,13 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 return View();
             }
             else
             {
-                var ogrt = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id == id);
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                var ogrt = await _context.Ogretmenler.Include(x=>x.Adres).FirstOrDefaultAsync(x => x.Id == id);
                 return View(ogrt);
 
             }
@@ -43,6 +46,7 @@ namespace OBS_App.Areas.Admin.Controllers
             if (Kaydet == null)
             {
                 // hata
+
                 return View();
             }
             else
@@ -52,6 +56,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+
                         await _context.Ogretmenler.AddAsync(model);
                         await _context.SaveChangesAsync();
 
@@ -67,7 +72,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-
                         _context.Update(model);
                         await _context.SaveChangesAsync();
 
@@ -75,6 +79,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
                     }
                 }
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 return View(model);
             }
         }

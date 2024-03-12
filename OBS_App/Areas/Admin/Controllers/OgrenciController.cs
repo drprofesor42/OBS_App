@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 using OBS_App.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace OBS_App.Areas.Admin.Controllers
@@ -23,16 +24,19 @@ namespace OBS_App.Areas.Admin.Controllers
             return View(ogrenciler);
         }
 
-        public IActionResult Ekle_Guncelle(int? id)
+        public async Task<IActionResult> Ekle_Guncelle(int? id)
         {
             if (id == 0)
             {
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd" );
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
                 return View();
             }
             else
             {
-
-                var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                var ogrenci = _context.Ogrenciler.Include(o => o.Adres).FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {
                     return NotFound();
@@ -43,11 +47,13 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
-
+   
             if (ModelState.IsValid)
             {
                 if (model == null || type == null)
                 {
+                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
                     // TempData Hata Gönder
                     return View(model);
                 }
@@ -59,17 +65,14 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "1")
                 {
-
+                   
                     _context.Update(model);
                     _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return View(model);
-                }
             }
-
+            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
             return View(model);
         }
 

@@ -39,6 +39,24 @@
                                 <span asp-validation-for="DersAkts" class="text-danger"></span>
                             </div>
                         </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Bolümünü Seçiniz<span class="login-danger">*</span></label>
+                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="BolumId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Öğretmenini Seçiniz<span class="login-danger">*</span></label>
+                                <select asp-for="OgretmensId" asp-items="ViewBag.Ogretmen" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="OgretmensId" class="text-danger"></span>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="student-submit">
                                 @if (Model == null)

@@ -5,10 +5,9 @@
         public int Id { get; set; }
         public string FakulteAd { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }
-        public ICollection<Ogrencis> Ogrencis { get; set; } = new List<Ogrencis>();
-        public ICollection<Bolum> Bolum { get; set; } = new List<Bolum>();
-        public ICollection<Ogretmens> Ogretmens { get; set; } = new List<Ogretmens>();
-        public ICollection<OgrenciNumara> OgrenciNumara { get; set; }= new List<OgrenciNumara>();
-        public ICollection<OkulDonemDers> OkulDonemDers { get; set; } = new List<OkulDonemDers>();
+        public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
+        public ICollection<Bolum> Bolumler { get; set; } = new List<Bolum>();
+        public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
+        public ICollection<OkulDonemDers> OkulDonemDersler { get; set; } = new List<OkulDonemDers>();
     }
 }

@@ -9,11 +9,10 @@
         public int DersAkts { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }
         public int BolumId { get; set; }
-        public Bolum Bolum { get; set; }
         public int OgretmensId { get; set; }
-        public Ogretmens Ogretmens { get; set; }
-        public ICollection<DersOgrenci> DersOgrenci { get; set; } = new List<DersOgrenci>();
-        public ICollection<OkulDonemDers> OkulDonemDers { get; set; } = new List<OkulDonemDers>();
+        public ICollection<Not> notlar { get; set; } = new List<Not>();
+        public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
+        public ICollection<OkulDonemDers> OkulDonemDersler { get; set; } = new List<OkulDonemDers>();
 
 
 

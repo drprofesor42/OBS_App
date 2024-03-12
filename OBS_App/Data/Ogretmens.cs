@@ -19,15 +19,10 @@ namespace OBS_App.Data
         public DateOnly OgretmenBaslamaTarihi { get; set; }
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
-        public int DuyuruId { get; set; }
-        public Duyuru Duyuru { get; set; }
         public int BolumId { get; set; }
-        public Bolum bolum { get; set; }
-        public int FakulteId { get; set; }
-        public Fakulte Fakulte { get; set; }
-        public ICollection<OgretmenOgrenci> OgretmenOgrenci { get; set; } = new List<OgretmenOgrenci>();
+        public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
-
+        public ICollection<Duyuru> Duyurular { get; set; } = new List<Duyuru>();
 
 
     }

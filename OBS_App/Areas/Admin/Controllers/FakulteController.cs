@@ -25,7 +25,7 @@ namespace OBS_App.Areas.Admin.Controllers
         {
 
             
-            var fakulteler = await _context.Fakulteler.Include(f => f.Bolum).ToListAsync();
+            var fakulteler = await _context.Fakulteler.Include(f => f.Bolumler).ToListAsync();
             return View(fakulteler);
         }
 
