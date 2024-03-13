@@ -55,6 +55,8 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt eklendi.";
+
                     return RedirectToAction("Index");
                 }
                 else if (type == "1")
@@ -62,6 +64,8 @@ namespace OBS_App.Areas.Admin.Controllers
 
                     _context.Update(model);
                     _context.SaveChanges();
+                    TempData["success"] = "Kayıt güncellendi.";
+
                     return RedirectToAction("Index");
                 }
                 else

@@ -52,7 +52,32 @@
 		</div>
 
 	}
-
 </div>
+@if (TempData["DuyuruGuncelle"] != null)
+{
+	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
+	<script>
+		Swal.fire({
+			title: "Güncelleme Başarılı!",
 
+			icon: "success"
+		});
+	</script>
+}
+
+@if (TempData["success"] != null)
+{
+	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+	<script>
+		var successMessage = "@TempData["success"]";
+
+		Swal.fire({
+			title: successMessage,
+			icon: "success"
+		});
+	</script>
+}

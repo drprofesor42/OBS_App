@@ -49,14 +49,18 @@ namespace OBS_App.Areas.Admin.Controllers
 
 					await _context.Bolumler.AddAsync(model);
 					await _context.SaveChangesAsync();
-					return RedirectToAction("Index");
+                    TempData["success"] = "Kayıt eklendi.";
+
+                    return RedirectToAction("Index");
 				}
 				//Güncelleme İşlemi
 				else if (Kaydet == 2)
 				{
 					_context.Bolumler.Update(model);
 					await _context.SaveChangesAsync();
-					return RedirectToAction("Index");
+                    TempData["success"] = "Kayıt güncellendi.";
+
+                    return RedirectToAction("Index");
 				}
 				else
 				{
@@ -83,8 +87,8 @@ namespace OBS_App.Areas.Admin.Controllers
 				if (bolum != null)
 				{
 					_context.Bolumler.Remove(bolum);
-					await _context.SaveChangesAsync();
-					return RedirectToAction("Index");
+					await _context.SaveChangesAsync();             
+                    return RedirectToAction("Index");
 				}
 				else
 				{

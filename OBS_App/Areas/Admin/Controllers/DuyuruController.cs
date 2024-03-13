@@ -55,13 +55,15 @@ namespace OBS_App.Areas.Admin.Controllers
 				{
 					await _context.Duyurular.AddAsync(model);
 					await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
 				}
 				else
 				{
 					_context.Duyurular.Update(model);
 					_context.SaveChanges();
-					return RedirectToAction("Index");
+                    TempData["success"] = "Kayıt güncellendi.";
+                    return RedirectToAction("Index");
 				}
 			}
             

@@ -55,12 +55,16 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     _identityDataContext.Add(model);
                     _identityDataContext.SaveChanges();
+                    TempData["success"] = "Kayıt eklendi.";
+
                     return RedirectToAction("Index");
                 }
                 else if (type == "1")
                 {
                     _identityDataContext.Update(model);
                     _identityDataContext.SaveChanges();
+                    TempData["success"] = "Kayıt güncellendi.";
+
                     return RedirectToAction("Index");
                 }
                 else
