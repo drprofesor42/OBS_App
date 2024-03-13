@@ -42,7 +42,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
-                var ogrenci = _context.Ogrenciler.Include(o => o.Adres).FirstOrDefault(x => x.Id == id);
+                var ogrenci = _context.Ogrenciler.Include(o => o.OgrenciAdres).FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {
                     return NotFound();
