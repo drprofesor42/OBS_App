@@ -20,7 +20,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var ogrenciler = await _context.Ogrenciler.ToListAsync();
+            var ogrenciler = await _context.Ogrenciler.Include(x => x.Bolum).ToListAsync();
             return View(ogrenciler);
         }
 
@@ -28,7 +28,7 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
-                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd" );
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
                 return View();
             }
@@ -47,8 +47,8 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
-            
-   
+
+
             if (ModelState.IsValid)
             {
                 if (model == null || type == null)
@@ -68,7 +68,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "1")
                 {
-                   
+
                     _context.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
