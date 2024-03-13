@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class asdbjh : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -404,30 +404,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Notlar",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OgrenciNumara = table.Column<int>(type: "int", nullable: true),
-                    NotOdev = table.Column<int>(type: "int", nullable: true),
-                    NotVize = table.Column<int>(type: "int", nullable: true),
-                    NotFinal = table.Column<int>(type: "int", nullable: true),
-                    NotTarihi = table.Column<DateOnly>(type: "date", nullable: true),
-                    DersId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notlar", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notlar_Dersler_DersId",
-                        column: x => x.DersId,
-                        principalTable: "Dersler",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Ogrenciler",
                 columns: table => new
                 {
@@ -556,6 +532,36 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Notlar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NotOdev = table.Column<int>(type: "int", nullable: true),
+                    NotVize = table.Column<int>(type: "int", nullable: true),
+                    NotFinal = table.Column<int>(type: "int", nullable: true),
+                    NotTarihi = table.Column<DateOnly>(type: "date", nullable: true),
+                    DersId = table.Column<int>(type: "int", nullable: true),
+                    OgrencisId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notlar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notlar_Dersler_DersId",
+                        column: x => x.DersId,
+                        principalTable: "Dersler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Notlar_Ogrenciler_OgrencisId",
+                        column: x => x.OgrencisId,
+                        principalTable: "Ogrenciler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "OgretmenOgrenciler",
                 columns: table => new
                 {
@@ -653,6 +659,11 @@ namespace OBS_App.Migrations
                 name: "IX_Notlar_DersId",
                 table: "Notlar",
                 column: "DersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notlar_OgrencisId",
+                table: "Notlar",
+                column: "OgrencisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ogrenciler_AdresId",

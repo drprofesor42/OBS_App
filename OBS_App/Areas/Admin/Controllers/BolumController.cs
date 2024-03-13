@@ -18,9 +18,9 @@ namespace OBS_App.Areas.Admin.Controllers
             _context = context;
 
         }
-        public async  Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            var bolum = await _context.Bolumler.Include(x=> x.Dersler).Include(x => x.Ogrencisler).Include(x => x.Ogretmensler).ToListAsync();
+            var bolum = await _context.Bolumler.Include(x => x.Dersler).Include(x => x.Ogrencisler).Include(x => x.Ogretmensler).ToListAsync();
             return View(bolum);
         }
 
@@ -47,12 +47,15 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int Kaydet)
         {
-            
+
+                var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
+
             if (ModelState.IsValid)
             {
                 //Ekleme İşlemi
                 if (Kaydet == 1)
                 {
+                    model.BolumBaskani = bolumbaskani.OgretmenAd;
                     TempData["success"] = "Kayıt eklendi.";
                     await _context.Bolumler.AddAsync(model);
                     await _context.SaveChangesAsync();
@@ -61,6 +64,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 //Güncelleme İşlemi
                 if (Kaydet == 2)
                 {
+                    model.BolumBaskani = bolumbaskani.OgretmenAd;
                     TempData["success"] = "Kayıt güncellendi.";
                     _context.Bolumler.Update(model);
                     await _context.SaveChangesAsync();

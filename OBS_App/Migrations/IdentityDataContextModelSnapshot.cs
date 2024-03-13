@@ -371,12 +371,14 @@ namespace OBS_App.Migrations
                     b.Property<int?>("NotVize")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OgrenciNumara")
+                    b.Property<int>("OgrencisId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DersId");
+
+                    b.HasIndex("OgrencisId");
 
                     b.ToTable("Notlar");
                 });
@@ -790,7 +792,15 @@ namespace OBS_App.Migrations
                         .WithMany("notlar")
                         .HasForeignKey("DersId");
 
+                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
+                        .WithMany("Notlar")
+                        .HasForeignKey("OgrencisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Ders");
+
+                    b.Navigation("Ogrencis");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
@@ -806,7 +816,7 @@ namespace OBS_App.Migrations
                         .HasForeignKey("BolumId");
 
                     b.HasOne("OBS_App.Data.Ders", null)
-                        .WithMany("Ogrencis")
+                        .WithMany("Ogrencisler")
                         .HasForeignKey("DersId");
 
                     b.HasOne("OBS_App.Data.Fakulte", null)
@@ -873,7 +883,7 @@ namespace OBS_App.Migrations
                         .IsRequired();
 
                     b.HasOne("OBS_App.Data.Donem", "Donem")
-                        .WithMany("OkulDonemDers")
+                        .WithMany("OkulDonemDersler")
                         .HasForeignKey("DonemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -908,7 +918,7 @@ namespace OBS_App.Migrations
                 {
                     b.Navigation("DersOgrenciler");
 
-                    b.Navigation("Ogrencis");
+                    b.Navigation("Ogrencisler");
 
                     b.Navigation("OkulDonemDersler");
 
@@ -917,7 +927,7 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Donem", b =>
                 {
-                    b.Navigation("OkulDonemDers");
+                    b.Navigation("OkulDonemDersler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
@@ -934,6 +944,8 @@ namespace OBS_App.Migrations
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
                 {
                     b.Navigation("DersOgrenciler");
+
+                    b.Navigation("Notlar");
 
                     b.Navigation("OgretmenOgrenciler");
                 });
