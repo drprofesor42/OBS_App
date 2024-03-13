@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string BolumAd { get; set; }
-        public string BolumBaskani { get; set; }
+        public int OgretmensId { get; set; }
         public int FakulteId { get; set; }
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
         public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
