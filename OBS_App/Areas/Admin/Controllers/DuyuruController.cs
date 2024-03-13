@@ -18,9 +18,9 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var duyurular = _context.Duyurular.ToList();
+            var duyurular =  await _context.Duyurular.Include(x=> x.Ogretmens).ToListAsync();
             return View(duyurular);
         }
 
