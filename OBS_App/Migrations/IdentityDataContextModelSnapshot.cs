@@ -297,6 +297,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("DuyuruBaslik")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -316,6 +319,8 @@ namespace OBS_App.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("OgretmensId");
 
@@ -631,6 +636,10 @@ namespace OBS_App.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DuyuruName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -779,9 +788,15 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
+                    b.HasOne("OBS_App.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
                         .WithMany("Duyurular")
                         .HasForeignKey("OgretmensId");
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Ogretmens");
                 });

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OBS_App.Models;
 
 namespace OBS_App.Data
 {
@@ -21,7 +22,7 @@ namespace OBS_App.Data
         public Adres Adres { get; set; }
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
-        public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
+		public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
         public ICollection<Duyuru> Duyurular { get; set; } = new List<Duyuru>();
 

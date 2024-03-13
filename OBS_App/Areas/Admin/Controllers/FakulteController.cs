@@ -34,8 +34,8 @@ namespace OBS_App.Areas.Admin.Controllers
 
             foreach (var fakulte in fakulteler)
             {
-                int toplamOgretmenSayisi = 0;
-                int toplamOgrenciSayisi = 0;
+                Int32 toplamOgretmenSayisi = 0;
+                Int32 toplamOgrenciSayisi = 0;
 
                 foreach (var bolum in fakulte.Bolumler)
                 {
