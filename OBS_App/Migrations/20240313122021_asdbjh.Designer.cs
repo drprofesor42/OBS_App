@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240313110143_asdbjh")]
+    [Migration("20240313122021_asdbjh")]
     partial class asdbjh
     {
         /// <inheritdoc />
@@ -362,26 +362,24 @@ namespace OBS_App.Migrations
                     b.Property<int?>("DersId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NotFinal")
+                    b.Property<int?>("NotFinal")
                         .HasColumnType("int");
 
-                    b.Property<int>("NotOdev")
+                    b.Property<int?>("NotOdev")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("NotTarihi")
+                    b.Property<DateOnly?>("NotTarihi")
                         .HasColumnType("date");
 
-                    b.Property<int>("NotVize")
+                    b.Property<int?>("NotVize")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OgrencisId")
+                    b.Property<int?>("OgrenciNumara")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DersId");
-
-                    b.HasIndex("OgrencisId");
 
                     b.ToTable("Notlar");
                 });
@@ -426,6 +424,9 @@ namespace OBS_App.Migrations
 
                     b.Property<DateOnly>("OgrenciKayitTarihi")
                         .HasColumnType("date");
+
+                    b.Property<int>("OgrenciNumara")
+                        .HasColumnType("int");
 
                     b.Property<string>("OgrenciParola")
                         .IsRequired()
@@ -792,13 +793,7 @@ namespace OBS_App.Migrations
                         .WithMany("notlar")
                         .HasForeignKey("DersId");
 
-                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
-                        .WithMany()
-                        .HasForeignKey("OgrencisId");
-
                     b.Navigation("Ders");
-
-                    b.Navigation("Ogrencis");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>

@@ -404,11 +404,36 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Notlar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OgrenciNumara = table.Column<int>(type: "int", nullable: true),
+                    NotOdev = table.Column<int>(type: "int", nullable: true),
+                    NotVize = table.Column<int>(type: "int", nullable: true),
+                    NotFinal = table.Column<int>(type: "int", nullable: true),
+                    NotTarihi = table.Column<DateOnly>(type: "date", nullable: true),
+                    DersId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notlar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notlar_Dersler_DersId",
+                        column: x => x.DersId,
+                        principalTable: "Dersler",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Ogrenciler",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OgrenciNumara = table.Column<int>(type: "int", nullable: false),
                     OgrenciTc = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciAd = table.Column<string>(type: "longtext", nullable: false)
@@ -531,35 +556,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Notlar",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NotOdev = table.Column<int>(type: "int", nullable: false),
-                    NotVize = table.Column<int>(type: "int", nullable: false),
-                    NotFinal = table.Column<int>(type: "int", nullable: false),
-                    NotTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    OgrencisId = table.Column<int>(type: "int", nullable: true),
-                    DersId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notlar", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notlar_Dersler_DersId",
-                        column: x => x.DersId,
-                        principalTable: "Dersler",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Notlar_Ogrenciler_OgrencisId",
-                        column: x => x.OgrencisId,
-                        principalTable: "Ogrenciler",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "OgretmenOgrenciler",
                 columns: table => new
                 {
@@ -657,11 +653,6 @@ namespace OBS_App.Migrations
                 name: "IX_Notlar_DersId",
                 table: "Notlar",
                 column: "DersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notlar_OgrencisId",
-                table: "Notlar",
-                column: "OgrencisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ogrenciler_AdresId",

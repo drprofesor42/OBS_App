@@ -6,6 +6,7 @@ namespace OBS_App.Data
     public class Ogrencis
     {
         public int Id { get; set; }
+        public int OgrenciNumara { get; set; } = 100;
         public string OgrenciTc { get; set; }
         public string OgrenciAd { get; set; }
         public string OgrenciSoyad { get; set; }
@@ -22,6 +23,7 @@ namespace OBS_App.Data
         public Adres Adres { get; set; }
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
+        public ICollection<Not> Notlar { get; set; } = new List<Not>();
         public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
         public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
 

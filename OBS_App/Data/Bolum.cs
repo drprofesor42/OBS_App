@@ -1,4 +1,6 @@
-﻿namespace OBS_App.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace OBS_App.Data
 {
     public class Bolum
     {

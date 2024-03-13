@@ -13,7 +13,7 @@
         public int? OgretmensId { get; set; }
         public Ogretmens? Ogretmens { get; set; }
         public ICollection<Not> notlar { get; set; } = new List<Not>();
-        public ICollection<Ogrencis> Ogrencis { get; set; } = new List<Ogrencis>();
+        public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
         public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
         public ICollection<OkulDonemDers> OkulDonemDersler { get; set; } = new List<OkulDonemDers>();
 
