@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
                     <thead class="student-thread">
                         <tr>
                             <th>
@@ -78,9 +78,10 @@
                                     </h2>
                                 </td>
                                 <td>@bolum.BolumBaskani</td>
-                                <td>x</td>
-                                <td>x</td>
-                                <td>x</td>
+                                
+                                <td>@bolum.Ogretmensler.Count()</td>
+                                <td>@bolum.Ogrencisler.Count()</td>
+                                <td>@bolum.Dersler.Count()</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">

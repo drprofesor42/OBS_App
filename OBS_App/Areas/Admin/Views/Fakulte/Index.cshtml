@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-2">
             <div class="search-student-btn">
-                <button type="btn" class="btn btn-primary">Ara</button>
+                <button type="button" class="btn btn-primary">Ara</button>
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
                     <thead class="student-thread">
                         <tr>
                             <th>
@@ -64,10 +64,10 @@
                             </th>
                             <th>ID</th>
                             <th>Fakülte İsim</th>
-                            <th>Fakülte Başkanı</th>
                             <th>Bölüm Sayısı</th>
                             <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
+                            <th>Kuruluş Tarihi</th>
                             <th class="text-end">İşlemler</th>
                         </tr>
                     </thead>
@@ -87,10 +87,10 @@
                                         <a>@fakulte.FakulteAd</a>
                                     </h2>
                                 </td>
-                                <td>Ogretmen İsmi</td>
-                                <td>X</td>
-                                <td>X</td>
-                                <td>X</td>
+                                <td>@fakulte.Bolumler.Count()</td>
+                                <td>@fakulte.FakulteOgretmenSayisi</td>
+                                <td>@fakulte.FakulteOgrenciSayisi</td>
+                                <td>@fakulte.OlusturmaTarihi</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
@@ -106,7 +106,6 @@
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>

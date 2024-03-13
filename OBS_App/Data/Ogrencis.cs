@@ -1,4 +1,7 @@
-﻿namespace OBS_App.Data
+﻿using Microsoft.EntityFrameworkCore;
+using OBS_App.Models;
+
+namespace OBS_App.Data
 {
     public class Ogrencis
     {
@@ -12,15 +15,16 @@
         public string OgrenciTelefon { get; set; }
         public string OgrenciParola { get; set; }
         public string OgrenciParolaOnayla { get; set; }
-        public int OgrenciDanisman { get; set; }
+        public string? OgrenciDanisman { get; set; }
         public DateOnly OgrenciKayitTarihi { get; set; }
         public DateOnly OgrenciDogumTarihi { get; set; }
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
-        public int OgrenciNumaraId { get; set; }
-        public OgrenciNumara OgrenciNumara { get; set; }
-        public ICollection<DersOgrenci> DersOgrenci { get; set; } = new List<DersOgrenci>();
-        public ICollection<OgretmenOgrenci> OgretmenOgrenci { get; set; } = new List<OgretmenOgrenci>();
+        public int? BolumId { get; set; }
+        public Bolum? Bolum { get; set; }
+        public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
+        public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
 
     }
+
 }

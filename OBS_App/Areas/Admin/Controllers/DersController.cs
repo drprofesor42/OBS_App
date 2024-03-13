@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
 
@@ -18,22 +20,26 @@ namespace OBS_App.Areas.Admin.Controllers
 
 
         // Dersleri Listeleme Sayfası
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var dersler = _context.Dersler.ToList();
+            var dersler = await _context.Dersler.Include(x => x.Ogretmens).Include(x=> x.Bolum).ThenInclude(x=> x.Ogrencisler).ToListAsync();
             return View(dersler);
         }
 
         // Id 0 gelirse ders ekleme sayfasına, 1 gelirse güncelleme sayfasına yönlendirir (aynı sayfalar ama model gönderiyor)
-		public IActionResult Ekle_Guncelle(int id)
+		public async Task<IActionResult> Ekle_Guncelle(int id)
         {
             if (id == 0)
             {
-				return View();
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                return View();
 			}
             else
             {
-				var ders = _context.Dersler.FirstOrDefault(x => x.Id == id);
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                var ders = await _context.Dersler.FirstOrDefaultAsync(x => x.Id == id);
 				if (ders == null)
 				{
                     // Hata Gönder
@@ -45,19 +51,20 @@ namespace OBS_App.Areas.Admin.Controllers
 
         // type 0 ise aldığı modeli db'e ekliyor, 1 ise modele göre db kayıt güncelliyor
 		[HttpPost]
-        public IActionResult Ekle_Guncelle(Ders model, string type)
+        public async Task<IActionResult> Ekle_Guncelle(Ders model, string type)
         {
 
             if (ModelState.IsValid)
             {
                 if (model == null || type == null)
                 {
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
                     return View(model);
                     // TempData Hata Gönder
                 }
                 else if (type == "0")
                 {
-                    _context.Add(model);
+                     await _context.AddAsync(model);
                     _context.SaveChanges();
 					TempData["success"] = "Kayıt eklendi.";
 
@@ -71,15 +78,12 @@ namespace OBS_App.Areas.Admin.Controllers
 
 					return RedirectToAction("Index");
                 }
-                else
-                {
 
-                    return View(model);
-                }
 
             }
-            
-			return View(model);
+            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+            return View(model);
         }
 
         // id ye göre db'den kayıt siliyor

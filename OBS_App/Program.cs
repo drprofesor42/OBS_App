@@ -103,6 +103,6 @@ app.MapControllerRoute(
 //IdentitySeed Verisini çalýþtýrýr
 IdentityUserSeed.IdentityTestUser(app);
 IdentityRoleSeed.IdentityTestRole(app);
-DonemSeed.DonemSeedTest(app);
+FakulteSeed.FakulteSeedTest(app);
 
 app.Run();

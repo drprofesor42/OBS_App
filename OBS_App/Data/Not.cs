@@ -7,5 +7,9 @@
         public int NotVize { get; set; }
         public int NotFinal { get; set; }
         public DateOnly NotTarihi { get; set; }
+        public int? OgrencisId { get; set; }
+        public Ogrencis? Ogrencis { get; set; }
+        public int? DersId { get; set; }
+        public Ders? Ders { get; set; }
     }
 }
