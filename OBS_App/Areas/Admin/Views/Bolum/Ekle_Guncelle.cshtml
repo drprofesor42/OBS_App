@@ -8,34 +8,45 @@
         <div class="card">
             <div class="card-body">
                 <form asp-controller="Bolum" asp-action="Ekle_Guncelle" method="post">
-                    <div asp-validation-summary="All" class="text-danger">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="form-title"><span>Ders Detayları</span></h5>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Ders Detayları</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Bölüm İsmi<span class="login-danger">*</span></label>
+                                <input asp-for="BolumAd" type="text" class="form-control">
+                                <span asp-validation-for="BolumAd" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Bölüm İsmi<span class="login-danger">*</span></label>
-                                    <input asp-for="BolumIsmi" class="form-control">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Bölüm Başkanı<span class="login-danger">*</span></label>
+                                <select asp-for="BolumBaskani" asp-items="ViewBag.Ogretmenler"  class="form-control select">
+                                    <option>Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="BolumBaskani" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Bölüm Başkanı<span class="login-danger">*</span></label>
-                                    <input asp-for="BolumBaskani" class="form-control">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Fakulte<span class="login-danger">*</span></label>
+                                <select asp-for="FakulteId" asp-items="ViewBag.Fakulteler" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="FakulteId" class="text-danger"></span>
                             </div>
-                            <div class="col-12">
-                                <div class="student-submit">
-                                    @if (Model == null)
-                                    {
-                                        <button type="submit" name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
-                                    }
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="student-submit">
+                                @if (Model == null)
+                                {
+                                    <button type="submit" name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
+                                }
                             </div>
                         </div>
                     </div>

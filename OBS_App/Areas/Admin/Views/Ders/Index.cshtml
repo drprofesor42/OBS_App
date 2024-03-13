@@ -1,9 +1,7 @@
-﻿
+﻿@model IEnumerable<Ders>
 @{
     ViewData["Title"] = "Index";
 }
-@model List<Ders>
-
 <div class="student-group-form">
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
@@ -23,7 +21,7 @@
 		</div>
 		<div class="col-lg-2">
 			<div class="search-student-btn">
-				<button type="btn" class="btn btn-primary">Ara</button>
+				<button type="button" class="btn btn-primary">Ara</button>
 			</div>
 		</div>
 	</div>
@@ -47,7 +45,7 @@
 					</div>
 				</div>
 
-				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+				<table class="table border-0 star-student table-hover table-center mb-0  table-striped">
 					<thead class="student-thread">
 						<tr>
 							<th>ID</th>
@@ -71,7 +69,7 @@
 								<td>*Bölüm Adı*</td>
 								<td>
 									<h2>
-										<a>@ders.dersIsim</a>
+										<a>@ders.DersAd</a>
 									</h2>
 								</td>
 								<td>@ders.profesorId</td>

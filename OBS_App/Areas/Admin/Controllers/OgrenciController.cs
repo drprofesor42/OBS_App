@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 using OBS_App.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
@@ -9,13 +11,17 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class OgrenciController : Controller
     {
+        private readonly IdentityDataContext _context;
+        public OgrenciController(IdentityDataContext context)
         private readonly IdentityDataContext _identityDataContext;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
         public OgrenciController(IdentityDataContext identityDataContext, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
+            _context = context;
             _identityDataContext = identityDataContext;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -27,16 +33,19 @@ namespace OBS_App.Areas.Admin.Controllers
             return View(ogrenciler);
         }
 
-        public IActionResult Ekle_Guncelle(int? id)
+        public async Task<IActionResult> Ekle_Guncelle(int? id)
         {
             if (id == 0)
             {
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd" );
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
                 return View();
             }
             else
             {
-
-                var ogrenci = _identityDataContext.Ogrenciler.FirstOrDefault(x => x.Id == id);
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                var ogrenci = _context.Ogrenciler.Include(o => o.Adres).FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {
                     return NotFound();
@@ -47,13 +56,15 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
-
+   
             if (ModelState.IsValid)
             {
                 if (model == null || type == null)
                 {
+                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
                     // TempData Hata Gönder
-                    return RedirectToAction("Index");
+                    return View(model);
                 }
                 else if (type == "0")
                 {
@@ -72,25 +83,21 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "1")
                 {
-                    _identityDataContext.Update(model);
-                    _identityDataContext.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    Console.WriteLine("How it possible?");
+                   
+                    _context.Update(model);
+                    _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
-
+            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
             return View(model);
         }
 
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {
-            var ogrenci = _identityDataContext.Ogrenciler.FirstOrDefault(x => x.Id == id);
+            var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);
             if (ogrenci == null)
             {
                 // TempData Hata Gönder
@@ -98,8 +105,8 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                _identityDataContext.Remove(ogrenci);
-                _identityDataContext.SaveChanges();
+                _context.Remove(ogrenci);
+                _context.SaveChanges();
             }
 
             return RedirectToAction("Index");

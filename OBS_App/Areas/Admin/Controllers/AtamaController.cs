@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
+
+    [Area("Admin")]
+    [Authorize(Roles ="Admin")]
     public class AtamaController : Controller
     {
         public IActionResult Index()
@@ -9,14 +13,19 @@ namespace OBS_App.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult DersAta_Sil()
+        public IActionResult DersAtaGuncelle()
         {
             return View();
         }
 
-        public IActionResult BolumAta_Sil()
+        public IActionResult BaskanAtaGuncelle()
         {
             return View();
         }
+        public IActionResult DanismanAtaGuncelle()
+        {
+            return View();
+        }
+
     }
 }

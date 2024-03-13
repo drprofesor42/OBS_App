@@ -1,15 +1,14 @@
 ﻿namespace OBS_App.Data
 {
-	public class Bolum
-	{
-		public int Id { get; set; }
-		public string BolumIsmi { get; set; }
-		public string BolumBaskani { get; set; }
-
-		public ICollection<Ogretmens> Ogretmenleri { get; set; } = new List<Ogretmens>();
-
-		public ICollection<Ogrencis> Ogrencileri { get; set; } = new List<Ogrencis>();
-		//public int bolumProfId { get; set; }
-		//public FakulteBolum FakulteBolum { get; set; } = null!;
-	}
+    public class Bolum
+    {
+        public int Id { get; set; }
+        public string BolumAd { get; set; }
+        public string BolumBaskani { get; set; }
+        public int FakulteId { get; set; }
+        public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
+        public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
+        public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
+        public ICollection<OkulDonemDers> OkulDonemDersler { get; set; } = new List<OkulDonemDers>();
+    }
 }

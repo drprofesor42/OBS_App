@@ -31,12 +31,12 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                var takvim = await _context.AkademikTakvimler.FirstOrDefaultAsync(x => x.akademikTakvimsId == id);
+                var takvim = await _context.AkademikTakvimler.FirstOrDefaultAsync(x => x.Id == id);
                 return View(takvim);
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(AkademikTakvims model, int? Kaydet)
+        public async Task<IActionResult> Ekle_Guncelle(AkademikTakvim model, int? Kaydet)
         {
             if (Kaydet == null)
             {
@@ -52,6 +52,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         await _context.AkademikTakvimler.AddAsync(model);
                         await _context.SaveChangesAsync();
+                        TempData["TakvimKaydet"] = "";
 
                         return RedirectToAction("Index");
                     }
@@ -69,6 +70,9 @@ namespace OBS_App.Areas.Admin.Controllers
                         _context.Update(model);
                         await _context.SaveChangesAsync();
 
+                        TempData["TakvimEkle_Guncelle"] = "";
+
+
                         return RedirectToAction("Index");
 
                     }
@@ -79,13 +83,16 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Sil(int? id)
         {
+            
             if (id != null)
             {
-                var user = await _context.AkademikTakvimler.FirstOrDefaultAsync(u => u.akademikTakvimsId == id);
+                var user = await _context.AkademikTakvimler.FirstOrDefaultAsync(u => u.Id == id);
                 if (user != null)
                 {
                     _context.Remove(user);
                     await _context.SaveChangesAsync();
+                    TempData["TakvimSil"] = "";
+
                     return RedirectToAction("Index");
                 }
                 else

@@ -1,15 +1,12 @@
-﻿
+﻿@model Fakulte
 @{
     ViewData["Title"] = "Ekle_Guncelle";
 }
-@model Fakulte
-
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-body">
 				<form asp-controller="Fakulte" asp-action="Ekle_Guncelle" method="post">
-
 					<div class="row">
 						<div class="col-12">
 							<h5 class="form-title"><span>Fakülte Detayları</span></h5>
@@ -17,15 +14,18 @@
 						<div class="col-12 col-sm-4">
 							<div class="form-group local-forms">
 								<label>Fakülte Adı <span class="login-danger">*</span></label>
-								<input name="fakulteIsim" type="text" class="form-control" value="@Model?.fakulteIsim">
+								<input asp-for="FakulteAd" type="text" class="form-control" >
+								<span asp-validation-for="FakulteAd" class="text-danger"></span>
 							</div>
 						</div>
 						<div class="col-12 col-sm-4">
 							<div class="form-group local-forms">
-								<label>Fakülte Başkanı <span class="login-danger">*</span></label>
-								<input name="fakulteProfId" type="number" class="form-control" value="@Model?.fakulteProfId">
+								<label>Kuruluş Tarihi<span class="login-danger">*</span></label>
+								<input asp-for="OlusturmaTarihi" type="date" class="form-control">
+								<span asp-validation-for="OlusturmaTarihi" class="text-danger"></span>
 							</div>
 						</div>
+						
 						<div class="col-12">
 							<div class="student-submit">
 								@if (Model == null)
