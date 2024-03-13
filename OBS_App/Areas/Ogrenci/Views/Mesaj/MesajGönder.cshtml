@@ -1,0 +1,56 @@
+﻿<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="page-title">Mesaj Gönder</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Compose</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4">
+            <ul class="inbox-menu">
+                <li class="active">
+                    <a asp-controller="Mesaj" asp-action="Index"><i class="fas fa-download"></i>Gelen Kutusu<span class="mail-count">(5)</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="far fa-paper-plane"></i>Gönderilen Mesajlar</a>
+                </li>
+                <li>
+                    <a href="#"><i class="far fa-trash-alt"></i>Çöp Kutusu</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form action="https://preschool.dreamstechnologies.com/template/inbox.html">
+                        <div class="form-group">
+                            <input type="email" placeholder="Kime" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Konu" class="form-control">
+                        </div>
+                        <div class="form-group">
+<textarea rows="4" class="form-control summernote" placeholder="Mesajınızı buraya girin."></textarea>
+                        </div>
+                        <div class="form-group mb-0">
+                            <div class="text-center">
+                                <button class="btn btn-primary"><i class="fas fa-paper-plane m-r-5"></i> <span>Gönder</span></button>
+                                <button class="btn btn-danger m-l-5" type="button"> <i class="far fa-trash-alt m-r-5"></i><span>Sil</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>

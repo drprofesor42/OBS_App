@@ -52,7 +52,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         await _context.AkademikTakvimler.AddAsync(model);
                         await _context.SaveChangesAsync();
-                        TempData["TakvimKaydet"] = "";
+                        TempData["success"] = "Kayıt eklendi.";
 
                         return RedirectToAction("Index");
                     }
@@ -69,9 +69,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
                         _context.Update(model);
                         await _context.SaveChangesAsync();
-
-                        TempData["TakvimEkle_Guncelle"] = "";
-
+                        TempData["success"] = "Kayıt güncellendi.";
 
                         return RedirectToAction("Index");
 
@@ -80,7 +78,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(model);
             }
         }
-
+      
         public async Task<IActionResult> Sil(int? id)
         {
             
@@ -91,8 +89,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     _context.Remove(user);
                     await _context.SaveChangesAsync();
-                    TempData["TakvimSil"] = "";
-
+ 
                     return RedirectToAction("Index");
                 }
                 else

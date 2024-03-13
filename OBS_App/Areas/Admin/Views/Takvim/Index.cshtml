@@ -2,59 +2,10 @@
 @{
     ViewData["Title"] = "Liste";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
 
-@if (TempData["TakvimEkle_Guncelle"] != null)
-{
-    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
-    <script>
-        Swal.fire({
-            title: "Güncelleme Başarılı!",
-            icon: "success"
-        });
-    </script>
-}
-
-@if (TempData["TakvimKaydet"] != null)
-{
-
-    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
-
-    <script>
-        Swal.fire({
-            title: "İşlem Başarılı!",
-            icon: "success"
-        });
-    </script>
-}
- @if (TempData["TakvimSil"] != null)
-{
-    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
-    <script>
-        Swal.fire({
-            title: "Emin misiniz?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
-    </script>
-
-} 
-
- <div class="page-header">
+<div class="page-header">
     <div class="row">
         <div class="col-sm-12">
             <div class="page-sub-header">
@@ -132,9 +83,10 @@
                                             <a asp-action="Ekle_Guncelle" asp-controller="Takvim" asp-route-id="@tak.Id" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a asp-action="Sil" asp-controller="Takvim" asp-route-id="@tak.Id" class="btn btn-sm bg-danger-light">
+                                            <a asp-controller="Takvim" asp-action="Sil" asp-route-id="@tak.Id" class="btn btn-sm bg-success-light" onclick="return confirm('Silmek istediğinizden emin misiniz?')">
                                                 <i class="feather-trash-2"></i>
                                             </a>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -147,6 +99,18 @@
     </div>
 </div>
 
-<section>
 
-</section>
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}
