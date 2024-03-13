@@ -15,12 +15,13 @@ namespace OBS_App.Data
         public string OgrenciTelefon { get; set; }
         public string OgrenciParola { get; set; }
         public string OgrenciParolaOnayla { get; set; }
-        public int OgrenciDanisman { get; set; }
+        public string? OgrenciDanisman { get; set; }
         public DateOnly OgrenciKayitTarihi { get; set; }
         public DateOnly OgrenciDogumTarihi { get; set; }
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
-        public int BolumId { get; set; }
+        public int? BolumId { get; set; }
+        public Bolum? Bolum { get; set; }
         public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
         public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
 

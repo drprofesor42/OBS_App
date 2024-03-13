@@ -25,6 +25,6 @@ namespace OBS_App.Models
         public DbSet<DersOgrenci> DersOgrenciler { get; set; }
         public DbSet<OkulDonemDers> OkulDonemDersler { get; set; }
         public DbSet<Donem> Donemler { get; set; }
-       
+
     }
 }

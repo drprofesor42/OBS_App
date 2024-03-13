@@ -24,9 +24,31 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
 
-            
-            var fakulteler = await _context.Fakulteler.Include(f => f.Bolumler).ToListAsync();
+
+            var fakulteler = await _context.Fakulteler
+                                      .Include(f => f.Bolumler)
+                                      .ThenInclude(b => b.Ogretmensler)
+                                      .Include(f => f.Bolumler)
+                                      .ThenInclude(b => b.Ogrencisler)
+                                      .ToListAsync();
+
+            foreach (var fakulte in fakulteler)
+            {
+                int toplamOgretmenSayisi = 0;
+                int toplamOgrenciSayisi = 0;
+
+                foreach (var bolum in fakulte.Bolumler)
+                {
+                    toplamOgretmenSayisi += bolum.Ogretmensler.Count;
+                    toplamOgrenciSayisi += bolum.Ogrencisler.Count;
+                }
+
+                fakulte.FakulteOgretmenSayisi = toplamOgretmenSayisi;
+                fakulte.FakulteOgrenciSayisi = toplamOgrenciSayisi;
+            }
+
             return View(fakulteler);
+
         }
 
         public async Task<IActionResult> Ekle_Guncelle(int id)

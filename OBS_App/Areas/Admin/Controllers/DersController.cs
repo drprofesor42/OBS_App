@@ -22,7 +22,7 @@ namespace OBS_App.Areas.Admin.Controllers
         // Dersleri Listeleme Sayfası
         public async Task<IActionResult> Index()
         {
-            var dersler = await _context.Dersler.ToListAsync();
+            var dersler = await _context.Dersler.Include(x => x.Ogretmens).Include(x=> x.Bolum).ThenInclude(x=> x.Ogrencisler).ToListAsync();
             return View(dersler);
         }
 
