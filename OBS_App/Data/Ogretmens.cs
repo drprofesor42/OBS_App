@@ -12,9 +12,7 @@ namespace OBS_App.Data
         public string OgretmenOfis { get; set; }
         public string OgretmenGorusme { get; set; }
         public string OgretmenTelefon { get; set; }
-        public int OgretmenCinsiyet { get; set; }
-        public string  OgretmenAdres { get; set; }
-        public string OgretmenParola { get; set; }
+        public string OgretmenCinsiyet { get; set; }
         public DateOnly OgretmenDogumTarihi { get; set; }
         public DateOnly OgretmenBaslamaTarihi { get; set; }
         public int? BolumId { get; set; }

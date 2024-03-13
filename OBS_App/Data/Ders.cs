@@ -7,12 +7,17 @@
         public string DersKod { get; set; }
         public int DersKredi { get; set; }
         public int DersAkts { get; set; }
-        public Bolum Bolum { get; set; }
-        /*public int BolumId { get; set; }*/
-        public int OgretmensId { get; set; }
-        /*public ICollection<Not> Notlar { get; set; } = new List<Not>();
+        public DateOnly OlusturmaTarihi { get; set; }
+        public int? BolumId { get; set; }
+        public Bolum? Bolum { get; set; } = null!;
+        public int? OgretmensId { get; set; }
+        public Ogretmens? Ogretmens { get; set; }
+        public ICollection<Not> notlar { get; set; } = new List<Not>();
+        public ICollection<Ogrencis> Ogrencis { get; set; } = new List<Ogrencis>();
         public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
-        public ICollection<OkulDonemDers> OkulDonemDersler { get; set; } = new List<OkulDonemDers>();*/
+        public ICollection<OkulDonemDers> OkulDonemDersler { get; set; } = new List<OkulDonemDers>();
+
+
 
     }
 }

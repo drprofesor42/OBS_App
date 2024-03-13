@@ -1,7 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-@model List<Fakulte>
 
 <div class="student-group-form">
 	<div class="row">
@@ -46,49 +45,62 @@
                     </div>
                 </div>
 
-				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
-					<thead class="student-thread">
-						<tr>
-							<th>ID</th>
-							<th>Fakülte İsim</th>
-							<th>Fakülte Başkanı</th>
-							<th>Bölüm Sayısı</th>
-							<th class="text-end">İşlemler</th>
-						</tr>
-					</thead>
-					<tbody>
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                    <thead class="student-thread">
+                        <tr>
+                            <th>
+                                <div class="form-check check-tables">
+                                    <input class="form-check-input" type="checkbox" value="something">
+                                </div>
+                            </th>
+                            <th>ID</th>
+                            <th>Fakülte İsim</th>
+                            <th>Bölüm Sayısı</th>
+                            <th>Öğretmen Sayısı</th>
+                            <th>Öğrenci Sayısı</th>
+                            <th>Kuruluş Tarihi</th>
+                            <th class="text-end">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-					@foreach (var fakulte in Model)
-					{
-						<tr>
-							<td>@fakulte.Id</td>
-							<td>
-								<h2>
-									<a>@fakulte.FakulteAd</a>
-								</h2>
-							</td>
-							<td>X</td>
-							<td>X</td>
-							<td class="text-end">
-								<div class="actions">
-									<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
-										<i class="feather-eye"></i>
-									</a>
-										<a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light me-2">
-										<i class="feather-edit"></i>
-									</a>
-									<a asp-controller="Fakulte" asp-action="Sil" asp-route-id="@fakulte.Id" class="btn btn-sm bg-success-light">
-										<i class="feather-trash-2"></i>
-									</a>
-								</div>
-							</td>
-						</tr>
-					}
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+                        @foreach (var fakulte in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="form-check check-tables">
+                                        <input class="form-check-input" type="checkbox" value="something">
+                                    </div>
+                                </td>
+                                <td>@fakulte.Id</td>
+                                <td>
+                                    <h2>
+                                        <a>@fakulte.FakulteAd</a>
+                                    </h2>
+                                </td>
+                                <td>@fakulte.Bolumler.Count()</td>
+                                <td>@fakulte.FakulteOgretmenSayisi</td>
+                                <td>@fakulte.FakulteOgrenciSayisi</td>
+                                <td>@fakulte.OlusturmaTarihi</td>
+                                <td class="text-end">
+                                    <div class="actions">
+                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                            <i class="feather-eye"></i>
+                                        </a>
+                                        <a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light">
+                                            <i class="feather-edit"></i>
+                                        </a>
+                                        <a asp-controller="Fakulte" asp-action="Sil" asp-route-id="@fakulte.Id" class="btn btn-sm bg-success-light">
+                                            <i class="feather-trash-2"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 

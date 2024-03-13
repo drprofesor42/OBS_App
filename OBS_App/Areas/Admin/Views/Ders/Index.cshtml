@@ -29,74 +29,90 @@
 
 
 <div class="row">
-	<div class="col-sm-12">
-		<div class="card card-table">
-			<div class="card-body">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
 
-				<div class="page-header">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="page-title">Dersler</h3>
-						</div>
-						<div class="col-auto text-end float-end ms-auto download-grp">
-							<a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-							<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-						</div>
-					</div>
-				</div>
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Dersler</h3>
+                        </div>
+                        <div class="col-auto text-end float-end ms-auto download-grp">
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
+                            <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
 
-				<table class="table border-0 star-student table-hover table-center mb-0  table-striped">
-					<thead class="student-thread">
-						<tr>
-							<th>ID</th>
-							<th>Ders Kod</th>
-							<th>Bölüm</th>
-							<th>Ders İsim</th>
-							<th>Ders Hocası</th>
-							<th>Ders Kredi</th>
-							<th>Ders Akts</th>
-							<th>Öğrenci Sayısı</th>
-							<th class="text-end">İşlemler</th>
-						</tr>
-					</thead>
-					<tbody>
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                    <thead class="student-thread">
+                        <tr>
+                            <th>ID</th>
+                            <th>Ders Kod</th>
+                            <th>Ders İsim</th>
+                            <th>Ders Hocası</th>
+                            <th>Ders Kredi</th>
+                            <th>Ders Akts</th>
+                            <th>Öğrenci Sayısı</th>
+                            <th class="text-end">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-						@foreach (var ders in Model)
-						{
-							<tr>
-								<td>@ders.Id</td>
-								<td>@ders.DersKod</td>
-								<td>@ders.Bolum.BolumAd</td>
-								<td>
-									<h2>
-										<a>@ders.DersAd</a>
-									</h2>
-								</td>
-								<td>@ders.OgretmensId</td>
-								<td>@ders.DersKredi</td>
-								<td>@ders.DersAkts</td>
-								<td>X</td>
-								<td class="text-end">
-									<div class="actions">
-										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
-											<i class="feather-eye"></i>
-										</a>
-										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
-											<i class="feather-edit"></i>
-										</a>
-										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
-											<i class="feather-trash-2"></i>
-										</a>
-									</div>
-								</td>
-							</tr>
-						}
+                        @foreach (var ders in Model)
+                        {
+                            <tr>
+                                <td>@ders.Id</td>
+                                <td>@ders.DersKod</td>
+                                <td>
+                                    <h2>
+                                        <a>@ders.DersAd</a>
+                                    </h2>
+                                </td>
+                                <td>
+                                    @if (@ders.Ogretmens == null)
+                                    {
+                                        <span>Yok</span>
+                                    }
+                                    else
+                                    {
+                                        @ders.Ogretmens.OgretmenAd
+                                    }
+                                </td>
+                                <td>@ders.DersKredi</td>
+                                <td>@ders.DersAkts</td>
+                                <td>
+                                    @if (ders.Bolum == null)
+                                    {
+                                        <span>Yok</span>
+                                    }
+                                    else
+                                    {
+                                        @ders.Bolum.Ogrencisler.Count
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <div class="actions">
+                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                            <i class="feather-eye"></i>
+                                        </a>
+                                        <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
+                                            <i class="feather-edit"></i>
+                                        </a>
+                                        <a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
+                                            <i class="feather-trash-2"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
 
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 

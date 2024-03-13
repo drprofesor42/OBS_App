@@ -18,8 +18,8 @@ namespace OBS_App.Data
         public string OgrenciParola { get; set; }
         public DateOnly OgrenciKayitTarihi { get; set; }
         public DateOnly OgrenciDogumTarihi { get; set; }
-        public int BolumId { get; set; }
-        public int OgretmenId { get; set; }
+        public int? BolumId { get; set; }
+        public Bolum? Bolum { get; set; }
         public ICollection<DersOgrenci> DersOgrenciler { get; set; } = new List<DersOgrenci>();
         public ICollection<OgretmenOgrenci> OgretmenOgrenciler { get; set; } = new List<OgretmenOgrenci>();
 
