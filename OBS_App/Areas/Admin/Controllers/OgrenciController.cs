@@ -15,21 +15,18 @@ namespace OBS_App.Areas.Admin.Controllers
     public class OgrenciController : Controller
     {
         private readonly IdentityDataContext _context;
-        public OgrenciController(IdentityDataContext context)
-        private readonly IdentityDataContext _identityDataContext;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
-        public OgrenciController(IdentityDataContext identityDataContext, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        public OgrenciController(IdentityDataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _context = context;
-            _identityDataContext = identityDataContext;
             _userManager = userManager;
             _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var ogrenciler = await _identityDataContext.Ogrenciler.ToListAsync();
+            var ogrenciler = await _context.Ogrenciler.ToListAsync();
             return View(ogrenciler);
         }
 
@@ -45,7 +42,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-                var ogrenci = _context.Ogrenciler.Include(o => o.Adres).FirstOrDefault(x => x.Id == id);
+                var ogrenci = _context.Ogrenciler.Include(o => o.OgrenciAdres).FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {
                     return NotFound();
@@ -70,14 +67,14 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
 					var user = new AppUser
 					{
-						UserName = model.Eposta,
-						Email = model.Eposta,
+						UserName = model.OgrenciEposta,
+						Email = model.OgrenciEposta,
 					};
 
-                    IdentityResult result = await _userManager.CreateAsync(user, model.ogrenciParola);
+                    IdentityResult result = await _userManager.CreateAsync(user, model.OgrenciParola);
 
-					_identityDataContext.Add(model);
-                    _identityDataContext.SaveChanges();
+					_context.Add(model);
+                    _context.SaveChanges();
 
                     return RedirectToAction("Index");
                 }

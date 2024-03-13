@@ -13,36 +13,35 @@ namespace OBS_App.Areas.Admin.Controllers
     public class OgretmenController : Controller
     {
         private readonly IdentityDataContext _context;
-        public OgretmenController(IdentityDataContext context)
+        private readonly UserManager<AppUser> _userManager;
+
+        public OgretmenController(IdentityDataContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-
-            var ogretmenler = await _context.Ogretmenler.Include(x => x.Adres).ToListAsync();
+            var ogretmenler = _context.Ogretmenler.ToList();
             return View(ogretmenler);
         }
 
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
+            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
             if (id == 0)
             {
-                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 return View();
             }
             else
             {
-                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                var ogrt = await _context.Ogretmenler.Include(x=>x.Adres).FirstOrDefaultAsync(x => x.Id == id);
+                var ogrt = await _context.Ogretmenler.Include(x=>x.OgretmenAdres).FirstOrDefaultAsync(x => x.Id == id);
                 return View(ogrt);
 
             }
-
-
         }
+
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int? Kaydet)
         {

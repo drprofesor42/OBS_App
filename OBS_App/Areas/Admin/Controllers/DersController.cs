@@ -23,6 +23,10 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var dersler = await _context.Dersler.ToListAsync();
+            var ogrencisayi = await _context.Ogrenciler.GroupBy(d => d.BolumId)
+                .Select(g => new { BolumId = g.Key, OgrenciSayisi = g.Count() })
+                .ToListAsync();
+
             return View(dersler);
         }
 

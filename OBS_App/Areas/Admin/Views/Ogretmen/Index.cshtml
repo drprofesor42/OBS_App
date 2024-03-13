@@ -3,20 +3,6 @@
     ViewData["Title"] = "Liste";
 }
 
-<div class="page-header">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="page-sub-header">
-                <h3 class="page-title">Öğretmenler</h3>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="students.html">Öğretmenler</a></li>
-                    <li class="breadcrumb-item active">Tüm Öğretmenler</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="student-group-form">
     <div class="row">
         <div class="col-lg-3 col-md-6">
@@ -67,12 +53,8 @@
                                 <th>İsim-Soyisim</th>
                                 <th>Ünvan</th>
                                 <th>Cinsiyet</th>
-                                <th>Kullanıcı Adı</th>
                                 <th>E-Posta</th>
                                 <th>Ofis</th>
-                                <th>Numara</th>
-                                <th>Ülke</th>
-                                <th>Şehir</th>
                                 <th>Görüşme Saati</th>
                                 <th>Doğum Tarihi</th>
                                 <th>Başlama Tarihi</th>
@@ -94,12 +76,8 @@
                                     </td>
                                     <td>@ogr.OgretmenUnvan</td>
                                     <td>@ogr.OgretmenCinsiyet</td>
-                                    <td>@ogr.OgretmenUsername</td>
                                     <td>@ogr.OgretmenEposta</td>
                                     <td>@ogr.OgretmenOfis</td>
-                                    <td>@ogr.OgretmenNumarasi</td>
-                                    <td>@ogr.OgretmenUlke</td>
-                                    <td>@ogr.OgretmenSehir</td>
                                     <td>@ogr.OgretmenGorusme</td>
                                     <td>@ogr.OgretmenDogumTarihi</td>
                                     <td>@ogr.OgretmenBaslamaTarihi</td>
@@ -108,7 +86,7 @@
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a asp-action="Ekle_Guncelle" asp-controller="Ogretmen" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">
+                                            <a asp-action="Ekle_Guncelle" asp-controller="Ogretmen" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             <a asp-action="Sil" asp-controller="Ogretmen" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">

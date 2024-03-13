@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Derslerim";
 }
-@model List<OgrenciDers>
+@* @model List<DersOgrenci> *@
 
 <div class="student-group-form">
 	<div class="row">
@@ -57,10 +57,10 @@
 					</thead>
 					<tbody>
 
-						@foreach (var ders in Model)
-						{
+						@* @foreach (var ders in Model)
+						{ *@
 							<tr>
-								<td>@ders.dersId</td>
+								<td>DersId</td>
 								<td>
 									<h2>
 										<a>Hoca</a>
@@ -68,24 +68,24 @@
 								</td>
 								<td>Kredi</td>
 								<td>AKTS</td>
-								<td>@ders.dersSinavSonuc1</td>
-								<td>@ders.dersSinavSonuc2</td>
-								<td>@ders.dersFinalSonuc</td>
+								<td>Vize</td>
+								<td>Final</td>
+								<td>Ödev</td>
 								<td class="text-end">
 									<div class="actions">
 										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
 											<i class="feather-eye"></i>
 										</a>
-										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.ogrenciDersId" class="btn btn-sm bg-danger-light me-2">
+										<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="ogrenciDersId" class="btn btn-sm bg-danger-light me-2">
 											<i class="feather-edit"></i>
 										</a>
-										<a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.ogrenciDersId" class="btn btn-sm bg-success-light">
+										<a asp-controller="Ders" asp-action="Sil" asp-route-id="ogrenciDersId" class="btn btn-sm bg-success-light">
 											<i class="feather-trash-2"></i>
 										</a>
 									</div>
 								</td>
 							</tr>
-						}
+						@* } *@
 
 					</tbody>
 				</table>

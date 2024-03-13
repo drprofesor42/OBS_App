@@ -2,18 +2,18 @@
 @{
     ViewData["Title"] = "SınavSonuc";
 }
-@model List<OgrenciDers>
-
+@* @model List<DersOgrenci>
+ *@
 <div class="content container-fluid">				
 
 	<div class="row">
 		
-		@foreach (var ders in Model)
+@* 		@foreach (var ders in Model)
 		{
-			<div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
+ *@			<div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
 			<div class="card invoices-grid-card w-100">
 				<div class="card-header d-flex justify-content-between align-items-center">
-					<a href="view-invoice.html" class="invoice-grid-link">@ders.dersId</a>
+					<a href="view-invoice.html" class="invoice-grid-link">dersId</a>
 				</div>
 				<div class="card-middle">
 					<h2 class="card-middle-avatar">
@@ -24,15 +24,15 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<span><i class="far fa-file-lines"></i> Ödev</span>
-							<h6 class="mb-0">@ders.dersSinavSonuc1</h6>
+							<h6 class="mb-0">dersSinavSonuc1</h6>
 						</div>
 						<div class="col">
 							<span><i class="fas fa-pencil"></i> Vize</span>
-							<h6 class="mb-0">@ders.dersSinavSonuc2</h6>
+							<h6 class="mb-0">dersSinavSonuc2</h6>
 						</div>
 						<div class="col">
 							<span><i class="fas fa-pencil"></i> Final</span>
-							<h6 class="mb-0">@ders.dersFinalSonuc</h6>
+							<h6 class="mb-0">dersFinalSonuc</h6>
 						</div>
 					</div>
 					<br />
@@ -60,8 +60,8 @@
 				</div>
 			</div>
 		</div>
-		}
-
+@* 		}
+ *@
 	</div>
 </div>
 			

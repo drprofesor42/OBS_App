@@ -17,8 +17,7 @@ namespace OBS_App.VeritabanıSeed
                 {
                     context.Fakulteler.Add(new Fakulte
                     {
-                        FakulteAd = List[i],
-                        OlusturmaTarihi = tarih,
+                        FakulteAd = List[i]
                         
                     });
                     context.SaveChanges();

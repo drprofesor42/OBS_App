@@ -23,8 +23,6 @@ namespace OBS_App.Areas.Admin.Controllers
         // Fakülteler Listeleme Sayfası
         public async Task<IActionResult> Index()
         {
-
-            
             var fakulteler = await _context.Fakulteler.Include(f => f.Bolumler).ToListAsync();
             return View(fakulteler);
         }

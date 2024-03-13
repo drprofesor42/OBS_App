@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Fakulte>
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 @model List<Fakulte>
@@ -65,17 +64,17 @@
 							<td>@fakulte.Id</td>
 							<td>
 								<h2>
-									<a>@fakulte.fakulteIsim</a>
+									<a>@fakulte.FakulteAd</a>
 								</h2>
 							</td>
-							<td>@fakulte.fakulteProfId</td>
+							<td>X</td>
 							<td>X</td>
 							<td class="text-end">
 								<div class="actions">
 									<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
 										<i class="feather-eye"></i>
 									</a>
-										<a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light">
+										<a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light me-2">
 										<i class="feather-edit"></i>
 									</a>
 									<a asp-controller="Fakulte" asp-action="Sil" asp-route-id="@fakulte.Id" class="btn btn-sm bg-success-light">

@@ -2,17 +2,7 @@
 @{
     ViewData["Title"] = "Ekle";
 }
-<div class="page-header">
-    <div class="row align-items-center">
-        <div class="col">
-            <h3 class="page-title">Add Teachers</h3>
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="teachers.html">Teachers</a></li>
-                <li class="breadcrumb-item active">Add Teachers</li>
-            </ul>
-        </div>
-    </div>
-</div>
+
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -41,8 +31,8 @@
                                 <label>Cinsiyet<span class="login-danger">*</span></label>
                                 <select asp-for="OgretmenCinsiyet" class="form-control select">
                                     <option>Cinsiyet Seç</option>
-                                    <option>Erkek</option>
-                                    <option>Kadın</option>
+                                    <option value=0>Kadın</option>
+                                    <option value=1>Erkek</option>
                                 </select>
                                 <span asp-validation-for="OgretmenCinsiyet" class="text-danger"></span>
                             </div>
@@ -107,9 +97,9 @@
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
-                                <label>Şifre Tekrarı<span class="login-danger">*</span></label>
-                                <input asp-for="OgretmenParolaOnayla" type="password" class="form-control">
-                                <span asp-validation-for="OgretmenParolaOnayla" class="text-danger"></span>
+                                <label>Şifre Tekrarı???<span class="login-danger">*</span></label>
+                                <input xasp-for="OgretmenParolaOnayla" type="password" class="form-control">
+                                <span xasp-validation-for="OgretmenParolaOnayla" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">
@@ -118,29 +108,8 @@
                         <div class="col-12 col-sm-12">
                             <div class="form-group local-forms">
                                 <label>Adres<span class="login-danger">*</span></label>
-                                <input asp-for="Adres.AcıkAdres" type="text" class="form-control">
-                                <span asp-validation-for="Adres.AcıkAdres" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>Ülke<span class="login-danger">*</span></label>
-                                <input asp-for="Adres.Ulke" type="text" class="form-control">
-                                <span asp-validation-for="Adres.Ulke" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>Şehir<span class="login-danger">*</span></label>
-                                <input asp-for="Adres.Sehir" type="text" class="form-control">
-                                <span asp-validation-for="Adres.Sehir" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>İlçe<span class="login-danger">*</span></label>
-                                <input asp-for="Adres.Ilce" type="text" class="form-control">
-                                <span asp-validation-for="Adres.Ilce" class="text-danger"></span>
+                                <input asp-for="OgretmenAdres" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenAdres" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group students-up-files">

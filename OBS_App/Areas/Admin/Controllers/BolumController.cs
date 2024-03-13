@@ -18,9 +18,9 @@ namespace OBS_App.Areas.Admin.Controllers
             _context = context;
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var bolum = _context.Bolumler.ToList();
+            var bolum = await _context.Bolumler.Include(x => x.Dersler).Include(x => x.Ogrencisler).Include(x => x.Ogretmensler).ToListAsync();
             return View(bolum);
         }
 
@@ -45,7 +45,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Bolum model, int Kaydet)
+        public IActionResult Ekle_Guncelle(Bolum model, int Kaydet)
         {
             
             if (ModelState.IsValid)
@@ -53,31 +53,28 @@ namespace OBS_App.Areas.Admin.Controllers
                 //Ekleme İşlemi
                 if (Kaydet == 1)
                 {
-                   
-                    await _context.Bolumler.AddAsync(model);
-                    await _context.SaveChangesAsync();
+                    _context.Bolumler.Add(model);
+                    _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 //Güncelleme İşlemi
                 if (Kaydet == 2)
                 {
-                   
                     _context.Bolumler.Update(model);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 else
                 {
 
                 }
-
             }
 
-            ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-            ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+            ViewBag.Fakulteler = new SelectList(_context.Fakulteler.ToList(), "Id", "FakulteAd");
+            ViewBag.Ogretmenler = new SelectList(_context.Ogretmenler.ToList(), "Id", "OgretmenAd");
             return View(model);
-
         }
+
         public async Task<IActionResult> Sil(int? id)
         {
             if (id == null)

@@ -15,6 +15,7 @@ namespace OBS_App.Data
         public int OgrenciSinif { get; set; }
         public string OgrenciTelefon { get; set; }
         public string OgrenciAdres { get; set; }
+        public string OgrenciParola { get; set; }
         public DateOnly OgrenciKayitTarihi { get; set; }
         public DateOnly OgrenciDogumTarihi { get; set; }
         public int BolumId { get; set; }

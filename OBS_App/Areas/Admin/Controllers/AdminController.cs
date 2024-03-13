@@ -30,8 +30,8 @@ namespace OBS_App.Areas.Admin.Controllers
         public IActionResult Data()
         {
 
-			int[] maleData = {_context.Ogrenciler.Where(x => x.ogrenciCinsiyet == "Erkek").Count()}; // Bu metodu örnek olarak ekleyin
-			int[] femaleData = {_context.Ogrenciler.Where(x => x.ogrenciCinsiyet == "Kadın").Count()}; // Bu metodu örnek olarak ekleyin
+			int[] femaleData = {_context.Ogrenciler.Where(x => x.OgrenciCinsiyet == 0).Count()};
+			int[] maleData = {_context.Ogrenciler.Where(x => x.OgrenciCinsiyet == 1).Count()};
 
             // S-Bar
 

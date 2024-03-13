@@ -30,10 +30,14 @@ namespace OBS_App.Areas.Ogrenci.Controllers
             if (kullanıcı != null)
 			{
 				// Kullanıcının derslerini çek
-				var ogrenci =  _context.Ogrenciler.FirstOrDefault(d => d.Eposta == kullanıcı.Email);
-                var dersler = _context.OgrenciDersler.Where(x => x.ogrenciId == ogrenci.Id).ToList();
+				var ogrenci =  _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
+                var dersIdler = _context.DersOgrenciler.Where(x => x.OgrencisId == ogrenci.Id).ToList();
+                //var dersler = _context.Dersler.Where(z => z.Id == dersIdler.)
+                
+                
+                // ViewsModel Gönderilecek!!
 
-				return View(dersler);
+				return View();
 			}
 
 			// Hata Gönder
@@ -51,8 +55,8 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			if (kullanıcı != null)
 			{
 				// Kullanıcının derslerini çek
-				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.Eposta == kullanıcı.Email);
-				var dersler = _context.OgrenciDersler.Where(x => x.ogrenciId == ogrenci.Id).ToList();
+				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
+				var dersler = _context.DersOgrenciler.Where(x => x.OgrencisId == ogrenci.Id).ToList();
 
 				return View(dersler);
 			}
