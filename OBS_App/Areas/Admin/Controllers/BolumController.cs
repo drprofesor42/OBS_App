@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
@@ -48,38 +49,47 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int Kaydet)
         {
 
-                var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
-
-            if (ModelState.IsValid)
+            var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
+            if (bolumbaskani != null)
             {
-                //Ekleme İşlemi
-                if (Kaydet == 1)
+                if (ModelState.IsValid)
                 {
-                    model.BolumBaskani = bolumbaskani.OgretmenAd;
-                    TempData["success"] = "Kayıt eklendi.";
-                    await _context.Bolumler.AddAsync(model);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-                //Güncelleme İşlemi
-                if (Kaydet == 2)
-                {
-                    model.BolumBaskani = bolumbaskani.OgretmenAd;
-                    TempData["success"] = "Kayıt güncellendi.";
-                    _context.Bolumler.Update(model);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
+                    //Ekleme İşlemi
+                    if (Kaydet == 1)
+                    {
+                        model.BolumBaskani = bolumbaskani.OgretmenAd;
+                        TempData["success"] = "Kayıt eklendi.";
+                        await _context.Bolumler.AddAsync(model);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
+                    //Güncelleme İşlemi
+                    if (Kaydet == 2)
+                    {
+                        model.BolumBaskani = bolumbaskani.OgretmenAd;
+                        TempData["success"] = "Kayıt güncellendi.";
+                        _context.Bolumler.Update(model);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+
+                    }
 
                 }
-
+                ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                return View(model);
+            }
+            else
+            {
+                ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                ModelState.AddModelError("BolumBaskani", "*Boş bırakılamaz");
+                return View(model);
             }
 
-            ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-            ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-            return View(model);
 
         }
         public async Task<IActionResult> Sil(int? id)

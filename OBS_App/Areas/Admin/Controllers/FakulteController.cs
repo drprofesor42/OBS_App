@@ -27,24 +27,26 @@ namespace OBS_App.Areas.Admin.Controllers
 
             var fakulteler = await _context.Fakulteler
                                       .Include(f => f.Bolumler)
-                                      .ThenInclude(b => b.Ogretmensler)
-                                      .Include(f => f.Bolumler)
-                                      .ThenInclude(b => b.Ogrencisler)
                                       .ToListAsync();
 
             foreach (var fakulte in fakulteler)
             {
                 Int32 toplamOgretmenSayisi = 0;
                 Int32 toplamOgrenciSayisi = 0;
+                Int32 toplamDersSayisi = 0;
 
                 foreach (var bolum in fakulte.Bolumler)
                 {
-                    toplamOgretmenSayisi += bolum.Ogretmensler.Count;
-                    toplamOgrenciSayisi += bolum.Ogrencisler.Count;
+                    toplamOgretmenSayisi += bolum.Ogretmensler.Count();
+                    toplamOgrenciSayisi += bolum.Ogrencisler.Count();
+                    toplamDersSayisi += bolum.Dersler.Count();
                 }
 
                 fakulte.FakulteOgretmenSayisi = toplamOgretmenSayisi;
                 fakulte.FakulteOgrenciSayisi = toplamOgrenciSayisi;
+                fakulte.FakulteDersSayisi = toplamDersSayisi;
+
+                await _context.SaveChangesAsync();
             }
 
             return View(fakulteler);
@@ -121,5 +123,19 @@ namespace OBS_App.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Detay(int id)
+        {
+
+            var fakulte = await _context.Fakulteler
+                    .Include(f => f.Ogretmensler)
+                    .Include(f => f.Ogrencisler)
+                    .Include(f => f.Bolumler)
+                    .ToListAsync();
+            var model = fakulte.FirstOrDefault(x => x.Id == id);
+
+
+
+            return View(model);
+        }
     }
 }

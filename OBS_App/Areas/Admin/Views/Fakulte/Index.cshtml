@@ -60,6 +60,7 @@
                             <th>ID</th>
                             <th>Fakülte İsim</th>
                             <th>Bölüm Sayısı</th>
+                            <th>Ders Sayısı</th>
                             <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
                             <th>Kuruluş Tarihi</th>
@@ -78,12 +79,13 @@
                                     </h2>
                                 </td>
                                 <td>@fakulte.Bolumler.Count()</td>
+                                <td>@fakulte.FakulteDersSayisi</td>
                                 <td>@fakulte.FakulteOgretmenSayisi</td>
                                 <td>@fakulte.FakulteOgrenciSayisi</td>
                                 <td>@fakulte.OlusturmaTarihi</td>
                                 <td class="text-end">
                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                        <a asp-action="Detay" asp-route-id="@fakulte.Id" class="btn btn-sm bg-success-light me-2">
                                             <i class="feather-eye"></i>
                                         </a>
                                         <a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light">

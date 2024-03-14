@@ -53,6 +53,12 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
             var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+            var bolum = await _context.Bolumler.FirstOrDefaultAsync(x => x.Id == model.BolumId);
+            if (bolum != null)
+            {
+                model.FakulteId = bolum.FakulteId;
+            }
+            
             if (ModelState.IsValid)
             {
                 if (model == null || type == null)
