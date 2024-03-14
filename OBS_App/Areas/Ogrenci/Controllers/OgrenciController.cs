@@ -27,7 +27,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			{
 				// Kullanıcının Danışman Bilgilerini çek
 				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
-				var danisman = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenAd == ogrenci.OgrenciDanisman);
+				var danisman = _context.Ogretmenler.Include(x => x.Adres).FirstOrDefault(x => x.OgretmenAd == ogrenci.OgrenciDanisman);
 
 				return View(danisman);
 			}
