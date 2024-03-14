@@ -56,21 +56,21 @@ namespace OBS_App.VeritabanıSeed
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Programlama Giriş",
-                    DersAkts = 8,
-                    DersKod = "7",
+                    DersAkts = 21,
+                    DersKod = "YBS201",
                     DersKredi = 7
                 });
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Nesne Tabanlı Programlama",
                     DersAkts = 6,
-                    DersKod = "5",
+                    DersKod = "BMH301",
                     DersKredi = 8
                 }); context.Dersler.Add(new Ders
                 {
                     DersAd = "Veri Yapıları ve Algoritmalar",
                     DersAkts = 6,
-                    DersKod = "8",
+                    DersKod = "YBS408",
                     DersKredi = 6
                 });
 
@@ -78,7 +78,7 @@ namespace OBS_App.VeritabanıSeed
                 {
                     DersAd = "Nesne Yönelimli Programlama",
                     DersAkts = 6,
-                    DersKod = "9",
+                    DersKod = "YMH304",
                     DersKredi = 5
                 });
 
@@ -86,7 +86,7 @@ namespace OBS_App.VeritabanıSeed
                 {
                     DersAd = "Web Programlama",
                     DersAkts = 5,
-                    DersKod = "10",
+                    DersKod = "YBS205",
                     DersKredi = 4
                 });
 
@@ -94,7 +94,7 @@ namespace OBS_App.VeritabanıSeed
                 {
                     DersAd = "Veritabanı Yönetimi",
                     DersAkts = 7,
-                    DersKod = "11",
+                    DersKod = "ISL309",
                     DersKredi = 6
                 });
                 context.SaveChanges();
