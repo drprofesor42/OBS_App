@@ -103,13 +103,13 @@ namespace OBS_App.VeritabanıSeed
             {
                 context.Ogrenciler.Add(new Ogrencis
                 {
-                    OgrenciTc = "123456789",
+                    OgrenciTc = "12345678919",
                     OgrenciAd = "Ceylin",
                     OgrenciSoyad = "Uzun",
                     OgrenciDogumTarihi = DateOnly.FromDateTime(DateTime.Today),
                     OgrenciCinsiyet = "Kız",
                     OgrenciSinif = 1,
-                    OgrenciTelefon = "123456",
+                    OgrenciTelefon = "05345678945",
                     OgrenciKayitTarihi = DateOnly.FromDateTime(DateTime.Today),
                     OgrenciEposta = "ceylinuz@gmail.com",
                     OgrenciParola = "123456",
@@ -125,13 +125,13 @@ namespace OBS_App.VeritabanıSeed
                 });
                 context.Ogrenciler.Add(new Ogrencis
                 {
-                    OgrenciTc = "987654321",
+                    OgrenciTc = "98765432118",
                     OgrenciAd = "Ali",
                     OgrenciSoyad = "Yılmaz",
                     OgrenciDogumTarihi = DateOnly.FromDateTime(new DateTime(2000, 5, 15)),
                     OgrenciCinsiyet = "Erkek",
                     OgrenciSinif = 2,
-                    OgrenciTelefon = "987654",
+                    OgrenciTelefon = "05349876545",
                     OgrenciKayitTarihi = DateOnly.FromDateTime(DateTime.Today),
                     OgrenciEposta = "aliyilmaz@gmail.com",
                     OgrenciParola = "abcdef",
@@ -147,13 +147,13 @@ namespace OBS_App.VeritabanıSeed
 
                 context.Ogrenciler.Add(new Ogrencis
                 {
-                    OgrenciTc = "456789123",
+                    OgrenciTc = "45678912317",
                     OgrenciAd = "Ayşe",
                     OgrenciSoyad = "Kaya",
                     OgrenciDogumTarihi = DateOnly.FromDateTime(new DateTime(1999, 10, 8)),
                     OgrenciCinsiyet = "Kız",
                     OgrenciSinif = 3,
-                    OgrenciTelefon = "456789",
+                    OgrenciTelefon = "05458456789",
                     OgrenciKayitTarihi = DateOnly.FromDateTime(DateTime.Today),
                     OgrenciEposta = "aysekaya@gmail.com",
                     OgrenciParola = "qwerty",
@@ -169,13 +169,13 @@ namespace OBS_App.VeritabanıSeed
 
                 context.Ogrenciler.Add(new Ogrencis
                 {
-                    OgrenciTc = "789123456",
+                    OgrenciTc = "78912345625",
                     OgrenciAd = "Mehmet",
                     OgrenciSoyad = "Şahin",
                     OgrenciDogumTarihi = DateOnly.FromDateTime(new DateTime(2001, 3, 20)),
                     OgrenciCinsiyet = "Erkek",
                     OgrenciSinif = 1,
-                    OgrenciTelefon = "789123",
+                    OgrenciTelefon = "05468789123",
                     OgrenciKayitTarihi = DateOnly.FromDateTime(DateTime.Today),
                     OgrenciEposta = "mehmetsahin@gmail.com",
                     OgrenciParola = "123abc",
@@ -199,7 +199,7 @@ namespace OBS_App.VeritabanıSeed
                     OgretmenSoyad = "Kuş",
                     OgretmenDogumTarihi = DateOnly.FromDateTime(new DateTime(1986, 3, 20)),
                     OgretmenCinsiyet = "Kadın",
-                    OgretmenTelefon = "147258",
+                    OgretmenTelefon = "04567147258",
                     OgretmenBaslamaTarihi = DateOnly.FromDateTime(new DateTime(2021,4,18)),
                     OgretmenUnvan="Doçent",
                     OgretmenGorusme="Pazartesi 14.00",
@@ -221,7 +221,7 @@ namespace OBS_App.VeritabanıSeed
                     OgretmenSoyad = "Yılmaz",
                     OgretmenDogumTarihi = DateOnly.FromDateTime(new DateTime(1975, 5, 10)),
                     OgretmenCinsiyet = "Erkek",
-                    OgretmenTelefon = "258369",
+                    OgretmenTelefon = "03456258369",
                     OgretmenBaslamaTarihi = DateOnly.FromDateTime(new DateTime(2015, 9, 3)),
                     OgretmenUnvan = "Profesör",
                     OgretmenGorusme = "Salı 10.00",
@@ -244,7 +244,7 @@ namespace OBS_App.VeritabanıSeed
                     OgretmenSoyad = "Demir",
                     OgretmenDogumTarihi = DateOnly.FromDateTime(new DateTime(1980, 9, 25)),
                     OgretmenCinsiyet = "Kadın",
-                    OgretmenTelefon = "369852",
+                    OgretmenTelefon = "0453698527",
                     OgretmenBaslamaTarihi = DateOnly.FromDateTime(new DateTime(2018, 6, 12)),
                     OgretmenUnvan = "Yardımcı Doçent",
                     OgretmenGorusme = "Çarşamba 13.00",
@@ -267,7 +267,7 @@ namespace OBS_App.VeritabanıSeed
                     OgretmenSoyad = "Şahin",
                     OgretmenDogumTarihi = DateOnly.FromDateTime(new DateTime(1990, 12, 15)),
                     OgretmenCinsiyet = "Erkek",
-                    OgretmenTelefon = "789456",
+                    OgretmenTelefon = "04557589456",
                     OgretmenBaslamaTarihi = DateOnly.FromDateTime(new DateTime(2019, 11, 8)),
                     OgretmenUnvan = "Öğretim Görevlisi",
                     OgretmenGorusme = "Perşembe 11.00",

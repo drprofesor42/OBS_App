@@ -409,7 +409,7 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OgrenciTc = table.Column<string>(type: "longtext", nullable: false)
+                    OgrenciTc = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciAd = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -420,7 +420,7 @@ namespace OBS_App.Migrations
                     OgrenciCinsiyet = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciSinif = table.Column<int>(type: "int", nullable: false),
-                    OgrenciTelefon = table.Column<string>(type: "longtext", nullable: false)
+                    OgrenciTelefon = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciParola = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

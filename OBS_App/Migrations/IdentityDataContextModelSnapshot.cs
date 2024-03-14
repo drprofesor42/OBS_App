@@ -441,11 +441,13 @@ namespace OBS_App.Migrations
 
                     b.Property<string>("OgrenciTc")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar(12)");
 
                     b.Property<string>("OgrenciTelefon")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(12)
+                        .HasColumnType("varchar(12)");
 
                     b.HasKey("Id");
 
