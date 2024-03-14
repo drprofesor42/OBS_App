@@ -9,7 +9,8 @@ namespace OBS_App.Data
         public int Id { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        [StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
+		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
+		[StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
         public string OgrenciTc { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
@@ -28,7 +29,8 @@ namespace OBS_App.Data
         public int OgrenciSinif { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        [StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
+		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
+		[StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
         public string OgrenciTelefon { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
@@ -36,7 +38,8 @@ namespace OBS_App.Data
         public string OgrenciParola { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        [MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
+		[Compare("OgrenciParola", ErrorMessage = "Şifreler eşleşmiyor.")]
+		[MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParolaOnayla { get; set; }
         public string? OgrenciDanisman { get; set; }
 

@@ -313,7 +313,7 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgretmenGorusme = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenTelefon = table.Column<string>(type: "longtext", nullable: false)
+                    OgretmenTelefon = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgretmenCinsiyet = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -355,8 +355,10 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DersKod = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersKredi = table.Column<int>(type: "int", nullable: false),
-                    DersAkts = table.Column<int>(type: "int", nullable: false),
+                    DersKredi = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DersAkts = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     BolumId = table.Column<int>(type: "int", nullable: true),
                     OgretmensId = table.Column<int>(type: "int", nullable: true)
@@ -409,7 +411,7 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OgrenciTc = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false)
+                    OgrenciTc = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciAd = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -420,7 +422,7 @@ namespace OBS_App.Migrations
                     OgrenciCinsiyet = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciSinif = table.Column<int>(type: "int", nullable: false),
-                    OgrenciTelefon = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false)
+                    OgrenciTelefon = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OgrenciParola = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

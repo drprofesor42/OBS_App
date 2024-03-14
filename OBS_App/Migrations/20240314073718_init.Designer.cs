@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240313142406_init")]
+    [Migration("20240314073718_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -224,15 +224,17 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("DersAkts")
-                        .HasColumnType("int");
+                    b.Property<string>("DersAkts")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("DersKod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("DersKredi")
-                        .HasColumnType("int");
+                    b.Property<string>("DersKredi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("OgretmensId")
                         .HasColumnType("int");
@@ -444,13 +446,13 @@ namespace OBS_App.Migrations
 
                     b.Property<string>("OgrenciTc")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("OgrenciTelefon")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.HasKey("Id");
 
@@ -545,7 +547,8 @@ namespace OBS_App.Migrations
 
                     b.Property<string>("OgretmenTelefon")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("OgretmenUnvan")
                         .IsRequired()

@@ -90,6 +90,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     _context.Remove(user);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
+
                 }
                 else
                 {

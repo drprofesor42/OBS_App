@@ -1,10 +1,16 @@
-﻿namespace OBS_App.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OBS_App.Data
 {
     public class Duyuru
     {
         public int Id { get; set; }
         public string DuyuruGonderen { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DuyuruBaslik { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DuyuruMesaj { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }
         public int? OgretmensId { get; set; }

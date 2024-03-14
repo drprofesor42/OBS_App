@@ -56,46 +56,46 @@ namespace OBS_App.VeritabanıSeed
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Programlama Giriş",
-                    DersAkts = 8,
+                    DersAkts = "8",
                     DersKod = "7",
-                    DersKredi = 7
+                    DersKredi = "7"
                 });
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Nesne Tabanlı Programlama",
-                    DersAkts = 6,
+                    DersAkts = "6",
                     DersKod = "5",
-                    DersKredi = 8
+                    DersKredi = "8"
                 }); context.Dersler.Add(new Ders
                 {
                     DersAd = "Veri Yapıları ve Algoritmalar",
-                    DersAkts = 6,
+                    DersAkts = "6",
                     DersKod = "8",
-                    DersKredi = 6
+                    DersKredi = "6"
                 });
 
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Nesne Yönelimli Programlama",
-                    DersAkts = 6,
+                    DersAkts = "6",
                     DersKod = "9",
-                    DersKredi = 5
+                    DersKredi = "5"
                 });
 
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Web Programlama",
-                    DersAkts = 5,
+                    DersAkts = "5",
                     DersKod = "10",
-                    DersKredi = 4
+                    DersKredi = "4"
                 });
 
                 context.Dersler.Add(new Ders
                 {
                     DersAd = "Veritabanı Yönetimi",
-                    DersAkts = 7,
+                    DersAkts = "7",
                     DersKod = "11",
-                    DersKredi = 6
+                    DersKredi = "6"
                 });
                 context.SaveChanges();
             }

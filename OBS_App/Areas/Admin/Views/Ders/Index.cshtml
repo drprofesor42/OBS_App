@@ -39,8 +39,7 @@
                             <h3 class="page-title">Dersler</h3>
                         </div>
                         <div class="col-auto text-end float-end ms-auto download-grp">
-                            <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-                            <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +109,7 @@
                                         <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
                                             <i class="feather-edit"></i>
                                         </a>
-                                        <a asp-controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
+                                        <a onclick="confirmDelete(@ders.Id)" class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
                                     </div>
@@ -124,33 +123,7 @@
         </div>
     </div>
 </div>
-@if (TempData["DersGuncelle"] != null)
-{
-	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
-	<script>
-		Swal.fire({
-			title: "Güncelleme Başarılı!",
-
-			icon: "success"
-		});
-	</script>
-}
-
-@if (TempData["DersKaydet"] != null)
-{
-
-	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
-
-	<script>
-		Swal.fire({
-			title: "Ekleme Başarılı!",
-			icon: "success"
-		});
-	</script>
-}
 @if (TempData["success"] != null)
 {
 	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
@@ -165,4 +138,45 @@
 		});
 	</script>
 }
-
+@section Scripts {
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Silmek İstediğinize Emin Misiniz?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Evet!",
+                cancelButtonText: "İptal!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Sil", "Ders")', { id: id })
+                        .done(() => swalWithBootstrapButtons.fire(
+                            "İşlem Başarılı!",
+                            !",
+                            "",
+                            "success"
+                        ).then(() => window.location.href = '@Url.Action("Index", "Ders")'));
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "İşlem İptal Edildi!",
+                        text: "",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    </script>
+}

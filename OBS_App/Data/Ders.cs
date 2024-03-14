@@ -1,12 +1,25 @@
-﻿namespace OBS_App.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OBS_App.Data
 {
     public class Ders
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DersAd { get; set; }
-        public string DersKod { get; set; }
-        public int DersKredi { get; set; }
-        public int DersAkts { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
+		public string DersKod { get; set; }
+
+		[Required(ErrorMessage = "*Zorunlu Alan")]
+		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
+		public string DersKredi { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
+		public string DersAkts { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; } = null!;
