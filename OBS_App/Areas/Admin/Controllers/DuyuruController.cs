@@ -35,8 +35,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 var model = new Duyuru
                 {
                     DuyuruGonderen = user.DuyuruName,
-                    
-
                 };
              
                 return View(model);
