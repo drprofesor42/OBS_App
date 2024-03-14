@@ -40,6 +40,7 @@ namespace identy_user.Models
 
                         UserName = userList[i],
                         Email = emailList[i],
+                        DuyuruName = userList[i]
 
                     };
 
@@ -63,7 +64,7 @@ namespace identy_user.Models
 
             if (ogretmenUser != null)
             {
-                // Admin kullanıcısı bulundu, Admin rolünü atama
+               
 
                 await userManager.AddToRoleAsync(ogretmenUser, "Ogretmen");
 
@@ -72,7 +73,7 @@ namespace identy_user.Models
 
             if (ogrenciUser != null)
             {
-                // Admin kullanıcısı bulundu, Admin rolünü atama
+               
 
                 await userManager.AddToRoleAsync(ogrenciUser, "Ogrenci");
 

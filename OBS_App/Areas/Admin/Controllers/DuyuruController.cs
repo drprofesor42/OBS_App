@@ -12,15 +12,17 @@ namespace OBS_App.Areas.Admin.Controllers
     public class DuyuruController : Controller
     {
         private readonly IdentityDataContext _context;
+        private readonly UserManager<AppUser> _userManager;
         public DuyuruController(IdentityDataContext context, UserManager<AppUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
 
         public async Task<IActionResult> Index()
         {
-            var duyurular =  await _context.Duyurular.Include(x=> x.Ogretmens).ToListAsync();
+            var duyurular = await _context.Duyurular.ToListAsync();
             return View(duyurular);
         }
 
@@ -29,7 +31,15 @@ namespace OBS_App.Areas.Admin.Controllers
 
 			if (id == 0)
             {
-                return View();
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var model = new Duyuru
+                {
+                    DuyuruGonderen = user.DuyuruName,
+                    
+
+                };
+             
+                return View(model);
             }
             else
             {
@@ -53,7 +63,11 @@ namespace OBS_App.Areas.Admin.Controllers
             {
 				if (type == "0")
 				{
-					await _context.Duyurular.AddAsync(model);
+                    //burada hangi öğretmenin gönderdiğini görebiliriz
+                  // var user = await _userManager.FindByNameAsync("ogretmen");
+                    //var ogretmenıd = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.OgretmenEposta == "aysedemir@gmail.com");
+                  //  model.OgretmensId = ogretmenıd.Id;
+                    await _context.Duyurular.AddAsync(model);
 					await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
