@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
@@ -7,9 +8,33 @@ namespace OBS_App.Areas.Admin.Controllers
     [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
+        private readonly IdentityDataContext _context;
+
+        public AdminController(IdentityDataContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            ViewBag.ogrenci_sayısı = _context.Ogrenciler.Count();
+			ViewBag.ogretmen_sayısı = _context.Ogretmenler.Count();
+			ViewBag.bolum_sayısı = _context.Bolumler.Count();
+			ViewBag.fakulte_sayısı = _context.Fakulteler.Count();
+
+			return View();
         }
-    }
+
+		[HttpPost]
+		public IActionResult Data()
+		{
+
+			int[] maleData = { _context.Ogrenciler.Where(x => x.OgrenciCinsiyet == "Erkek").Count() }; 
+			int[] femaleData = { _context.Ogrenciler.Where(x => x.OgrenciCinsiyet == "Kız").Count() };
+
+			// S-Bar
+
+			return Json(new { maleData, femaleData });
+		}
+	}
 }
