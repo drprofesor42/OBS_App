@@ -4,6 +4,7 @@ using OBS_App.Models;
 using OBS_App.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace OBS_App.Areas.Admin.Controllers
@@ -13,9 +14,13 @@ namespace OBS_App.Areas.Admin.Controllers
     public class OgrenciController : Controller
     {
         private readonly IdentityDataContext _context;
-        public OgrenciController(IdentityDataContext context)
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
+        public OgrenciController(IdentityDataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()
@@ -47,8 +52,7 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
-
-
+            var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
             if (ModelState.IsValid)
             {
                 if (model == null || type == null)
@@ -58,7 +62,31 @@ namespace OBS_App.Areas.Admin.Controllers
                     // TempData Hata Gönder
                     return View(model);
                 }
-                else if (type == "0")
+                else if (dogrula == null)
+                {
+                    var user = new AppUser()
+                    {
+                        DuyuruName = model.OgrenciAd,
+                        UserName = model.OgrenciEposta,
+                        Email = model.OgrenciEposta
+                    };
+                    await _userManager.CreateAsync(user, model.OgrenciParola);
+                    var ogrenci = await _userManager.FindByNameAsync(model.OgrenciEposta);
+
+
+                    if (ogrenci != null)
+                    {
+                        await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
+                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                    return View(model);
+
+                }
+                if (type == "0")
                 {
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();

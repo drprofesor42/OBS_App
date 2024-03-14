@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class asdsda : Migration
+    public partial class askjdhasdjk : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,7 +78,7 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DuyuruName = table.Column<string>(type: "longtext", nullable: false)
+                    DuyuruName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -392,18 +392,11 @@ namespace OBS_App.Migrations
                     DuyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    OgretmensId = table.Column<int>(type: "int", nullable: true),
-                    AppUserId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    OgretmensId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Duyurular", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Duyurular_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Duyurular_Ogretmenler_OgretmensId",
                         column: x => x.OgretmensId,
@@ -658,11 +651,6 @@ namespace OBS_App.Migrations
                 name: "IX_DersOgrenciler_OgrencisId",
                 table: "DersOgrenciler",
                 column: "OgrencisId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Duyurular_AppUserId",
-                table: "Duyurular",
-                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Duyurular_OgretmensId",

@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240313195849_asdsda")]
-    partial class asdsda
+    [Migration("20240314061622_askjdhasdjk")]
+    partial class askjdhasdjk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -300,9 +300,6 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("DuyuruBaslik")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -322,8 +319,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("OgretmensId");
 
@@ -640,7 +635,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("DuyuruName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
@@ -791,15 +785,9 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
                 {
-                    b.HasOne("OBS_App.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
                         .WithMany("Duyurular")
                         .HasForeignKey("OgretmensId");
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Ogretmens");
                 });
