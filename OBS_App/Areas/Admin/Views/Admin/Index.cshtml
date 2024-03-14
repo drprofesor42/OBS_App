@@ -90,7 +90,7 @@
 			<div class="card-header">
 				<div class="row align-items-center">
 					<div class="col-6">
-						<h5 class="card-title">Öğrenci Cinsiyetleri Sayısı</h5>
+						<h5 class="card-title">Öğrenci Cinsiyetleri Sayısı (Hazır Değil) </h5>
 					</div>
 					<div class="col-6">
 						<ul class="chart-list-out">
@@ -114,9 +114,9 @@
 
 		<div class="card flex-fill student-space comman-shadow">
 			<div class="card-header d-flex align-items-center">
-				<h5 class="card-title">Star Students</h5>
+				<h5 class="card-title">Son Akademik Etkinlikler</h5>
 				<ul class="chart-list-out student-ellips">
-					<li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
+					<a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0" style="margin-right:20px" class="btn btn-primary btn-sm">Etkinlik Ekle</a>
 				</ul>
 			</div>
 			<div class="card-body">
@@ -124,94 +124,22 @@
 					<table class="table star-student table-hover table-center table-borderless table-striped">
 						<thead class="thead-light">
 							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th class="text-center">Marks</th>
-								<th class="text-center">Percentage</th>
-								<th class="text-end">Year</th>
+								<th class="text-center">Başlangıç Tarihi</th>
+								<th class="text-center">Bitiş Tarihi</th>
+								<th class="text-center">Aktivite</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-nowrap">
-									<div>PRE2209</div>
-								</td>
-								<td class="text-nowrap">
-									<a href="profile.html">
-										<img class="rounded-circle" src="~/panel/img/profiles/avatar-02.jpg" width="25" alt="Star Students">
-										John Smith
-									</a>
-								</td>
-								<td class="text-center">1185</td>
-								<td class="text-center">98%</td>
-								<td class="text-end">
-									<div>2019</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-nowrap">
-									<div>PRE1245</div>
-								</td>
-								<td class="text-nowrap">
-									<a href="profile.html">
-										<img class="rounded-circle" src="~/panel/img/profiles/avatar-01.jpg" width="25" alt="Star Students">
-										Jolie Hoskins
-									</a>
-								</td>
-								<td class="text-center">1195</td>
-								<td class="text-center">99.5%</td>
-								<td class="text-end">
-									<div>2018</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-nowrap">
-									<div>PRE1625</div>
-								</td>
-								<td class="text-nowrap">
-									<a href="profile.html">
-										<img class="rounded-circle" src="~/panel/img/profiles/avatar-03.jpg" width="25" alt="Star Students">
-										Pennington Joy
-									</a>
-								</td>
-								<td class="text-center">1196</td>
-								<td class="text-center">99.6%</td>
-								<td class="text-end">
-									<div>2017</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-nowrap">
-									<div>PRE2516</div>
-								</td>
-								<td class="text-nowrap">
-									<a href="profile.html">
-										<img class="rounded-circle" src="~/panel/img/profiles/avatar-04.jpg" width="25" alt="Star Students">
-										Millie Marsden
-									</a>
-								</td>
-								<td class="text-center">1187</td>
-								<td class="text-center">98.2%</td>
-								<td class="text-end">
-									<div>2016</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-nowrap">
-									<div>PRE2209</div>
-								</td>
-								<td class="text-nowrap">
-									<a href="profile.html">
-										<img class="rounded-circle" src="~/panel/img/profiles/avatar-05.jpg" width="25" alt="Star Students">
-										John Smith
-									</a>
-								</td>
-								<td class="text-center">1185</td>
-								<td class="text-center">98%</td>
-								<td class="text-end">
-									<div>2015</div>
-								</td>
-							</tr>
+
+							@foreach (var etkinlik in ViewBag.takvim)
+							{
+								<tr>
+									<td class="text-center">@etkinlik.AkademikTakvimBaslangic</td>
+									<td class="text-center">@etkinlik.AkademikTakvimBitis</td>
+									<td>@etkinlik.AkademikTakvimAktivite</td>
+								</tr>
+							}
+
 						</tbody>
 					</table>
 				</div>
@@ -219,65 +147,47 @@
 		</div>
 
 	</div>
+
+	@* Duyru Kısmı *@
 	<div class="col-xl-6 d-flex">
 
 		<div class="card flex-fill comman-shadow">
 			<div class="card-header d-flex align-items-center">
-				<h5 class="card-title ">Student Activity </h5>
+				<h5 class="card-title ">Son Duyurular </h5>
 				<ul class="chart-list-out student-ellips">
-					<li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
+					<a asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
 				</ul>
 			</div>
 			<div class="card-body">
 				<div class="activity-groups">
-					<div class="activity-awards">
-						<div class="award-boxs">
-							<img src="~/panel/img/icons/award-icon-01.svg" alt="Award">
-						</div>
-						<div class="award-list-outs">
-							<h4>1st place in "Chess”</h4>
-							<h5>John Doe won 1st place in "Chess"</h5>
-						</div>
-						<div class="award-time-list">
-							<span>1 Day ago</span>
-						</div>
-					</div>
-					<div class="activity-awards">
-						<div class="award-boxs">
-							<img src="~/panel/img/icons/award-icon-02.svg" alt="Award">
-						</div>
-						<div class="award-list-outs">
-							<h4>Participated in "Carrom"</h4>
-							<h5>Justin Lee participated in "Carrom"</h5>
-						</div>
-						<div class="award-time-list">
-							<span>2 hours ago</span>
-						</div>
-					</div>
-					<div class="activity-awards">
-						<div class="award-boxs">
-							<img src="~/panel/img/icons/award-icon-03.svg" alt="Award">
-						</div>
-						<div class="award-list-outs">
-							<h4>Internation conference in "St.John School"</h4>
-							<h5>Justin Leeattended internation conference in "St.John School"</h5>
-						</div>
-						<div class="award-time-list">
-							<span>2 Week ago</span>
-						</div>
-					</div>
-					<div class="activity-awards mb-0">
-						<div class="award-boxs">
-							<img src="~/panel/img/icons/award-icon-04.svg" alt="Award">
-						</div>
-						<div class="award-list-outs">
-							<h4>Won 1st place in "Chess"</h4>
-							<h5>John Doe won 1st place in "Chess"</h5>
-						</div>
-						<div class="award-time-list">
-							<span>3 Day ago</span>
-						</div>
-					</div>
+
+					@if ( ViewBag.duyurular != null)
+					{
+						@foreach (var duyuru in ViewBag.duyurular)
+						{
+							<div class="activity-awards">
+								<div class="award-boxs">
+									<img width="30px" src="~/panel/img/icons/award-icon-03.svg">
+								</div>
+								<div class="award-list-outs">
+									<h4>@duyuru.DuyuruBaslik</h4>
+									<h5 class="duyuruMesaj">@duyuru.DuyuruMesaj</h5>
+								</div>
+								<div style="text-align:center; display: flex; justify-content: center;" class="award-time-list">
+									<div class="col">
+										<span>@duyuru.OlusturmaTarihi</span>
+										<br>
+										<a style="margin-top:5px" class="btn btn-primary btn-sm">Duyuruya Git</a>
+									</div>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<h5 class="text-danger" style="text-align:center"> Duyuru Bulunmamaktadır! </h5>
+					}
+
 				</div>
 			</div>
 		</div>
@@ -285,4 +195,17 @@
 	</div>
 </div>
 
+<script>
+	// Her bir duyuru için kısaltılmış mesajları güncelleyen fonksiyon
+	function kisaltmaYap(duyuruMesajiElementi) {
+		var duyuruMesaji = duyuruMesajiElementi.textContent;
 
+		if (duyuruMesaji.length > 50) {
+			duyuruMesajiElementi.textContent = duyuruMesaji.substring(0, 60) + "...";
+		}
+	}
+
+	// Her bir duyurunun kısaltılmış mesajını güncelleyin
+	var duyuruMesajlar = document.querySelectorAll(".duyuruMesaj");
+	duyuruMesajlar.forEach(kisaltmaYap);
+</script>

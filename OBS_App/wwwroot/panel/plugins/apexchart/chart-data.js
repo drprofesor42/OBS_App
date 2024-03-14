@@ -136,7 +136,7 @@ if ($('#admin_bar').length > 0) {
                 data: [] // Boþ dizi olarak baþlatýlýyor
             }
         ],
-        labels: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+        labels: ["Cinsiyet"],
         xaxis: {
             labels: {
                 show: false
@@ -395,7 +395,7 @@ if ($('#s-col-stacked').length > 0) {
 if ($('#s-bar').length > 0) {
     $.ajax({
         type: 'POST',
-        url: '/Admin/Admin/Data', // Controller ve Action adýný doðru þekilde ayarlayýn
+        url: '/Admin/Admin/Data', // Controller ve Action adý
         contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify({}),
@@ -403,16 +403,10 @@ if ($('#s-bar').length > 0) {
             // Veri baþarýyla alýndýktan sonra chart'ý güncelle
             chartBar.updateSeries([
                 {
-                    name: "Erkekler",
-                    data: data.maleData
-                },
-                {
-                    name: "Kadinlar",
-                    data: data.femaleData
+                    name: "bolumOgrenciSayilari",
+                    data: data.bolumOgrenciSayilari
                 }
             ]);
-
-            // Chart'ý yeniden render et
         },
         error: function (error) {
             console.log(error);

@@ -7,11 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:OBS_App/Migrations/20240314061622_askjdhasdjk.cs
-    public partial class askjdhasdjk : Migration
-========
     public partial class init : Migration
->>>>>>>> kagan:OBS_App/Migrations/20240313143226_init.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
