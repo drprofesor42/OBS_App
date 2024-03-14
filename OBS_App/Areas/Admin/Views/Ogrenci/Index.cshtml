@@ -38,8 +38,7 @@
                             <h3 class="page-title">Öğrenciler</h3>
                         </div>
                         <div class="col-auto text-end float-end ms-auto download-grp">
-                            <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-                            <a asp-controller="Ogrenci" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            <a asp-controller="Ogrenci" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +84,7 @@
                                             <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a asp-controller="Ogrenci" asp-action="Sil" asp-route-id="@ogr.Id" class="btn btn-sm bg-success-light" onclick="return confirm('Silmek istediğinizden emin misiniz?')">
+                                            <a onclick="confirmDelete(@ogr.Id)" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
@@ -113,5 +112,44 @@
         });
     </script>
 }
-
-
+@section Scripts {
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Silmek İstediğinize Emin Misiniz?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Evet!",
+                cancelButtonText: "İptal!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Sil", "Ogrenci")', { id: id })
+                        .done(() => swalWithBootstrapButtons.fire(
+                            "İşlem Başarılı!",
+                            "",
+                            "success"
+                        ).then(() => window.location.href = '@Url.Action("Index", "Ogrenci")'));
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "İşlem İptal Edildi!",
+                        text: "",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    </script>
+}

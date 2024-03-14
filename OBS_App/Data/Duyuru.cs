@@ -1,4 +1,6 @@
-﻿using OBS_App.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+using OBS_App.Models;
 
 namespace OBS_App.Data
 {
@@ -6,7 +8,11 @@ namespace OBS_App.Data
     {
         public int Id { get; set; }
         public string DuyuruGonderen { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DuyuruBaslik { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DuyuruMesaj { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }
         public int? OgretmensId { get; set; }

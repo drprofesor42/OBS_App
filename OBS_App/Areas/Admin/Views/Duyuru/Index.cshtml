@@ -43,7 +43,9 @@
 					<div class="edit-options">
 						<div class="edit-delete-btn">
 							<a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="@duyuru.Id" class="text-success"><i class="feather-edit-3 me-1"></i> Düzenle</a>
-							<a asp-controller="Duyuru" asp-action="Sil" asp-route-id=@duyuru.Id class="text-danger"><i class="feather-trash-2 me-1"></i> Sil</a>
+							<a onclick="confirmDelete(@duyuru.Id)" class="btn btn-sm bg-danger-light">
+								<i class="feather-trash-2"></i>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -52,18 +54,6 @@
 
 	}
 </div>
-@if (TempData["DuyuruGuncelle"] != null)
-{
-	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
-
-	<script>
-		Swal.fire({
-			title: "Güncelleme Başarılı!",
-			icon: "success"
-		});
-	</script>
-}
 
 @if (TempData["success"] != null)
 {
@@ -77,5 +67,46 @@
 			title: successMessage,
 			icon: "success"
 		});
+	</script>
+}
+@section Scripts {
+	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+	<script>
+		function confirmDelete(id) {
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: "btn btn-success",
+					cancelButton: "btn btn-danger"
+				},
+				buttonsStyling: false
+			});
+			swalWithBootstrapButtons.fire({
+				title: "Silmek İstediğinize Emin Misiniz?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Evet!",
+				cancelButtonText: "İptal!",
+				reverseButtons: true
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.post('@Url.Action("Sil", "Duyuru")', { id: id })
+						.done(() => swalWithBootstrapButtons.fire(
+							"İşlem Başarılı!",
+							"",
+							"success"
+						).then(() => window.location.href = '@Url.Action("Index", "Duyuru")'));
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire({
+						title: "İşlem İptal Edildi!",
+						text: "",
+						icon: "error"
+					});
+				}
+			});
+		}
 	</script>
 }

@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using System.ComponentModel.DataAnnotations;
 namespace OBS_App.Data
 {
     public class Bolum
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string BolumAd { get; set; }
         public string BolumBaskani { get; set; }
         public int? FakulteId { get; set; }
