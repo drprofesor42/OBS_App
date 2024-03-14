@@ -1,7 +1,105 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+	ViewData["Title"] = "Index";
 }
+@model Ogretmens
 
-<h1>Ogernci Area Index</h1>
+<div class="row">
+	<div class="col-lg-4">
+		<div class="student-personals-grp">
+			<div class="card">
+				@if (Model != null)
+				{
+					<div class="card-body">
+						<div style="text-align:center" class="heading-detail">
+							<h4>Danışman Bilgileri</h4>
+							<span class="avatar avatar-md flex-shrink-0">
+								<img class="avatar-img rounded-circle" alt="User Image" src="~/panel/img/profiles/avatar-03.jpg">
+							</span>
+						</div>
+						<br />
+						<div class="personal-activity">
+							<div class="personal-icons">
+								<i class="feather-user"></i>
+							</div>
+							<div class="views-personal">
+								<h4>İsim</h4>
+								<h5>@Model.OgretmenAd @Model.OgretmenSoyad</h5>
+							</div>
+						</div>
+						<div class="personal-activity">
+							<div class="personal-icons">
+								<i class="feather-star"></i>
+							</div>
+							<div class="views-personal">
+								<h4>Ünvan</h4>
+								<h5>@Model.OgretmenUnvan</h5>
+							</div>
+						</div>
+						<div class="personal-activity">
+							<div class="personal-icons">
+								<i class="feather-mail"></i>
+							</div>
+							<div class="views-personal">
+								<h4>E-Posta</h4>
+								<h5>@Model.OgretmenEposta</h5>
+							</div>
+						</div>
+						<div class="personal-activity">
+							<div class="personal-icons">
+								<i class="feather-user"></i>
+							</div>
+							<div class="views-personal">
+								<h4>Şehir</h4>
+								<h5>@Model.OgretmenSehir</h5>
+							</div>
+						</div>
+						<div class="personal-activity">
+							<div class="personal-icons">
+								<i class="feather-calendar"></i>
+							</div>
+							<div class="views-personal">
+								<h4>Doğum Tarihi</h4>
+								<h5>@Model.OgretmenDogumTarihi</h5>
+							</div>
+						</div>
+						<div class="personal-activity mb-0">
+							<div class="personal-icons">
+								<i class="feather-map-pin"></i>
+							</div>
+							<div class="views-personal">
+								<h4>Ofis Adresi</h4>
+								<h5>@Model.OgretmenAdres</h5>
+							</div>
+						</div>
+						<br />
+						<div class="personal-activity mb-0">
+							<div class="personal-icons">
+								<i class="feather-map-pin"></i>
+							</div>
+							<div class="views-personal">
+								<h4>Görüşme Saatleri</h4>
+								<h5>@Model.OgretmenGorusme</h5>
+							</div>
+						</div>
+						<br />
+						<div class="d-flex align-items-center">
+							<div class="follow-btn-group">
+								<a asp-controller="Ogrenci" asp-action="DanismanMesaj" class="btn btn-info message-btns">Mesaj Gönder</a>
+							</div>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="card-body">
+						<div style="text-align:center" class="heading-detail">
+							<h4>Danışman Bilgileri</h4>
+							<h5 class="text-danger">Henüz Danışman Atanmamıştır</h5>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
 
