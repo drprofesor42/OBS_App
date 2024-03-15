@@ -6,8 +6,10 @@
 <div class="content container-fluid">
 
 	<div class="row">
-
-		@foreach (var ders in Model)
+		
+		@if (Model.Count() != 0)
+		{
+			@foreach (var ders in Model)
 		{
 			<div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
 				<div class="card invoices-grid-card w-100">
@@ -58,6 +60,13 @@
 
 					</div>
 				</div>
+			</div>
+			}
+		}
+		else
+		{
+			<div class="blog grid-blog flex-fill">
+				<h3 class="text-danger" style="text-align:center"> Sınav Bilgisi Bulunmamaktadır! </h3>
 			</div>
 		}
 
