@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240314122359_askjdhasdjk")]
-    partial class askjdhasdjk
+    [Migration("20240315064705_asdasdlşjkş")]
+    partial class asdasdlşjkş
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace OBS_App.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("DersOgrencis", b =>
+                {
+                    b.Property<int>("DerslerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrencislerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DerslerId", "OgrencislerId");
+
+                    b.HasIndex("OgrencislerId");
+
+                    b.ToTable("DersOgrencis");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -202,9 +217,14 @@ namespace OBS_App.Migrations
                     b.Property<int?>("FakulteId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SinifId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FakulteId");
+
+                    b.HasIndex("SinifId");
 
                     b.ToTable("Bolumler");
                 });
@@ -236,17 +256,27 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("FakulteId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("OgretmensId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("OlusturmaTarihi")
                         .HasColumnType("date");
 
+                    b.Property<int?>("SinifId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BolumId");
 
+                    b.HasIndex("FakulteId");
+
                     b.HasIndex("OgretmensId");
+
+                    b.HasIndex("SinifId");
 
                     b.ToTable("Dersler");
                 });
@@ -359,11 +389,16 @@ namespace OBS_App.Migrations
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OgretmensId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DersId");
 
                     b.HasIndex("OgrencisId");
+
+                    b.HasIndex("OgretmensId");
 
                     b.ToTable("Notlar");
                 });
@@ -380,9 +415,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BolumId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DersId")
                         .HasColumnType("int");
 
                     b.Property<int?>("FakulteId")
@@ -434,15 +466,18 @@ namespace OBS_App.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("varchar(11)");
 
+                    b.Property<int?>("SinifId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AdresId");
 
                     b.HasIndex("BolumId");
 
-                    b.HasIndex("DersId");
-
                     b.HasIndex("FakulteId");
+
+                    b.HasIndex("SinifId");
 
                     b.ToTable("Ogrenciler");
                 });
@@ -511,6 +546,9 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("SinifId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AdresId");
@@ -519,7 +557,31 @@ namespace OBS_App.Migrations
 
                     b.HasIndex("FakulteId");
 
+                    b.HasIndex("SinifId");
+
                     b.ToTable("Ogretmenler");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Sinif", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DonemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SinifNumarasi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DonemId");
+
+                    b.ToTable("Siniflar");
                 });
 
             modelBuilder.Entity("OBS_App.Models.AppRole", b =>
@@ -615,6 +677,36 @@ namespace OBS_App.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("OgrencisOgretmens", b =>
+                {
+                    b.Property<int>("OgrencislerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgretmenslerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OgrencislerId", "OgretmenslerId");
+
+                    b.HasIndex("OgretmenslerId");
+
+                    b.ToTable("OgrencisOgretmens");
+                });
+
+            modelBuilder.Entity("DersOgrencis", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ders", null)
+                        .WithMany()
+                        .HasForeignKey("DerslerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OBS_App.Data.Ogrencis", null)
+                        .WithMany()
+                        .HasForeignKey("OgrencislerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("OBS_App.Models.AppRole", null)
@@ -672,6 +764,10 @@ namespace OBS_App.Migrations
                         .WithMany("Bolumler")
                         .HasForeignKey("FakulteId");
 
+                    b.HasOne("OBS_App.Data.Sinif", null)
+                        .WithMany("Bolumler")
+                        .HasForeignKey("SinifId");
+
                     b.Navigation("Fakulte");
                 });
 
@@ -681,9 +777,17 @@ namespace OBS_App.Migrations
                         .WithMany("Dersler")
                         .HasForeignKey("BolumId");
 
+                    b.HasOne("OBS_App.Data.Fakulte", null)
+                        .WithMany("Dersler")
+                        .HasForeignKey("FakulteId");
+
                     b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
                         .WithMany("Dersler")
                         .HasForeignKey("OgretmensId");
+
+                    b.HasOne("OBS_App.Data.Sinif", null)
+                        .WithMany("Dersler")
+                        .HasForeignKey("SinifId");
 
                     b.Navigation("Bolum");
 
@@ -711,9 +815,15 @@ namespace OBS_App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
+                        .WithMany("Notlar")
+                        .HasForeignKey("OgretmensId");
+
                     b.Navigation("Ders");
 
                     b.Navigation("Ogrencis");
+
+                    b.Navigation("Ogretmens");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
@@ -728,13 +838,13 @@ namespace OBS_App.Migrations
                         .WithMany("Ogrencisler")
                         .HasForeignKey("BolumId");
 
-                    b.HasOne("OBS_App.Data.Ders", null)
-                        .WithMany("Ogrencisler")
-                        .HasForeignKey("DersId");
-
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Ogrencisler")
                         .HasForeignKey("FakulteId");
+
+                    b.HasOne("OBS_App.Data.Sinif", null)
+                        .WithMany("Ogrencisler")
+                        .HasForeignKey("SinifId");
 
                     b.Navigation("Adres");
 
@@ -755,13 +865,43 @@ namespace OBS_App.Migrations
                         .WithMany("Ogretmensler")
                         .HasForeignKey("BolumId");
 
-                    b.HasOne("OBS_App.Data.Fakulte", null)
+                    b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Ogretmensler")
                         .HasForeignKey("FakulteId");
+
+                    b.HasOne("OBS_App.Data.Sinif", null)
+                        .WithMany("Ogretmensler")
+                        .HasForeignKey("SinifId");
 
                     b.Navigation("Adres");
 
                     b.Navigation("Bolum");
+
+                    b.Navigation("Fakulte");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Sinif", b =>
+                {
+                    b.HasOne("OBS_App.Data.Donem", "Donem")
+                        .WithMany("Siniflar")
+                        .HasForeignKey("DonemId");
+
+                    b.Navigation("Donem");
+                });
+
+            modelBuilder.Entity("OgrencisOgretmens", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ogrencis", null)
+                        .WithMany()
+                        .HasForeignKey("OgrencislerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OBS_App.Data.Ogretmens", null)
+                        .WithMany()
+                        .HasForeignKey("OgretmenslerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
@@ -775,14 +915,19 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
-                    b.Navigation("Ogrencisler");
-
                     b.Navigation("notlar");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Donem", b =>
+                {
+                    b.Navigation("Siniflar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Fakulte", b =>
                 {
                     b.Navigation("Bolumler");
+
+                    b.Navigation("Dersler");
 
                     b.Navigation("Ogrencisler");
 
@@ -799,6 +944,19 @@ namespace OBS_App.Migrations
                     b.Navigation("Dersler");
 
                     b.Navigation("Duyurular");
+
+                    b.Navigation("Notlar");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Sinif", b =>
+                {
+                    b.Navigation("Bolumler");
+
+                    b.Navigation("Dersler");
+
+                    b.Navigation("Ogrencisler");
+
+                    b.Navigation("Ogretmensler");
                 });
 #pragma warning restore 612, 618
         }

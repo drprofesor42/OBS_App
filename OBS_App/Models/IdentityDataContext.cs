@@ -22,6 +22,7 @@ namespace OBS_App.Models
         public DbSet<Not> Notlar { get; set; }
         public DbSet<Ogretmens> Ogretmenler { get; set; }
         public DbSet<Donem> Donemler { get; set; }
+        public DbSet<Sinif> Siniflar { get; set; }
 
     }
 }

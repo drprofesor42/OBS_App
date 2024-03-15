@@ -15,5 +15,6 @@ namespace OBS_App.Data
         public string Ilce { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string AcıkAdres { get; set; }
+
     }
 }

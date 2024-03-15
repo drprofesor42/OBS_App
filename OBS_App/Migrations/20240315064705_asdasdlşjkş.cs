@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class askjdhasdjk : Migration
+    public partial class asdasdlşjkş : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -272,6 +272,27 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Siniflar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    SinifNumarasi = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DonemId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Siniflar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Siniflar_Donemler_DonemId",
+                        column: x => x.DonemId,
+                        principalTable: "Donemler",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Bolumler",
                 columns: table => new
                 {
@@ -281,7 +302,8 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     BolumBaskani = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FakulteId = table.Column<int>(type: "int", nullable: true)
+                    FakulteId = table.Column<int>(type: "int", nullable: true),
+                    SinifId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -291,119 +313,10 @@ namespace OBS_App.Migrations
                         column: x => x.FakulteId,
                         principalTable: "Fakulteler",
                         principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Ogretmenler",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OgretmenAd = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenSoyad = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenUnvan = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenEposta = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenParola = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenParolaOnayla = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenOfis = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenGorusme = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenTelefon = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenCinsiyet = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgretmenDogumTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    OgretmenBaslamaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    AdresId = table.Column<int>(type: "int", nullable: false),
-                    BolumId = table.Column<int>(type: "int", nullable: true),
-                    FakulteId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ogretmenler", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ogretmenler_Adresler_AdresId",
-                        column: x => x.AdresId,
-                        principalTable: "Adresler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ogretmenler_Bolumler_BolumId",
-                        column: x => x.BolumId,
-                        principalTable: "Bolumler",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Ogretmenler_Fakulteler_FakulteId",
-                        column: x => x.FakulteId,
-                        principalTable: "Fakulteler",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Dersler",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DersAd = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersKod = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersKredi = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersAkts = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    BolumId = table.Column<int>(type: "int", nullable: true),
-                    OgretmensId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dersler", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Dersler_Bolumler_BolumId",
-                        column: x => x.BolumId,
-                        principalTable: "Bolumler",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Dersler_Ogretmenler_OgretmensId",
-                        column: x => x.OgretmensId,
-                        principalTable: "Ogretmenler",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Duyurular",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DuyuruGonderen = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DuyuruBaslik = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DuyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    OgretmensId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Duyurular", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Duyurular_Ogretmenler_OgretmensId",
-                        column: x => x.OgretmensId,
-                        principalTable: "Ogretmenler",
+                        name: "FK_Bolumler_Siniflar_SinifId",
+                        column: x => x.SinifId,
+                        principalTable: "Siniflar",
                         principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -438,7 +351,7 @@ namespace OBS_App.Migrations
                     AdresId = table.Column<int>(type: "int", nullable: false),
                     BolumId = table.Column<int>(type: "int", nullable: true),
                     FakulteId = table.Column<int>(type: "int", nullable: true),
-                    DersId = table.Column<int>(type: "int", nullable: true)
+                    SinifId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -455,15 +368,197 @@ namespace OBS_App.Migrations
                         principalTable: "Bolumler",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Ogrenciler_Dersler_DersId",
-                        column: x => x.DersId,
-                        principalTable: "Dersler",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Ogrenciler_Fakulteler_FakulteId",
                         column: x => x.FakulteId,
                         principalTable: "Fakulteler",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ogrenciler_Siniflar_SinifId",
+                        column: x => x.SinifId,
+                        principalTable: "Siniflar",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Ogretmenler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    OgretmenAd = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenSoyad = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenUnvan = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenEposta = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenParola = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenParolaOnayla = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenOfis = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenGorusme = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenTelefon = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenCinsiyet = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgretmenDogumTarihi = table.Column<DateOnly>(type: "date", nullable: false),
+                    OgretmenBaslamaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
+                    AdresId = table.Column<int>(type: "int", nullable: false),
+                    BolumId = table.Column<int>(type: "int", nullable: true),
+                    FakulteId = table.Column<int>(type: "int", nullable: true),
+                    SinifId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ogretmenler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ogretmenler_Adresler_AdresId",
+                        column: x => x.AdresId,
+                        principalTable: "Adresler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ogretmenler_Bolumler_BolumId",
+                        column: x => x.BolumId,
+                        principalTable: "Bolumler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ogretmenler_Fakulteler_FakulteId",
+                        column: x => x.FakulteId,
+                        principalTable: "Fakulteler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ogretmenler_Siniflar_SinifId",
+                        column: x => x.SinifId,
+                        principalTable: "Siniflar",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Dersler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DersAd = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DersKod = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DersKredi = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DersAkts = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
+                    BolumId = table.Column<int>(type: "int", nullable: true),
+                    OgretmensId = table.Column<int>(type: "int", nullable: true),
+                    FakulteId = table.Column<int>(type: "int", nullable: true),
+                    SinifId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dersler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dersler_Bolumler_BolumId",
+                        column: x => x.BolumId,
+                        principalTable: "Bolumler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Dersler_Fakulteler_FakulteId",
+                        column: x => x.FakulteId,
+                        principalTable: "Fakulteler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Dersler_Ogretmenler_OgretmensId",
+                        column: x => x.OgretmensId,
+                        principalTable: "Ogretmenler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Dersler_Siniflar_SinifId",
+                        column: x => x.SinifId,
+                        principalTable: "Siniflar",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Duyurular",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DuyuruGonderen = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DuyuruBaslik = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DuyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
+                    OgretmensId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Duyurular", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Duyurular_Ogretmenler_OgretmensId",
+                        column: x => x.OgretmensId,
+                        principalTable: "Ogretmenler",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "OgrencisOgretmens",
+                columns: table => new
+                {
+                    OgrencislerId = table.Column<int>(type: "int", nullable: false),
+                    OgretmenslerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OgrencisOgretmens", x => new { x.OgrencislerId, x.OgretmenslerId });
+                    table.ForeignKey(
+                        name: "FK_OgrencisOgretmens_Ogrenciler_OgrencislerId",
+                        column: x => x.OgrencislerId,
+                        principalTable: "Ogrenciler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OgrencisOgretmens_Ogretmenler_OgretmenslerId",
+                        column: x => x.OgretmenslerId,
+                        principalTable: "Ogretmenler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "DersOgrencis",
+                columns: table => new
+                {
+                    DerslerId = table.Column<int>(type: "int", nullable: false),
+                    OgrencislerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DersOgrencis", x => new { x.DerslerId, x.OgrencislerId });
+                    table.ForeignKey(
+                        name: "FK_DersOgrencis_Dersler_DerslerId",
+                        column: x => x.DerslerId,
+                        principalTable: "Dersler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DersOgrencis_Ogrenciler_OgrencislerId",
+                        column: x => x.OgrencislerId,
+                        principalTable: "Ogrenciler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -478,7 +573,8 @@ namespace OBS_App.Migrations
                     NotFinal = table.Column<int>(type: "int", nullable: true),
                     NotTarihi = table.Column<DateOnly>(type: "date", nullable: true),
                     DersId = table.Column<int>(type: "int", nullable: true),
-                    OgrencisId = table.Column<int>(type: "int", nullable: false)
+                    OgrencisId = table.Column<int>(type: "int", nullable: false),
+                    OgretmensId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -494,6 +590,11 @@ namespace OBS_App.Migrations
                         principalTable: "Ogrenciler",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Notlar_Ogretmenler_OgretmensId",
+                        column: x => x.OgretmensId,
+                        principalTable: "Ogretmenler",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -540,14 +641,34 @@ namespace OBS_App.Migrations
                 column: "FakulteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bolumler_SinifId",
+                table: "Bolumler",
+                column: "SinifId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Dersler_BolumId",
                 table: "Dersler",
                 column: "BolumId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Dersler_FakulteId",
+                table: "Dersler",
+                column: "FakulteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Dersler_OgretmensId",
                 table: "Dersler",
                 column: "OgretmensId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dersler_SinifId",
+                table: "Dersler",
+                column: "SinifId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DersOgrencis_OgrencislerId",
+                table: "DersOgrencis",
+                column: "OgrencislerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Duyurular_OgretmensId",
@@ -565,6 +686,11 @@ namespace OBS_App.Migrations
                 column: "OgrencisId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notlar_OgretmensId",
+                table: "Notlar",
+                column: "OgretmensId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ogrenciler_AdresId",
                 table: "Ogrenciler",
                 column: "AdresId");
@@ -575,14 +701,19 @@ namespace OBS_App.Migrations
                 column: "BolumId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ogrenciler_DersId",
-                table: "Ogrenciler",
-                column: "DersId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ogrenciler_FakulteId",
                 table: "Ogrenciler",
                 column: "FakulteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ogrenciler_SinifId",
+                table: "Ogrenciler",
+                column: "SinifId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OgrencisOgretmens_OgretmenslerId",
+                table: "OgrencisOgretmens",
+                column: "OgretmenslerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ogretmenler_AdresId",
@@ -598,6 +729,16 @@ namespace OBS_App.Migrations
                 name: "IX_Ogretmenler_FakulteId",
                 table: "Ogretmenler",
                 column: "FakulteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ogretmenler_SinifId",
+                table: "Ogretmenler",
+                column: "SinifId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Siniflar_DonemId",
+                table: "Siniflar",
+                column: "DonemId");
         }
 
         /// <inheritdoc />
@@ -622,7 +763,7 @@ namespace OBS_App.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Donemler");
+                name: "DersOgrencis");
 
             migrationBuilder.DropTable(
                 name: "Duyurular");
@@ -631,16 +772,19 @@ namespace OBS_App.Migrations
                 name: "Notlar");
 
             migrationBuilder.DropTable(
+                name: "OgrencisOgretmens");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Ogrenciler");
+                name: "Dersler");
 
             migrationBuilder.DropTable(
-                name: "Dersler");
+                name: "Ogrenciler");
 
             migrationBuilder.DropTable(
                 name: "Ogretmenler");
@@ -653,6 +797,12 @@ namespace OBS_App.Migrations
 
             migrationBuilder.DropTable(
                 name: "Fakulteler");
+
+            migrationBuilder.DropTable(
+                name: "Siniflar");
+
+            migrationBuilder.DropTable(
+                name: "Donemler");
         }
     }
 }
