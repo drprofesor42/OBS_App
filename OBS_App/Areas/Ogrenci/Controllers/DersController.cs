@@ -31,9 +31,16 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			{
 				// Kullanıcının derslerini çek
 				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
-				//var dersler = _context.OgrenciDersler.Where(x => x.ogrenciId == ogrenci.Id).ToList();
+				var dersler = _context.Ogrenciler
+					.Include(x => x.Bolum)
+					.ThenInclude(c => c.Dersler)
+					.Include(z => z.Dersler)
+					.ThenInclude(q => q.notlar)
+					.Include(x => x.Dersler)
+					.ThenInclude(x => x.Ogretmens)
+					.ToList();
 
-				return View();
+				return View(dersler);
 			}
 
 			// Hata Gönder
@@ -52,7 +59,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			{
 				// Kullanıcının derslerini çek
 				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
-				var dersler = _context.Notlar.Where(x => x.OgrencisId == ogrenci.Id).ToList();
+				var dersler = _context.Notlar.Include(x => x.Ogretmens).Include(x => x.Ders).Where(x => x.OgrencisId == ogrenci.Id).ToList();
 
 				return View(dersler);
 			}
