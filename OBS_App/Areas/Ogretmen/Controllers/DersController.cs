@@ -23,10 +23,10 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             if (kullanıcı != null)
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(d => d.OgretmenEposta == kullanıcı.Email);
-                //var dersler = _context.Dersler.Where(x => x.profesorId == ogretmen.Id).ToList();
-                var deneme = _context.Dersler.Include(x => x.Ogretmens).ToList();
+                var dersler = _context.Dersler.Where(x => x.OgretmensId == ogretmen.Id).ToList();
+                //var deneme = _context.Dersler.Include(x => x.Ogretmens).Where(x => x.OgretmensId == ogretmen.Id).ToList();
 
-                return View(deneme);
+                return View(dersler);
             }
             return View();
         }

@@ -1,18 +1,18 @@
 ﻿@{
-	ViewData["Title"] = "Derslerim";
+	ViewData["Title"] = "DanısmanOgrenciler";
 }
-@model IEnumerable<Ders>
+@model List<Ogrencis>
 
 <div class="student-group-form">
 	<div class="row">
 		<div class="col-lg-3 col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders İsmine Göre Ara ...">
+				<input type="text" class="form-control" placeholder="Öğrenci İsmine Göre Ara ...">
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders Koduna Göre Ara ...">
+				<input type="text" class="form-control" placeholder="Bölüm İsmine Göre Ara ...">
 			</div>
 		</div>
 		<div class="col-lg-2">
@@ -32,7 +32,7 @@
 				<div class="page-header">
 					<div class="row align-items-center">
 						<div class="col">
-							<h3 class="page-title">Verilen Dersler</h3>
+							<h3 class="page-title">Danışman Öğrenciler</h3>
 						</div>
 						<div class="col-auto text-end float-end ms-auto download-grp">
 							<a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
@@ -44,33 +44,31 @@
 				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
 					<thead class="student-thread">
 						<tr>
-							<th>Ders Kodu</th>
-							<th>Ders Adı</th>
-							<th>Dersi Alan Kişi Sayısı</th>
-							<th>Ders Kredi</th>
-							<th>Ders Akts</th>
+							<th>Öğrenci Adı-Soyadı</th>
+							<th>Öğrenci Bölüm</th>
+							<th>Öğrenci Doğum Tarihi</th>
+							<th>Öğrenci E-Posta</th>
 							<th class="text-end">İşlemler?</th>
 						</tr>
 					</thead>
 					<tbody>
 
-						@foreach (var ders in Model)
+						@foreach (var ogrenci in Model)
 						{
 							<tr>
-								<td>@ders.DersKod</td>
-								<td>@ders.DersAd</td>
-								<td>@ders.Ogrencisler.Count()</td>
-								<td>@ders.DersKredi</td>
-								<td>@ders.DersAkts</td>
+								<td>@ogrenci.OgrenciAd @ogrenci.OgrenciSoyad</td>
+								<td>@ogrenci.Bolum?.BolumAd</td>
+								<td>@ogrenci.OgrenciDogumTarihi</td>
+								<td>@ogrenci.OgrenciEposta</td>
 								<td class="text-end">
 									<div class="actions">
 										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
 											<i class="feather-eye"></i>
 										</a>
-										<a asp-controller="x" asp-action="x" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
+										<a asp-controller="x" asp-action="x" asp-route-id="@ogrenci.Id" class="btn btn-sm bg-danger-light me-2">
 											<i class="feather-edit"></i>
 										</a>
-										<a asp-controller="x" asp-action="x" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light">
+										<a asp-controller="x" asp-action="x" asp-route-id="@ogrenci.Id" class="btn btn-sm bg-success-light">
 											<i class="feather-trash-2"></i>
 										</a>
 									</div>
@@ -84,5 +82,3 @@
 		</div>
 	</div>
 </div>
-
-

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Ogretmen.Controllers
@@ -23,16 +24,18 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
                 // Öğretmen İsmine Göre Aramamalı
-                var danisanlar = _context.Ogrenciler.Where(d => d.OgrenciDanisman == ogretmen.OgretmenAd).ToList();
+                var danisanlar = _context.Ogrenciler.Include(x => x.Bolum).Where(d => d.OgrenciDanisman == ogretmen.OgretmenAd).ToList();
 
                 return View(danisanlar);
             }
             return View();
         }
 
-        public IActionResult AkademikTakvim()
+        public async Task<IActionResult> AkademikTakvim()
         {
-            return View();
+            var takvimler = await _context.AkademikTakvimler.ToListAsync();
+
+            return View(takvimler);
         }
 
 

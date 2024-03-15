@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "AkademikTakvim";
+}
+@model IEnumerable<AkademikTakvim>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+
+
+<div class="col-12 col-sm-4">
+    <div class="form-group local-forms">
+        <label>Dönem Seçiniz</label>
+        <select class="form-control select">
+            <option>2019-2020</option>
+            <option>2020-2021</option>
+            <option>2021-2022</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table comman-shadow">
+            <div class="card-body">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Akademik Etkinlik Listesi</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                        <thead class="student-thread">
+                            <tr>
+                                <th>Id</th>
+                                <th>Başlangıç Tarihi</th>
+                                <th>Bitiş Tarihi</th>
+                                <th>Aktivite</th>
+                                <th class="text-end">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tak in Model)
+                            {
+
+                                <tr>
+                                    <td>@tak.Id</td>
+                                    <td>@tak.AkademikTakvimBaslangic</td>
+                                    <td>@tak.AkademikTakvimBitis</td>
+                                    <td>@tak.AkademikTakvimAktivite</td>
+                                    <td>
+                                        <div class="actions">
+                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a asp-action="Ekle_Guncelle" asp-controller="Takvim" asp-route-id="@tak.Id" class="btn btn-sm bg-danger-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a onclick="confirmDelete(@tak.Id)" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-trash-2"></i>
+                                            </a>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}
+@section Scripts {
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Silmek İstediğinize Emin Misiniz?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Evet!",
+                cancelButtonText: "İptal!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Sil", "Takvim")', { id: id })
+                        .done(() => swalWithBootstrapButtons.fire(
+                            "İşlem Başarılı!",
+                            "",
+                            "success"
+                        ).then(() => window.location.href = '@Url.Action("Index", "Takvim")'));
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "İşlem İptal Edildi!",
+                        text: "",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    </script>
+}
