@@ -34,14 +34,18 @@ namespace OBS_App.Data
         public string OgrenciTelefon { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        [MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
+        [DataType(DataType.Password)]
+        [MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParola { get; set; }
 
+
         [Required(ErrorMessage = "*Zorunlu Alan")]
-		[Compare("OgrenciParola", ErrorMessage = "Şifreler eşleşmiyor.")]
-		[MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
+        [DataType(DataType.Password)]
+        [Compare("OgrenciParola", ErrorMessage = "Şifreler eşleşmiyor.")]
+		[MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParolaOnayla { get; set; }
         public string? OgrenciDanisman { get; set; }
+
         public DateOnly OgrenciKayitTarihi { get; set; }
         public DateOnly OgrenciDogumTarihi { get; set; }
         public int AdresId { get; set; }
