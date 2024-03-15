@@ -53,6 +53,17 @@ namespace OBS_App.Areas.Admin.Controllers
 		[HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ders model, string type)
         {
+            var ogretmen = await _context.Ogretmenler
+                .FirstOrDefaultAsync(x => x.Id == model.OgretmensId);
+            var bolum = await _context.Bolumler
+                .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+
+            if (ogretmen != null)
+            {
+                model.Ogretmens = ogretmen;
+                model.Bolum = bolum;
+            }
+
 
             if (ModelState.IsValid)
             {

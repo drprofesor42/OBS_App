@@ -48,39 +48,17 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int Kaydet)
         {
+            var fakulte = await _context.Fakulteler.FirstOrDefaultAsync(x => x.Id == model.FakulteId);
+            if (fakulte != null)
+            {
+                model.Fakulte = fakulte;
+
+            }
 
             var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
             if (bolumbaskani != null)
             {
-                if (ModelState.IsValid)
-                {
-                    //Ekleme İşlemi
-                    if (Kaydet == 1)
-                    {
-                        model.BolumBaskani = bolumbaskani.OgretmenAd;
-                        TempData["success"] = "Kayıt eklendi.";
-                        await _context.Bolumler.AddAsync(model);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction("Index");
-                    }
-                    //Güncelleme İşlemi
-                    if (Kaydet == 2)
-                    {
-                        model.BolumBaskani = bolumbaskani.OgretmenAd;
-                        TempData["success"] = "Kayıt güncellendi.";
-                        _context.Bolumler.Update(model);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-
-                    }
-
-                }
-                ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-                return View(model);
+                model.BolumBaskani = bolumbaskani.OgretmenAd;
             }
             else
             {
@@ -89,8 +67,34 @@ namespace OBS_App.Areas.Admin.Controllers
                 ModelState.AddModelError("BolumBaskani", "*Boş bırakılamaz");
                 return View(model);
             }
+            if (ModelState.IsValid)
+            {
+                //Ekleme İşlemi
+                if (Kaydet == 1)
+                {
 
+                    TempData["success"] = "Kayıt eklendi.";
+                    await _context.Bolumler.AddAsync(model);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                //Güncelleme İşlemi
+                if (Kaydet == 2)
+                {
+                    TempData["success"] = "Kayıt güncellendi.";
+                    _context.Bolumler.Update(model);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
 
+                }
+
+            }
+            ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
+            ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+            return View(model);
         }
         public async Task<IActionResult> Sil(int? id)
         {
