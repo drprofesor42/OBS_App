@@ -117,6 +117,7 @@
                         </div>
                         <a class="dropdown-item" href="profile.html">Profilim</a>
                         <a class="dropdown-item" href="inbox.html">Gelen Kutusu</a>
+                        <a class="dropdown-item" asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="">Şifre Değiştir</a>
                         <a class="dropdown-item" asp-action="Logout" asp-controller="Account" asp-area="">Çıkış Yap</a>
                     </div>
                 </li>
@@ -205,10 +206,14 @@
                                 <li><a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0">Etkinlik Ekle</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="settings.html"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
-                        </li>
 
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-calendar-alt"></i> <span>Şifre Değiştirme İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="1">Öğrenci Şifre Değiştir</a></li>
+                                <li><a asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="2">Öğretmen Şifre Değiştir</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -228,8 +233,9 @@
         </footer>
     </div>
    
-
+   
 </body>
+
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

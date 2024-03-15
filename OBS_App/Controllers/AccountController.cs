@@ -33,6 +33,7 @@ namespace OBS_App.Controllers
         
         public IActionResult Login()
         {
+
             return View();
         }
 
@@ -84,9 +85,6 @@ namespace OBS_App.Controllers
                 {
                     ModelState.AddModelError("", "*Bu Email Adresi İle Bir Hesap Bulunumadı");
                 }
-
-               
-
 
             }
             return View(model);
