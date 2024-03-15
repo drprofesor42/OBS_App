@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +16,12 @@ namespace OBS_App.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly IdentityDataContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public AdminController(IdentityDataContext context)
+        public AdminController(IdentityDataContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -87,30 +90,55 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //ogrenci
                 if (id == 1)
                 {
+                    var users = await _userManager.FindByEmailAsync(model.Eposta);
+
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users, token, model.Eposta);
+                    }
                     ViewBag.user = new SelectList(await _context.Ogrenciler.ToListAsync(), "OgrenciEposta", "OgrenciEposta");
-                    return View();
+                    return RedirectToAction("Index");
                 }
+                //ogretmen
                 else if (id == 2)
                 {
+                    var users = await _userManager.FindByEmailAsync(model.Eposta);
 
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users, token, model.Eposta);
+                    }
                     ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
-                    return View();
+                    return RedirectToAction("Index");
 
+                }else//admin
+                {
+                    var users = await _userManager.GetUserAsync(HttpContext.User);
+
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users, token, users.Email);
+                    }
+                    return RedirectToAction("Index");
                 }
-                return View(model);
+                
             }
             if (id == 1)
             {
                 ViewBag.user = new SelectList(await _context.Ogrenciler.ToListAsync(), "OgrenciEposta", "OgrenciEposta");
-                return View();
+                return View(model);
             }
             else if (id == 2)
             {
 
                 ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
-                return View();
+                return View(model);
 
             }
             return View(model);

@@ -56,13 +56,12 @@ namespace OBS_App.Areas.Admin.Controllers
             var bolum = await _context.Bolumler
                 .Include(x => x.Dersler)
                 .ThenInclude(x => x.Ogretmens)
-                .Include(x => x.Fakulte) 
+                .Include(x => x.Fakulte)
                 .FirstOrDefaultAsync(x => x.Id == model.BolumId);
             if (bolum != null)
             {
                 model.Fakulte = bolum.Fakulte;
                 model.FakulteId = bolum.FakulteId;
-                model.Dersler = bolum.Dersler;
                 model.Ogretmensler = bolum.Ogretmensler;
             }
             if (ModelState.IsValid)
@@ -79,8 +78,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula == null)
                     {
                         var user = new AppUser()
-                        {
-                            DuyuruName = model.OgrenciAd,
+                        {   
                             UserName = model.OgrenciEposta,
                             Email = model.OgrenciEposta
                         };
@@ -100,6 +98,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         return View(model);
 
                     }
+                    model.Dersler = bolum.Dersler;
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
@@ -108,6 +107,13 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "1")
                 {
+                    var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+                    
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users,token,model.OgrenciParola);
+                    }
 
                     _context.Update(model);
                     _context.SaveChanges();

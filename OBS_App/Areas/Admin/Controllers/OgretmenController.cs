@@ -95,7 +95,13 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var users = await _userManager.FindByEmailAsync(model.OgretmenEposta);
 
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users, token, model.OgretmenEposta);
+                    }
                     _context.Update(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt güncellendi.";

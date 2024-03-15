@@ -7,15 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:OBS_App/Migrations/20240314131123_init.cs
-    public partial class init : Migration
-========
-<<<<<<<< HEAD:OBS_App/Migrations/20240315065246_init.cs
-    public partial class init : Migration
-========
     public partial class asdasdlşjkş : Migration
->>>>>>>> Bilimist:OBS_App/Migrations/20240315074122_asdasdlşjkş.cs
->>>>>>>> NewMaster:OBS_App/Migrations/20240315065246_init.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
