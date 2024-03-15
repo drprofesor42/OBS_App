@@ -17,5 +17,6 @@ namespace OBS_App.Data
         public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
         public ICollection<Bolum> Bolumler { get; set; } = new List<Bolum>();
         public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
+        public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
     }
 }
