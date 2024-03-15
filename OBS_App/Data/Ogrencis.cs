@@ -42,11 +42,8 @@ namespace OBS_App.Data
 		[MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParolaOnayla { get; set; }
         public string? OgrenciDanisman { get; set; }
-
         public DateOnly OgrenciKayitTarihi { get; set; }
-
         public DateOnly OgrenciDogumTarihi { get; set; }
-
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
         public int? BolumId { get; set; }
@@ -54,6 +51,8 @@ namespace OBS_App.Data
         public int? FakulteId { get; set; }
         public Fakulte? Fakulte { get; set; }
         public ICollection<Not> Notlar { get; set; } = new List<Not>();
+        public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
+        public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
 
     }
 

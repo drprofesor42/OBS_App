@@ -1,0 +1,82 @@
+﻿@{
+	ViewData["Title"] = "DanısmanOgrenciler";
+}
+@model List<Ogrencis>
+
+<div class="student-group-form">
+	<div class="row">
+		<div class="col-lg-3 col-md-6">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Öğrenci İsmine Göre Ara ...">
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Öğrenci Bölüm İsmine Göre Ara ...">
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Öğrenci E-Postasına Göre Ara ...">
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="search-student-btn text-end">
+				<button type="btn" class="btn btn-primary">Ara</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card card-table">
+			<div class="card-body">
+
+				<div class="page-header">
+					<div class="row align-items-center">
+						<div class="col">
+							<h3 class="page-title">Danışman Öğrenciler</h3>
+						</div>
+					</div>
+				</div>
+
+				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+					<thead class="student-thread">
+						<tr>
+							<th>Öğrenci Adı-Soyadı</th>
+							<th>Öğrenci Bölüm</th>
+							<th>Öğrenci Doğum Tarihi</th>
+							<th>Öğrenci E-Posta</th>
+							<th class="text-end">İşlemler</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						@foreach (var ogrenci in Model)
+						{
+							<tr>
+								<td>@ogrenci.OgrenciAd @ogrenci.OgrenciSoyad</td>
+								<td>@ogrenci.Bolum?.BolumAd</td>
+								<td>@ogrenci.OgrenciDogumTarihi</td>
+								<td>@ogrenci.OgrenciEposta</td>
+								<td class="text-end">
+									<div class="actions">
+										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+											<i class="feather-eye"></i>
+										</a>
+										<a asp-controller="x" asp-action="x" asp-route-id="@ogrenci.Id" class="btn btn-sm bg-danger-light">
+											<i class="feather-edit"></i>
+										</a>
+									</div>
+								</td>
+							</tr>
+						}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

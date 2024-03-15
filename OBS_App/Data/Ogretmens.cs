@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using OBS_App.Models;
 
@@ -41,9 +42,12 @@ namespace OBS_App.Data
         public Adres Adres { get; set; }
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
+        public int? FakulteId { get; set; }
+        public  Fakulte? Fakulte { get; set; }
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
         public ICollection<Duyuru> Duyurular { get; set; } = new List<Duyuru>();
-
+        public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
+        public ICollection<Not> Notlar { get; set; } = new List<Not>();
 
     }
 }
