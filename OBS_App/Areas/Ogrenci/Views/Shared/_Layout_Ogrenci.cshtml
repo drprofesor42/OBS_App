@@ -29,10 +29,10 @@
         <div class="header">
 
             <div class="header-left">
-                <a asp-controller="Home" asp-action="index" class="logo">
+                <a asp-controller="Ogrenci" asp-action="Index" class="logo">
                     <img src="~/panel/img/profiles/logo.png" alt="Logo">
                 </a>
-                <a asp-controller="Home" asp-action="index" class="logo logo-small">
+                <a asp-controller="Ogrenci" asp-action="Index" class="logo logo-small">
                     <img src="~/panel/img/profiles/logo-small.png" alt="Logo" width="30" height="30">
                 </a>
             </div>
@@ -43,13 +43,9 @@
                 </a>
             </div>
 
-
-
-
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fas fa-bars"></i>
             </a>
-
 
             <ul class="nav user-menu">
                 <li class="nav-item dropdown language-drop me-2">
@@ -171,12 +167,6 @@
                         <li>
                             <a asp-controller="Ogrenci" asp-action="Duyurular"><i class="fas fa-bullhorn"></i> <span>Duyurular</span></a>
                         </li>
-                        <li>
-                            <a asp-controller="Ogrenci" asp-action="Etkinlikler"><i class="fas fa-calendar-day"></i> <span>Etkinlikler</span></a>
-                        </li>
-                        <li>
-                            <a asp-controller="Ogrenci" asp-action="Ayarlar"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
-                        </li>
 
                     </ul>
                 </div>
@@ -228,6 +218,6 @@
 
     <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

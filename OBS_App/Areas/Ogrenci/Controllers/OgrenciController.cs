@@ -41,21 +41,18 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			return View();
 		}
 
-		public IActionResult AkademikTakvim()
+		public async Task<IActionResult> AkademikTakvim()
 		{
-			return View();
-		}
+            var takvimler = await _context.AkademikTakvimler.ToListAsync();
+
+            return View(takvimler);
+        }
 
 		public IActionResult Duyurular()
 		{
 			var duyurular = _context.Duyurular.ToList();
 			return View(duyurular);
 
-		}
-
-		public IActionResult Ayarlar()
-		{
-			return View();
 		}
 
 	}
