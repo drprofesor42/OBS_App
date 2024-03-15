@@ -1,0 +1,67 @@
+﻿@{
+	ViewData["Title"] = "SınavSonuc";
+}
+@model List<Not>
+
+<div class="content container-fluid">
+
+	<div class="row">
+
+		@foreach (var ders in Model)
+		{
+			<div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
+				<div class="card invoices-grid-card w-100">
+					<div class="card-header d-flex justify-content-between align-items-center">
+						<a href="view-invoice.html" class="invoice-grid-link">@ders.DersId</a>
+					</div>
+					<div class="card-middle">
+						<h2 class="card-middle-avatar">
+							<a><img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="~/panel/img/profiles/avatar-04.jpg" alt="User Image"> *Öğretmen Adı*</a>
+						</h2>
+					</div>
+					<div class="card-body">
+						<div class="row align-items-center">
+							<div class="col">
+								<span><i class="far fa-file-lines"></i> Ödev</span>
+								<h6 class="mb-0">@ders.NotOdev</h6>
+							</div>
+							<div class="col">
+								<span><i class="fas fa-pencil"></i> Vize</span>
+								<h6 class="mb-0">@ders.NotVize</h6>
+							</div>
+							<div class="col">
+								<span><i class="fas fa-pencil"></i> Final</span>
+								<h6 class="mb-0">@ders.NotFinal</h6>
+							</div>
+						</div>
+						<br />
+						<div class="row align-items-center">
+							<div class="col">
+								<span><i class="far fa-clock"></i> Saat</span>
+								<h6 class="mb-0">*Sınav Saat*</h6>
+							</div>
+							<div class="col-auto">
+								<span><i class="far fa-calendar-alt"></i> Tarih</span>
+								<h6 class="mb-0">@ders.NotTarihi</h6>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<div class="row align-items-center">
+							<div class="col-auto">
+								<span class="badge bg-success-dark">Bitti</span>
+							</div>
+							<div class="col text-end">
+								<span class="text-danger text-sm">12 gün önce bitti</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		}
+
+	</div>
+</div>
+
+
