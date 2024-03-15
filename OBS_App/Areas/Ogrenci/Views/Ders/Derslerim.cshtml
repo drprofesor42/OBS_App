@@ -56,23 +56,23 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var ders in Model)
+                        @foreach (var ogrenci in Model)
                         {
-                            @foreach (var item in ders.Dersler)
+                            @foreach (var ders in ogrenci.Dersler)
                             {
                                 <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.DersAd</td>
+                                    <td>@ders.Id</td>
+                                    <td>@ders.DersAd</td>
 
                                     <td>
                                         <h2>
-                                            <a>@item.Ogretmens?.OgretmenAd</a>
+                                            <a>@ders.Ogretmens?.OgretmenAd</a>
                                         </h2>
                                     </td>
-                                    <td>@item.DersKredi</td>
-                                    <td>@item.DersAkts</td>
+                                    <td>@ders.DersKredi</td>
+                                    <td>@ders.DersAkts</td>
 
-                                    @foreach (var notlar in item.notlar)
+                                    @foreach (var notlar in ders.notlar)
                                     {
                                         <td>@notlar.NotVize</td>
                                         <td>@notlar.NotFinal</td>
