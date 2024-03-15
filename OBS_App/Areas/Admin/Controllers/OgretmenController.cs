@@ -44,74 +44,69 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int? Kaydet)
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int Kaydet)
         {
-            if (Kaydet == null)
-            {
-                // hata
 
-                return View();
-            }
-            else
+            //ekleme
+            if (Kaydet == 1)
             {
-                //ekleme
-                if (Kaydet == 1)
+                
+
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
+                    var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
+                    if (dogrula == null)
                     {
-                        var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
-                        if (dogrula == null)
+                        var user = new AppUser()
                         {
-                            var user = new AppUser()
-                            {
-                                DuyuruName = model.OgretmenAd,
-                                UserName = model.OgretmenEposta,
-                                Email = model.OgretmenEposta
-                            };
-                            await _userManager.CreateAsync(user, model.OgretmenParola);
-                            var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
+                            DuyuruName = model.OgretmenAd,
+                            UserName = model.OgretmenEposta,
+                            Email = model.OgretmenEposta
+                        };
+                        await _userManager.CreateAsync(user, model.OgretmenParola);
+                        var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
 
 
-                            if (ogretmen != null)
-                            {
-                                await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
-                            }
-                        }
-                        else
+                        if (ogretmen != null)
                         {
-                            ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
-                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                            return View(model);
-
+                            await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
                         }
-
-                        await _context.Ogretmenler.AddAsync(model);
-                        await _context.SaveChangesAsync();
-                        TempData["success"] = "Kayıt eklendi.";
-                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        //hata mesajı
+                        ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
+                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                        return View(model);
+
                     }
+
+                    await _context.Ogretmenler.AddAsync(model);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt eklendi.";
+                    return RedirectToAction("Index");
                 }
-                //Güncelleme işlemi
-                if (Kaydet == 2)
+                else
                 {
-                    if (ModelState.IsValid)
-                    {
-
-                        _context.Update(model);
-                        await _context.SaveChangesAsync();
-                        TempData["success"] = "Kayıt güncellendi.";
-
-                        return RedirectToAction("Index");
-
-                    }
+                    //hata mesajı
                 }
-                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                return View(model);
             }
+            //Güncelleme işlemi
+            if (Kaydet == 2)
+            {
+                if (ModelState.IsValid)
+                {
+
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt güncellendi.";
+
+                    return RedirectToAction("Index");
+
+                }
+            }
+            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+            return View(model);
+
         }
         public async Task<IActionResult> Sil(int? id)
         {

@@ -29,6 +29,8 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
 
+
+
 			if (id == 0)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
