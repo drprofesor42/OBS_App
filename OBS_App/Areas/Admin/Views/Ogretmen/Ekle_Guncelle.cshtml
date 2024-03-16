@@ -20,7 +20,7 @@
                 <form asp-action="Ekle_Guncelle" asp-controller="Ogretmen" method="post">
                     <div class="row">
                         <div class="col-12">
-                            <h5 class="form-title"><span>Öğretmen Ekle</span></h5>
+                            <h5 class="form-title"><span>Öğretmen Ekle / Düzenle</span></h5>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
@@ -101,14 +101,14 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Şifre<span class="login-danger">*</span></label>
-                                <input asp-for="OgretmenParola" type="password" class="form-control">
+                                <input asp-for="OgretmenParola" type="text" class="form-control">
                                 <span asp-validation-for="OgretmenParola" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Şifre Tekrarı<span class="login-danger">*</span></label>
-                                <input asp-for="OgretmenParolaOnayla" type="password" class="form-control">
+                                <input asp-for="OgretmenParolaOnayla" type="text" class="form-control">
                                 <span asp-validation-for="OgretmenParolaOnayla" class="text-danger"></span>
                             </div>
                         </div>
