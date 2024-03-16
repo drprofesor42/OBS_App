@@ -62,10 +62,8 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-                ModelState.AddModelError("BolumBaskani", "*Boş bırakılamaz");
-                return View(model);
+                model.BolumBaskani = "Seçilmedi";
+
             }
             if (ModelState.IsValid)
             {

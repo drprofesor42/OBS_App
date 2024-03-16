@@ -184,10 +184,12 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("AkademikTakvimBaslangic")
+                    b.Property<DateOnly?>("AkademikTakvimBaslangic")
+                        .IsRequired()
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("AkademikTakvimBitis")
+                    b.Property<DateOnly?>("AkademikTakvimBitis")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -208,10 +210,10 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("BolumBaskani")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int?>("FakulteId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("SinifId")
@@ -235,6 +237,7 @@ namespace OBS_App.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("BolumId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("DersAd")
@@ -321,7 +324,8 @@ namespace OBS_App.Migrations
                     b.Property<int?>("OgretmensId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("OlusturmaTarihi")
+                    b.Property<DateOnly?>("OlusturmaTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -352,7 +356,8 @@ namespace OBS_App.Migrations
                     b.Property<int>("FakulteOgretmenSayisi")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("OlusturmaTarihi")
+                    b.Property<DateOnly?>("OlusturmaTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -412,6 +417,7 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BolumId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("FakulteId")
@@ -428,14 +434,16 @@ namespace OBS_App.Migrations
                     b.Property<string>("OgrenciDanisman")
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgrenciDogumTarihi")
+                    b.Property<DateOnly?>("OgrenciDogumTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgrenciEposta")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgrenciKayitTarihi")
+                    b.Property<DateOnly?>("OgrenciKayitTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgrenciParola")
@@ -446,7 +454,8 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("OgrenciSinif")
+                    b.Property<int?>("OgrenciSinif")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("OgrenciSoyad")
@@ -491,6 +500,7 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BolumId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("FakulteId")
@@ -500,14 +510,16 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                    b.Property<DateOnly?>("OgretmenBaslamaTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                    b.Property<DateOnly?>("OgretmenDogumTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")
@@ -759,7 +771,9 @@ namespace OBS_App.Migrations
                 {
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Bolumler")
-                        .HasForeignKey("FakulteId");
+                        .HasForeignKey("FakulteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OBS_App.Data.Sinif", null)
                         .WithMany("Bolumler")
@@ -772,7 +786,9 @@ namespace OBS_App.Migrations
                 {
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany("Dersler")
-                        .HasForeignKey("BolumId");
+                        .HasForeignKey("BolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OBS_App.Data.Fakulte", null)
                         .WithMany("Dersler")
@@ -833,7 +849,9 @@ namespace OBS_App.Migrations
 
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany("Ogrencisler")
-                        .HasForeignKey("BolumId");
+                        .HasForeignKey("BolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Ogrencisler")
@@ -860,7 +878,9 @@ namespace OBS_App.Migrations
 
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany("Ogretmensler")
-                        .HasForeignKey("BolumId");
+                        .HasForeignKey("BolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Ogretmensler")

@@ -13,7 +13,7 @@ namespace OBS_App.Data
         public Int32 FakulteDersSayisi { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        public DateOnly OlusturmaTarihi { get; set; }
+        public DateOnly? OlusturmaTarihi { get; set; }
         public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
         public ICollection<Bolum> Bolumler { get; set; } = new List<Bolum>();
         public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();

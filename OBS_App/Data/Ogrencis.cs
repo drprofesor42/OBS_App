@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,10 +24,10 @@ namespace OBS_App.Data
         public string OgrenciEposta { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        public string OgrenciCinsiyet { get; set; }
+        public string? OgrenciCinsiyet { get; set; }    
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        public int OgrenciSinif { get; set; }
+        public int? OgrenciSinif { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
 		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
@@ -38,18 +39,23 @@ namespace OBS_App.Data
         [MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParola { get; set; }
 
-
         [Required(ErrorMessage = "*Zorunlu Alan")]
         [DataType(DataType.Password)]
         [Compare("OgrenciParola", ErrorMessage = "Şifreler eşleşmiyor.")]
 		[MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParolaOnayla { get; set; }
+
         public string? OgrenciDanisman { get; set; }
 
-        public DateOnly OgrenciKayitTarihi { get; set; }
-        public DateOnly OgrenciDogumTarihi { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public DateOnly? OgrenciKayitTarihi { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public DateOnly? OgrenciDogumTarihi { get; set; }
+
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
         public int? FakulteId { get; set; }
