@@ -14,7 +14,8 @@ namespace OBS_App.Data
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DuyuruMesaj { get; set; }
-        public DateOnly OlusturmaTarihi { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public DateOnly? OlusturmaTarihi { get; set; }
         public int? OgretmensId { get; set; }
         public Ogretmens? Ogretmens { get; set; }
     }

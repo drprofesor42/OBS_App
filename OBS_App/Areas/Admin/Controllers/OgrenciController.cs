@@ -52,7 +52,6 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
         {
-            var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
             var bolum = await _context.Bolumler
                 .Include(x => x.Dersler)
                 .ThenInclude(x => x.Ogretmens)
@@ -64,8 +63,12 @@ namespace OBS_App.Areas.Admin.Controllers
                 model.FakulteId = bolum.FakulteId;
                 model.Ogretmensler = bolum.Ogretmensler;
             }
+
             if (ModelState.IsValid)
             {
+               
+                var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+
                 if (model == null || type == null)
                 {
                     ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
