@@ -56,13 +56,12 @@ namespace OBS_App.Areas.Admin.Controllers
             var bolum = await _context.Bolumler
                 .Include(x => x.Dersler)
                 .ThenInclude(x => x.Ogretmens)
-                .Include(x => x.Fakulte) 
+                .Include(x => x.Fakulte)
                 .FirstOrDefaultAsync(x => x.Id == model.BolumId);
             if (bolum != null)
             {
                 model.Fakulte = bolum.Fakulte;
                 model.FakulteId = bolum.FakulteId;
-                model.Dersler = bolum.Dersler;
                 model.Ogretmensler = bolum.Ogretmensler;
             }
             if (ModelState.IsValid)
@@ -79,8 +78,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula == null)
                     {
                         var user = new AppUser()
-                        {
-                            DuyuruName = model.OgrenciAd,
+                        {   
                             UserName = model.OgrenciEposta,
                             Email = model.OgrenciEposta
                         };
@@ -88,18 +86,19 @@ namespace OBS_App.Areas.Admin.Controllers
                         var ogrenci = await _userManager.FindByNameAsync(model.OgrenciEposta);
 
 
-                        if (ogrenci != null)
-                        {
-                            await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
+                            if (ogrenci != null)
+                            {
+                                await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
+                            }
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
-                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                        return View(model);
+                        else
+                        {
+                            ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
+                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                            return View(model);
 
                     }
+                    model.Dersler = bolum.Dersler;
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
@@ -108,19 +107,26 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "1")
                 {
+                    var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+                    
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users,token,model.OgrenciParola);
+                    }
 
-                    _context.Update(model);
-                    _context.SaveChanges();
-                    TempData["success"] = "Kayıt güncellendi.";
+                        _context.Update(model);
+                        _context.SaveChanges();
+                        TempData["success"] = "Kayıt güncellendi.";
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
                 }
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                return View(model);
             }
-            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
-            return View(model);
-        }
-
+        
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {

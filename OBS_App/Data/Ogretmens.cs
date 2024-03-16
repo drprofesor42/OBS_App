@@ -19,11 +19,11 @@ namespace OBS_App.Data
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string OgretmenEposta { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        [MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
+        [MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgretmenParola { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
 		[Compare("OgretmenParola", ErrorMessage = "Şifreler eşleşmiyor.")]
-		[MinLength(8, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
+		[MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgretmenParolaOnayla { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string OgretmenOfis { get; set; }

@@ -10,7 +10,6 @@ namespace OBS_App.Data
         public string DersAd { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
 		public string DersKod { get; set; }
 
 		[Required(ErrorMessage = "*Zorunlu Alan")]

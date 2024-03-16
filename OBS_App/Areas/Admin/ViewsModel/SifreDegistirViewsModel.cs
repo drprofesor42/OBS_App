@@ -7,21 +7,20 @@ namespace OBS_App.Areas.Admin.ViewsModel
     public class SifreDegistirViewsModel
     {
 
-        [Required]
+        
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; } 
+        public string? Eposta { get; set; } 
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; } 
+        public string Parola { get; set; } 
 
         //Confirm Parola için onay 
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "Parola eşleşmiyor.")]
-        public string ConfirmPassword { get; set; }
-        public List<SelectList> SelectLists { get; set; } = new List<SelectList>();
+        [Compare(nameof(Parola), ErrorMessage = "Parola eşleşmiyor.")]
+        public string ParolaOnayla { get; set; }
         
 
     }
