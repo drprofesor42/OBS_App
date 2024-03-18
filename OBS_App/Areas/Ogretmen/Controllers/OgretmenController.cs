@@ -24,11 +24,5 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             return View();
         }
 
-        public IActionResult Duyurular()
-        {
-            var duyurular = _context.Duyurular.ToList();
-            return View(duyurular);
-        }
-
     }
 }

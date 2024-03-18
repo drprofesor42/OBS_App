@@ -59,7 +59,6 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         var user = new AppUser()
                         {
-                            DuyuruName = model.OgretmenAd,
                             UserName = model.OgretmenEposta,
                             Email = model.OgretmenEposta
                         };
