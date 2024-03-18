@@ -782,7 +782,7 @@ namespace OBS_App.Migrations
                         .WithMany("Dersler")
                         .HasForeignKey("BolumId");
 
-                    b.HasOne("OBS_App.Data.Fakulte", null)
+                    b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Dersler")
                         .HasForeignKey("FakulteId");
 
@@ -795,6 +795,8 @@ namespace OBS_App.Migrations
                         .HasForeignKey("SinifId");
 
                     b.Navigation("Bolum");
+
+                    b.Navigation("Fakulte");
 
                     b.Navigation("Ogretmens");
                 });

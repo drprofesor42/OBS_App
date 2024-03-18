@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240318060941_asdasdsda")]
-    partial class asdasdsda
+    [Migration("20240318131026_asdsadd")]
+    partial class asdsadd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -785,7 +785,7 @@ namespace OBS_App.Migrations
                         .WithMany("Dersler")
                         .HasForeignKey("BolumId");
 
-                    b.HasOne("OBS_App.Data.Fakulte", null)
+                    b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Dersler")
                         .HasForeignKey("FakulteId");
 
@@ -798,6 +798,8 @@ namespace OBS_App.Migrations
                         .HasForeignKey("SinifId");
 
                     b.Navigation("Bolum");
+
+                    b.Navigation("Fakulte");
 
                     b.Navigation("Ogretmens");
                 });

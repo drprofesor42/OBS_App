@@ -25,7 +25,10 @@ namespace OBS_App.Data
         public Bolum? Bolum { get; set; }
         public int? OgretmensId { get; set; }
         public Ogretmens? Ogretmens { get; set; }
+        public int? FakulteId { get; internal set; }
+        public Fakulte? Fakulte { get; set; }
         public ICollection<Not> notlar { get; set; } = new List<Not>();
         public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
+       
     }
 }

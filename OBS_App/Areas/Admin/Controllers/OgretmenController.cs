@@ -47,7 +47,13 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int Kaydet)
         {
-
+            var bolum = await _context.Bolumler
+                                      .Include(x => x.Fakulte)
+                                      .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+            if (model != null && bolum != null)
+            {
+                model.FakulteId = bolum.FakulteId;
+            }
 
             if (ModelState.IsValid)
             {
@@ -55,13 +61,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 if (Kaydet == 1)
                 {
 
-                    var bolum = await _context.Bolumler
-                                       .Include(x => x.Fakulte)
-                                       .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-                    if (model != null && bolum != null)
-                    {
-                        model.FakulteId = bolum.FakulteId;
-                    }
+                   
 
                     var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
                     if (dogrula == null)
