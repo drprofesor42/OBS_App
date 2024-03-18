@@ -99,7 +99,7 @@
                                         <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
                                             <i class="feather-edit"></i>
                                         </a>
-                                        <a onclick="confirmDelete(@ders.Id)" class="btn btn-sm bg-danger-light">
+                                        <a -controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
                                     </div>

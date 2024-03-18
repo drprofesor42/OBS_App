@@ -373,6 +373,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BolumId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DersId")
                         .HasColumnType("int");
 
@@ -395,6 +398,8 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BolumId");
 
                     b.HasIndex("DersId");
 
@@ -818,6 +823,10 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Not", b =>
                 {
+                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                        .WithMany()
+                        .HasForeignKey("BolumId");
+
                     b.HasOne("OBS_App.Data.Ders", "Ders")
                         .WithMany("notlar")
                         .HasForeignKey("DersId");
@@ -831,6 +840,8 @@ namespace OBS_App.Migrations
                     b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
                         .WithMany("Notlar")
                         .HasForeignKey("OgretmensId");
+
+                    b.Navigation("Bolum");
 
                     b.Navigation("Ders");
 

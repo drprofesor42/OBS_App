@@ -1,0 +1,70 @@
+﻿@model Not
+@{
+    ViewData["Title"] = "Ekle_Guncelle";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Not" asp-action="Ekle_Guncelle" method="post">
+                    <input type="hidden" asp-for="OgretmensId" value="@ViewBag.OgretmensId" class="form-control">
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ödev Notu</label>
+                                <input asp-for="NotOdev" class="form-control" type="number">
+                                <span asp-validation-for="NotOdev" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Vize Notu</label>
+                                <input asp-for="NotVize" class="form-control" type="number">
+                                <span asp-validation-for="NotVize" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Final Notu</label>
+                                <input asp-for="NotFinal" class="form-control" type="number">
+                                <span asp-validation-for="NotFinal" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ders <span class="login-danger">*</span></label>
+                                <select asp-for="DersId" asp-items="ViewBag.Dersler" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="DersId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Öğrenci <span class="login-danger">*</span></label>
+                                <select asp-for="OgrencisId" asp-items="ViewBag.Ogrenciler" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="OgrencisId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="student-submit">
+                                @if (Model == null)
+                                {
+                                    <input name="type" id="type" type="hidden" value="0">
+                                }
+                                else
+                                {
+                                    <input name="type" id="type" type="hidden" value="1">
+                                }
+                                <button type="submit" class="btn btn-primary">Onayla</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
