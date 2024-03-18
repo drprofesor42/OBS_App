@@ -27,6 +27,9 @@ namespace OBS_App.Areas.Admin.Controllers
 
             var fakulteler = await _context.Fakulteler
                                       .Include(f => f.Bolumler)
+                                      .ThenInclude(x => x.Ogretmensler)
+                                      .ThenInclude(x => x.Ogrencisler)
+                                      .ThenInclude(x => x.Dersler)
                                       .ToListAsync();
 
             foreach (var fakulte in fakulteler)

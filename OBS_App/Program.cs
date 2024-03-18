@@ -121,6 +121,6 @@ app.MapHub<SignalRHub>("/signalrhub");
 //IdentitySeed Verisini çalýþtýrýr
 IdentityUserSeed.IdentityTestUser(app);
 IdentityRoleSeed.IdentityTestRole(app);
-FakulteSeed.FakulteSeedTest(app);
+//FakulteSeed.FakulteSeedTest(app);
 
 app.Run();

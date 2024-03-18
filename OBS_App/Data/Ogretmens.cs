@@ -35,11 +35,15 @@ namespace OBS_App.Data
 		[StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
         public string OgretmenTelefon { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
-        public string OgretmenCinsiyet { get; set; }
-        public DateOnly OgretmenDogumTarihi { get; set; }
-        public DateOnly OgretmenBaslamaTarihi { get; set; }
+        public string? OgretmenCinsiyet { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public DateOnly? OgretmenDogumTarihi { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public DateOnly? OgretmenBaslamaTarihi { get; set; }
         public int AdresId { get; set; }
-        public Adres Adres { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public Adres? Adres { get; set; }
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
         public int? FakulteId { get; set; }

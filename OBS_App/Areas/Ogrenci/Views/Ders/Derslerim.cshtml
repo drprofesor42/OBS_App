@@ -72,12 +72,22 @@
                                     <td>@ders.DersKredi</td>
                                     <td>@ders.DersAkts</td>
 
-                                    @foreach (var notlar in ders.notlar)
+                                    @if (ders.notlar.Count() == 0)
                                     {
-                                        <td>@notlar.NotVize</td>
-                                        <td>@notlar.NotFinal</td>
-                                        <td>@notlar.NotOdev</td>
+                                        <td>Not Girilmedi</td>
+                                        <td>Not Girilmedi</td>
+                                        <td>Not Girilmedi</td>
                                     }
+                                    else
+                                    {
+                                        @foreach (var notlar in ders.notlar)
+                                        {
+                                            <td>@notlar.NotVize</td>
+                                            <td>@notlar.NotFinal</td>
+                                            <td>@notlar.NotOdev</td>
+                                        }
+                                    }
+                                    
                                 </tr>
                             }
                         }
@@ -85,6 +95,12 @@
                     </tbody>
                 </table>
             </div>
+            @if (Model.Count() == 0)
+            {
+                <div class="blog grid-blog flex-fill">
+                    <h3 class="text-danger" style="text-align:center"> Ders Bulunmamaktadır! </h3>
+                </div>
+            }
         </div>
     </div>
 </div>
