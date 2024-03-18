@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="card comman-shadow">
             <div class="card-body">
-                <form asp-action="Ekle_Guncelle" asp-controller="Ogrenci" method="post">
+                <form asp-action="Ekle_Guncelle" asp-controller="Ogrenci" method="post" novalidate>
 
                     <div class="row">
                         <div class="col-12">
@@ -16,7 +16,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>TC Kimlik Numarası<span class="login-danger">*</span></label>
-                                <input asp-for="OgrenciTc" class="form-control" type="text">
+                                <input asp-for="OgrenciTc" class="form-control" >
                                 <span asp-validation-for="OgrenciTc" class="text-danger"></span>
                             </div>
                         </div>
@@ -94,14 +94,14 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Parola<span class="login-danger">*</span></label>
-                                <input asp-for="OgrenciParola" class="form-control" type="text">
+                                <input asp-for="OgrenciParola" class="form-control" >
                                 <span asp-validation-for="OgrenciParola" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Parola<span class="login-danger">*</span></label>
-                                <input asp-for="OgrenciParolaOnayla" class="form-control" type="text">
+                                <input asp-for="OgrenciParolaOnayla" class="form-control" >
                                 <span asp-validation-for="OgrenciParolaOnayla" class="text-danger"></span>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                         </div>
                         <div class="col-12">
                             <div class="student-submit">
-                                @if (Model == null)
+                                @if (Model == null || Model.Bolum == null)
                                 {
                                     <input name="type" id="type" type="hidden" value="0">
                                 }

@@ -10,8 +10,9 @@ namespace OBS_App.Data
         public int Id { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
+		
 		[StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
+        [DataType(DataType.PhoneNumber)]
         public string OgrenciTc { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
@@ -55,7 +56,7 @@ namespace OBS_App.Data
 
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
-        [Required(ErrorMessage = "*Zorunlu Alan")]
+       // [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
         public int? FakulteId { get; set; }

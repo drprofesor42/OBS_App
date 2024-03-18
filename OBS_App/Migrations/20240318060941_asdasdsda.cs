@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-    public partial class asdasdd : Migration
+    public partial class asdasdsda : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -302,7 +302,7 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     BolumBaskani = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FakulteId = table.Column<int>(type: "int", nullable: false),
+                    FakulteId = table.Column<int>(type: "int", nullable: true),
                     SinifId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -312,8 +312,7 @@ namespace OBS_App.Migrations
                         name: "FK_Bolumler_Fakulteler_FakulteId",
                         column: x => x.FakulteId,
                         principalTable: "Fakulteler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Bolumler_Siniflar_SinifId",
                         column: x => x.SinifId,
@@ -350,7 +349,7 @@ namespace OBS_App.Migrations
                     OgrenciKayitTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     OgrenciDogumTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     AdresId = table.Column<int>(type: "int", nullable: false),
-                    BolumId = table.Column<int>(type: "int", nullable: false),
+                    BolumId = table.Column<int>(type: "int", nullable: true),
                     FakulteId = table.Column<int>(type: "int", nullable: true),
                     SinifId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -367,8 +366,7 @@ namespace OBS_App.Migrations
                         name: "FK_Ogrenciler_Bolumler_BolumId",
                         column: x => x.BolumId,
                         principalTable: "Bolumler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Ogrenciler_Fakulteler_FakulteId",
                         column: x => x.FakulteId,
@@ -411,7 +409,7 @@ namespace OBS_App.Migrations
                     OgretmenDogumTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     OgretmenBaslamaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
                     AdresId = table.Column<int>(type: "int", nullable: false),
-                    BolumId = table.Column<int>(type: "int", nullable: false),
+                    BolumId = table.Column<int>(type: "int", nullable: true),
                     FakulteId = table.Column<int>(type: "int", nullable: true),
                     SinifId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -428,8 +426,7 @@ namespace OBS_App.Migrations
                         name: "FK_Ogretmenler_Bolumler_BolumId",
                         column: x => x.BolumId,
                         principalTable: "Bolumler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Ogretmenler_Fakulteler_FakulteId",
                         column: x => x.FakulteId,
@@ -458,7 +455,7 @@ namespace OBS_App.Migrations
                     DersAkts = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),
-                    BolumId = table.Column<int>(type: "int", nullable: false),
+                    BolumId = table.Column<int>(type: "int", nullable: true),
                     OgretmensId = table.Column<int>(type: "int", nullable: true),
                     FakulteId = table.Column<int>(type: "int", nullable: true),
                     SinifId = table.Column<int>(type: "int", nullable: true)
@@ -470,8 +467,7 @@ namespace OBS_App.Migrations
                         name: "FK_Dersler_Bolumler_BolumId",
                         column: x => x.BolumId,
                         principalTable: "Bolumler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Dersler_Fakulteler_FakulteId",
                         column: x => x.FakulteId,

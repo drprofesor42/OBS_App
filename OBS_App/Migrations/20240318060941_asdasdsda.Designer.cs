@@ -12,8 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240316071925_asdasdd")]
-    partial class asdasdd
+    [Migration("20240318060941_asdasdsda")]
+    partial class asdasdsda
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,7 +216,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int?>("FakulteId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("SinifId")
@@ -240,7 +239,6 @@ namespace OBS_App.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("BolumId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("DersAd")
@@ -420,7 +418,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BolumId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("FakulteId")
@@ -503,7 +500,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BolumId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("FakulteId")
@@ -774,9 +770,7 @@ namespace OBS_App.Migrations
                 {
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Bolumler")
-                        .HasForeignKey("FakulteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FakulteId");
 
                     b.HasOne("OBS_App.Data.Sinif", null)
                         .WithMany("Bolumler")
@@ -789,9 +783,7 @@ namespace OBS_App.Migrations
                 {
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany("Dersler")
-                        .HasForeignKey("BolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BolumId");
 
                     b.HasOne("OBS_App.Data.Fakulte", null)
                         .WithMany("Dersler")
@@ -852,9 +844,7 @@ namespace OBS_App.Migrations
 
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany("Ogrencisler")
-                        .HasForeignKey("BolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BolumId");
 
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Ogrencisler")
@@ -881,9 +871,7 @@ namespace OBS_App.Migrations
 
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
                         .WithMany("Ogretmensler")
-                        .HasForeignKey("BolumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BolumId");
 
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Ogretmensler")
