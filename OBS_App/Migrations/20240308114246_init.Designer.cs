@@ -12,8 +12,29 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
+<<<<<<< HEAD
+<<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.Designer.cs
     [Migration("20240308114246_init")]
     partial class init
+========
+=======
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
+<<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
+    [Migration("20240307182322_denme")]
+    partial class denme
+========
+    [Migration("20240307141739_init")]
+    partial class init
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+<<<<<<< HEAD
+>>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.Designer.cs
+=======
+=======
+    [Migration("20240308114246_init")]
+    partial class init
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -257,7 +278,14 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+<<<<<<< HEAD
+                    b.Property<int>("duyuruGondericiAdmin")
+                        .HasColumnType("int");
+
+                    b.Property<int>("duyuruGondericiProf")
+=======
                     b.Property<int>("duyuruGonderici")
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                         .HasColumnType("int");
 
                     b.Property<string>("duyuruMesaj")
@@ -280,8 +308,30 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("duyuruAliciId"));
 
+<<<<<<< HEAD
                     b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
                         .HasColumnType("date");
+<<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.Designer.cs
+========
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+>>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.Designer.cs
+=======
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
+<<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
+                    b.Property<int>("OgrencisId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("duyuruAliciOlusturmaTarihi")
+                        .HasColumnType("datetime(6)");
+========
+                    b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
+                        .HasColumnType("date");
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+=======
+                    b.Property<DateOnly>("duyuruAliciOlusturmaTarihi")
+                        .HasColumnType("date");
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
 
                     b.Property<int>("duyuruAlici_ogrenci")
                         .HasColumnType("int");
@@ -291,6 +341,25 @@ namespace OBS_App.Migrations
 
                     b.HasKey("duyuruAliciId");
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.Designer.cs
+========
+=======
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
+<<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
+                    b.HasIndex("OgrencisId");
+
+                    b.HasIndex("duyuruId");
+
+========
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+<<<<<<< HEAD
+>>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.Designer.cs
+=======
+=======
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                     b.ToTable("DuyuruAlicilar");
                 });
 
@@ -669,6 +738,58 @@ namespace OBS_App.Migrations
                         .IsRequired();
                 });
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.Designer.cs
+========
+=======
+<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
+<<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.Designer.cs
+            modelBuilder.Entity("OBS_App.Data.Duyuru", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ogretmens", "Profesor")
+                        .WithMany()
+                        .HasForeignKey("ProfesorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profesor");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.DuyuruAlici", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
+                        .WithMany()
+                        .HasForeignKey("OgrencisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OBS_App.Data.Duyuru", "Duyuru")
+                        .WithMany()
+                        .HasForeignKey("duyuruId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Duyuru");
+
+                    b.Navigation("Ogrencis");
+========
+            modelBuilder.Entity("OBS_App.Data.FakulteBolum", b =>
+                {
+                    b.HasOne("OBS_App.Data.Bolum", null)
+                        .WithOne("FakulteBolum")
+                        .HasForeignKey("OBS_App.Data.FakulteBolum", "bolumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+>>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.Designer.cs
+                });
+
+<<<<<<< HEAD
+>>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.Designer.cs
+=======
+=======
+>>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.Designer.cs
+>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
             modelBuilder.Entity("OBS_App.Data.OgrenciDers", b =>
                 {
                     b.HasOne("OBS_App.Data.Ders", "Ders")

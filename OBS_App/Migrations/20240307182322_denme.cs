@@ -149,26 +149,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
-<<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.cs
-                name: "FakulteBolumler",
-                columns: table => new
-                {
-                    fakulteBolumId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    fakulteId = table.Column<int>(type: "int", nullable: false),
-                    bolumId = table.Column<int>(type: "int", nullable: false),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FakulteBolumler", x => x.fakulteBolumId);
-========
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                 name: "DuyuruAlicilar",
                 columns: table => new
                 {
@@ -190,12 +170,8 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-<<<<<<< HEAD
                     duyuruGondericiAdmin = table.Column<int>(type: "int", nullable: false),
                     duyuruGondericiProf = table.Column<int>(type: "int", nullable: false),
-=======
-                    duyuruGonderici = table.Column<int>(type: "int", nullable: false),
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                     duyuruBaslık = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     duyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
@@ -204,14 +180,7 @@ namespace OBS_App.Migrations
                 },
                 constraints: table =>
                 {
-<<<<<<< HEAD
 <<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.cs
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
-                    table.PrimaryKey("PK_Duyurular", x => x.duyuruId);
->>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
-=======
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                     table.PrimaryKey("PK_Duyurular", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -229,14 +198,10 @@ namespace OBS_App.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FakulteBolumler", x => x.fakulteBolumId);
-<<<<<<< HEAD
 ========
                     table.PrimaryKey("PK_Duyurular", x => x.duyuruId);
 >>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
 >>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.cs
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -476,12 +441,8 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<< HEAD
 <<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.cs
 ========
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.cs
 ========
                 name: "FakulteBolumler",
@@ -507,12 +468,7 @@ namespace OBS_App.Migrations
 
             migrationBuilder.CreateTable(
 >>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
-<<<<<<< HEAD
 >>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.cs
-=======
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                 name: "OgrenciDersler",
                 columns: table => new
                 {
@@ -532,48 +488,13 @@ namespace OBS_App.Migrations
                         name: "FK_OgrenciDersler_Dersler_dersId",
                         column: x => x.dersId,
                         principalTable: "Dersler",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
-                        principalColumn: "dersId",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-<<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.cs
-            migrationBuilder.CreateTable(
-                name: "Duyurular",
-                columns: table => new
-                {
-                    duyuruId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    duyuruGonderici = table.Column<int>(type: "int", nullable: false),
-                    ProfesorId = table.Column<int>(type: "int", nullable: false),
-                    duyuruMesaj = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    olusturmaTarihi = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Duyurular", x => x.duyuruId);
-                    table.ForeignKey(
-                        name: "FK_Duyurular_Ogretmenler_ProfesorId",
-                        column: x => x.ProfesorId,
-                        principalTable: "Ogretmenler",
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-<<<<<<< HEAD
 <<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.cs
 ========
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
             migrationBuilder.CreateTable(
                 name: "DuyuruAlicilar",
                 columns: table => new
@@ -605,12 +526,7 @@ namespace OBS_App.Migrations
 
 ========
 >>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
-<<<<<<< HEAD
 >>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.cs
-=======
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -649,12 +565,8 @@ namespace OBS_App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-<<<<<<< HEAD
 <<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.cs
 ========
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.cs
                 name: "IX_DuyuruAlicilar_duyuruId",
                 table: "DuyuruAlicilar",
@@ -677,12 +589,7 @@ namespace OBS_App.Migrations
 >>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
 
             migrationBuilder.CreateIndex(
-<<<<<<< HEAD
 >>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.cs
-=======
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                 name: "IX_OgrenciDersler_dersId",
                 table: "OgrenciDersler",
                 column: "dersId");
@@ -746,12 +653,8 @@ namespace OBS_App.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD
 <<<<<<<< HEAD:OBS_App/Migrations/20240308114246_init.cs
 ========
-=======
-<<<<<<< HEAD:OBS_App/Migrations/20240307141739_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
 <<<<<<<< HEAD:OBS_App/Migrations/20240307182322_denme.cs
                 name: "Duyurular");
 
@@ -762,12 +665,7 @@ namespace OBS_App.Migrations
 >>>>>>>> kagan:OBS_App/Migrations/20240307141739_init.cs
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD
 >>>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b:OBS_App/Migrations/20240307182322_denme.cs
-=======
-=======
->>>>>>> Profesor:OBS_App/Migrations/20240308114246_init.cs
->>>>>>> 405cea934c578e9f7a35764583885fa6e27ab09b
                 name: "Dersler");
         }
     }
