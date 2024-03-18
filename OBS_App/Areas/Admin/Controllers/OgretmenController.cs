@@ -47,13 +47,22 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int Kaydet)
         {
 
-            //ekleme
-            if (Kaydet == 1)
-            {
-                
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                //ekleme işlemi
+                if (Kaydet == 1)
                 {
+
+                    var bolum = await _context.Bolumler
+                                       .Include(x => x.Fakulte)
+                                       .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+                    if (model != null && bolum != null)
+                    {
+                        model.FakulteId = bolum.FakulteId;
+                        model.Fakulte = bolum.Fakulte;
+                    }
+
                     var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
                     if (dogrula == null)
                     {
@@ -84,17 +93,13 @@ namespace OBS_App.Areas.Admin.Controllers
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
+
+
                 }
-                else
+                //Güncelleme işlemi
+                if (Kaydet == 2)
                 {
-                    //hata mesajı
-                }
-            }
-            //Güncelleme işlemi
-            if (Kaydet == 2)
-            {
-                if (ModelState.IsValid)
-                {
+
                     var users = await _userManager.FindByEmailAsync(model.OgretmenEposta);
 
                     if (users != null)
@@ -108,11 +113,16 @@ namespace OBS_App.Areas.Admin.Controllers
 
                     return RedirectToAction("Index");
 
-                }
-            }
-            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-            return View(model);
 
+                }
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                return View(model);
+            }
+            else
+            {
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                return View(model);
+            }
         }
         public async Task<IActionResult> Sil(int? id)
         {

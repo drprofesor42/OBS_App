@@ -43,7 +43,7 @@ namespace OBS_App.Data
         public int AdresId { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public Adres? Adres { get; set; }
-        [Required(ErrorMessage = "*Zorunlu Alan")]
+      //  [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
         public int? FakulteId { get; set; }

@@ -81,7 +81,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula == null)
                     {
                         var user = new AppUser()
-                        {   
+                        {
                             UserName = model.OgrenciEposta,
                             Email = model.OgrenciEposta
                         };
@@ -111,11 +111,11 @@ namespace OBS_App.Areas.Admin.Controllers
                 else if (type == "1")
                 {
                     var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);
-                    
+
                     if (users != null)
                     {
                         var token = await _userManager.GeneratePasswordResetTokenAsync(users);
-                        await _userManager.ResetPasswordAsync(users,token,model.OgrenciParola);
+                        await _userManager.ResetPasswordAsync(users, token, model.OgrenciParola);
                     }
 
                         _context.Update(model);
