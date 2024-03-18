@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-12">
                             <div class="student-submit">
-                                @if (Model == null)
+                                @if (ViewData["Ekleme"] != null)
                                 {
                                     <button type="submit" name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
                                 }

@@ -38,7 +38,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     DuyuruGonderen = user.DuyuruName,
                 };
-             
+                ViewData["Ekleme"] = 0;
                 return View(model);
             }
             else

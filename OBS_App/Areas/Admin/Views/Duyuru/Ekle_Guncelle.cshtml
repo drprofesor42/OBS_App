@@ -39,7 +39,7 @@
         </div>
         <div class=" blog-categories-btn pt-0 ">
             <div class="bank-details-btn ">
-                @if (Model.DuyuruMesaj == null)
+                @if (ViewData["Ekleme"] == null)
                 {
                     <input name="type" type="hidden" value="0">
                 }

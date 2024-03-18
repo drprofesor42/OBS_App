@@ -101,7 +101,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         return View(model);
 
                     }
-                    model.Dersler = bolum.Dersler;
+                    
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";

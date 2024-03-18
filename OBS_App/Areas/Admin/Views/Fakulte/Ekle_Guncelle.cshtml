@@ -28,7 +28,7 @@
 						
 						<div class="col-12">
 							<div class="student-submit">
-								@if (Model == null)
+								@if (ViewData["Ekleme"] != null)
 								{
 									<input name="type" id="type" type="hidden" value="0">
 								}

@@ -60,7 +60,7 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
-
+                ViewData["Ekleme"] = 0;
                 return View();
             }
             else

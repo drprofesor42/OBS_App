@@ -22,7 +22,7 @@ namespace OBS_App.Data
         public DateOnly OlusturmaTarihi { get; set; }
        // [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
-        public Bolum? Bolum { get; set; } = null!;
+        public Bolum? Bolum { get; set; }
         public int? OgretmensId { get; set; }
         public Ogretmens? Ogretmens { get; set; }
         public ICollection<Not> notlar { get; set; } = new List<Not>();

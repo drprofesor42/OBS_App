@@ -168,7 +168,7 @@
                         <div class="col-12">
                             <div class="student-submit">
 
-                                @if (Model == null || Model.Fakulte == null)
+                                @if (ViewData["Ekleme"] != null)
                                 {
                                     <button name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
                                 }

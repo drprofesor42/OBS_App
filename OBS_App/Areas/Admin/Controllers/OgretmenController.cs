@@ -33,6 +33,7 @@ namespace OBS_App.Areas.Admin.Controllers
             if (id == 0)
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewData["Ekleme"] = 0;
                 return View();
             }
             else
@@ -60,7 +61,6 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (model != null && bolum != null)
                     {
                         model.FakulteId = bolum.FakulteId;
-                        model.Fakulte = bolum.Fakulte;
                     }
 
                     var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);

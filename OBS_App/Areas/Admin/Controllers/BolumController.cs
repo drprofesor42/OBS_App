@@ -31,7 +31,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
                 ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-
+                ViewData["Ekleme"] = 0;
                 return View();
 
             }

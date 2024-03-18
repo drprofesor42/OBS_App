@@ -33,6 +33,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                ViewData["Ekleme"] = 0;
                 return View();
 			}
             else
@@ -58,10 +59,9 @@ namespace OBS_App.Areas.Admin.Controllers
             var bolum = await _context.Bolumler
                 .FirstOrDefaultAsync(x => x.Id == model.BolumId);
 
-            if (ogretmen != null)
+            if (bolum != null)
             {
-                model.Ogretmens = ogretmen;
-                model.Bolum = bolum;
+                model.FakulteId = bolum.FakulteId;
             }
 
 
