@@ -20,33 +20,58 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var duyurular = _context.Duyurular.ToList();
+            var duyurular = _context.Duyurular.Include(x => x.Ogretmens).ToList();
+			var kullanıcı = await _userManager.GetUserAsync(User);
+            if (kullanıcı != null)
+            {
+                var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
+                ViewBag.kullanıcıId = ogretmen.Id;
+
+			}
+
             return View(duyurular);
         }
 
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
-            if (id == 0)
+            var kullanıcı = await _userManager.GetUserAsync(User);
+            if (kullanıcı != null)
             {
-                var kullanıcı = await _userManager.GetUserAsync(User);
-                var model = new Duyuru{};
-
-                return View(model);
-            }
-            else
-            {
-                var duyuru = await _context.Duyurular.FirstOrDefaultAsync(x => x.Id == id);
-                if (duyuru == null)
+                var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
+                if (id == 0)
                 {
-                    // Hata Gönder
-                    return RedirectToAction("Index");
+			        var model = new Duyuru
+			        {
+				        OgretmensId = ogretmen.Id,
+			        };
+                    return View(model);
+                
                 }
                 else
                 {
-                    return View(duyuru);
+                    var duyuru = await _context.Duyurular.FirstOrDefaultAsync(x => x.Id == id);
+                    
+                    if (duyuru == null)
+                    {
+                        // Hata Gönder
+                        return RedirectToAction("Index");
+                    }
+                    else if(duyuru.OgretmensId != id)
+                    {
+                        // Kendine ait olamayan mesajı değiştirmeye çalışıyor. Hata
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(duyuru);
+                    }
                 }
+            }
+            else
+            {
+                return RedirectToAction("Index");
             }
         }
 
@@ -57,10 +82,6 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             {
                 if (type == "0")
                 {
-                    //burada hangi öğretmenin gönderdiğini görebiliriz
-                    // var user = await _userManager.FindByNameAsync("ogretmen");
-                    //var ogretmenıd = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.OgretmenEposta == "aysedemir@gmail.com");
-                    //  model.OgretmensId = ogretmenıd.Id;
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";

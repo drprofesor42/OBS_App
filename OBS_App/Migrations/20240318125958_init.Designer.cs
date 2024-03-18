@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240318093249_init")]
+    [Migration("20240318125958_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -313,10 +313,6 @@ namespace OBS_App.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DuyuruBaslik")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("DuyuruGonderen")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -637,9 +633,6 @@ namespace OBS_App.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("DuyuruName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")

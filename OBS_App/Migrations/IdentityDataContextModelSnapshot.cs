@@ -313,10 +313,6 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("DuyuruGonderen")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("DuyuruMesaj")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -634,9 +630,6 @@ namespace OBS_App.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("DuyuruName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")

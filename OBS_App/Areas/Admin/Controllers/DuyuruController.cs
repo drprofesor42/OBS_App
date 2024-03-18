@@ -22,7 +22,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var duyurular = await _context.Duyurular.ToListAsync();
+            var duyurular = await _context.Duyurular.Include(x => x.Ogretmens).ToListAsync();
             return View(duyurular);
         }
 
@@ -30,7 +30,7 @@ namespace OBS_App.Areas.Admin.Controllers
         {
 			if (id == 0)
             {
-                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var user = await _userManager.GetUserAsync(User);
                 var model = new Duyuru{};
              
                 return View(model);
@@ -57,10 +57,6 @@ namespace OBS_App.Areas.Admin.Controllers
             {
 				if (type == "0")
 				{
-                    //burada hangi öğretmenin gönderdiğini görebiliriz
-                  // var user = await _userManager.FindByNameAsync("ogretmen");
-                    //var ogretmenıd = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.OgretmenEposta == "aysedemir@gmail.com");
-                  //  model.OgretmensId = ogretmenıd.Id;
                     await _context.Duyurular.AddAsync(model);
 					await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
