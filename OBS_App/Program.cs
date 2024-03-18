@@ -1,6 +1,7 @@
 using identy_user.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OBS_App.Hubs;
 using OBS_App.Models;
 using OBS_App.VeritabanýSeed;
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,19 @@ new SmtpEmailSender(
     builder.Configuration["EmailSender:Username"],
     builder.Configuration["EmailSender:Password"])
 );
+//SignalR
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .SetIsOriginAllowed((host) => true)
+               .AllowCredentials();
+    });
+});
+builder.Services.AddSignalR();
+
 
 builder.Services.AddControllersWithViews();
 
@@ -72,7 +86,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
-
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -99,6 +113,10 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
+
+app.MapHub<SignalRHub>("/signalrhub");
+//SignalR istek bulunabilmek için
+//localhost:1234/signalrhub
 
 //IdentitySeed Verisini çalýþtýrýr
 IdentityUserSeed.IdentityTestUser(app);

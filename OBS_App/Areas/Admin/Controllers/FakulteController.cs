@@ -84,6 +84,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (type == "0")
                 {
+
                     await _context.AddAsync(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt eklendi.";

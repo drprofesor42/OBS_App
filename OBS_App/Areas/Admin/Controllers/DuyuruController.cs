@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 using OBS_App.Data;
 using OBS_App.Models;
-
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -13,6 +13,7 @@ namespace OBS_App.Areas.Admin.Controllers
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
+
         public DuyuruController(IdentityDataContext context, UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -28,8 +29,6 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
-
-
 
 			if (id == 0)
             {
@@ -61,8 +60,11 @@ namespace OBS_App.Areas.Admin.Controllers
 		{
             if (ModelState.IsValid)
             {
-				if (type == "0")
+               
+                if (type == "0")
 				{
+                  
+
                     //burada hangi öğretmenin gönderdiğini görebiliriz
                   // var user = await _userManager.FindByNameAsync("ogretmen");
                     //var ogretmenıd = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.OgretmenEposta == "aysedemir@gmail.com");
