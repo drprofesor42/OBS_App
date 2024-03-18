@@ -29,7 +29,7 @@ namespace OBS_App.Areas.Admin.Controllers
 			}
             else
             {
-                var fakulte = _identityDataContext.Fakulteler.FirstOrDefault(x => x.fakulteId == id);
+                var fakulte = _identityDataContext.Fakulteler.FirstOrDefault(x => x.Id == id);
                 if (fakulte == null)
                 {
                     // Hata Gönder
@@ -67,7 +67,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
 		public IActionResult Sil(int id)
         {
-			var fakulte = _identityDataContext.Fakulteler.FirstOrDefault(x => x.fakulteId == id);
+			var fakulte = _identityDataContext.Fakulteler.FirstOrDefault(x => x.Id == id);
 
 			if (id == 0 || fakulte == null)
             {

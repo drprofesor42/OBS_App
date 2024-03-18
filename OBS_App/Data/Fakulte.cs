@@ -2,7 +2,7 @@
 {
     public class Fakulte
     {
-        public int fakulteId { get; set; }
+        public int Id { get; set; }
         /*public FakulteBolum FakulteBolum { get; set; } = null!;*/
         public int fakulteProfId { get; set; }
         /*public Ogretmens Profesor { get; set; } = null!;*/
