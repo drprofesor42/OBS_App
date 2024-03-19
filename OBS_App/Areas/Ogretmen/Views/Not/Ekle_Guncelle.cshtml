@@ -9,26 +9,18 @@
             <div class="card-body">
                 <form asp-controller="Not" asp-action="Ekle_Guncelle" method="post">
                     <input type="hidden" asp-for="OgretmensId" value="@ViewBag.OgretmensId" class="form-control">
+                    <input asp-for="NotTarihi" type="hidden" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                     <div class="row">
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
-                                <label>Ödev Notu</label>
-                                <input asp-for="NotOdev" class="form-control" type="number">
-                                <span asp-validation-for="NotOdev" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>Vize Notu</label>
-                                <input asp-for="NotVize" class="form-control" type="number">
-                                <span asp-validation-for="NotVize" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>Final Notu</label>
-                                <input asp-for="NotFinal" class="form-control" type="number">
-                                <span asp-validation-for="NotFinal" class="text-danger"></span>
+                                <label>Sınav Tipi</label>
+                                <select asp-for="NotTip" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                    <option value="Ödev">Ödev</option>
+                                    <option value="Vize">Vize</option>
+                                    <option value="Final">Final</option>
+                                </select>
+                                <span asp-validation-for="NotTip" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
@@ -47,6 +39,20 @@
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="OgrencisId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Sınav Notu</label>
+                                <input asp-for="NotPuan" class="form-control" type="number">
+                                <span asp-validation-for="NotPuan" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Sınav Saati</label>
+                                <input asp-for="NotSaat" class="form-control" type="text">
+                                <span asp-validation-for="NotSaat" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">

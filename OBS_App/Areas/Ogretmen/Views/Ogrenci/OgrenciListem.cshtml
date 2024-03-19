@@ -54,8 +54,7 @@
                                 <th>Doğum Tarihi</th>
                                 <th>E-Mail</th>
                                 <th>Telefon Numarası</th>
-                                <th>Kayıt Tarihi</th>
-                                <th class="text-end">İşlemler</th>
+                                <th class="text-end">Kayıt Tarihi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,19 +78,6 @@
                                     <td>@ogr.OgrenciEposta</td>
                                     <td>@ogr.OgrenciTelefon</td>
                                     <td>@ogr.OgrenciKayitTarihi</td>
-                                    <td class="text-end">
-                                        <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
-                                            <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">
-                                                <i class="feather-edit"></i>
-                                            </a>
-                                            <a onclick="confirmDelete(@ogr.Id)" class="btn btn-sm bg-danger-light">
-                                                <i class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
                                 </tr>
                                 }
                             }

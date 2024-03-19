@@ -25,7 +25,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             if (kullanıcı != null)
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
-                var ogrenciler = _context.Dersler.Include(x => x.Ogrencisler).Where(z => z.OgretmensId == ogretmen.Id).ToList();
+                var ogrenciler = _context.Dersler.Include(x => x.Bolum).Include(x => x.Ogrencisler).Where(z => z.OgretmensId == ogretmen.Id).ToList();
 
                 return View(ogrenciler);
             }

@@ -568,10 +568,12 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NotOdev = table.Column<int>(type: "int", nullable: true),
-                    NotVize = table.Column<int>(type: "int", nullable: true),
-                    NotFinal = table.Column<int>(type: "int", nullable: true),
+                    NotTip = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NotPuan = table.Column<int>(type: "int", nullable: true),
                     NotTarihi = table.Column<DateOnly>(type: "date", nullable: true),
+                    NotSaat = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     DersId = table.Column<int>(type: "int", nullable: true),
                     OgrencisId = table.Column<int>(type: "int", nullable: false),
                     OgretmensId = table.Column<int>(type: "int", nullable: true),

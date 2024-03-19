@@ -4,73 +4,77 @@
 @model List<Not>
 
 <div class="content container-fluid">
+    <div class="row">
+        @if (Model.Count() != 0)
+        {
+            @foreach (var ders in Model.OrderByDescending(s => s.NotTip).GroupBy(s => s.Ders))
+            {
+                <div class="col-sm-6 col-lg-4 col-xl-4 d-flex">
+                    <div class="card invoices-grid-card w-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <a style="font-weight:bold; font-size:15px" href="view-invoice.html" class="invoice-grid-link">@ders.Key?.DersAd</a>
+                        </div>
+                        <div class="card-middle">
+                            <h2 class="card-middle-avatar">
+                                <a><img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="~/panel/img/profiles/avatar-04.jpg" alt="User Image"> @ders.First().Ogretmens?.OgretmenAd @ders.First().Ogretmens?.OgretmenSoyad</a>
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div style="text-align:start; margin-left:5px" class="col">
+                                    <span><i class="far fa-file-lines"></i> Sınav</span>
+                                </div>
+                                <div style="text-align:start; margin-right:5px" class="col">
+                                    <span><i class="fas fa-pencil"></i> Sonuç</span>
+                                </div>
+                                <div style="text-align:start; margin-right:10px" class="col">
+                                    <span><i class="far fa-clock"></i> Saat</span>
+                                </div>
+                                <div style="text-align:start; margin-right:15px" class="col-auto">
+                                    <span><i class="far fa-calendar-alt"></i> Tarih</span>
+                                </div>
+                            </div>
 
-	<div class="row">
-		
-		@if (Model.Count() != 0)
-		{
-			@foreach (var ders in Model)
-		{
-			<div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
-				<div class="card invoices-grid-card w-100">
-					<div class="card-header d-flex justify-content-between align-items-center">
-						<a style="font-weight:bold;" href="view-invoice.html" class="invoice-grid-link">@ders.Ders?.DersAd</a>
-					</div>
-					<div class="card-middle">
-						<h2 class="card-middle-avatar">
-							<a><img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="~/panel/img/profiles/avatar-04.jpg" alt="User Image"> @ders.Ogretmens?.OgretmenAd @ders.Ogretmens?.OgretmenSoyad</a>
-						</h2>
-					</div>
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col">
-								<span><i class="far fa-file-lines"></i> Ödev</span>
-								<h6 class="mb-0">@ders.NotOdev</h6>
-							</div>
-							<div class="col">
-								<span><i class="fas fa-pencil"></i> Vize</span>
-								<h6 class="mb-0">@ders.NotVize</h6>
-							</div>
-							<div class="col">
-								<span><i class="fas fa-pencil"></i> Final</span>
-								<h6 class="mb-0">@ders.NotFinal</h6>
-							</div>
-						</div>
-						<br />
-						<div class="row align-items-center">
-							<div class="col">
-								<span><i class="far fa-clock"></i> Saat</span>
-								<h6 class="mb-0">*Sınav Saat*</h6>
-							</div>
-							<div class="col-auto">
-								<span><i class="far fa-calendar-alt"></i> Tarih</span>
-								<h6 class="mb-0">@ders.NotTarihi</h6>
-							</div>
-						</div>
-					</div>
-					<div class="card-footer">
-						<div class="row align-items-center">
-							<div class="col-auto">
-								<span class="badge bg-success-dark">Bitti</span>
-							</div>
-							<div class="col text-end">
-								<span class="text-danger text-sm">12 gün önce bitti</span>
-							</div>
-						</div>
+                            @foreach (var sınav in ders)
+                            {
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 style="text-align:center" class="mb-0">@sınav.NotTip</h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="text-align:center" class="mb-0">@sınav.NotPuan</h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="text-align:center" class="mb-0">@sınav.NotSaat</h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <h6 style="text-align:center" class="mb-0">@sınav.NotTarihi</h6>
+                                    </div>
+                                </div>
+                                <br>
+                            }
 
-					</div>
-				</div>
-			</div>
-			}
-		}
-		else
-		{
-			<div class="blog grid-blog flex-fill">
-				<h3 class="text-danger" style="text-align:center"> Sınav Bilgisi Bulunmamaktadır! </h3>
-			</div>
-		}
-
-	</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <span class="badge bg-success-dark">Bitti</span>
+                                </div>
+                                <div class="col text-end">
+                                    <span class="text-danger text-sm">12 gün önce bitti</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="blog grid-blog flex-fill">
+                <h3 class="text-danger" style="text-align:center"> Sınav Bilgisi Bulunmamaktadır! </h3>
+            </div>
+        }
+    </div>
 </div>
-
 

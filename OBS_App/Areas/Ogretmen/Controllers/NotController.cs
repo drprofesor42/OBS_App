@@ -25,7 +25,12 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             if (kullanıcı != null)
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
-                var notlar = _context.Notlar.Include(x => x.Ogrencis).Include(x => x.Ogretmens).Include(x => x.Bolum).Where(x => x.OgretmensId == ogretmen.Id).ToList();
+                var notlar = _context.Notlar
+                    .Include(x => x.Ogrencis)
+                    .ThenInclude(x => x.Bolum)
+                    .Include(x => x.Ogretmens)
+                    .Include(x => x.Ders)
+                    .Where(x => x.OgretmensId == ogretmen.Id);
 
                 return View(notlar);
             }
@@ -58,7 +63,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Not model, int type)
         {
-            var existingNot = await _context.Notlar.FirstOrDefaultAsync(n => n.OgrencisId == model.OgrencisId && n.DersId == model.DersId);
+            var existingNot = await _context.Notlar.FirstOrDefaultAsync(n => n.OgrencisId == model.OgrencisId && n.DersId == model.DersId && n.NotTip == model.NotTip);
             if (existingNot != null)
             {
                 type = 1;
@@ -76,9 +81,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                 }
                 else if (existingNot != null)
                 {
-                    existingNot.NotOdev = model.NotOdev;
-                    existingNot.NotVize = model.NotVize;
-                    existingNot.NotFinal = model.NotFinal;
+                    existingNot.NotPuan= model.NotPuan;
                     existingNot.NotTarihi = model.NotTarihi;
 
                     _context.Update(existingNot);

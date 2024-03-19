@@ -6023,7 +6023,7 @@ table.table-inbox tbody tr.checked {
     }
 
 .card-middle {
-    padding: 20px;
+    padding: 0px;
     background: #f7f7ff
 }
 
@@ -6031,7 +6031,8 @@ table.table-inbox tbody tr.checked {
     align-items: center;
     display: inline-flex;
     font-size: 16px;
-    margin: 0
+    margin: 10px;
+    margin-left: 20px
 }
 
     .card-middle-avatar a {

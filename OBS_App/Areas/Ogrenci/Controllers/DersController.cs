@@ -17,11 +17,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> Derslerim()
         {
             var kullanıcı = await _userManager.GetUserAsync(User);

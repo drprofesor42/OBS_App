@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-@model List<Not>
+@model IEnumerable<Not>
 
 <div class="student-group-form">
     <div class="row">
@@ -49,11 +49,11 @@
                         <thead class="student-thread">
                             <tr>
                                 <th>Ad-Soyad</th>
-                                <th>Sınıfı</th>
-                                <th>Bölümü</th>
-                                <th>Ödev Notu</th>
-                                <th>Vize Notu</th>
-                                <th>Final Notu</th>
+                                <th>Bölüm</th>
+                                <th>Ders</th>
+                                <th>Sınıf</th>
+                                <th>Sınav Tipi</th>
+                                <th>Sınav Notu</th>
                                 <th class="text-end">İşlemler</th>
                             </tr>
                         </thead>
@@ -68,11 +68,11 @@
                                             <a href="student-details.html">@not.Ogrencis?.OgrenciAd @not.Ogrencis?.OgrenciSoyad</a>
                                         </h2>
                                     </td>
-                                    <td>@not.Ogrencis?.OgrenciSinif</td>
                                     <td>@not.Ogrencis?.Bolum?.BolumAd</td>
-                                    <td>@not.NotOdev</td>
-                                    <td>@not.NotVize</td>
-                                    <td>@not.NotFinal</td>
+                                    <td>@not.Ders?.DersAd</td>
+                                    <td>@not.Ogrencis?.OgrenciSinif</td>
+                                    <td>@not.NotTip</td>
+                                    <td>@not.NotPuan</td>
                                     <td class="text-end">
                                         <div class="actions ">
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">

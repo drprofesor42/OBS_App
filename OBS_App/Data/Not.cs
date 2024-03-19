@@ -3,10 +3,10 @@
     public class Not
     {
         public int Id { get; set; }
-        public int? NotOdev { get; set; }
-        public int? NotVize { get; set; }
-        public int? NotFinal { get; set; }
+        public string? NotTip { get; set; }
+        public int? NotPuan { get; set; }
         public DateOnly? NotTarihi { get; set; }
+        public string? NotSaat { get; set; }
         public int? DersId { get; set; }
         public Ders? Ders { get; set; }
         public int OgrencisId { get; set; }

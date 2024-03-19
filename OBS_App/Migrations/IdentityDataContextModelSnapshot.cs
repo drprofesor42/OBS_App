@@ -375,17 +375,17 @@ namespace OBS_App.Migrations
                     b.Property<int?>("DersId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NotFinal")
+                    b.Property<int?>("NotPuan")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NotOdev")
-                        .HasColumnType("int");
+                    b.Property<string>("NotSaat")
+                        .HasColumnType("longtext");
 
                     b.Property<DateOnly?>("NotTarihi")
                         .HasColumnType("date");
 
-                    b.Property<int?>("NotVize")
-                        .HasColumnType("int");
+                    b.Property<string>("NotTip")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");
