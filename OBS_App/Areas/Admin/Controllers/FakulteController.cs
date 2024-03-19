@@ -60,7 +60,6 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
-                ViewData["Ekleme"] = 0;
                 return View();
             }
             else
@@ -76,23 +75,19 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(string type, Fakulte model)
+        public async Task<IActionResult> Ekle_Guncelle(Fakulte model, int id)
         {
             if (ModelState.IsValid)
             {
-                if (model == null || type == null)
-                {
-                    return View(model);
-                    // TempData Hata Gönder
-                }
-                else if (type == "0")
+
+                if (id == 0)
                 {
                     await _context.AddAsync(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
                 }
-                else if (type == "1")
+                else if (id == 1)
                 {
                     _context.Update(model);
                     _context.SaveChanges();
@@ -105,8 +100,10 @@ namespace OBS_App.Areas.Admin.Controllers
                     // Hata Gönder
                 }
             }
-
-            return View(model);
+            else
+            {
+                return View(model);
+            }
         }
 
         public IActionResult Sil(int id)
