@@ -38,15 +38,7 @@
             </div>
         </div>
         <div class=" blog-categories-btn pt-0 ">
-            <div class="bank-details-btn ">
-                @if (ViewData["Ekleme"] == null)
-                {
-                    <input name="type" type="hidden" value="0">
-                }
-                else
-                {
-                    <input name="type" type="hidden" value="1">
-                }
+            <div class="bank-details-btn ">  
                 <input asp-for="OgretmensId" type="hidden">
                 <input asp-for="OlusturmaTarihi" type="hidden" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                 <span asp-validation-for="OlusturmaTarihi" class="text-danger"></span>

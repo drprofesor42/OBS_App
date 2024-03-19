@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,11 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OBS_App.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:OBS_App/Migrations/20240318121504_init.cs
     public partial class init : Migration
-========
-    public partial class amsnbmsja : Migration
->>>>>>>> NewMaster:OBS_App/Migrations/20240319054027_amsnbmsja.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
