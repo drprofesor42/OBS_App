@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Şifre Değiştir</div>
                 <div class="card-body">
-                    <form asp-action="SifreDegistir" asp-controller="Admin" method="post">
+                    <form asp-action="SifreDegistir" asp-controller="Ogrenci" method="post">
                         @if (ViewBag.user != null)
                         {
                             <div class="form-group ">
@@ -28,7 +28,7 @@
                                 <input asp-for="ParolaOnayla" class="form-control pass-input" type="password">
                                 <div class="input-group-append">
                                     <span class="profile-views feather-eye toggle-password"></span>
-                                </div> 
+                                </div>
                             </div>
                             <span asp-validation-for="ParolaOnayla" class="text-danger"></span>
                         </div>
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+

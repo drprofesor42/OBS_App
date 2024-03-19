@@ -8,7 +8,7 @@ namespace OBS_App.Data
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string FakulteAd { get; set; }
-        public Int32  FakulteOgretmenSayisi { get; set; }
+        public Int32 FakulteOgretmenSayisi { get; set; }
         public Int32 FakulteOgrenciSayisi { get; set; }
         public Int32 FakulteDersSayisi { get; set; }
 

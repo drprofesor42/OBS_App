@@ -26,10 +26,10 @@
         <div class="header">
 
             <div class="header-left">
-                <a asp-controller="Home" asp-action="index" class="logo">
+                <a asp-controller="Admin" asp-action="index" class="logo">
                     <img src="~/panel/img/profiles/logo.png" alt="Logo">
                 </a>
-                <a asp-controller="Home" asp-action="index" class="logo logo-small">
+                <a asp-controller="Admin" asp-action="index" class="logo logo-small">
                     <img src="~/panel/img/profiles/logo-small.png" alt="Logo" width="30" height="30">
                 </a>
             </div>
@@ -98,7 +98,7 @@
                 <li class="nav-item dropdown has-arrow new-user-menus">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <div class="user-img">
-                            <img class="rounded-circle" src="https://pbs.twimg.com/profile_images/2861121762/8b50471dbedc1b0968bdb9d79a894ba3_400x400.jpeg" width="31" alt="Ryan Taylor">
+                            <img class="rounded-circle" src="~/panel/img/profiles/avatar-02.jpg" width="31" alt="Ryan Taylor">
                             <div class="user-text">
                                 <h6>Merhaba, @User.Identity.Name</h6>
                                 <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
@@ -108,14 +108,13 @@
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="https://pbs.twimg.com/profile_images/2861121762/8b50471dbedc1b0968bdb9d79a894ba3_400x400.jpeg" alt="User Image" class="avatar-img rounded-circle">
+                                <img src="~/panel/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
                                 <h6>@User.Identity.Name</h6>
                                 <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="profile.html">Profilim</a>
                         <a class="dropdown-item" href="inbox.html">Gelen Kutusu</a>
                         <a class="dropdown-item" asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="">Şifre Değiştir</a>
                         <a class="dropdown-item" asp-action="Logout" asp-controller="Account" asp-area="">Çıkış Yap</a>
@@ -183,13 +182,13 @@
                         </li>
 
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-book-reader"></i> <span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <a href="#">
+                                <i class="fas fa-bullhorn"></i><span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Duyuru" asp-action="Index">Duyurular</a></li>
                                 <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0">Duyuru Yayınla</a></li>
                             </ul>
                         </li>
-
                         <li class="submenu">
                             <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Atama İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
@@ -208,7 +207,8 @@
                         </li>
 
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-calendar-alt"></i> <span>Şifre İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <a href="#">
+                                <i class="fas fa-lock"></i><span>Şifre İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="1">Öğrenci Şifre Değiştir</a></li>
                                 <li><a asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="2">Öğretmen Şifre Değiştir</a></li>

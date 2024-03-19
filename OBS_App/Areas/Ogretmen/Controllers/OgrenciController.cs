@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Ogretmen.Controllers

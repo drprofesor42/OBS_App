@@ -1,33 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OBS_App.Models;
-using OBS_App.Data;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using OBS_App.Data;
+using OBS_App.Models;
 
 
 namespace OBS_App.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-	[Authorize(Roles = "Admin")]
-	public class OgrenciController : Controller
-	{
-		private readonly IdentityDataContext _context;
-		private readonly UserManager<AppUser> _userManager;
-		private readonly RoleManager<AppRole> _roleManager;
-		public OgrenciController(IdentityDataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
-		{
-			_context = context;
-			_userManager = userManager;
-			_roleManager = roleManager;
-		}
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+    public class OgrenciController : Controller
+    {
+        private readonly IdentityDataContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
+        public OgrenciController(IdentityDataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        {
+            _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
 
-		public async Task<IActionResult> Index()
-		{
-			var ogrenciler = await _context.Ogrenciler.Include(x => x.Bolum).ToListAsync();
-			return View(ogrenciler);
-		}
+        public async Task<IActionResult> Index()
+        {
+            var ogrenciler = await _context.Ogrenciler.Include(x => x.Bolum).ToListAsync();
+            return View(ogrenciler);
+        }
 
         public async Task<IActionResult> Ekle_Guncelle(int? id)
         {
@@ -66,7 +66,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-               
+
                 var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
 
                 if (model == null || type == null)
@@ -89,16 +89,16 @@ namespace OBS_App.Areas.Admin.Controllers
                         var ogrenci = await _userManager.FindByNameAsync(model.OgrenciEposta);
 
 
-                            if (ogrenci != null)
-                            {
-                                await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
-                            }
-                        }
-                        else
+                        if (ogrenci != null)
                         {
-                            ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
-                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                            return View(model);
+                            await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
+                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                        return View(model);
 
                     }
                     model.Dersler = bolum.Dersler;
@@ -118,18 +118,18 @@ namespace OBS_App.Areas.Admin.Controllers
                         await _userManager.ResetPasswordAsync(users, token, model.OgrenciParola);
                     }
 
-                        _context.Update(model);
-                        _context.SaveChanges();
-                        TempData["success"] = "Kayıt güncellendi.";
+                    _context.Update(model);
+                    _context.SaveChanges();
+                    TempData["success"] = "Kayıt güncellendi.";
 
-                        return RedirectToAction("Index");
-                    }
+                    return RedirectToAction("Index");
                 }
-                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
-                return View(model);
             }
-        
+            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+            return View(model);
+        }
+
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {
@@ -145,9 +145,9 @@ namespace OBS_App.Areas.Admin.Controllers
                 _context.SaveChanges();
             }
 
-			return RedirectToAction("Index");
-		}
+            return RedirectToAction("Index");
+        }
 
 
-	}
+    }
 }

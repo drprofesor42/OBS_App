@@ -3,7 +3,7 @@ using OBS_App.Models;
 
 namespace OBS_App.Hubs
 {
-    public class SignalRHub: Hub
+    public class SignalRHub : Hub
     {
         private readonly IdentityDataContext _context;
 

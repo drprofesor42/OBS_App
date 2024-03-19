@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OBS_App.Models;
 using OBS_App.Data;
+using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
@@ -78,10 +78,10 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(model);
             }
         }
-      
+
         public async Task<IActionResult> Sil(int? id)
         {
-            
+
             if (id != null)
             {
                 var user = await _context.AkademikTakvimler.FirstOrDefaultAsync(u => u.Id == id);

@@ -59,12 +59,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     //user giriþindeki harici kelimeleri engellemek için kullanýlýr
     //options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm@.";
     //5 sifre giriþ hakký var
-    
+
 
     //Hesaba giriþ yapmak için hesabý onaylatma
     options.SignIn.RequireConfirmedEmail = false;
 
-   
+
 });
 
 //Authorization  configuration files ayarlarýný yapýlandýrýr(Giriþ)
@@ -121,6 +121,6 @@ app.MapHub<SignalRHub>("/signalrhub");
 //IdentitySeed Verisini çalýþtýrýr
 IdentityUserSeed.IdentityTestUser(app);
 IdentityRoleSeed.IdentityTestRole(app);
-//FakulteSeed.FakulteSeedTest(app);
+FakulteSeed.FakulteSeedTest(app);
 
 app.Run();

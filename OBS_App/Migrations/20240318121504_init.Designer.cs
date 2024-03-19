@@ -12,11 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240318060959_init.Designer.cs
-    [Migration("20240318060959_init")]
-========
-    [Migration("20240315125536_init")]
->>>>>>>> NewMaster:OBS_App/Migrations/20240315125536_init.Designer.cs
+    [Migration("20240318121504_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -191,10 +187,12 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("AkademikTakvimBaslangic")
+                    b.Property<DateOnly?>("AkademikTakvimBaslangic")
+                        .IsRequired()
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("AkademikTakvimBitis")
+                    b.Property<DateOnly?>("AkademikTakvimBitis")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -215,7 +213,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("BolumBaskani")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int?>("FakulteId")
@@ -328,7 +325,8 @@ namespace OBS_App.Migrations
                     b.Property<int?>("OgretmensId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("OlusturmaTarihi")
+                    b.Property<DateOnly?>("OlusturmaTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -359,7 +357,8 @@ namespace OBS_App.Migrations
                     b.Property<int>("FakulteOgretmenSayisi")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("OlusturmaTarihi")
+                    b.Property<DateOnly?>("OlusturmaTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -435,14 +434,16 @@ namespace OBS_App.Migrations
                     b.Property<string>("OgrenciDanisman")
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgrenciDogumTarihi")
+                    b.Property<DateOnly?>("OgrenciDogumTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgrenciEposta")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgrenciKayitTarihi")
+                    b.Property<DateOnly?>("OgrenciKayitTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgrenciParola")
@@ -453,7 +454,8 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("OgrenciSinif")
+                    b.Property<int?>("OgrenciSinif")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("OgrenciSoyad")
@@ -507,14 +509,16 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgretmenBaslamaTarihi")
+                    b.Property<DateOnly?>("OgretmenBaslamaTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgretmenCinsiyet")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("OgretmenDogumTarihi")
+                    b.Property<DateOnly?>("OgretmenDogumTarihi")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("OgretmenEposta")

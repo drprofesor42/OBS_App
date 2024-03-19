@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
-using OBS_App.ViewsModel;
-using System.Data;
 
 namespace OBS_App.Areas.Admin.Controllers
 {

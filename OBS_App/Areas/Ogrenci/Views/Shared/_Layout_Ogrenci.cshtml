@@ -118,8 +118,9 @@
                                 <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="profile.html">Profilim</a>
+                        <a class="dropdown-item" asp-action="Profilim" asp-controller="Ogrenci">Profilim</a>
                         <a class="dropdown-item" href="inbox.html">Gelen Kutusu</a>
+                        <a class="dropdown-item" asp-action="SifreDegistir" asp-controller="Ogrenci">Şifre Değiştir</a>
                         <a class="dropdown-item" asp-action="Logout" asp-controller="Account" asp-area="">Çıkış Yap</a>
                     </div>
                 </li>
@@ -176,29 +177,13 @@
         <div class="page-wrapper">
             <div class="content container-fluid">
 
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="page-title">X Page</h3>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a>X Page</a></li>
-                                <li class="breadcrumb-item active">X Page</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+               
 
                 @RenderBody()
 
             </div>
         </div>
-        <footer>
-            <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
-        </footer>
     </div>
-
-
-
     @* <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

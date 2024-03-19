@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting.Internal;
 using OBS_App.Data;
 using OBS_App.Models;
 namespace OBS_App.Areas.Admin.Controllers
@@ -30,14 +29,14 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
 
-			if (id == 0)
+            if (id == 0)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 var model = new Duyuru
                 {
                     DuyuruGonderen = user.DuyuruName,
                 };
-             
+
                 return View(model);
             }
             else
@@ -56,38 +55,38 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> Ekle_Guncelle(string type, Duyuru model)
-		{
+        public async Task<IActionResult> Ekle_Guncelle(string type, Duyuru model)
+        {
             if (ModelState.IsValid)
             {
-               
+
                 if (type == "0")
-				{
-                  
+                {
+
 
                     //burada hangi öğretmenin gönderdiğini görebiliriz
-                  // var user = await _userManager.FindByNameAsync("ogretmen");
+                    // var user = await _userManager.FindByNameAsync("ogretmen");
                     //var ogretmenıd = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.OgretmenEposta == "aysedemir@gmail.com");
-                  //  model.OgretmensId = ogretmenıd.Id;
+                    //  model.OgretmensId = ogretmenıd.Id;
                     await _context.Duyurular.AddAsync(model);
-					await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
-				}
-				else
-				{
-					_context.Duyurular.Update(model);
-					_context.SaveChanges();
+                }
+                else
+                {
+                    _context.Duyurular.Update(model);
+                    _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
-				}
-			}
-            
+                }
+            }
 
-			return View (model);
-		}
 
-		public IActionResult Sil(int id)
+            return View(model);
+        }
+
+        public IActionResult Sil(int id)
         {
             var duyuru = _context.Duyurular.FirstOrDefault(x => x.Id == id);
             if (duyuru == null)

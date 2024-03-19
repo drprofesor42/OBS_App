@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Ogretmen.Controllers
@@ -30,5 +29,13 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             return View(duyurular);
         }
 
+        public IActionResult SifreDegistir()
+        {
+            return View();
+        }
+        public IActionResult Profilim()
+        {
+            return View();
+        }
     }
 }
