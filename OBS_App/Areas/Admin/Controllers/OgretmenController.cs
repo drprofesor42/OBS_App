@@ -68,7 +68,6 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         var user = new AppUser()
                         {
-                            DuyuruName = model.OgretmenAd,
                             UserName = model.OgretmenEposta,
                             Email = model.OgretmenEposta
                         };
@@ -96,10 +95,12 @@ namespace OBS_App.Areas.Admin.Controllers
 
 
                 }
-                //Güncelleme işlemi
-                if (Kaydet == 2)
+            }
+            //Güncelleme işlemi
+            if (Kaydet == 2)
+            {
+                if (ModelState.IsValid)
                 {
-
                     var users = await _userManager.FindByEmailAsync(model.OgretmenEposta);
 
                     if (users != null)

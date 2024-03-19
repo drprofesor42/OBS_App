@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OBS_App.Models;
 
@@ -11,9 +12,11 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    partial class IdentityDataContextModelSnapshot : ModelSnapshot
+    [Migration("20240318125958_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -788,7 +791,7 @@ namespace OBS_App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
+                    b.HasOne("OBS_App.Data.Fakulte", null)
                         .WithMany("Dersler")
                         .HasForeignKey("FakulteId");
 
@@ -801,8 +804,6 @@ namespace OBS_App.Migrations
                         .HasForeignKey("SinifId");
 
                     b.Navigation("Bolum");
-
-                    b.Navigation("Fakulte");
 
                     b.Navigation("Ogretmens");
                 });

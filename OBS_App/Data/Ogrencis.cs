@@ -40,6 +40,7 @@ namespace OBS_App.Data
         [MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParola { get; set; }
 
+
         [Required(ErrorMessage = "*Zorunlu Alan")]
         [DataType(DataType.Password)]
         [Compare("OgrenciParola", ErrorMessage = "Şifreler eşleşmiyor.")]
@@ -56,7 +57,7 @@ namespace OBS_App.Data
 
         public int AdresId { get; set; }
         public Adres Adres { get; set; }
-       // [Required(ErrorMessage = "*Zorunlu Alan")]
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
         public int? FakulteId { get; set; }

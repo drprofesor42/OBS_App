@@ -39,12 +39,14 @@
         </div>
         <div class=" blog-categories-btn pt-0 ">
             <div class="bank-details-btn ">
-                @if (ViewData["Ekleme"] == null)
+                @if (Model.DuyuruMesaj == null)
                 {
+                    // Ekle
                     <input name="type" type="hidden" value="0">
                 }
                 else
                 {
+                    // Güncelle
                     <input name="type" type="hidden" value="1">
                 }
                 <input asp-for="OgretmensId" type="hidden">

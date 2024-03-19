@@ -7,7 +7,6 @@ namespace OBS_App.Data
     public class Duyuru
     {
         public int Id { get; set; }
-        public string DuyuruGonderen { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string DuyuruBaslik { get; set; }

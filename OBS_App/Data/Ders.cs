@@ -20,7 +20,7 @@ namespace OBS_App.Data
 		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
 		public string DersAkts { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }
-       // [Required(ErrorMessage = "*Zorunlu Alan")]
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? BolumId { get; set; }
         public Bolum? Bolum { get; set; }
         public int? OgretmensId { get; set; }

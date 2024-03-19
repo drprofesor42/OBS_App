@@ -1,8 +1,7 @@
-﻿
-@{
-    ViewData["Title"] = "OgrenciListem";
+﻿@{
+    ViewData["Title"] = "Index";
 }
-@model IEnumerable<Ders>
+@model List<Not>
 
 <div class="student-group-form">
     <div class="row">
@@ -18,7 +17,7 @@
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="E-Mail Adresine Göre Ara ...">
+                <input type="text" class="form-control" placeholder="Bölüm İsmine Göre Ara ...">
             </div>
         </div>
         <div class="col-lg-2">
@@ -34,11 +33,13 @@
     <div class="col-sm-12">
         <div class="card card-table">
             <div class="card-body">
-
+                <div class="col-auto text-end float-end ms-auto download-grp">
+                    <a asp-controller="Not" asp-action="Ekle_Guncelle" asp-route-type="0" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
+                </div>
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Öğrencilerim</h3>
+                            <h3 class="page-title">Not Bilgileri</h3>
                         </div>
                     </div>
                 </div>
@@ -47,53 +48,46 @@
                     <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
                         <thead class="student-thread">
                             <tr>
-                                <th>ID</th>
                                 <th>Ad-Soyad</th>
                                 <th>Sınıfı</th>
                                 <th>Bölümü</th>
-                                <th>Doğum Tarihi</th>
-                                <th>E-Mail</th>
-                                <th>Telefon Numarası</th>
-                                <th>Kayıt Tarihi</th>
+                                <th>Ödev Notu</th>
+                                <th>Vize Notu</th>
+                                <th>Final Notu</th>
                                 <th class="text-end">İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach (var ders in Model) // Modeldeki her öğrenci için döngü
+                            @foreach (var not in Model) // Modeldeki her öğrenci için döngü
                             {
-                                foreach (var ogr in ders.Ogrencisler)
-                                {
-                                    
-                                    <tr>
-                                    <th>@ogr.Id</th>
+                                <tr>
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/panel/img/profiles/avatar-10.jpg" alt="User Image"></a>
-                                            <a href="student-details.html">@ogr.OgrenciAd @ogr.OgrenciSoyad</a>
+                                            <a href="student-details.html">@not.Ogrencis?.OgrenciAd @not.Ogrencis?.OgrenciSoyad</a>
                                         </h2>
                                     </td>
-                                    <td>@ogr.OgrenciSinif</td>
-                                    <td>@ogr.Bolum?.BolumAd</td>
-                                    <td>@ogr.OgrenciDogumTarihi</td>
-                                    <td>@ogr.OgrenciEposta</td>
-                                    <td>@ogr.OgrenciTelefon</td>
-                                    <td>@ogr.OgrenciKayitTarihi</td>
+                                    <td>@not.Ogrencis?.OgrenciSinif</td>
+                                    <td>@not.Ogrencis?.Bolum?.BolumAd</td>
+                                    <td>@not.NotOdev</td>
+                                    <td>@not.NotVize</td>
+                                    <td>@not.NotFinal</td>
                                     <td class="text-end">
                                         <div class="actions ">
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light">
+                                            <a asp-controller="Not" asp-action="Ekle_Guncelle" asp-route-id="@not.Id" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a onclick="confirmDelete(@ogr.Id)" class="btn btn-sm bg-danger-light">
+                                            <a asp-controller="Not" asp-action="Sil" asp-route-id="@not.Id" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
-                                }
+
                             }
                         </tbody>
                     </table>
@@ -102,5 +96,4 @@
         </div>
     </div>
 </div>
-
 
