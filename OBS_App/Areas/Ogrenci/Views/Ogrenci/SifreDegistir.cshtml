@@ -6,17 +6,7 @@
             <div class="card">
                 <div class="card-header">Şifre Değiştir</div>
                 <div class="card-body">
-                    <form asp-action="SifreDegistir" asp-controller="Ogrenci" method="post">
-                        @if (ViewBag.user != null)
-                        {
-                            <div class="form-group ">
-                                <label>Kullanıcı Seç<span class="login-danger">*</span></label>
-                                <select asp-for="Eposta" asp-items="ViewBag.user" class="form-control select">
-                                    <option value="">Seçiniz</option>
-                                </select>
-                                <span asp-validation-for="Eposta" class="text-danger"></span>
-                            </div>
-                        }
+                    <form asp-action="SifreDegistir" asp-controller="Ogrenci" method="post" novalidate>
                         <div class="form-group">
                             <label>Şifre <span class="login-danger">*</span></label>
                             <input asp-for="Parola" class="form-control pass-input" type="password">

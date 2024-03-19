@@ -12,14 +12,10 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240319115743_init.Designer.cs
-    [Migration("20240319115743_init")]
-========
 <<<<<<<< HEAD:OBS_App/Migrations/20240319102241_init.Designer.cs
     [Migration("20240319102241_init")]
 ========
     [Migration("20240319073751_init")]
->>>>>>>> NewMaster:OBS_App/Migrations/20240319073751_init.Designer.cs
 >>>>>>>> NewMaster:OBS_App/Migrations/20240319073751_init.Designer.cs
     partial class init
     {
@@ -386,17 +382,17 @@ namespace OBS_App.Migrations
                     b.Property<int?>("DersId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NotPuan")
+                    b.Property<int?>("NotFinal")
                         .HasColumnType("int");
 
-                    b.Property<string>("NotSaat")
-                        .HasColumnType("longtext");
+                    b.Property<int?>("NotOdev")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly?>("NotTarihi")
                         .HasColumnType("date");
 
-                    b.Property<string>("NotTip")
-                        .HasColumnType("longtext");
+                    b.Property<int?>("NotVize")
+                        .HasColumnType("int");
 
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");

@@ -43,41 +43,43 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id)
         {
-            var bolum = await _context.Bolumler
-                                      .Include(x => x.Fakulte)
-                                      .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-            if (model != null && bolum != null)
-            {
-                model.FakulteId = bolum.FakulteId;
-            }
-
             if (ModelState.IsValid)
             {
                 if (id == 0)
                 {
                     var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
-                    if (dogrula == null)
-                    {
-                        var user = new AppUser()
-                        {
-                            UserName = model.OgretmenEposta,
-                            Email = model.OgretmenEposta
-                        };
-                        await _userManager.CreateAsync(user, model.OgretmenParola);
-                        var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
-
-
-                        if (ogretmen != null)
-                        {
-                            await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
-                        }
-                    }
-                    else
+                    if (dogrula != null)
                     {
                         ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
                         ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                         return View(model);
+                    }
+                }
 
+                if (id == 0)
+                {
+                    var user = new AppUser()
+                    {
+                        UserName = model.OgretmenEposta,
+                        Email = model.OgretmenEposta
+                    };
+                    await _userManager.CreateAsync(user, model.OgretmenParola);
+                    var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
+
+
+                    if (ogretmen != null)
+                    {
+                        await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
+                    }
+                    var bolum = await _context.Bolumler
+                                  .Include(x => x.Fakulte)
+                                  .Include(x => x.Ogrencisler)
+                                  .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+                    if (bolum != null)
+                    {
+                        model.Ogrencisler = bolum.Ogrencisler;
+                        model.Fakulte = bolum.Fakulte;
+                        model.FakulteId = bolum.FakulteId;
                     }
                     await _context.Ogretmenler.AddAsync(model);
                     await _context.SaveChangesAsync();
@@ -92,8 +94,21 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (users != null)
                     {
                         var token = await _userManager.GeneratePasswordResetTokenAsync(users);
-                        await _userManager.ResetPasswordAsync(users, token, model.OgretmenEposta);
+                        await _userManager.ResetPasswordAsync(users, token, model.OgretmenParola);
                     }
+                    else
+                    {
+
+                        var user = new AppUser()
+                        {
+                            UserName = model.OgretmenEposta,
+                            Email = model.OgretmenEposta
+                            
+                        };
+                        await _userManager.CreateAsync(user, model.OgretmenParola);
+                        var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
+                    }
+                    
                     _context.Update(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt güncellendi.";

@@ -49,19 +49,23 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ders model, int id)
         {
-            var bolum = await _context.Bolumler
-                .Include(x => x.Ogrencisler)
-                .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-            if (bolum != null)
-            {
-                model.FakulteId = bolum.FakulteId;
-                model.Ogrencisler = bolum.Ogrencisler;
-            }
+
 
             if (ModelState.IsValid)
             {
+
                 if (id == 0)
                 {
+                    var bolum = await _context.Bolumler
+                                       .Include(x => x.Fakulte)
+                                       .Include(x => x.Ogrencisler)
+                                       .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+                    if (bolum != null)
+                    {
+                        model.FakulteId = bolum.FakulteId;
+                        model.Fakulte = bolum.Fakulte;
+                        model.Ogrencisler = bolum.Ogrencisler;
+                    }
                     await _context.AddAsync(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt eklendi.";

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OBS_App.Areas.Admin.ViewsModel;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Ogretmen.Controllers
@@ -33,9 +35,34 @@ namespace OBS_App.Areas.Ogretmen.Controllers
         {
             return View();
         }
-        public IActionResult Profilim()
+
+		[HttpPost]
+		public async Task<IActionResult> SifreDegistir(SifreDegistirViewsModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var users = await _userManager.GetUserAsync(User);
+				var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+				if (users != null)
+				{
+					await _userManager.ResetPasswordAsync(users, token, model.Parola);
+
+				}
+			}
+			return View(model);
+		}
+
+		public async Task<IActionResult> Profilim()
         {
-            return View();
+
+            var users = await _userManager.GetUserAsync(HttpContext.User);
+
+            var ogretmen = _context.Ogretmenler
+                .Include(x => x.Fakulte)
+                .Include(x => x.Bolum)
+                .Include(x=> x.Adres)
+                .Where(x => x.OgretmenEposta == users.Email);
+            return View(ogretmen);
         }
     }
 }
