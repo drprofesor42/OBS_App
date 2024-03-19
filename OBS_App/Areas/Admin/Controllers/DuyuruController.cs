@@ -45,6 +45,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else
                 {
+                    ViewData["Ekleme"] = 1;
                     return View(duyuru);
                 }
             }

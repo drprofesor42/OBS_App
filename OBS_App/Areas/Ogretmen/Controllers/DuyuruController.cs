@@ -58,7 +58,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                         // Hata Gönder
                         return RedirectToAction("Index");
                     }
-                    else if(duyuru.OgretmensId != id)
+                    else if(duyuru.OgretmensId != ogretmen.Id)
                     {
                         // Kendine ait olamayan mesajı değiştirmeye çalışıyor. Hata
                         return RedirectToAction("Index");
