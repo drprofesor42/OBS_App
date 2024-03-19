@@ -76,7 +76,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
 		public IActionResult Duyurular()
 		{
-			var duyurular = _context.Duyurular.ToList();
+			var duyurular = _context.Duyurular.Include(x => x.Ogretmens).ToList();
 			return View(duyurular);
 
 		}
