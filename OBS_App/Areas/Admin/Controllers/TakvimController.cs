@@ -36,48 +36,38 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(AkademikTakvim model, int? Kaydet)
+        public async Task<IActionResult> Ekle_Guncelle(AkademikTakvim model, int id)
         {
-            if (Kaydet == null)
+            if (ModelState.IsValid)
             {
-                // hata
-                return View();
+                if (id == 0)
+                {
+                    await _context.AkademikTakvimler.AddAsync(model);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt eklendi.";
+                    return RedirectToAction("Index");
+
+                }
+                //Güncelleme işlemi
+                if (id == 1)
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt güncellendi.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(model);
+                }
             }
             else
             {
-                //ekleme
-                if (Kaydet == 1)
-                {
-                    if (ModelState.IsValid)
-                    {
-                        await _context.AkademikTakvimler.AddAsync(model);
-                        await _context.SaveChangesAsync();
-                        TempData["success"] = "Kayıt eklendi.";
-
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        //hata mesajı
-                    }
-                }
-                //Güncelleme işlemi
-                if (Kaydet == 2)
-                {
-                    if (ModelState.IsValid)
-                    {
-
-                        _context.Update(model);
-                        await _context.SaveChangesAsync();
-                        TempData["success"] = "Kayıt güncellendi.";
-
-                        return RedirectToAction("Index");
-
-                    }
-                }
                 return View(model);
             }
         }
+
+
 
         public async Task<IActionResult> Sil(int? id)
         {

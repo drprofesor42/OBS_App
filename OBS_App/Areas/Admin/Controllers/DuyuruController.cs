@@ -28,11 +28,11 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
-			if (id == 0)
+            if (id == 0)
             {
                 var user = await _userManager.GetUserAsync(User);
-                var model = new Duyuru{};
-             
+                var model = new Duyuru { };
+
                 return View(model);
             }
             else
@@ -43,37 +43,38 @@ namespace OBS_App.Areas.Admin.Controllers
                     // Hata Gönder
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    ViewData["Ekleme"] = 1;
-                    return View(duyuru);
-                }
+                return View(duyuru);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(string type, Duyuru model)
+        public async Task<IActionResult> Ekle_Guncelle(int id, Duyuru model)
         {
             if (ModelState.IsValid)
             {
-				if (type == "0")
-				{
+                if (id == 0)
+                {
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
                 }
-                else
+                else if (id == 1) 
                 {
                     _context.Duyurular.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    return View(model);
+                }
             }
-
-
-            return View(model);
+            else
+            {
+                return View(model);
+            }
         }
 
         public IActionResult Sil(int id)
