@@ -4,49 +4,74 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
-namespace OBS_App.Areas.Admin.Controllers
+
+namespace OBS_App.Areas.Ogretmen.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area("Ogretmen")]
+    [Authorize(Roles = "Ogretmen")]
     public class DuyuruController : Controller
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public DuyuruController(IdentityDataContext context, UserManager<AppUser> userManager)
+        public DuyuruController(UserManager<AppUser> userManager, IdentityDataContext context)
         {
             _userManager = userManager;
             _context = context;
         }
 
-
         public async Task<IActionResult> Index()
         {
-            var duyurular = await _context.Duyurular.Include(x => x.Ogretmens).ToListAsync();
+            var duyurular = _context.Duyurular.Include(x => x.Ogretmens).ToList();
+			var kullanıcı = await _userManager.GetUserAsync(User);
+            if (kullanıcı != null)
+            {
+                var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
+                ViewBag.kullanıcıId = ogretmen.Id;
+
+			}
+
             return View(duyurular);
         }
 
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
-			if (id == 0)
+            var kullanıcı = await _userManager.GetUserAsync(User);
+            if (kullanıcı != null)
             {
-                var user = await _userManager.GetUserAsync(User);
-                var model = new Duyuru{};
-             
-                return View(model);
-            }
-            else
-            {
-                var duyuru = await _context.Duyurular.FirstOrDefaultAsync(x => x.Id == id);
-                if (duyuru == null)
+                var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
+                if (id == 0)
                 {
-                    // Hata Gönder
-                    return RedirectToAction("Index");
+			        var model = new Duyuru
+			        {
+				        OgretmensId = ogretmen.Id,
+			        };
+                    return View(model);
+                
                 }
                 else
                 {
-                    return View(duyuru);
+                    var duyuru = await _context.Duyurular.FirstOrDefaultAsync(x => x.Id == id);
+                    
+                    if (duyuru == null)
+                    {
+                        // Hata Gönder
+                        return RedirectToAction("Index");
+                    }
+                    else if(duyuru.OgretmensId != id)
+                    {
+                        // Kendine ait olamayan mesajı değiştirmeye çalışıyor. Hata
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(duyuru);
+                    }
                 }
+            }
+            else
+            {
+                return RedirectToAction("Index");
             }
         }
 
@@ -55,8 +80,8 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-				if (type == "0")
-				{
+                if (type == "0")
+                {
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
@@ -89,6 +114,5 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
     }
 }

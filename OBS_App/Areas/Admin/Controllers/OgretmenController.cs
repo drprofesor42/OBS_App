@@ -23,11 +23,9 @@ namespace OBS_App.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
             var ogretmenler = await _context.Ogretmenler.Include(x => x.Adres).ToListAsync();
             return View(ogretmenler);
         }
-
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
             if (id == 0)
@@ -40,35 +38,28 @@ namespace OBS_App.Areas.Admin.Controllers
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 var ogrt = await _context.Ogretmenler.Include(x => x.Adres).FirstOrDefaultAsync(x => x.Id == id);
                 return View(ogrt);
-
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int Kaydet)
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id)
         {
-
+            var bolum = await _context.Bolumler
+                                      .Include(x => x.Fakulte)
+                                      .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+            if (model != null && bolum != null)
+            {
+                model.FakulteId = bolum.FakulteId;
+            }
 
             if (ModelState.IsValid)
             {
-                //ekleme işlemi
-                if (Kaydet == 1)
+                if (id == 0)
                 {
-
-                    var bolum = await _context.Bolumler
-                                       .Include(x => x.Fakulte)
-                                       .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-                    if (model != null && bolum != null)
-                    {
-                        model.FakulteId = bolum.FakulteId;
-                        model.Fakulte = bolum.Fakulte;
-                    }
-
                     var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
                     if (dogrula == null)
                     {
                         var user = new AppUser()
                         {
-                            DuyuruName = model.OgretmenAd,
                             UserName = model.OgretmenEposta,
                             Email = model.OgretmenEposta
                         };
@@ -88,16 +79,12 @@ namespace OBS_App.Areas.Admin.Controllers
                         return View(model);
 
                     }
-
                     await _context.Ogretmenler.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
-
-
                 }
-                //Güncelleme işlemi
-                if (Kaydet == 2)
+                if (id == 1)
                 {
 
                     var users = await _userManager.FindByEmailAsync(model.OgretmenEposta);
@@ -112,11 +99,11 @@ namespace OBS_App.Areas.Admin.Controllers
                     TempData["success"] = "Kayıt güncellendi.";
 
                     return RedirectToAction("Index");
-
-
                 }
-                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                return View(model);
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             else
             {

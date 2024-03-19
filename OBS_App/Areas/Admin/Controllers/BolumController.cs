@@ -30,7 +30,6 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
                 ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-
                 return View();
 
             }
@@ -40,12 +39,10 @@ namespace OBS_App.Areas.Admin.Controllers
                 ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
                 var bolum = await _context.Bolumler.FirstOrDefaultAsync(x => x.Id == id);
                 return View(bolum);
-
             }
-
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Bolum model, int Kaydet)
+        public async Task<IActionResult> Ekle_Guncelle(Bolum model, int id)
         {
             var fakulte = await _context.Fakulteler.FirstOrDefaultAsync(x => x.Id == model.FakulteId);
             if (fakulte != null)
@@ -53,7 +50,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 model.Fakulte = fakulte;
 
             }
-
             var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
             if (bolumbaskani != null)
             {
@@ -67,7 +63,7 @@ namespace OBS_App.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //Ekleme İşlemi
-                if (Kaydet == 1)
+                if (id == 0)
                 {
 
                     TempData["success"] = "Kayıt eklendi.";
@@ -76,7 +72,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
                 //Güncelleme İşlemi
-                if (Kaydet == 2)
+                if (id == 1)
                 {
                     TempData["success"] = "Kayıt güncellendi.";
                     _context.Bolumler.Update(model);
@@ -85,13 +81,17 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else
                 {
-
+                    ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
+                    ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                    return View(model);
                 }
-
             }
-            ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-            ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
-            return View(model);
+            else
+            {
+                ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                return View(model);
+            }
         }
         public async Task<IActionResult> Sil(int? id)
         {

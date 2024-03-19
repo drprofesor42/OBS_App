@@ -147,8 +147,15 @@
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Öğrenci İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a asp-controller="Ogrenci" asp-action="OgrenciListem">Öğrenci Listem</a></li>
-                                <li><a asp-controller="Ogrenci" asp-action="Notlar">Not İşlemleri?</a></li>
                                 <li><a asp-controller="Ogrenci" asp-action="Yoklama">Yoklama İşlemleri?</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-trophy"></i> <span> Not İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-controller="Not" asp-action="Index">Öğrenci Notları</a></li>
+                                <li><a asp-controller="Not" asp-action="Ekle_Guncelle">Not Ekle</a></li>
                             </ul>
                         </li>
 
@@ -176,8 +183,8 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-bullhorn"></i> <span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a asp-controller="Ogretmen" asp-action="Duyurular">Duyurular</a></li>
-                                <li><a asp-controller="Ogretmen" asp-action="xxx">Duyuru Yayınla?</a></li>
+                                <li><a asp-controller="Duyuru" asp-action="Index">Duyurular</a></li>
+                                <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle">Duyuru Yayınla</a></li>
                             </ul>
                         </li>
 

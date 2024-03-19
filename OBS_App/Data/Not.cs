@@ -13,6 +13,7 @@
         public Ogrencis? Ogrencis { get; set; }
         public int? OgretmensId { get; set; }
         public Ogretmens? Ogretmens { get; set; }
+        public Bolum? Bolum { get; set; }
 
     }
 }

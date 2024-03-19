@@ -37,8 +37,7 @@ namespace identy_user.Models
                     {
 
                         UserName = userList[i],
-                        Email = emailList[i],
-                        DuyuruName = userList[i]
+                        Email = emailList[i]
 
                     };
 

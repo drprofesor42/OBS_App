@@ -22,7 +22,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Bölüm Başkanı<span class="login-danger">*</span></label>
-                                <select asp-for="BolumBaskani" asp-items="ViewBag.Ogretmenler"  class="form-control select">
+                                <select asp-for="BolumBaskani" asp-items="ViewBag.Ogretmenler" class="form-control select">
                                     <option>Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="BolumBaskani" class="text-danger"></span>
@@ -39,14 +39,7 @@
                         </div>
                         <div class="col-12">
                             <div class="student-submit">
-                                @if (Model == null)
-                                {
-                                    <button type="submit" name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
-                                }
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
                             </div>
                         </div>
                     </div>

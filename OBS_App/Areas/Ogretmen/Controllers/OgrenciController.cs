@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using OBS_App.Data;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Ogretmen.Controllers
@@ -16,22 +19,18 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> OgrenciListem()
         {
             var kullanıcı = await _userManager.GetUserAsync(User);
             if (kullanıcı != null)
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
-                //var ogrenciler = _context
+                var ogrenciler = _context.Dersler.Include(x => x.Ogrencisler).Where(z => z.OgretmensId == ogretmen.Id).ToList();
 
-                return View();
+                return View(ogrenciler);
             }
             return View();
         }
+
     }
 }

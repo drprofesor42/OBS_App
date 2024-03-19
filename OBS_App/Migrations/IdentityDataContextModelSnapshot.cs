@@ -311,10 +311,6 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("DuyuruGonderen")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("DuyuruMesaj")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -371,6 +367,9 @@ namespace OBS_App.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BolumId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DersId")
                         .HasColumnType("int");
 
@@ -393,6 +392,8 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BolumId");
 
                     b.HasIndex("DersId");
 
@@ -627,9 +628,6 @@ namespace OBS_App.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("DuyuruName")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -782,7 +780,7 @@ namespace OBS_App.Migrations
                         .WithMany("Dersler")
                         .HasForeignKey("BolumId");
 
-                    b.HasOne("OBS_App.Data.Fakulte", null)
+                    b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
                         .WithMany("Dersler")
                         .HasForeignKey("FakulteId");
 
@@ -795,6 +793,8 @@ namespace OBS_App.Migrations
                         .HasForeignKey("SinifId");
 
                     b.Navigation("Bolum");
+
+                    b.Navigation("Fakulte");
 
                     b.Navigation("Ogretmens");
                 });
@@ -810,6 +810,10 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Not", b =>
                 {
+                    b.HasOne("OBS_App.Data.Bolum", "Bolum")
+                        .WithMany()
+                        .HasForeignKey("BolumId");
+
                     b.HasOne("OBS_App.Data.Ders", "Ders")
                         .WithMany("notlar")
                         .HasForeignKey("DersId");
@@ -823,6 +827,8 @@ namespace OBS_App.Migrations
                     b.HasOne("OBS_App.Data.Ogretmens", "Ogretmens")
                         .WithMany("Notlar")
                         .HasForeignKey("OgretmensId");
+
+                    b.Navigation("Bolum");
 
                     b.Navigation("Ders");
 
