@@ -52,44 +52,47 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, int id)
         {
-            var bolum = await _context.Bolumler
-                .Include(x => x.Dersler)
-                .ThenInclude(x => x.Ogretmens)
-                .Include(x => x.Fakulte)
-                .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-            if (bolum != null)
-            {
-                model.Fakulte = bolum.Fakulte;
-                model.FakulteId = bolum.FakulteId;
-                model.Ogretmensler = bolum.Ogretmensler;
-            }
-
             if (ModelState.IsValid)
             {
-                var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
-
                 if (id == 0)
                 {
-                    if (dogrula == null)
-                    {
-                        var user = new AppUser()
-                        {
-                            UserName = model.OgrenciEposta,
-                            Email = model.OgrenciEposta
-                        };
-                        await _userManager.CreateAsync(user, model.OgrenciParola);
-                        var ogrenci = await _userManager.FindByNameAsync(model.OgrenciEposta);
-
-                        if (ogrenci != null)
-                        {
-                            await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
-                        }
-                    }
-                    else
+                    var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+                    if (dogrula != null)
                     {
                         ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
                         ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                         return View(model);
+                    }
+                }
+
+
+                if (id == 0)
+                {
+
+                    var user = new AppUser()
+                    {
+                        UserName = model.OgrenciEposta,
+                        Email = model.OgrenciEposta
+                    };
+                    await _userManager.CreateAsync(user, model.OgrenciParola);
+                    var ogrenci = await _userManager.FindByNameAsync(model.OgrenciEposta);
+
+                    if (ogrenci != null)
+                    {
+                        await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
+                    }
+
+                    var bolum = await _context.Bolumler
+                                   .Include(x => x.Dersler)
+                                   .Include(x => x.Ogretmensler)
+                                   .Include(x => x.Fakulte)
+                                   .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+                    if (bolum != null)
+                    {
+                        model.Fakulte = bolum.Fakulte;
+                        model.Dersler = bolum.Dersler;
+                        model.FakulteId = bolum.FakulteId;
+                        model.Ogretmensler = bolum.Ogretmensler;
                     }
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
