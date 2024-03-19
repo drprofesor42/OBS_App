@@ -12,12 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240319060250_init.Designer.cs
-    [Migration("20240319060250_init")]
-========
 <<<<<<<< HEAD:OBS_App/Migrations/20240318121504_init.Designer.cs
     [Migration("20240318121504_init")]
->>>>>>>> 67d79c33e5052c2f329601cc9c7940112f17c0f9:OBS_App/Migrations/20240318121504_init.Designer.cs
     partial class init
 ========
     [Migration("20240319054027_amsnbmsja")]

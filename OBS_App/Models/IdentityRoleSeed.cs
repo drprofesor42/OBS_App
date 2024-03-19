@@ -19,7 +19,7 @@ namespace OBS_App.Models
             }
 
             var userRole = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
-            
+
             var role = await userRole.FindByNameAsync("Admin");
 
             if (role == null)

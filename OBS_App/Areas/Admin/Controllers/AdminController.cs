@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OBS_App.Areas.Admin.ViewsModel;
-using OBS_App.Data;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
@@ -67,7 +65,7 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
         public async Task<IActionResult> SifreDegistir(int id)
-        {                    
+        {
             if (id == 1)
             {
                 ViewBag.user = new SelectList(await _context.Ogrenciler.ToListAsync(), "OgrenciEposta", "OgrenciEposta");
@@ -78,7 +76,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
                 ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
                 return View();
-                
+
             }
             else
             {
@@ -86,7 +84,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async  Task<IActionResult> SifreDegistir(SifreDegistirViewsModel model, int id)
+        public async Task<IActionResult> SifreDegistir(SifreDegistirViewsModel model, int id)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +114,8 @@ namespace OBS_App.Areas.Admin.Controllers
                     ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
                     return RedirectToAction("Index");
 
-                }else//admin
+                }
+                else//admin
                 {
                     var users = await _userManager.GetUserAsync(HttpContext.User);
 
@@ -127,7 +126,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     }
                     return RedirectToAction("Index");
                 }
-                
+
             }
             if (id == 1)
             {

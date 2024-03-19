@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using OBS_App.Models;
-
 namespace OBS_App.Data
 {
     public class Duyuru

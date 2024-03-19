@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OBS_App.Models;
-using OBS_App.Data;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using OBS_App.Data;
+using OBS_App.Models;
 
 
 namespace OBS_App.Areas.Admin.Controllers
@@ -50,7 +50,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, string type)
+        public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, int id)
         {
             var bolum = await _context.Bolumler
                 .Include(x => x.Dersler)
@@ -66,64 +66,55 @@ namespace OBS_App.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-               
                 var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
 
-                if (model == null || type == null)
-                {
-                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
-                    // TempData Hata Gönder
-                    return View(model);
-                }
-                else if (type == "0")
+                if (id == 0)
                 {
                     if (dogrula == null)
                     {
                         var user = new AppUser()
-                        {   
+                        {
                             UserName = model.OgrenciEposta,
                             Email = model.OgrenciEposta
                         };
                         await _userManager.CreateAsync(user, model.OgrenciParola);
                         var ogrenci = await _userManager.FindByNameAsync(model.OgrenciEposta);
 
-
-                            if (ogrenci != null)
-                            {
-                                await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
-                            }
-                        }
-                        else
+                        if (ogrenci != null)
                         {
-                            ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
-                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                            return View(model);
-
+                            await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
+                        }
                     }
-                    
+                    else
+                    {
+                        ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
+                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                        return View(model);
+                    }
                     await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
-
                     return RedirectToAction("Index");
                 }
-                else if (type == "1")
+                else if (id == 1)
                 {
-
-                        _context.Update(model);
-                        _context.SaveChanges();
-                        TempData["success"] = "Kayıt güncellendi.";
-
-                        return RedirectToAction("Index");
-                    }
+                    _context.Update(model);
+                    _context.SaveChanges();
+                    TempData["success"] = "Kayıt güncellendi.";
+                    return RedirectToAction("Index");
                 }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
                 return View(model);
             }
-        
-        // id ye göre db'den kayıt siliyor
+        }
         public IActionResult Sil(int id)
         {
             var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);

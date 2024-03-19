@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
-
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -13,6 +12,7 @@ namespace OBS_App.Areas.Admin.Controllers
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
+
         public DuyuruController(IdentityDataContext context, UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -52,31 +52,31 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> Ekle_Guncelle(string type, Duyuru model)
-		{
+        public async Task<IActionResult> Ekle_Guncelle(string type, Duyuru model)
+        {
             if (ModelState.IsValid)
             {
 				if (type == "0")
 				{
                     await _context.Duyurular.AddAsync(model);
-					await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
-				}
-				else
-				{
-					_context.Duyurular.Update(model);
-					_context.SaveChanges();
+                }
+                else
+                {
+                    _context.Duyurular.Update(model);
+                    _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
-				}
-			}
-            
+                }
+            }
 
-			return View (model);
-		}
 
-		public IActionResult Sil(int id)
+            return View(model);
+        }
+
+        public IActionResult Sil(int id)
         {
             var duyuru = _context.Duyurular.FirstOrDefault(x => x.Id == id);
             if (duyuru == null)
