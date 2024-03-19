@@ -101,7 +101,14 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (id == 1)
                 {
-                    _context.Update(model);
+					var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+
+					if (users != null)
+					{
+						var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+						await _userManager.ResetPasswordAsync(users, token, model.OgrenciParola);
+					}
+					_context.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");

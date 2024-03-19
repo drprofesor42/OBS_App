@@ -94,7 +94,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (users != null)
                     {
                         var token = await _userManager.GeneratePasswordResetTokenAsync(users);
-                        await _userManager.ResetPasswordAsync(users, token, model.OgretmenEposta);
+                        await _userManager.ResetPasswordAsync(users, token, model.OgretmenParola);
                     }
                     else
                     {
