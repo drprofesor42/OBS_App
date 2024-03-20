@@ -71,10 +71,11 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
                     }
-                    var bolum = await _context.Bolumler
+                    var bolum = await _context.Dersler
                                   .Include(x => x.Fakulte)
                                   .Include(x => x.Ogrencisler)
                                   .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+
                     if (bolum != null)
                     {
                         model.Ogrencisler = bolum.Ogrencisler;

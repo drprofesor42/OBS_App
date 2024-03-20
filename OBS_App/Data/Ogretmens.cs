@@ -40,6 +40,7 @@ namespace OBS_App.Data
         public DateOnly? OgretmenDogumTarihi { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public DateOnly? OgretmenBaslamaTarihi { get; set; }
+        public string? OgretmenFotograf { get; set; }
         public int AdresId { get; set; }
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public Adres? Adres { get; set; }
