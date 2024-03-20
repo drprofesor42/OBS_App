@@ -31,7 +31,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
 				if (ogrenci != null)
 				{
-					var danisman = _context.Ogretmenler.Include(x => x.Adres).FirstOrDefault(x => x.OgretmenAd == ogrenci.OgrenciDanisman);
+					var danisman = _context.Ogretmenler.Include(x => x.Bolum).FirstOrDefault(x => x.OgretmenAd == ogrenci.OgrenciDanisman);
 
 					return View(danisman);
 				}
@@ -57,7 +57,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 				}
 
 			}
-
 			// Hata Gönder
 			return View();
 		}
@@ -70,7 +69,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 		public async Task<IActionResult> AkademikTakvim()
 		{
 			var takvimler = await _context.AkademikTakvimler.ToListAsync();
-
 			return View(takvimler);
 		}
 
@@ -104,8 +102,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 		public async Task<IActionResult> Profilim()
 		{
 
-			var users = await _userManager.GetUserAsync(HttpContext.User);
-
+			var users = await _userManager.GetUserAsync(User);
 			var ogrenci = _context.Ogrenciler
 				.Include(x => x.Fakulte)
 				.Include(x => x.Bolum)
