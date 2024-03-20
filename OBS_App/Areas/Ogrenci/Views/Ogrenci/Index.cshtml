@@ -13,7 +13,7 @@
 						<div style="text-align:center" class="heading-detail">
 							<h4>Danışman Bilgileri</h4>
 							<span class="avatar avatar-md flex-shrink-0">
-								<img class="avatar-img rounded-circle" alt="User Image" src="~/panel/img/profiles/avatar-03.jpg">
+								<img class="avatar-img rounded-circle" alt="User Image" src="~/img/@Model.OgretmenFotograf">
 							</span>
 						</div>
 						<br />
@@ -24,15 +24,6 @@
 							<div class="views-personal">
 								<h4>Danışman</h4>
 								<h5>@Model.OgretmenUnvan @Model.OgretmenAd @Model.OgretmenSoyad</h5>
-							</div>
-						</div>
-						<div class="personal-activity">
-							<div class="personal-icons">
-								<i class="feather-star"></i>
-							</div>
-							<div class="views-personal">
-								<h4>Bölüm</h4>
-								<h5>@Model.Bolum?.BolumAd</h5>
 							</div>
 						</div>
 						<div class="personal-activity">
@@ -83,3 +74,17 @@
 		</div>
 	</div>
 </div>
+@if (TempData["success"] != null)
+{
+	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+	<script>
+		var successMessage = "@TempData["success"]";
+
+		Swal.fire({
+			title: successMessage,
+			icon: "success"
+		});
+	</script>
+}

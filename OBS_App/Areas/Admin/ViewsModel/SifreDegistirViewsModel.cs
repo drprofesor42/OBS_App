@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace OBS_App.Areas.Admin.ViewsModel
 {
-
     public class SifreDegistirViewsModel
     {
         [DataType(DataType.EmailAddress)]

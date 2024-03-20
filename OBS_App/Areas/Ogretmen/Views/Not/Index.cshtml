@@ -64,7 +64,7 @@
                                 <tr>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/panel/img/profiles/avatar-10.jpg" alt="User Image"></a>
+                                            <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/img/@not.Ogrencis?.OgrenciFotograf" alt="User Image"></a>
                                             <a href="student-details.html">@not.Ogrencis?.OgrenciAd @not.Ogrencis?.OgrenciSoyad</a>
                                         </h2>
                                     </td>
@@ -97,3 +97,17 @@
     </div>
 </div>
 
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}

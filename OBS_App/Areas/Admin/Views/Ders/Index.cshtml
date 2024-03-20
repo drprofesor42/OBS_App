@@ -99,7 +99,7 @@
                                         <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
                                             <i class="feather-edit"></i>
                                         </a>
-                                        <a -controller="Ders" asp-action="Sil" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light">
+                                        <a onclick="confirmDelete(@ders.Id)" class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
                                     </div>
@@ -152,12 +152,10 @@
                     $.post('@Url.Action("Sil", "Ders")', { id: id })
                         .done(() => swalWithBootstrapButtons.fire(
                             "İşlem Başarılı!",
-                            !",
                             "",
                             "success"
                         ).then(() => window.location.href = '@Url.Action("Index", "Ders")'));
                 } else if (
-                    /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire({
@@ -170,3 +168,4 @@
         }
     </script>
 }
+     
