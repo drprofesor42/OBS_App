@@ -75,7 +75,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                 {
                     await _context.Notlar.AddAsync(model);
                     await _context.SaveChangesAsync();
-                    TempData["success"] = "Kayıt eklendi.";
+                    TempData["success"] = "Kayıt eklendi!";
                     return RedirectToAction("Index");
 
                 }
@@ -86,7 +86,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
                     _context.Update(existingNot);
                     _context.SaveChanges();
-                    TempData["success"] = "Kayıt güncellendi.";
+                    TempData["success"] = "Kayıt güncellendi!";
                     return RedirectToAction("Index");
                 }
                 else if (type == 1)

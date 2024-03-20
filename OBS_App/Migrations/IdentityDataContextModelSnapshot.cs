@@ -444,7 +444,6 @@ namespace OBS_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("OgrenciFotograf")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateOnly?>("OgrenciKayitTarihi")
@@ -529,6 +528,9 @@ namespace OBS_App.Migrations
 
                     b.Property<string>("OgretmenEposta")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OgretmenFotograf")
                         .HasColumnType("longtext");
 
                     b.Property<string>("OgretmenGorusme")

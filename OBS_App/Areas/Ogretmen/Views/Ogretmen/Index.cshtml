@@ -4,4 +4,17 @@
 }
 
 <h1>Ogretmen Area Index</h1>
+@if (TempData["success"] != null)
+{
+	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
+	<script>
+		var successMessage = "@TempData["success"]";
+
+		Swal.fire({
+			title: successMessage,
+			icon: "success"
+		});
+	</script>
+}

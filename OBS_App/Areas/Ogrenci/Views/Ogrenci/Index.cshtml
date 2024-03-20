@@ -28,15 +28,6 @@
 						</div>
 						<div class="personal-activity">
 							<div class="personal-icons">
-								<i class="feather-star"></i>
-							</div>
-							<div class="views-personal">
-								<h4>Bölüm</h4>
-								<h5>@Model.Bolum?.BolumAd</h5>
-							</div>
-						</div>
-						<div class="personal-activity">
-							<div class="personal-icons">
 								<i class="feather-mail"></i>
 							</div>
 							<div class="views-personal">
@@ -83,3 +74,17 @@
 		</div>
 	</div>
 </div>
+@if (TempData["success"] != null)
+{
+	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+	<script>
+		var successMessage = "@TempData["success"]";
+
+		Swal.fire({
+			title: successMessage,
+			icon: "success"
+		});
+	</script>
+}

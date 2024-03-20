@@ -46,7 +46,9 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 				if (users != null)
 				{
 					await _userManager.ResetPasswordAsync(users, token, model.Parola);
+                    TempData["success"] = "Şifre başarıyla değiştirildi!";
 
+					return RedirectToAction("Index");
 				}
 			}
 			return View(model);

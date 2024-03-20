@@ -66,18 +66,18 @@ namespace OBS_App.Areas.Admin.Controllers
                 if (id == 0)
                 {
 
-                    TempData["success"] = "Kayıt eklendi.";
                     await _context.Bolumler.AddAsync(model);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
+					TempData["success"] = "Kayıt eklendi.";
+					return RedirectToAction("Index");
                 }
                 //Güncelleme İşlemi
                 if (id == 1)
                 {
-                    TempData["success"] = "Kayıt güncellendi.";
                     _context.Bolumler.Update(model);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
+					TempData["success"] = "Kayıt güncellendi.";
+					return RedirectToAction("Index");
                 }
                 else
                 {

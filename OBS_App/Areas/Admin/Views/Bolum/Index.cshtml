@@ -93,7 +93,6 @@
         </div>
     </div>
 </div>
-
 @if (TempData["success"] != null)
 {
     <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
@@ -109,10 +108,10 @@
     </script>
 }
 @section Scripts {
-<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
-<script>
-    function confirmDelete(id) {
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        function confirmDelete(id) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -131,12 +130,11 @@
                 if (result.isConfirmed) {
                     $.post('@Url.Action("Sil", "Bolum")', { id: id })
                         .done(() => swalWithBootstrapButtons.fire(
-                            İşlem Başarılı!",
+                            "İşlem Başarılı!",
                             "",
                             "success"
                         ).then(() => window.location.href = '@Url.Action("Index", "Bolum")'));
                 } else if (
-                    /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire({
@@ -146,6 +144,6 @@
                     });
                 }
             });
-    }
-</script>
-}
+        }
+    </script>
+} 
