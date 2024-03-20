@@ -9,15 +9,13 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 {
     [Area("Ogretmen")]
     [Authorize(Roles = "Ogretmen")]
-    public class OgretmenController : Controller
+    public class OgretmenController : BaseController
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public OgretmenController(UserManager<AppUser> userManager, IdentityDataContext context)
+        public OgretmenController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
         {
-            _userManager = userManager;
-            _context = context;
         }
 
         public IActionResult Index()
