@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="card comman-shadow">
             <div class="card-body">
-                <form asp-action="Ekle_Guncelle" asp-controller="Ogrenci" method="post" novalidate>
+                <form asp-action="Ekle_Guncelle" asp-controller="Ogrenci" enctype="multipart/form-data" method="post" novalidate>
 
                     <div class="row">
                         <div class="col-12">
@@ -16,7 +16,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>TC Kimlik Numarası<span class="login-danger">*</span></label>
-                                <input asp-for="OgrenciTc" class="form-control" >
+                                <input asp-for="OgrenciTc" class="form-control">
                                 <span asp-validation-for="OgrenciTc" class="text-danger"></span>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
-                                    <span asp-validation-for="OgrenciSinif" class="text-danger" ></span>
+                                    <span asp-validation-for="OgrenciSinif" class="text-danger"></span>
                                 </select>
                             </div>
                         </div>
@@ -142,8 +142,9 @@
                             <label>Öğrenci Fotoğrafını Yükle(150 X 150 piksel)</label>
                             <div class="uplod">
                                 <label class="file-upload image-upbtn mb-0">
-                                    Dosya Seç <input type="file">
+                                    Dosya Seç <input type="file" name="file">
                                 </label>
+                                <span asp-validation-for="OgrenciFotograf" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">

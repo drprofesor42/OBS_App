@@ -443,6 +443,10 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("OgrenciFotograf")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateOnly?>("OgrenciKayitTarihi")
                         .IsRequired()
                         .HasColumnType("date");
