@@ -46,6 +46,7 @@ namespace OBS_App.Data
         [Compare("OgrenciParola", ErrorMessage = "Şifreler eşleşmiyor.")]
 		[MinLength(7, ErrorMessage = "Şifreniz en az 7 karakter olmalıdır")]
         public string OgrenciParolaOnayla { get; set; }
+        public string? OgrenciFotograf { get; set; }
 
         public string? OgrenciDanisman { get; set; }
 

@@ -50,7 +50,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, int id)
+        public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, int id, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -61,13 +61,34 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
                         ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                        return View(model);
+
+                    }
+                    var bosluk = "";
+                    if (file != null)
+                    {
+                        var uzanti = new[] { ".jpg", ".jpeg", ".png" };
+                        bosluk = Path.GetExtension(file.FileName);
+                        if (!uzanti.Contains(bosluk))
+                        {
+                            ModelState.AddModelError("", "Geçerli bir resim seçiniz.");
+                            return View(model);
+                        }
                     }
                 }
-
-
                 if (id == 0)
                 {
+
+                    if (file != null)
+                    {
+                        
+                        var uzantısı = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", uzantısı);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        model.OgrenciFotograf = uzantısı;
+                    }
 
                     var user = new AppUser()
                     {
@@ -101,14 +122,35 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (id == 1)
                 {
-					var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+                    
+                    if (file != null)
+                    {
+                        
+                        var uzanti = new[] { ".jpg", ".jpeg", ".png" };
+                        var resimuzantı = Path.GetExtension(file.FileName);
+                        if (!uzanti.Contains(resimuzantı))
+                        {
+                            ModelState.AddModelError("", "Geçerli bir resim seçiniz.");
+                            return View(model);
+                        }
+                        var uzantısı = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", uzantısı);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
 
-					if (users != null)
-					{
-						var token = await _userManager.GeneratePasswordResetTokenAsync(users);
-						await _userManager.ResetPasswordAsync(users, token, model.OgrenciParola);
-					}
-					_context.Update(model);
+                        }
+                        model.OgrenciFotograf = uzantısı;
+                    }
+
+                    var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);
+
+                    if (users != null)
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(users);
+                        await _userManager.ResetPasswordAsync(users, token, model.OgrenciParola);
+                    }
+                    _context.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
