@@ -5129,9 +5129,7 @@ table.table-inbox tbody tr.checked {
         white-space: nowrap
     }
 
-    .custom-file-upload input {
-        display: none
-    }
+
 
 .change-user {
     padding: 14px 21px;

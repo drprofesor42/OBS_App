@@ -63,16 +63,18 @@ namespace OBS_App.Areas.Admin.Controllers
                         ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
 
                     }
-                    var bosluk = "";
+                   
                     if (file != null)
                     {
                         var uzanti = new[] { ".jpg", ".jpeg", ".png" };
-                        bosluk = Path.GetExtension(file.FileName);
-                        if (!uzanti.Contains(bosluk))
+                        var resimuzanti = Path.GetExtension(file.FileName);
+                        if (!uzanti.Contains(resimuzanti))
                         {
-                            ModelState.AddModelError("", "Geçerli bir resim seçiniz.");
+                            ModelState.AddModelError("OgrenciFotograf", "Geçerli bir resim seçiniz. *jpg,jpeg,png");
                             return View(model);
                         }
+                        ModelState.AddModelError("OgrenciFotograf", "Resim alanı boş olamaz");
+                        return View(model);
                     }
                 }
                 if (id == 0)
@@ -81,13 +83,13 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (file != null)
                     {
                         
-                        var uzantısı = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", uzantısı);
-                        using (var stream = new FileStream(path, FileMode.Create))
+                        var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                        var resimyolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", random);
+                        using (var stream = new FileStream(resimyolu, FileMode.Create))
                         {
                             await file.CopyToAsync(stream);
                         }
-                        model.OgrenciFotograf = uzantısı;
+                        model.OgrenciFotograf = random;
                     }
 
                     var user = new AppUser()
@@ -130,17 +132,17 @@ namespace OBS_App.Areas.Admin.Controllers
                         var resimuzantı = Path.GetExtension(file.FileName);
                         if (!uzanti.Contains(resimuzantı))
                         {
-                            ModelState.AddModelError("", "Geçerli bir resim seçiniz.");
+                            ModelState.AddModelError("OgrenciFotograf", "Geçerli bir resim seçiniz. *jpg,jpeg,png");
                             return View(model);
                         }
-                        var uzantısı = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", uzantısı);
+                        var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", random);
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await file.CopyToAsync(stream);
 
                         }
-                        model.OgrenciFotograf = uzantısı;
+                        model.OgrenciFotograf = random;
                     }
 
                     var users = await _userManager.FindByEmailAsync(model.OgrenciEposta);

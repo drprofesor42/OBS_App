@@ -74,11 +74,21 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-sm-4">
+                        <div class="col-12 col-sm-4 ">
                             <div class="form-group local-forms">
                                 <label>Kayıt Tarihi<span class="login-danger">*</span></label>
                                 <input asp-for="OgrenciKayitTarihi" class="form-control" type="date">
                                 <span asp-validation-for="OgrenciKayitTarihi" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class ="col-12 col-sm-4>
+
+                        </divclass>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="files" class="btn btn-outline-primary px-4 pb-2 pt-2 ">Fotoğraf Yükle (150 X 150)</label>
+                                <input id="files" style="display:none;" type="file" name="file">
+                                <span asp-validation-for="OgrenciFotograf" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">
@@ -136,17 +146,7 @@
                                 <span asp-validation-for="Adres.Ilce" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-4">
-                        </div>
-                        <div class="form-group students-up-files">
-                            <label>Öğrenci Fotoğrafını Yükle(150 X 150 piksel)</label>
-                            <div class="uplod">
-                                <label class="file-upload image-upbtn mb-0">
-                                    Dosya Seç <input type="file" name="file">
-                                </label>
-                                <span asp-validation-for="OgrenciFotograf" class="text-danger"></span>
-                            </div>
-                        </div>
+
                         <div class="col-12">
                             <h5 class="form-title"><span>Okul Bilgileri</span></h5>
                         </div>
@@ -179,8 +179,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 

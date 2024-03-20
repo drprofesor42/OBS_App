@@ -41,10 +41,11 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id)
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+
                 if (id == 0)
                 {
                     var dogrula = await _userManager.FindByEmailAsync(model.OgretmenEposta);
@@ -52,12 +53,34 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
                         ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                    }
+                    else if (file != null)
+                    {
+                        var uzanti = new[] { ".jpg", ".jpeg", ".png" };
+                        var resimuzanti = Path.GetExtension(file.FileName);
+                        if (!uzanti.Contains(resimuzanti))
+                        {
+                            ModelState.AddModelError("OgretmenFotograf", "Geçerli bir resim seçiniz. jpg,jpeg,png");
+                            return View(model);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("OgretmenFotograf", "Resmim alanı boş olamaz");
                         return View(model);
                     }
-                }
 
-                if (id == 0)
-                {
+                    if (file != null)
+                    {
+
+                        var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                        var resimyolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", random);
+                        using (var stream = new FileStream(resimyolu, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        model.OgretmenFotograf = random;
+                    }
                     var user = new AppUser()
                     {
                         UserName = model.OgretmenEposta,
@@ -89,6 +112,25 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 if (id == 1)
                 {
+                    if (file != null)
+                    {
+
+                        var uzanti = new[] { ".jpg", ".jpeg", ".png" };
+                        var resimuzantı = Path.GetExtension(file.FileName);
+                        if (!uzanti.Contains(resimuzantı))
+                        {
+                            ModelState.AddModelError("OgretmenFotograf", "Geçerli bir resim seçiniz. jpg,jpeg,png");
+                            return View(model);
+                        }
+                        var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", random);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+
+                        }
+                        model.OgretmenFotograf = random;
+                    }
 
                     var users = await _userManager.FindByEmailAsync(model.OgretmenEposta);
 
@@ -104,12 +146,12 @@ namespace OBS_App.Areas.Admin.Controllers
                         {
                             UserName = model.OgretmenEposta,
                             Email = model.OgretmenEposta
-                            
+
                         };
                         await _userManager.CreateAsync(user, model.OgretmenParola);
                         var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
                     }
-                    
+
                     _context.Update(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt güncellendi.";
