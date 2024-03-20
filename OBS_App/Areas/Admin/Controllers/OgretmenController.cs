@@ -52,7 +52,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula != null)
                     {
                         ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
-                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                       
                     }
                     else if (file != null)
                     {
@@ -61,12 +61,14 @@ namespace OBS_App.Areas.Admin.Controllers
                         if (!uzanti.Contains(resimuzanti))
                         {
                             ModelState.AddModelError("OgretmenFotograf", "Geçerli bir resim seçiniz. jpg,jpeg,png");
+                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                             return View(model);
                         }
                     }
                     else
                     {
                         ModelState.AddModelError("OgretmenFotograf", "Resmim alanı boş olamaz");
+                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                         return View(model);
                     }
 
@@ -120,6 +122,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         if (!uzanti.Contains(resimuzantı))
                         {
                             ModelState.AddModelError("OgretmenFotograf", "Geçerli bir resim seçiniz. jpg,jpeg,png");
+                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
                             return View(model);
                         }
                         var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
@@ -160,7 +163,8 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                    return View(model);
                 }
             }
             else

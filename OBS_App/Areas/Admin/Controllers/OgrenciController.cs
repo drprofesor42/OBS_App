@@ -56,14 +56,18 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 if (id == 0)
                 {
+
+                }
+                if (id == 0)
+                {
                     var dogrula = await _userManager.FindByEmailAsync(model.OgrenciEposta);
                     if (dogrula != null)
                     {
                         ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
-                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+
 
                     }
-                   
+
                     if (file != null)
                     {
                         var uzanti = new[] { ".jpg", ".jpeg", ".png" };
@@ -71,26 +75,27 @@ namespace OBS_App.Areas.Admin.Controllers
                         if (!uzanti.Contains(resimuzanti))
                         {
                             ModelState.AddModelError("OgrenciFotograf", "Geçerli bir resim seçiniz. *jpg,jpeg,png");
+                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
                             return View(model);
                         }
+                    }
+                    else
+                    {
                         ModelState.AddModelError("OgrenciFotograf", "Resim alanı boş olamaz");
+                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                        ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
                         return View(model);
                     }
-                }
-                if (id == 0)
-                {
 
-                    if (file != null)
+                    var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
+                    var resimyolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", random);
+                    using (var stream = new FileStream(resimyolu, FileMode.Create))
                     {
-                        
-                        var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
-                        var resimyolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", random);
-                        using (var stream = new FileStream(resimyolu, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-                        model.OgrenciFotograf = random;
+                        await file.CopyToAsync(stream);
                     }
+                    model.OgrenciFotograf = random;
+
 
                     var user = new AppUser()
                     {
@@ -124,15 +129,17 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else if (id == 1)
                 {
-                    
+
                     if (file != null)
                     {
-                        
+
                         var uzanti = new[] { ".jpg", ".jpeg", ".png" };
                         var resimuzantı = Path.GetExtension(file.FileName);
                         if (!uzanti.Contains(resimuzantı))
                         {
                             ModelState.AddModelError("OgrenciFotograf", "Geçerli bir resim seçiniz. *jpg,jpeg,png");
+                            ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
                             return View(model);
                         }
                         var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
@@ -159,7 +166,9 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                    return View(model);
                 }
             }
             else
