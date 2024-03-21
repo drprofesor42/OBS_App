@@ -6,12 +6,12 @@ using OBS_App.Models;
 namespace OBS_App.Areas.Ogretmen.Controllers
 {
     [Area("Ogretmen")]
-    public class FakulteController : Controller
+    public class FakulteController : BaseController
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IdentityDataContext _context;
 
-        public FakulteController(UserManager<AppUser> userManager, IdentityDataContext context)
+        public FakulteController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
         {
             _context = context;
             _userManager = userManager;

@@ -65,6 +65,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         model.FakulteId = bolum.FakulteId;
                         model.Fakulte = bolum.Fakulte;
                         model.Ogrencisler = bolum.Ogrencisler;
+                        model.OlusturmaTarihi = DateOnly.FromDateTime(DateTime.Today);
                     }
                     await _context.AddAsync(model);
                     _context.SaveChanges();

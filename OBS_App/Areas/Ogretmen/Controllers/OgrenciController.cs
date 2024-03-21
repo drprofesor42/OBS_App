@@ -8,12 +8,12 @@ using OBS_App.Models;
 namespace OBS_App.Areas.Ogretmen.Controllers
 {
     [Area("Ogretmen")]
-    public class OgrenciController : Controller
+    public class OgrenciController : BaseController
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IdentityDataContext _context;
 
-        public OgrenciController(UserManager<AppUser> userManager, IdentityDataContext context)
+        public OgrenciController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
         {
             _context = context;
             _userManager = userManager;
