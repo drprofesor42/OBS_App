@@ -33,11 +33,9 @@
                     <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
                         <thead class="student-thread">
                             <tr>
-                                <th>Id</th>
                                 <th>Başlangıç Tarihi</th>
                                 <th>Bitiş Tarihi</th>
                                 <th>Aktivite</th>
-                                <th class="text-end">İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,25 +43,9 @@
                             {
 
                                 <tr>
-                                    <td>@tak.Id</td>
                                     <td>@tak.AkademikTakvimBaslangic</td>
                                     <td>@tak.AkademikTakvimBitis</td>
                                     <td>@tak.AkademikTakvimAktivite</td>
-                                    <td>
-                                        <div class="actions">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
-                                            <a asp-action="Ekle_Guncelle" asp-controller="Takvim" asp-route-id="@tak.Id" class="btn btn-sm bg-danger-light me-2">
-                                                <i class="feather-edit"></i>
-                                            </a>
-                                            <a onclick="confirmDelete(@tak.Id)" class="btn btn-sm bg-danger-light">
-                                                <i class="feather-trash-2"></i>
-                                            </a>
-
-
-                                        </div>
-                                    </td>
                                 </tr>
                             }
                         </tbody>

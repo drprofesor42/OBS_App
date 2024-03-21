@@ -415,6 +415,7 @@ namespace OBS_App.Migrations
                     AdresId = table.Column<int>(type: "int", nullable: false),
                     BolumId = table.Column<int>(type: "int", nullable: false),
                     FakulteId = table.Column<int>(type: "int", nullable: true),
+                    OgretmensId = table.Column<int>(type: "int", nullable: true),
                     SinifId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -436,6 +437,11 @@ namespace OBS_App.Migrations
                         name: "FK_Ogretmenler_Fakulteler_FakulteId",
                         column: x => x.FakulteId,
                         principalTable: "Fakulteler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ogretmenler_Ogretmenler_OgretmensId",
+                        column: x => x.OgretmensId,
+                        principalTable: "Ogretmenler",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Ogretmenler_Siniflar_SinifId",
@@ -746,6 +752,11 @@ namespace OBS_App.Migrations
                 name: "IX_Ogretmenler_FakulteId",
                 table: "Ogretmenler",
                 column: "FakulteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ogretmenler_OgretmensId",
+                table: "Ogretmenler",
+                column: "OgretmensId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ogretmenler_SinifId",

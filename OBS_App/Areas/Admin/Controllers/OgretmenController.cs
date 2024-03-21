@@ -60,7 +60,8 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula != null)
                     {
                         ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
-
+                        ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                        return View(model);
                     }
                     else if (file != null)
                     {
@@ -170,26 +171,20 @@ namespace OBS_App.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Sil(int? id)
         {
-            if (id != null)
+
+            // Identity ve kendi dbmizden silme
+            var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.Id == id);
+            var ogretmenIdentity = _context.Users.FirstOrDefault(d => d.Email == ogretmen.OgretmenEposta);
+
+            if (ogretmen != null && ogretmenIdentity != null)
             {
-                var user = await _context.Ogretmenler.FirstOrDefaultAsync(u => u.Id == id);
-                if (user != null)
-                {
-                    _context.Remove(user);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    //Kullanıcı bulunamadı
-                }
-            }
-            else
-            {
-                //hata mesajı
+                _context.Remove(ogretmenIdentity);
+                _context.Remove(ogretmen);
+                _context.SaveChanges();
             }
 
-            return View();
+            // Hata
+            return RedirectToAction("Index");
         }
 
     }
