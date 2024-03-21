@@ -9,12 +9,12 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 {
     [Area("Ogretmen")]
     [Authorize(Roles = "Ogretmen")]
-    public class DuyuruController : Controller
+    public class DuyuruController : BaseController
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public DuyuruController(UserManager<AppUser> userManager, IdentityDataContext context)
+        public DuyuruController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
         {
             _userManager = userManager;
             _context = context;

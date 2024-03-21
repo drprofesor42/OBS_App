@@ -3,7 +3,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="utf-8">
@@ -110,7 +110,7 @@
                             <img class="rounded-circle" src="~/img/@ViewBag.fotograf" width="31" alt="@User.Identity">
                             <div class="user-text">
                                 <h6>Merhaba, @ViewBag.adsoyad</h6>
-                                <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
+                                <p class="text-muted mb-0">@ViewBag.Unvan</p>
                             </div>
                         </div>
                     </a>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="user-text">
                                 <h6>@ViewBag.adsoyad</h6>
-                                <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
+                                <p class="text-muted mb-0">@ViewBag.Unvan</p>
                             </div>
                         </div>
                         <a class="dropdown-item" asp-action="Profilim" asp-controller="Ogretmen">Profilim</a>

@@ -81,6 +81,10 @@
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group">
+                                @if (Model != null)
+                                {
+                                    <input asp-for="OgretmenFotograf" value="@Model.OgretmenFotograf" type="hidden" />
+                                }
                                 <label for="files" class="btn btn-outline-primary px-4 pb-2 pt-2">Fotoğraf Yükle (150 X 150)</label>
                                 <input id="files" style="display:none;" type="file" name="file">
                                 <span asp-validation-for="OgretmenFotograf" class="text-danger"></span>

@@ -8,12 +8,12 @@ using OBS_App.Models;
 namespace OBS_App.Areas.Ogretmen.Controllers
 {
     [Area("Ogretmen")]
-    public class NotController : Controller
+    public class NotController : BaseController
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IdentityDataContext _context;
 
-        public NotController(UserManager<AppUser> userManager, IdentityDataContext context)
+        public NotController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
         {
             _context = context;
             _userManager = userManager;

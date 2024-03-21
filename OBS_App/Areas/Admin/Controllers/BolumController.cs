@@ -29,14 +29,14 @@ namespace OBS_App.Areas.Admin.Controllers
             if (id == 0)
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 return View();
 
             }
             else
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 var bolum = await _context.Bolumler.FirstOrDefaultAsync(x => x.Id == id);
                 return View(bolum);
             }
@@ -44,25 +44,21 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int id)
         {
-            var fakulte = await _context.Fakulteler.FirstOrDefaultAsync(x => x.Id == model.FakulteId);
-            if (fakulte != null)
-            {
-                model.Fakulte = fakulte;
+           
 
-            }
-            var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
-            if (bolumbaskani != null)
-            {
-                model.BolumBaskani = bolumbaskani.OgretmenAdSoyad;
-            }
-            else
-            {
-                model.BolumBaskani = "Seçilmedi";
-
-            }
             if (ModelState.IsValid)
             {
-                //Ekleme İşlemi
+                var fakulte = await _context.Fakulteler.FirstOrDefaultAsync(x => x.Id == model.FakulteId);
+                if (fakulte != null)
+                {
+                    model.FakulteId = fakulte.Id;
+                    model.Fakulte = fakulte;
+
+                }
+                if (model.BolumBaskani == null)
+                {
+                    model.BolumBaskani = "Seçilmedi";
+                }
                 if (id == 0)
                 {
 
@@ -71,25 +67,19 @@ namespace OBS_App.Areas.Admin.Controllers
 					TempData["success"] = "Kayıt eklendi.";
 					return RedirectToAction("Index");
                 }
-                //Güncelleme İşlemi
-                if (id == 1)
+                else
                 {
                     _context.Bolumler.Update(model);
                     await _context.SaveChangesAsync();
 					TempData["success"] = "Kayıt güncellendi.";
 					return RedirectToAction("Index");
                 }
-                else
-                {
-                    ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                    ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
-                    return View(model);
-                }
+
             }
             else
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 return View(model);
             }
         }
