@@ -29,14 +29,14 @@ namespace OBS_App.Areas.Admin.Controllers
             if (id == 0)
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
                 return View();
 
             }
             else
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
                 var bolum = await _context.Bolumler.FirstOrDefaultAsync(x => x.Id == id);
                 return View(bolum);
             }
@@ -53,7 +53,7 @@ namespace OBS_App.Areas.Admin.Controllers
             var bolumbaskani = await _context.Ogretmenler.FirstOrDefaultAsync(x => x.Id.ToString() == model.BolumBaskani);
             if (bolumbaskani != null)
             {
-                model.BolumBaskani = bolumbaskani.OgretmenAd;
+                model.BolumBaskani = bolumbaskani.OgretmenAdSoyad;
             }
             else
             {
@@ -82,14 +82,14 @@ namespace OBS_App.Areas.Admin.Controllers
                 else
                 {
                     ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                    ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                    ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
                     return View(model);
                 }
             }
             else
             {
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
-                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
                 return View(model);
             }
         }

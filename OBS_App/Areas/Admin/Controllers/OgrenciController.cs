@@ -34,13 +34,13 @@ namespace OBS_App.Areas.Admin.Controllers
             if (id == 0)
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 return View();
             }
             else
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 var ogrenci = _context.Ogrenciler.Include(o => o.Adres).FirstOrDefault(x => x.Id == id);
                 if (ogrenci == null)
                 {
@@ -76,7 +76,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         {
                             ModelState.AddModelError("OgrenciFotograf", "Geçerli bir resim seçiniz. *jpg,jpeg,png");
                             ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                             return View(model);
                         }
                     }
@@ -84,7 +84,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("OgrenciFotograf", "Resim alanı boş olamaz");
                         ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                        ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                        ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                         return View(model);
                     }
 
@@ -139,7 +139,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         {
                             ModelState.AddModelError("OgrenciFotograf", "Geçerli bir resim seçiniz. *jpg,jpeg,png");
                             ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                             return View(model);
                         }
                         var random = string.Format($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
@@ -167,14 +167,14 @@ namespace OBS_App.Areas.Admin.Controllers
                 else
                 {
                     ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                     return View(model);
                 }
             }
             else
             {
                 ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAd", "OgretmenAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 return View(model);
             }
         }

@@ -25,10 +25,19 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             if (kullanıcı != null)
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(d => d.OgretmenEposta == kullanıcı.Email);
+
+                if (ogretmen != null)
+                {
+                    ViewBag.fotograf = ogretmen.OgretmenFotograf;
+                    ViewBag.adsoyad = ogretmen.OgretmenAdSoyad;
+                }
+
+
                 LayoutViewModel layoutViewModel = new LayoutViewModel
                 {
                     ImagePath = ogretmen.OgretmenFotograf
                 };
+                
                 ViewBag.LayoutViewModel = layoutViewModel;
                 base.OnActionExecuting(filterContext);
             }
