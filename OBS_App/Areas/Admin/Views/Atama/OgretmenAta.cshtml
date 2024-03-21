@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Ders>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table comman-shadow">
+            <div class="card-body">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Ders Atama Listesi</h3>
+                        </div>
+                        <div class="col-auto text-end float-end ms-auto download-grp">
+                            <a asp-controller="Atama" asp-action="DersAtaGuncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                    <thead class="student-thread">
+                        <tr>
+
+                            <th>Ders Adı</th>
+                            <th>Öğretmen Ad Soyad</th>
+                            <th class="text-end">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var ders in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <h2>
+                                        <a>@ders.DersAd</a>
+                                    </h2>
+                                </td>
+                                <td>
+                                    @if (@ders.Ogretmens == null)
+                                    {
+                                        <span>Yok</span>
+                                    }
+                                    else
+                                    {
+                                        @ders.Ogretmens.OgretmenAdSoyad
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <div class="actions ">
+                                        <a asp-action="DersAtaGuncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light">
+                                            <i class="feather-edit"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}
