@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240321053242_init")]
+    [Migration("20240321073428_init")]
     partial class init
     {
         /// <inheritdoc />

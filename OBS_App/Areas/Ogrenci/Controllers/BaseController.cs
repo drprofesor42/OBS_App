@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
 using OBS_App.ViewsModel;
 
-namespace OBS_App.Areas.Ogretmen.Controllers
+namespace OBS_App.Areas.Ogrenci.Controllers
 {
     public abstract class BaseController : Controller
     {
@@ -18,29 +17,27 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             _context = context;
         }
 
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
-
             var kullanıcı = _userManager.GetUserAsync(User).Result;
             if (kullanıcı != null)
             {
-                var ogretmen = _context.Ogretmenler.FirstOrDefault(d => d.OgretmenEposta == kullanıcı.Email);
+                var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
 
-                if (ogretmen != null)
+                if (ogrenci != null)
                 {
-                    ViewBag.fotograf = ogretmen.OgretmenFotograf;
-                    ViewBag.adsoyad = ogretmen.OgretmenAdSoyad;
-                    ViewBag.Unvan = ogretmen.OgretmenUnvan;
+                    ViewBag.Fotograf = ogrenci.OgrenciFotograf;
+                    ViewBag.AdSoyad = ogrenci.OgrenciAdSoyad;
                 }
 
 
                 LayoutViewModel layoutViewModel = new LayoutViewModel
                 {
-                    ImagePath = ogretmen.OgretmenFotograf
+                    ImagePath = ogrenci.OgrenciFotograf
                 };
-                
+
                 ViewBag.LayoutViewModel = layoutViewModel;
-                base.OnActionExecuting(filterContext);
+                base.OnActionExecuted(context);
             }
         }
     }

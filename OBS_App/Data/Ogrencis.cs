@@ -10,8 +10,8 @@ namespace OBS_App.Data
         public int Id { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
-		
-		[StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
+
+        [StringLength(11, ErrorMessage = "11 karakter uzunluğunda olmalıdır.", MinimumLength = 11)]
         [DataType(DataType.PhoneNumber)]
         public string OgrenciTc { get; set; }
 
@@ -22,7 +22,17 @@ namespace OBS_App.Data
         public string OgrenciSoyad { get; set; }
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
+        public string OgrenciAdSoyad
+        { 
+            get
+            {
+                return this.OgrenciAd + " " + this.OgrenciSoyad;
+            }
+        }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public string OgrenciEposta { get; set; }
+
 
         [Required(ErrorMessage = "*Zorunlu Alan")]
         public string? OgrenciCinsiyet { get; set; }    

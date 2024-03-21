@@ -6,15 +6,15 @@ using OBS_App.Models;
 namespace OBS_App.Areas.Ogrenci.Controllers
 {
     [Area("Ogrenci")]
-    public class DersController : Controller
+    public class DersController : BaseController
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public DersController(IdentityDataContext context, UserManager<AppUser> userManager)
+        public DersController(IdentityDataContext context, UserManager<AppUser> userManager) : base (userManager, context)
         {
-            _context = context;
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<IActionResult> Derslerim()

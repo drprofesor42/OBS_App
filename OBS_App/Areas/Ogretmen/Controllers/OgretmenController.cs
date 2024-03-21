@@ -16,6 +16,8 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
         public OgretmenController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
         {
+            _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -55,7 +57,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 		public async Task<IActionResult> Profilim()
         {
 
-            var users = await _userManager.GetUserAsync(HttpContext.User);
+            var users = await _userManager.GetUserAsync(User);
 
             var ogretmen = _context.Ogretmenler
                 .Include(x => x.Fakulte)
