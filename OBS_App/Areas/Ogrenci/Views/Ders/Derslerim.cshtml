@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Ders İsmine Göre Ara ...">
+                <input type="text" class="form-control" placeholder="Ders Adına Göre Ara ...">
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
@@ -65,20 +65,18 @@
                                     <td>@ders.DersKredi</td>
                                     <td>@ders.DersAkts</td>
 
-                                    @if (ders.notlar.Count() == 0)
+                                    @for (int i = 1; i <= 3; i++)
                                     {
-                                        <td>Not Girilmedi</td>
-                                        <td>Not Girilmedi</td>
-                                        <td>Not Girilmedi</td>
-                                    }
-                                    else
-                                    {
-                                        @foreach (var notlar in ders.notlar)
+                                        var not = ders.notlar.ElementAtOrDefault(i);
+                                        if (not != null)
                                         {
-                                            <td>@notlar.NotPuan</td>
+                                            <td>@not.NotPuan</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Girilmedi</td>
                                         }
                                     }
-                                    
                                 </tr>
                             }
                         }

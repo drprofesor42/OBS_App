@@ -12,11 +12,15 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
+<<<<<<< HEAD:OBS_App/Migrations/20240321073428_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240321061439_init.Designer.cs
     [Migration("20240321061439_init")]
 ========
     [Migration("20240321073428_init")]
 >>>>>>>> NewMaster:OBS_App/Migrations/20240321073428_init.Designer.cs
+=======
+    [Migration("20240321100936_init")]
+>>>>>>> kagan:OBS_App/Migrations/20240321100936_init.Designer.cs
     partial class init
     {
         /// <inheritdoc />
@@ -569,6 +573,9 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("OgretmensId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SinifId")
                         .HasColumnType("int");
 
@@ -579,6 +586,8 @@ namespace OBS_App.Migrations
                     b.HasIndex("BolumId");
 
                     b.HasIndex("FakulteId");
+
+                    b.HasIndex("OgretmensId");
 
                     b.HasIndex("SinifId");
 
@@ -905,6 +914,10 @@ namespace OBS_App.Migrations
                         .WithMany("Ogretmensler")
                         .HasForeignKey("FakulteId");
 
+                    b.HasOne("OBS_App.Data.Ogretmens", null)
+                        .WithMany("Ogretmensler")
+                        .HasForeignKey("OgretmensId");
+
                     b.HasOne("OBS_App.Data.Sinif", null)
                         .WithMany("Ogretmensler")
                         .HasForeignKey("SinifId");
@@ -982,6 +995,8 @@ namespace OBS_App.Migrations
                     b.Navigation("Duyurular");
 
                     b.Navigation("Notlar");
+
+                    b.Navigation("Ogretmensler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Sinif", b =>

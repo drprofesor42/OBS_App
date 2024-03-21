@@ -63,7 +63,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 model.FakulteId = bolum.FakulteId;
                 model.Fakulte = bolum.Fakulte;
                 model.Dersler = bolum.Dersler;
-                model.Ogretmensler = bolum.Ogretmensler;
 
                 if (id == 0)
                 {
@@ -71,8 +70,6 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula != null)
                     {
                         ModelState.AddModelError("OgrenciEposta", "Bu E-posta daha önce alınmış");
-
-
                     }
 
                     if (file != null)
@@ -116,7 +113,8 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         await _userManager.AddToRoleAsync(ogrenci, "Ogrenci");
                     }
-                                      await _context.AddAsync(model);
+                    model.Ogretmensler = bolum.Ogretmensler;
+                    await _context.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
@@ -165,23 +163,22 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(model);
             }
         }
-        public IActionResult Sil(int id)
+        public async Task<IActionResult> Sil(int id)
         {
+            
+            // Identity ve kendi dbmizden silme
             var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);
-            if (ogrenci == null)
+            var ogrenciIdentity = _context.Users.FirstOrDefault(d => d.Email == ogrenci.OgrenciEposta);
+
+            if (ogrenci != null && ogrenciIdentity != null)
             {
-                // TempData Hata Gönder
-                return RedirectToAction("Index");
-            }
-            else
-            {
+                _context.Remove(ogrenciIdentity);
                 _context.Remove(ogrenci);
                 _context.SaveChanges();
             }
-
+            
             return RedirectToAction("Index");
         }
-
 
     }
 }

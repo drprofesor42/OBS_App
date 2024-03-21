@@ -1,12 +1,23 @@
-﻿namespace OBS_App.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OBS_App.Data
 {
     public class Not
     {
         public int Id { get; set; }
-        public string? NotTip { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public string NotTip { get; set; }
+
         public int? NotPuan { get; set; }
-        public DateOnly? NotTarihi { get; set; }
-        public string? NotSaat { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public DateOnly NotTarihi { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
+        public string NotSaat { get; set; }
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         public int? DersId { get; set; }
         public Ders? Ders { get; set; }
         public int OgrencisId { get; set; }

@@ -148,12 +148,8 @@
                             <a asp-controller="Ogretmen" asp-action="Index"><i class="fas fa-home"></i> <span>Anasayfa</span></a>
                         </li>
 
-                        <li class="submenu">
-                            <a href="#"><i class="fas fa-pencil-alt"></i> <span> Öğrenci İşlemleri</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a asp-controller="Ogrenci" asp-action="OgrenciListem">Öğrenci Listem</a></li>
-                                <li><a asp-controller="Ogrenci" asp-action="Yoklama">Yoklama İşlemleri?</a></li>
-                            </ul>
+                        <li>
+                            <a asp-controller="Ogrenci" asp-action="OgrenciListem"><i class="fas fa-graduation-cap"></i> <span>Öğrenci Listem</span></a>
                         </li>
 
                         <li class="submenu">
@@ -169,7 +165,6 @@
                             <ul>
                                 <li><a asp-controller="Ders" asp-action="Ogretmen_Derslerim">Verilen Dersler</a></li>
                                 <li><a asp-controller="Ders" asp-action="DersProgramı">Ders Programı</a></li>
-                                <li><a asp-controller="Ders" asp-action="DersTalepleri">Ders Talepleri?</a></li>
                             </ul>
                         </li>
 
