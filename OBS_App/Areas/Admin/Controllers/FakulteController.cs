@@ -83,17 +83,12 @@ namespace OBS_App.Areas.Admin.Controllers
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
                 }
-                else if (id == 1)
+                else
                 {
                     _context.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View(model);
-                    // Hata Gönder
                 }
             }
             else

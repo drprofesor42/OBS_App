@@ -30,10 +30,8 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
-                var user = await _userManager.GetUserAsync(User);
-                var model = new Duyuru { };
 
-                return View(model);
+                return View();
             }
             else
             {
@@ -50,6 +48,7 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(int id, Duyuru model)
         {
+
             if (ModelState.IsValid)
             {
                 if (id == 0)
@@ -59,16 +58,12 @@ namespace OBS_App.Areas.Admin.Controllers
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
                 }
-                else if (id == 1) 
+                else 
                 {
                     _context.Duyurular.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View(model);
                 }
             }
             else

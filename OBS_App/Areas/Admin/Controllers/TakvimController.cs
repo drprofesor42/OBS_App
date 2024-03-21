@@ -49,16 +49,12 @@ namespace OBS_App.Areas.Admin.Controllers
 
                 }
                 //Güncelleme işlemi
-                if (id == 1)
+                else
                 {
                     _context.Update(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View(model);
                 }
             }
             else

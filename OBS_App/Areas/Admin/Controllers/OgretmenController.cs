@@ -41,10 +41,18 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id, IFormFile file)
+        public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
+                var bolum = await _context.Bolumler
+                                   .Include(x => x.Dersler)
+                                   .Include(x => x.Ogretmensler)
+                                   .Include(x => x.Fakulte)
+                                   .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+                model.Fakulte = bolum.Fakulte;
+                model.FakulteId = bolum.FakulteId;
+                model.Ogrencisler = bolum.Ogrencisler;
 
                 if (id == 0)
                 {
@@ -52,7 +60,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     if (dogrula != null)
                     {
                         ModelState.AddModelError("OgretmenEposta", "Bu E-posta daha önce alınmış");
-                       
+
                     }
                     else if (file != null)
                     {
@@ -96,27 +104,18 @@ namespace OBS_App.Areas.Admin.Controllers
                     {
                         await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
                     }
-                    var bolum = await _context.Dersler
-                                  .Include(x => x.Fakulte)
-                                  .Include(x => x.Ogrencisler)
-                                  .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-
-                    if (bolum != null)
-                    {
-                        model.Ogrencisler = bolum.Ogrencisler;
-                        model.Fakulte = bolum.Fakulte;
-                        model.FakulteId = bolum.FakulteId;
-                    }
+ 
+                      
+                    
                     await _context.Ogretmenler.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
                 }
-                if (id == 1)
+                else
                 {
                     if (file != null)
                     {
-
                         var uzanti = new[] { ".jpg", ".jpeg", ".png" };
                         var resimuzantı = Path.GetExtension(file.FileName);
                         if (!uzanti.Contains(resimuzantı))
@@ -155,16 +154,12 @@ namespace OBS_App.Areas.Admin.Controllers
                         var ogretmen = await _userManager.FindByNameAsync(model.OgretmenEposta);
                     }
 
+
                     _context.Update(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt güncellendi.";
 
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
-                    return View(model);
                 }
             }
             else

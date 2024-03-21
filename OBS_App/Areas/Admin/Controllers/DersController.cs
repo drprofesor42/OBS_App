@@ -49,40 +49,35 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ders model, int id)
         {
-
+            
 
             if (ModelState.IsValid)
             {
-
-                if (id == 0)
-                {
-                    var bolum = await _context.Bolumler
+                var bolum = await _context.Bolumler
                                        .Include(x => x.Fakulte)
                                        .Include(x => x.Ogrencisler)
                                        .FirstOrDefaultAsync(x => x.Id == model.BolumId);
-                    if (bolum != null)
-                    {
-                        model.FakulteId = bolum.FakulteId;
-                        model.Fakulte = bolum.Fakulte;
-                        model.Ogrencisler = bolum.Ogrencisler;
-                        model.OlusturmaTarihi = DateOnly.FromDateTime(DateTime.Today);
-                    }
+                model.FakulteId = bolum.FakulteId;
+                model.Fakulte = bolum.Fakulte;
+
+                if (id == 0)
+                {
+
+                    model.Ogrencisler = bolum.Ogrencisler;
+                    model.OlusturmaTarihi = DateOnly.FromDateTime(DateTime.Today);
+
                     await _context.AddAsync(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt eklendi.";
 
                     return RedirectToAction("Index");
                 }
-                else if (id == 1)
+                else
                 {
                     _context.Update(model);
                     _context.SaveChanges();
                     TempData["success"] = "Kayıt güncellendi.";
 
-                    return RedirectToAction("Index");
-                }
-                else
-                {
                     return RedirectToAction("Index");
                 }
             }
@@ -100,11 +95,11 @@ namespace OBS_App.Areas.Admin.Controllers
             var ders = _context.Dersler.FirstOrDefault(x => x.Id == id);
             if (ders == null)
             {
-				// TempData Hata Gönder
-				return RedirectToAction("Index");
+                // TempData Hata Gönder
+                return RedirectToAction("Index");
 
-			}
-			else
+            }
+            else
             {
                 _context.Remove(ders);
                 _context.SaveChanges();
