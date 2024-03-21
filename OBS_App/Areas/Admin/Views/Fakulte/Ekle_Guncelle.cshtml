@@ -17,21 +17,14 @@
 								<input asp-for="FakulteAd" type="text" class="form-control" >
 								<span asp-validation-for="FakulteAd" class="text-danger"></span>
 							</div>
-						</div>
-						<div class="col-12 col-sm-4">
-							<div class="form-group local-forms">
-								<label>Kuruluş Tarihi<span class="login-danger">*</span></label>
-								<input asp-for="OlusturmaTarihi" type="date" class="form-control">
-								<span asp-validation-for="OlusturmaTarihi" class="text-danger"></span>
-							</div>
-						</div>
-						
+						</div>						
 						<div class="col-12">
 							<div class="student-submit">
 								<button type="submit" class="btn btn-primary">Onayla</button>
 							</div>
 						</div>
 					</div>
+					<input asp-for="OlusturmaTarihi" type="hidden" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
 				</form>
 			</div>
 		</div>

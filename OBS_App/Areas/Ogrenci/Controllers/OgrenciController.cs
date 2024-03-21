@@ -10,12 +10,12 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 {
 	[Area("Ogrenci")]
 	[Authorize(Roles = "Ogrenci")]
-	public class OgrenciController : Controller
-	{
+	public class OgrenciController : BaseController
+    {
 		private readonly IdentityDataContext _context;
 		private readonly UserManager<AppUser> _userManager;
 
-		public OgrenciController(UserManager<AppUser> userManager, IdentityDataContext context)
+		public OgrenciController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
 		{
 			_userManager = userManager;
 			_context = context;
