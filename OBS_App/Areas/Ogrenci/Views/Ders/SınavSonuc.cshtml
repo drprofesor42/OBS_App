@@ -7,20 +7,18 @@
     <div class="row">
         @if (Model.Count() != 0)
         {
-            @foreach (var ders in Model.OrderByDescending(s => s.NotTip).GroupBy(s => s.Ders))
+            @foreach (var ders in Model)
             {
 
-                // Dersin notlarını al
-                var dersNotlari = ders.ToList();
-
                 // Notların ağırlıklı ortalamasını hesapla
-                var notOrtalamasi = CalculateWeightedAverage(dersNotlari);
+                decimal notOrtalamasi = CalculateWeightedAverage(ders);
+                string harfNotu = CalculateLetterGrade(notOrtalamasi);
 
                 <div class="col-sm-6 col-lg-4 col-xl-4 d-flex">
                     <div class="card invoices-grid-card w-100">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <a style="font-weight:bold; font-size:15px; ">@ders.Key?.DersAd</a>
-                            @if (ders.Count() == 3)
+                            <a style="font-weight:bold; font-size:15px; ">@ders.Ders?.DersAd</a>
+                            @if (ders.NotOdev != null && ders.NotVize != null && ders.NotFinal != null)
                                 @if (notOrtalamasi >= 50)
                                 {
                                     <h6 class="text-end text-success">Geçtiniz</h6>
@@ -33,7 +31,7 @@
                         <div class="card-middle">
                             <h2 class="card-middle-avatar">
                                 
-                                <a><img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="~/img/@ders.First().Ogretmens?.OgretmenFotograf" alt="User Image"> @ders.First().Ogretmens?.OgretmenAdSoyad</a>
+                                <a><img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="~/img/@ders.Ogretmens?.OgretmenFotograf" alt="User Image"> @ders.Ogretmens?.OgretmenAdSoyad</a>
                                 
                             </h2>
                         </div>
@@ -56,47 +54,41 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <br />
+                            <br>
 
-                            <div class="row align-items-center">
-                                <div style="text-align:start; margin-left:5px" class="col">
-                                    <span><i class="far fa-file-lines"></i> Sınav</span>
-                                </div>
-                                <div style="text-align:start; margin-right:5px" class="col">
-                                    <span><i class="fas fa-pencil"></i> Sonuç</span>
-                                </div>
-                                <div style="text-align:start; margin-right:10px" class="col">
-                                    <span><i class="far fa-clock"></i> Saat</span>
-                                </div>
-                                <div style="text-align:start; margin-right:15px" class="col-auto">
-                                    <span><i class="far fa-calendar-alt"></i> Tarih</span>
-                                </div>
-                            </div>
+                            <table style="text-align:center" class="table">
+                                <tr>
+                                    <td><i class="fas fa-pencil"></i> <b>Sınav<b></td>
+                                    <td><i class="fas fa-square-poll-vertical"></i> <b>Not<b></td>
+                                    <td><i class="far fa-calendar-alt"></i> <b>Tarih<b></td>
+                                    <td><i class="far fa-clock"></i> <b>Saat<b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Ödev<b></td>
+                                    <td>@ders.NotOdev</td>
+                                    <td>@ders.NotOdevTarih</td>
+                                    <td>@ders.NotOdevSaat</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Vize<b></td>
+                                    <td>@ders.NotVize</td>
+                                    <td>@ders.NotVizeTarih</td>
+                                    <td>@ders.NotVizeSaat</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Final<b></td>
+                                    <td>@ders.NotFinal</td>
+                                    <td>@ders.NotFinalTarih</td>
+                                    <td>@ders.NotFinalSaat</td>
+                                </tr>
+                            </table>
 
-                            @foreach (var sınav in ders)
-                            {
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 style="text-align:center" class="mb-0">@sınav.NotTip</h6>
-                                    </div>
-                                    <div class="col">
-                                        <h6 style="text-align:center" class="mb-0">@sınav.NotPuan</h6>
-                                    </div>
-                                    <div class="col">
-                                        <h6 style="text-align:center" class="mb-0">@sınav.NotSaat</h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <h6 style="text-align:center" class="mb-0">@sınav.NotTarihi</h6>
-                                    </div>
-                                </div>
-                                <br>
-                            }
 
                         </div>
                         <div class="card-footer">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    @if (ders.Count() == 3)
+                                    @if (ders.NotOdev != null && ders.NotVize != null && ders.NotFinal != null)
                                     {
                                         <span class="badge bg-success-dark">Bitti</span>
                                     }
@@ -124,36 +116,33 @@
 </div>
 
 @functions {
-    private decimal CalculateWeightedAverage(List<Not> notlar)
+    public decimal CalculateWeightedAverage(Not ders)
     {
         decimal toplamNot = 0;
         decimal toplamAgirlik = 0;
 
-        foreach (var not in notlar)
+        if (ders.NotOdev.HasValue)
         {
-            switch (not.NotTip)
-            {
-                case "Ödev":
-                    toplamNot += (not.NotPuan ?? 0) * 0.25m;
-                    toplamAgirlik += 0.25m;
-                    break;
-                case "Vize":
-                    toplamNot += (not.NotPuan ?? 0) * 0.35m;
-                    toplamAgirlik += 0.35m;
-                    break;
-                case "Final":
-                    toplamNot += (not.NotPuan ?? 0) * 0.40m;
-                    toplamAgirlik += 0.40m;
-                    break;
-                default:
-                    // Belirtilmeyen not tipleri için bir şey yapma
-                    break;
-            }
+            toplamNot += ders.NotOdev.Value * 0.25m;
+            toplamAgirlik += 0.25m;
+        }
+
+        if (ders.NotVize.HasValue)
+        {
+            toplamNot += ders.NotVize.Value * 0.35m;
+            toplamAgirlik += 0.35m;
+        }
+
+        if (ders.NotFinal.HasValue)
+        {
+            toplamNot += ders.NotFinal.Value * 0.40m;
+            toplamAgirlik += 0.40m;
         }
 
         decimal ortalama = toplamAgirlik != 0 ? toplamNot / toplamAgirlik : 0;
         return Math.Round(ortalama); // Ondalık basamakları 2'ye yuvarla
     }
+
 
     private string CalculateLetterGrade(decimal ortalama)
     {

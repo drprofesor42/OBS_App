@@ -44,8 +44,6 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int id)
         {
-           
-
             if (ModelState.IsValid)
             {
                 var fakulte = await _context.Fakulteler.FirstOrDefaultAsync(x => x.Id == model.FakulteId);
@@ -53,12 +51,13 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     model.FakulteId = fakulte.Id;
                     model.Fakulte = fakulte;
-
                 }
+
                 if (model.BolumBaskani == null)
                 {
                     model.BolumBaskani = "Seçilmedi";
                 }
+
                 if (id == 0)
                 {
 
@@ -106,9 +105,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 }
 
             }
-
-
         }
-
     }
 }

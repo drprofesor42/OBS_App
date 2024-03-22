@@ -35,7 +35,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
 					return View(danisman);
 				}
-
 			}
 
 			// Hata Gönder

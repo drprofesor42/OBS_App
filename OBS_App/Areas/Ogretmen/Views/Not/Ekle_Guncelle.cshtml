@@ -9,19 +9,81 @@
             <div class="card-body">
                 <form asp-controller="Not" asp-action="Ekle_Guncelle" method="post">
                     <input type="hidden" asp-for="OgretmensId" value="@ViewBag.OgretmensId" class="form-control">
-                    <input asp-for="NotTarihi" type="hidden" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                     <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Not Bilgileri</span></h5>
+                        </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
-                                <label>Sınav Tipi<span class="login-danger">*</span></label>
-                                <select asp-for="NotTip" class="form-control select">
-                                    <option value="">Seçiniz</option>
-                                    <option value="Ödev">Ödev</option>
-                                    <option value="Vize">Vize</option>
-                                    <option value="Final">Final</option>
-                                </select>
-                                <span asp-validation-for="NotTip" class="text-danger"></span>
+                                <label>Ödev Notu</label>
+                                <input asp-for="NotOdev" class="form-control" type="number">
+                                <span asp-validation-for="NotOdev" class="text-danger"></span>
                             </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Vize Notu</label>
+                                <input asp-for="NotVize" class="form-control" type="number">
+                                <span asp-validation-for="NotVize" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Final Notu</label>
+                                <input asp-for="NotFinal" class="form-control" type="number">
+                                <span asp-validation-for="NotFinal" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Tarih Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ödev Tarih </label>
+                                <input asp-for="NotOdevTarih" class="form-control" type="date">
+                                <span asp-validation-for="NotOdevTarih" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Vize Tarih</label>
+                                <input asp-for="NotVizeTarih" class="form-control" type="date">
+                                <span asp-validation-for="NotVizeTarih" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Final Tarih</label>
+                                <input asp-for="NotFinalTarih" class="form-control" type="date">
+                                <span asp-validation-for="NotFinalTarih" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Saat Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ödev Saat </label>
+                                <input asp-for="NotOdevSaat" class="form-control" type="text">
+                                <span asp-validation-for="NotOdevSaat" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Vize Saat </label>
+                                <input asp-for="NotVizeSaat" class="form-control" type="text">
+                                <span asp-validation-for="NotVizeSaat" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Final Saat</label>
+                                <input asp-for="NotFinalSaat" class="form-control" type="text">
+                                <span asp-validation-for="NotFinalSaat" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Atama Bilgileri</span></h5>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
@@ -39,20 +101,6 @@
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="OgrencisId" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>Not</label>
-                                <input asp-for="NotPuan" class="form-control" type="number">
-                                <span asp-validation-for="NotPuan" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="form-group local-forms">
-                                <label>Saat<span class="login-danger">*</span></label>
-                                <input asp-for="NotSaat" class="form-control" type="text">
-                                <span asp-validation-for="NotSaat" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">

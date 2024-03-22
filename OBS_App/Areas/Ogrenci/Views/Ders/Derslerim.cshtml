@@ -44,9 +44,9 @@
                             <th>Ders Hocası</th>
                             <th>Ders Kredi</th>
                             <th>Ders Akts</th>
+                            <th>Ders Ödev</th>
                             <th>Ders Vize</th>
                             <th>Ders Final</th>
-                            <th>Ders Ödev</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,18 +65,34 @@
                                     <td>@ders.DersKredi</td>
                                     <td>@ders.DersAkts</td>
 
-                                    @for (int i = 1; i <= 3; i++)
+                                    @foreach (var not in ders.notlar)
                                     {
-                                        var not = ders.notlar.ElementAtOrDefault(i);
-                                        if (not != null)
+                                        @if (not.NotOdev != null)
                                         {
-                                            <td>@not.NotPuan</td>
+                                            <td>@not.NotOdev</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Girilmedi</td>
+                                        }
+                                        @if (not.NotVize != null)
+                                        {
+                                            <td>@not.NotVize</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Girilmedi</td>
+                                        }
+                                        @if (not.NotFinal != null)
+                                        {
+                                            <td>@not.NotFinal</td>
                                         }
                                         else
                                         {
                                             <td>Not Girilmedi</td>
                                         }
                                     }
+
                                 </tr>
                             }
                         }
