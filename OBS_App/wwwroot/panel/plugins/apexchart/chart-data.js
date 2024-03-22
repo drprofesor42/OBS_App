@@ -401,50 +401,58 @@ if ($('#s-bar').length > 0) {
         data: JSON.stringify({}),
         success: function (data) {
             // Veri baþarýyla alýndýktan sonra chart'ý güncelle
-            chartBar.updateSeries([
-                {
-                    name: "bolumOgrenciSayilari",
-                    data: data.bolumOgrenciSayilari
+            var categories = [];
+            var seriesData = [];
+            data.bolumOgrenciSayilari.forEach(function (item) {
+                categories.push(item.bolumAd);
+                seriesData.push(item.ogrenciSayisi);
+            });
+            chartBar.updateOptions({
+                xaxis: {
+                    categories: categories
                 }
-            ]);
+            });
+            chartBar.updateSeries([{
+                name: "Ogrenci Sayisi",
+                data: seriesData
+            }]);
         },
         error: function (error) {
             console.log(error);
         }
     });
 
-    var sBar = {
-        chart: {
-            height: 350,
-            type: 'bar',
-            toolbar: {
-                show: false,
-            }
-        },
-        // colors: ['#4361ee'],
-        plotOptions: {
-            bar: {
-                horizontal: true,
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        series: [{
-            data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }],
-        xaxis: {
-            categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan', 'United States', 'China', 'Germany'],
-        }
-    }
-
-    var chart = new ApexCharts(
+    var chartBar = new ApexCharts(
         document.querySelector("#s-bar"),
-        sBar
+        {
+            chart: {
+                height: 350,
+                type: 'bar',
+                toolbar: {
+                    show: false,
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: [],
+            },
+            series: [{
+                name: "Ogrenci Sayisi",
+                data: []
+            }],
+        }
     );
 
-    chart.render();
+    chartBar.render();
 }
+
 
 // Mixed Chart
 if ($('#mixed-chart').length > 0) {

@@ -56,12 +56,13 @@ namespace OBS_App.Areas.Admin.Controllers
 
             // S-Bar
             // Bölümlere göre öğrenci sayılarını al, sonra düzenlenecek
-            /*var bolumOgrenciSayilari = _context.Ogrenciler
-                .GroupBy(o => o.BolumId) // Bölümlere göre grupla
-                .Select(g => new { BolumId = g.Key, OgrenciSayisi = g.Count() }) // Her bölüm için öğrenci sayısını al
-                .ToList(); // Sonucu liste olarak al*/
+            var bolumOgrenciSayilari = _context.Ogrenciler
+                .Include(o => o.Bolum) // Bölüm bilgisini ekleyerek join işlemi yapar
+                .GroupBy(o => new { o.BolumId, o.Bolum.BolumAd }) // Bölümlere göre grupla
+                .Select(g => new { BolumAd = g.Key.BolumAd, OgrenciSayisi = g.Count() }) // Her bölüm için bölüm adını ve öğrenci sayısını al
+                .ToList(); // Sonucu liste olarak al
 
-            return Json(new { maleData, femaleData });
+            return Json(new { maleData, femaleData, bolumOgrenciSayilari });
         }
         public async Task<IActionResult> SifreDegistir(int id)
         {
