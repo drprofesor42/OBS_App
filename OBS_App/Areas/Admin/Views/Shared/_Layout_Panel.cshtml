@@ -56,38 +56,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item dropdown noti-dropdown me-2">
-                    <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="~/panel/img/icons/header-icon-05.svg">
-                    </a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span class="notification-title">Bildirimler</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Temizle </a>
-                        </div>
-                        <div class="noti-content">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media d-flex">
-                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/panel/img/profiles/avatar-13.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Kağan Muslu</span> size <span class="noti-title">mesaj gönderdi</span></p>
-                                                <p class="noti-time"><span class="notification-time">4 dk önce</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="#">Tüm Bildirimleri Görüntüle</a>
-                        </div>
-                    </div>
-                </li>
+              @await Html.PartialAsync("_Layout_Bildirim")
 
                 <li class="nav-item zoom-screen me-2">
                     <a href="#" class="nav-link header-nav-list">
@@ -181,7 +150,8 @@
 
                         <li class="submenu">
                             <a href="#">
-                                <i class="fas fa-bullhorn"></i><span> Duyuru İşlemleri</span> <span class="menu-arrow"></span></a>
+                                <i class="fas fa-bullhorn"></i><span> Duyuru İşlemleri</span> <span class="menu-arrow"></span>
+                            </a>
                             <ul>
                                 <li><a asp-controller="Duyuru" asp-action="Index">Duyurular</a></li>
                                 <li><a asp-controller="Duyuru" asp-action="Ekle_Guncelle" asp-route-id="0">Duyuru Yayınla</a></li>
@@ -206,7 +176,8 @@
 
                         <li class="submenu">
                             <a href="#">
-                                <i class="fas fa-lock"></i><span>Şifre İşlemleri</span> <span class="menu-arrow"></span></a>
+                                <i class="fas fa-lock"></i><span>Şifre İşlemleri</span> <span class="menu-arrow"></span>
+                            </a>
                             <ul>
                                 <li><a asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="1">Öğrenci Şifre Değiştir</a></li>
                                 <li><a asp-controller="Admin" asp-action="SifreDegistir" asp-route-id="2">Öğretmen Şifre Değiştir</a></li>
@@ -220,15 +191,15 @@
         <div class="page-wrapper">
             <div class="content container-fluid">
 
-                
+
 
                 @RenderBody()
 
             </div>
         </div>
     </div>
-   
-   
+
+
 </body>
 
 <script src="~/js/site.js"></script>
@@ -242,6 +213,7 @@
 <script src="~/panel/plugins/apexchart/chart-data.js"></script>
 <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
 <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 @RenderSection("Scripts", required: false)
 
 </html>

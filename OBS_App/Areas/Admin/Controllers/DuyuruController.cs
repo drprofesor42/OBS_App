@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
+using OBS_App.Hubs;
 using OBS_App.Models;
 namespace OBS_App.Areas.Admin.Controllers
 {
@@ -12,14 +14,14 @@ namespace OBS_App.Areas.Admin.Controllers
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IHubContext<SignalRHub> _hubContext;
 
-        public DuyuruController(IdentityDataContext context, UserManager<AppUser> userManager)
+        public DuyuruController(IdentityDataContext context, UserManager<AppUser> userManager, IHubContext<SignalRHub> hubContext)
         {
             _userManager = userManager;
             _context = context;
+            _hubContext = hubContext;
         }
-
-
         public async Task<IActionResult> Index()
         {
             var duyurular = await _context.Duyurular.Include(x => x.Ogretmens).ToListAsync();
@@ -53,6 +55,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 if (id == 0)
                 {
+                    await _hubContext.Clients.All.SendAsync("ReceiveDuyuru", model.DuyuruBaslik, model.DuyuruMesaj);
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";

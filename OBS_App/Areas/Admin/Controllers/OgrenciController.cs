@@ -167,7 +167,7 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             
             // Identity ve kendi dbmizden silme
-            var ogrenci = _context.Ogrenciler.FirstOrDefault(x => x.Id == id);
+            var ogrenci = await _context.Ogrenciler.FirstOrDefaultAsync(x => x.Id == id);
             var ogrenciIdentity = _context.Users.FirstOrDefault(d => d.Email == ogrenci.OgrenciEposta);
 
             if (ogrenci != null && ogrenciIdentity != null)

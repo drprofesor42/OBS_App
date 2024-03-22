@@ -578,16 +578,23 @@ namespace OBS_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NotTip = table.Column<string>(type: "longtext", nullable: true)
+                    NotOdev = table.Column<int>(type: "int", nullable: true),
+                    NotVize = table.Column<int>(type: "int", nullable: true),
+                    NotFinal = table.Column<int>(type: "int", nullable: true),
+                    NotOdevTarih = table.Column<DateOnly>(type: "date", nullable: true),
+                    NotVizeTarih = table.Column<DateOnly>(type: "date", nullable: true),
+                    NotFinalTarih = table.Column<DateOnly>(type: "date", nullable: true),
+                    NotOdevSaat = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    NotPuan = table.Column<int>(type: "int", nullable: true),
-                    NotTarihi = table.Column<DateOnly>(type: "date", nullable: true),
-                    NotSaat = table.Column<string>(type: "longtext", nullable: true)
+                    NotVizeSaat = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersId = table.Column<int>(type: "int", nullable: true),
+                    NotFinalSaat = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DersId = table.Column<int>(type: "int", nullable: false),
                     OgrencisId = table.Column<int>(type: "int", nullable: false),
                     OgretmensId = table.Column<int>(type: "int", nullable: true),
-                    BolumId = table.Column<int>(type: "int", nullable: true)
+                    BolumId = table.Column<int>(type: "int", nullable: true),
+                    NotBilgiId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -601,7 +608,8 @@ namespace OBS_App.Migrations
                         name: "FK_Notlar_Dersler_DersId",
                         column: x => x.DersId,
                         principalTable: "Dersler",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Notlar_Ogrenciler_OgrencisId",
                         column: x => x.OgrencisId,
