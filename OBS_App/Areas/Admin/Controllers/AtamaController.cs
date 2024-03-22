@@ -46,11 +46,13 @@ namespace OBS_App.Areas.Admin.Controllers
         {
 
             var ders = _context.Dersler.FirstOrDefault(a => a.Id == id);
+
             if (ders != null)
             {
                 ders.OgretmensId = model.OgretmensId;
                 _context.Dersler.Update(ders);
                 await _context.SaveChangesAsync();
+                TempData["success"] = "İşlem Başarılı!";
                 return RedirectToAction("OgretmenAta");
             }
             else
@@ -60,17 +62,106 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(model);
             }
 
-
-
         }
-        public IActionResult BaskanAtaGuncelle()
+        public async Task<IActionResult> BaskanIndex(int id)
         {
-            return View();
+            var bolum = await _context.Bolumler.ToListAsync();
+            return View(bolum);
         }
-        public IActionResult DanismanAtaGuncelle()
+        public async Task<IActionResult> BaskanAtaGuncelle(int id)
         {
-            return View();
+            if (id == 0)
+            {
+                ViewBag.Bolumler = new SelectList(_context.Bolumler.Where(b => b.BolumBaskani == "Seçiniz").ToList(), "Id", "BolumAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
+                return View();
+
+            }
+            else
+            {
+                ViewBag.Bolumler = new SelectList(_context.Bolumler.Where(x => x.Id == id), "Id", "BolumAd");
+                ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
+                return View();
+            }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> BaskanAtaGuncelle(Bolum model, int id)
+        {
+
+            var bolum = _context.Bolumler.FirstOrDefault(b => b.Id == id);
+            if (bolum != null)
+            {
+                bolum.BolumBaskani = model.BolumBaskani;
+
+                if (bolum.BolumBaskani != null)
+                {
+                    _context.Bolumler.Update(bolum);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "İşlem Başarılı!";
+                    return RedirectToAction("BaskanIndex");
+                }
+                else
+                {
+                    ViewBag.Bolumler = new SelectList(_context.Bolumler.Where(b => b.BolumBaskani == "Seçiniz").ToList(), "Id", "BolumAd");
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                    return View(model);
+                }
+            }
+            else
+            {
+
+                ViewBag.Bolumler = new SelectList(_context.Bolumler.Where(b => b.BolumBaskani == "Seçiniz").ToList(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                return View(model);
+            }
+        }
+
+        public async Task<IActionResult> DanismanIndex(int id)
+        {
+            var ogrenci = await _context.Ogrenciler.ToListAsync();
+            return View(ogrenci);
+        }
+        public async Task<IActionResult> DanismanAtaGuncelle(int id)
+        {
+            if (id == 0)
+            {
+
+                ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.Where(d => d.OgrenciDanisman == null).ToList(), "Id", "OgrenciAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
+                return View();
+            }
+            else
+            {
+                ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.Where(x => x.Id == id), "Id", "OgrenciAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
+                return View();
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> DanismanAtaGuncelle(Ogrencis model, int id)
+        {
+
+            var ogrenci = _context.Ogrenciler.FirstOrDefault(a => a.Id == id);
+
+            if (ogrenci != null)
+            {
+                ogrenci.OgrenciDanisman = model.OgrenciDanisman;
+                _context.Ogrenciler.Update(ogrenci);
+                await _context.SaveChangesAsync();
+                TempData["success"] = "İşlem Başarılı!";
+                return RedirectToAction("DanismanIndex");
+            }
+            else
+            {
+                ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.ToList(), "Id", "OgrenciAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
+                return View(model);
+            }
+
+        }
     }
+
+
 }
+
