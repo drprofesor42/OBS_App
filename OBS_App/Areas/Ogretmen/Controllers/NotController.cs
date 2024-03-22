@@ -63,11 +63,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Not model, int type)
         {
-            var existingNot = await _context.Notlar.FirstOrDefaultAsync(n => n.OgrencisId == model.OgrencisId && n.DersId == model.DersId && n.NotTip == model.NotTip);
-            if (existingNot != null)
-            {
-                type = 1;
-            }
+            var existingNot = await _context.Notlar.FirstOrDefaultAsync(n => n.OgrencisId == model.OgrencisId && n.DersId == model.DersId);
 
             if (ModelState.IsValid)
             {
@@ -81,19 +77,20 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                 }
                 else if (existingNot != null)
                 {
-                    existingNot.NotPuan= model.NotPuan;
-                    existingNot.NotTarihi = model.NotTarihi;
+                    existingNot.NotOdev= model.NotOdev;
+                    existingNot.NotVize= model.NotVize;
+                    existingNot.NotFinal = model.NotFinal;
+
+                    existingNot.NotOdevTarih = model.NotOdevTarih;
+                    existingNot.NotVizeTarih = model.NotVizeTarih;
+                    existingNot.NotFinalTarih = model.NotFinalTarih;
+
+                    existingNot.NotOdevSaat = model.NotOdevSaat;
+                    existingNot.NotVizeSaat = model.NotVizeSaat;
+                    existingNot.NotFinalSaat = model.NotFinalSaat;
 
                     _context.Update(existingNot);
                     _context.SaveChanges();
-                    TempData["success"] = "Kayıt güncellendi!";
-                    return RedirectToAction("Index");
-                }
-                else if (type == 1)
-                {
-                    _context.Update(model);
-                    _context.SaveChanges();
-                    TempData["success"] = "Kayıt güncellendi.";
                     return RedirectToAction("Index");
                 }
             }

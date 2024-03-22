@@ -52,8 +52,9 @@
                                 <th>Bölüm</th>
                                 <th>Ders</th>
                                 <th>Sınıf</th>
-                                <th>Sınav Tipi</th>
-                                <th>Sınav Notu</th>
+                                <th>Ödev Notu</th>
+                                <th>Vize Notu</th>
+                                <th>Final Notu</th>
                                 <th class="text-end">İşlemler</th>
                             </tr>
                         </thead>
@@ -71,8 +72,30 @@
                                     <td>@not.Ogrencis?.Bolum?.BolumAd</td>
                                     <td>@not.Ders?.DersAd</td>
                                     <td>@not.Ogrencis?.OgrenciSinif</td>
-                                    <td>@not.NotTip</td>
-                                    <td>@not.NotPuan</td>
+                                    @if (not.NotOdev != null)
+                                    {
+                                        <td>@not.NotOdev</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Girilmedi</td>
+                                    }
+                                    @if (not.NotVize != null)
+                                    {
+                                        <td>@not.NotVize</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Girilmedi</td>
+                                    }
+                                    @if (not.NotFinal != null)
+                                    {
+                                        <td>@not.NotFinal</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Girilmedi</td>
+                                    }
                                     <td class="text-end">
                                         <div class="actions ">
                                             <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">

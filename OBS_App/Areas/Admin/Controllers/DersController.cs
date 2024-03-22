@@ -49,8 +49,6 @@ namespace OBS_App.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ders model, int id)
         {
-            
-
             if (ModelState.IsValid)
             {
                 var bolum = await _context.Bolumler
@@ -97,7 +95,6 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 // TempData Hata Gönder
                 return RedirectToAction("Index");
-
             }
             else
             {

@@ -74,7 +74,6 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 if (id == 0)
                 {
 
@@ -116,15 +115,12 @@ namespace OBS_App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Detay(int id)
         {
-
             var fakulte = await _context.Fakulteler
                     .Include(f => f.Ogretmensler)
                     .Include(f => f.Ogrencisler)
                     .Include(f => f.Bolumler)
                     .ToListAsync();
             var model = fakulte.FirstOrDefault(x => x.Id == id);
-
-
 
             return View(model);
         }

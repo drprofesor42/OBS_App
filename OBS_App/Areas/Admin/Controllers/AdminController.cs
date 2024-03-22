@@ -72,10 +72,8 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else if (id == 2)
             {
-
                 ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
                 return View();
-
             }
             else
             {

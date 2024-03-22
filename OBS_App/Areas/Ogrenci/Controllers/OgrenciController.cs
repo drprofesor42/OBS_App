@@ -31,11 +31,10 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
 				if (ogrenci != null)
 				{
-					var danisman = _context.Ogretmenler.Include(x => x.Bolum).FirstOrDefault(x => x.OgretmenAd == ogrenci.OgrenciDanisman);
+					var danisman = _context.Ogretmenler.Include(x => x.Bolum).FirstOrDefault(x => x.OgretmenAd + " " + x.OgretmenSoyad == ogrenci.OgrenciDanisman);
 
 					return View(danisman);
 				}
-
 			}
 
 			// Hata Gönder
@@ -51,7 +50,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 				var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
 				if (ogrenci != null)
 				{
-					var danisman = _context.Ogretmenler.Include(x => x.Adres).FirstOrDefault(x => x.OgretmenAd == ogrenci.OgrenciDanisman);
+					var danisman = _context.Ogretmenler.Include(x => x.Adres).FirstOrDefault(x => x.OgretmenAd + " " + x.OgretmenSoyad == ogrenci.OgrenciDanisman);
 
 					return View(danisman);
 				}
