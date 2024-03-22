@@ -5,19 +5,14 @@
 
 <div class="student-group-form">
 	<div class="row">
-		<div class="col-lg-3 col-md-6">
+		<div class="col-lg-5 col-md-7">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders Koduna Göre Ara ...">
+				<input type="text" class="form-control" id="dersKoduAdiArama"  placeholder="Ders Koduna Göre Ara ..." oninput="aramaYap()">
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6">
+		<div class="col-lg-5 col-md-7">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders Adına Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-2">
-			<div class="search-student-btn text-end">
-				<button type="btn" class="btn btn-primary">Ara</button>
+				<input type="text" class="form-control" id="dersAdiArama" placeholder="Ders Adına Göre Ara ..." oninput="aramaYap()">
 			</div>
 		</div>
 	</div>
@@ -33,10 +28,6 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h3 class="page-title">Verilen Dersler</h3>
-						</div>
-						<div class="col-auto text-end float-end ms-auto download-grp">
-							<a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-							<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
 						</div>
 					</div>
 				</div>
@@ -88,4 +79,30 @@
 	</div>
 </div>
 
+@section Scripts {
+	<script>
+		function aramaYap() {
+			var dersKoduAdiInput, dersAdiInput, dersKoduAdiFilter, dersAdiFilter, table, tr, td, i;
+			dersKoduAdiInput = document.getElementById("dersKoduAdiArama");
+			dersAdiInput = document.getElementById("dersAdiArama");
+			dersKoduAdiFilter = dersKoduAdiInput.value.toUpperCase();
+			dersAdiFilter = dersAdiInput.value.toUpperCase();
+			table = document.querySelector(".star-student");
+			tr = table.getElementsByTagName("tr");
 
+			for (i = 0; i < tr.length; i++) {
+				tdDersKoduAdi = tr[i].getElementsByTagName("td")[0];
+				tdDersAdi = tr[i].getElementsByTagName("td")[1];
+				if (tdDersKoduAdi && tddersAdi) {
+					dersKoduAdiValue = tdDersKoduAdi.textContent || tdDersKoduAdi.innerText;
+					dersAdiValue = tdDersAdi.textContent || tdDersAdi.innerText;
+					if (dersKoduAdiValue.toUpperCase().indexOf(dersKoduAdiFilter) > -1 && dersAdiValue.toUpperCase().indexOf(dersAdiFilter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+}

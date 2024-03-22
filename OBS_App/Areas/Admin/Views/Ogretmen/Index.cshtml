@@ -6,24 +6,9 @@
 
 <div class="student-group-form">
     <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="ID'ye Göre Ara...">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="İsme Göre Ara...">
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Ünvana Göre Ara...">
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="search-student-btn">
-                <button type="btn" class="btn btn-primary">Ara</button>
+                <input type="text" class="form-control" id="arama" placeholder="İsmine Göre Ara..." oninput="deneme()">
             </div>
         </div>
     </div>
@@ -116,7 +101,7 @@
         Swal.fire({
             title: successMessage,
             icon: "success"
-        });
+        });       
     </script>
 }
 @section Scripts {
@@ -157,6 +142,27 @@
                     });
                 }
             });
+        }
+    </script>
+    <script>
+        function deneme() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("arama");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".star-student");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
         }
     </script>
 }

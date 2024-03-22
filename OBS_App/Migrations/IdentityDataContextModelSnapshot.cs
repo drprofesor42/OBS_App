@@ -373,19 +373,38 @@ namespace OBS_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("DersId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int?>("NotPuan")
+                    b.Property<int?>("NotBilgiId")
                         .HasColumnType("int");
 
-                    b.Property<string>("NotSaat")
+                    b.Property<int?>("NotFinal")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NotFinalSaat")
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly?>("NotTarihi")
+                    b.Property<DateOnly?>("NotFinalTarih")
                         .HasColumnType("date");
 
-                    b.Property<string>("NotTip")
+                    b.Property<int?>("NotOdev")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NotOdevSaat")
                         .HasColumnType("longtext");
+
+                    b.Property<DateOnly?>("NotOdevTarih")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("NotVize")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NotVizeSaat")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateOnly?>("NotVizeTarih")
+                        .HasColumnType("date");
 
                     b.Property<int>("OgrencisId")
                         .HasColumnType("int");
@@ -835,7 +854,9 @@ namespace OBS_App.Migrations
 
                     b.HasOne("OBS_App.Data.Ders", "Ders")
                         .WithMany("notlar")
-                        .HasForeignKey("DersId");
+                        .HasForeignKey("DersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OBS_App.Data.Ogrencis", "Ogrencis")
                         .WithMany("Notlar")

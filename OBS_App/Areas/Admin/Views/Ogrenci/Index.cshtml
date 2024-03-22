@@ -5,28 +5,19 @@
 }
 <div class="student-group-form">
     <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-5 col-md-7">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
+                <input type="text" class="form-control" id="ogrenciAdiArama" placeholder="İsme Göre Ara ..." oninput="aramaYap()">
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-5 col-md-7">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="İsme Göre Ara ...">
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Bölümüne Göre Ara ...">
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="search-student-btn">
-                <button type="btn" class="btn btn-primary">Ara</button>
+                <input type="text" class="form-control" id="bolumAdiArama" placeholder="Bölümüne Göre Ara ..." oninput="aramaYap()">
             </div>
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-table comman-shadow">
@@ -150,4 +141,29 @@
             });
         }
     </script>
+ <script>
+        function aramaYap() {
+            var ogrenciAdiInput, bolumAdiInput, ogrenciAdiFilter, bolumAdiFilter, table, tr, td, i;
+            ogrenciAdiInput = document.getElementById("ogrenciAdiArama");
+            bolumAdiInput = document.getElementById("bolumAdiArama");
+            ogrenciAdiFilter = ogrenciAdiInput.value.toUpperCase();
+            bolumAdiFilter = bolumAdiInput.value.toUpperCase();
+            table = document.querySelector(".star-student");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                tdOgrenciAdi = tr[i].getElementsByTagName("td")[0];
+                tdBolumAdi = tr[i].getElementsByTagName("td")[2];
+                if (tdOgrenciAdi && tdBolumAdi) {
+                    ogrenciAdiValue = tdOgrenciAdi.textContent || tdOgrenciAdi.innerText;
+                    bolumAdiValue = tdBolumAdi.textContent || tdBolumAdi.innerText;
+                    if (ogrenciAdiValue.toUpperCase().indexOf(ogrenciAdiFilter) > -1 && bolumAdiValue.toUpperCase().indexOf(bolumAdiFilter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+ </script>
 }
