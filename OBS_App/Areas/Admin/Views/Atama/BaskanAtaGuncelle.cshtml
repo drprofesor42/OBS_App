@@ -1,0 +1,45 @@
+﻿@model Bolum
+@{
+    ViewData["Title"] = "BaskanAtaGuncelle";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card comman-shadow">
+            <div class="card-body">
+                <form asp-action="BaskanAtaGuncelle" asp-controller="Atama" method="post" novalidate>                  
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title student-info">Başkan Atama İşlemleri<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Bölüm Seçiniz.<span class="login-danger">*</span></label>
+                                    <select asp-for="BolumAd" asp-items="ViewBag.Bolumler" class="form-control select">
+                                    </select>
+                                    <span asp-validation-for="BolumAd" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Bölüm Başkanı Seçiniz.<span class="login-danger">*</span></label>
+                                    <select asp-for="BolumBaskani" asp-items="ViewBag.Ogretmenler" class="form-control select">
+                                        <option>Seçiniz</option>
+                                    </select>
+                                    <span asp-validation-for="BolumBaskani" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="student-submit">
+                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

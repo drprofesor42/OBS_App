@@ -1,7 +1,4 @@
-﻿@model LoginViewsModel
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <title>@ViewData["Title"] - Ogrenci Bilgi Sistemi</title>
-
     <link rel="shortcut icon" href="~/panel/img/favicon.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/panel/plugins/feather/feather.css">
     <link rel="stylesheet" href="~/panel/plugins/icons/flags/flags.css">
+    <link href="~/panel/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="~/panel/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/panel/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/panel/css/ckeditor.css">
+    <link rel="stylesheet" href="~/panel/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/panel/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
 </head>
 
@@ -26,10 +27,10 @@
         <div class="header">
 
             <div class="header-left">
-                <a asp-controller="Home" asp-action="index" class="logo">
+                <a asp-controller="Ogrenci" asp-action="Index" class="logo">
                     <img src="~/panel/img/profiles/logo.png" alt="Logo">
                 </a>
-                <a asp-controller="Home" asp-action="index" class="logo logo-small">
+                <a asp-controller="Ogrenci" asp-action="Index" class="logo logo-small">
                     <img src="~/panel/img/profiles/logo-small.png" alt="Logo" width="30" height="30">
                 </a>
             </div>
@@ -40,11 +41,9 @@
                 </a>
             </div>
 
-
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fas fa-bars"></i>
             </a>
-
 
             <ul class="nav user-menu">
                 <li class="nav-item dropdown language-drop me-2">
@@ -60,7 +59,7 @@
 
                 <li class="nav-item dropdown noti-dropdown me-2">
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="~/panel/img/icons/header-icon-05.svg" alt>
+                        <img src="~/panel/img/icons/header-icon-05.svg">
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
@@ -73,7 +72,7 @@
                                     <a href="#">
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/panel/img/profiles/avatar-13.jpg">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/img/profiles/avatar-13.jpg">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Kağan Muslu</span> size <span class="noti-title">mesaj gönderdi</span></p>
@@ -100,25 +99,26 @@
                 <li class="nav-item dropdown has-arrow new-user-menus">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <div class="user-img">
-                            <img class="rounded-circle" src="https://pbs.twimg.com/profile_images/2861121762/8b50471dbedc1b0968bdb9d79a894ba3_400x400.jpeg" width="31" alt="Ryan Taylor">
+                            <img class="rounded-circle" src="~/img/@ViewBag.Fotograf" width="31" alt="@User.Identity">
                             <div class="user-text">
-                                <h6>Merhaba, @User.Identity.Name</h6>
-                                <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
+                                <h6>Merhaba, @ViewBag.AdSoyad</h6>
+                                <p class="text-muted mb-0">Öğrenci</p>
                             </div>
                         </div>
                     </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="https://pbs.twimg.com/profile_images/2861121762/8b50471dbedc1b0968bdb9d79a894ba3_400x400.jpeg" alt="User Image" class="avatar-img rounded-circle">
+                                <img src="~/img/@ViewBag.Fotograf" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
-                                <h6>@User.Identity.Name</h6>
-                                <p class="text-muted mb-0">Bölüm Başkan Yardımcısı</p>
+                                <h6>@ViewBag.AdSoyad</h6>
+                                <p class="text-muted mb-0">Öğrenci</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="profile.html">Profilim</a>
+                        <a class="dropdown-item" asp-action="Profilim" asp-controller="Ogrenci">Profilim</a>
                         <a class="dropdown-item" href="inbox.html">Gelen Kutusu</a>
+                        <a class="dropdown-item" asp-action="SifreDegistir" asp-controller="Ogrenci">Şifre Değiştir</a>
                         <a class="dropdown-item" asp-action="Logout" asp-controller="Account" asp-area="">Çıkış Yap</a>
                     </div>
                 </li>
@@ -126,7 +126,6 @@
             </ul>
 
         </div>
-
 
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
@@ -138,25 +137,22 @@
                         </li>
 
                         <li>
-                            <a asp-action="Index" asp-controller="Ogrenci"><i class="fas "></i> <span>Anasayfa</span></a>
+                            <a asp-action="Index" asp-controller="Ogrenci"><i class="fas fa-home"></i> <span>Anasayfa</span></a>
                         </li>
 
                         <li class="submenu">
                             <a href="#"><i class="fas fa-graduation-cap"></i> <span> Ders İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="students.html">Aldığım Dersler</a></li>
-                                <li><a href="student-details.html">Ders Programı</a></li>
-                                <li><a href="add-student.html">Sınav Sonuçları</a></li>
-                                <li><a href="edit-student.html">Sınav Takvimi</a></li>
+                                <li><a asp-controller="Ders" asp-action="Derslerim">Aldığım Dersler</a></li>
+                                <li><a asp-controller="Ders" asp-action="DersProgramı">Ders Programı</a></li>
                             </ul>
                         </li>
 
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Danışman İşlemleri</span> <span class="menu-arrow"></span></a>
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Sınav İşlemleri</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="teachers.html">Danışman Bilgileri</a></li>
-                                <li><a href="teacher-details.html">Danışman Mesaj </a></li>
-                                <li><a href="add-teacher.html">Danışman Talep </a></li>     
+                                <li><a asp-controller="Ders" asp-action="SınavSonuc">Sınav Sonuçları</a></li>
+                                <li><a asp-controller="Ders" asp-action="SınavTakvim">Sınav Takvimi</a></li>
                             </ul>
                         </li>
 
@@ -165,19 +161,13 @@
                         </li>
 
                         <li>
-                            <a href="index-2.html"><i class="fas fa-table"></i> <span>Akademik Takvim</span></a>
+                            <a asp-controller="Ogrenci" asp-action="AkademikTakvim"><i class="fas fa-table"></i> <span>Akademik Takvim</span></a>
                         </li>
-
                         <li>
-                            <a href="index-2.html"><i class="fas fa-table"></i> <span>Duyurular</span></a>
+                            <a asp-controller="Ogrenci" asp-action="Danisman"><i class="fas fa-user "></i><span>Danışman Bilgileri</span></a>
                         </li>
-                        
                         <li>
-                            <a href="index-2.html"><i class="fas fa-calendar-day"></i> <span>Etkinlikler</span></a>
-                        </li>
-
-                        <li>
-                            <a href="settings.html"><i class="fas fa-cog"></i> <span>Profil Ayarları</span></a>
+                            <a asp-controller="Ogrenci" asp-action="Duyurular"><i class="fas fa-bullhorn"></i> <span>Duyurular</span></a>
                         </li>
 
                     </ul>
@@ -188,40 +178,32 @@
         <div class="page-wrapper">
             <div class="content container-fluid">
 
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="page-title">X Page</h3>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a>X Page</a></li>
-                                <li class="breadcrumb-item active">X Page</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+               
 
                 @RenderBody()
 
             </div>
         </div>
-
     </div>
-
-    <footer>
-        <p>COPYRIGHT © 2023 DREAMSTECHNOLOGIES.</p>
-    </footer>
-
+    @* <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/panel/plugins/select2/js/select2.min.js"></script>
+    <script src="~/panel/js/feather.min.js"></script>
+    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/panel/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="~/panel/plugins/apexchart/chart-data.js"></script>
 
-    <script src="~/panel/js/feather.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/apexcharts.min.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
-    <script src="~/panel/plugins/apexchart/chart-data.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/moment.min.js"></script>
+    <script src="~/panel/js/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="~/panel/js/script.js" type="d3e9fe501045cc33aa3e5f15-text/javascript"></script>
+    <script src="~/panel/js/jquery-ui.min.js"></script>
+    <script src="~/panel/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/panel/plugins/fullcalendar/jquery.fullcalendar.js"></script>
+
+    <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

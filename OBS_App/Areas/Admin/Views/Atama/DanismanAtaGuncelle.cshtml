@@ -1,0 +1,46 @@
+﻿@model Ogrencis
+
+@{
+    ViewData["Title"] = "DanismanAtaGuncelle";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card comman-shadow">
+            <div class="card-body">
+                <form asp-action="DanismanAtaGuncelle" asp-controller="Atama" method="post" novalidate>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title student-info">Danışman Atama İşlemleri<span><a href="javascript:;"><i class="feather-more-vertical"></i></a></span></h5>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Öğrenci Seçiniz<span class="login-danger">*</span></label>
+                                    <select asp-for="Id" asp-items="ViewBag.Ogrenci" class="form-control select">
+                                        <option value="">Seçiniz</option>
+                                    </select>
+                                    <span asp-validation-for="OgrenciAd" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Danışman Seçiniz<span class="login-danger">*</span></label>
+                                    <select asp-for="OgrenciDanisman" asp-items="@ViewBag.Ogretmen" class="form-control select">
+                                        <option value="">Seçiniz</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="student-submit">                                   
+                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

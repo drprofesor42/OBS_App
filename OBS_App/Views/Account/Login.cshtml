@@ -17,6 +17,7 @@
                         <h1 class="mb-4">Öğrenci Bilgi Sistemi</h1>
 
                         <h2>Giriş Yap</h2>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
                         <form method="post">
                             <div asp-validation-summary="All" class="text-danger">
@@ -44,9 +45,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary btn-block " asp-action="Login" asp-controller="Account" type="submit">Giriş Yap</button>
+                                    <button class="btn btn-primary btn-block" onclick="deneme()" type="submit">Giriş Yap</button>
                                 </div>
-                            </div>
+                            </div>                           
                         </form>
 
                         <div class="login-or">
@@ -57,11 +58,17 @@
                         <div class="text-center">
                             <a class="btn btn-danger">E-Devlet İle Giriş Yap</a>
                         </div>
-
-                    </div>
+                    </div>       
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    function deneme() 
+    {
+        toastr.success('Oturumunuz açıldı', 'Başarılı', { timeOut: 10000, extendedTimeOut: 3000 });
+    }
+</script>
+@* <button class="btn btn-primary btn-block " asp-action="Login" asp-controller="Account" type="submit">Giriş Yap</button>
+ *@

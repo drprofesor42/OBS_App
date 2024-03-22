@@ -4,11 +4,12 @@ namespace OBS_App.ViewsModel
 {
     public class LoginViewsModel
     {
-        [Required]
+
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         [EmailAddress]
         public string? Email { get; set; }
-        [Required]
 
+        [Required(ErrorMessage = "*Zorunlu Alan")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 

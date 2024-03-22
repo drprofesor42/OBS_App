@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OBS_App.Models;
 using OBS_App.Data;
+using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
@@ -31,62 +31,52 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             else
             {
-                var takvim = await _context.AkademikTakvimler.FirstOrDefaultAsync(x => x.akademikTakvimsId == id);
+                var takvim = await _context.AkademikTakvimler.FirstOrDefaultAsync(x => x.Id == id);
                 return View(takvim);
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ekle_Guncelle(AkademikTakvims model, int? Kaydet)
+        public async Task<IActionResult> Ekle_Guncelle(AkademikTakvim model, int id)
         {
-            if (Kaydet == null)
+            if (ModelState.IsValid)
             {
-                // hata
-                return View();
+                if (id == 0)
+                {
+                    await _context.AkademikTakvimler.AddAsync(model);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt eklendi.";
+                    return RedirectToAction("Index");
+
+                }
+                //Güncelleme işlemi
+                else
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "Kayıt güncellendi.";
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                //ekleme
-                if (Kaydet == 1)
-                {
-                    if (ModelState.IsValid)
-                    {
-                        await _context.AkademikTakvimler.AddAsync(model);
-                        await _context.SaveChangesAsync();
-
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        //hata mesajı
-                    }
-                }
-                //Güncelleme işlemi
-                if (Kaydet == 2)
-                {
-                    if (ModelState.IsValid)
-                    {
-
-                        _context.Update(model);
-                        await _context.SaveChangesAsync();
-
-                        return RedirectToAction("Index");
-
-                    }
-                }
                 return View(model);
             }
         }
 
+
+
         public async Task<IActionResult> Sil(int? id)
         {
+
             if (id != null)
             {
-                var user = await _context.AkademikTakvimler.FirstOrDefaultAsync(u => u.akademikTakvimsId == id);
+                var user = await _context.AkademikTakvimler.FirstOrDefaultAsync(u => u.Id == id);
                 if (user != null)
                 {
                     _context.Remove(user);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
+
                 }
                 else
                 {

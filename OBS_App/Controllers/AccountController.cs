@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Common;
-using OBS_App.Data;
 using OBS_App.Models;
 using OBS_App.ViewsModel;
-using System.Security.Cryptography.X509Certificates;
 
 
 namespace OBS_App.Controllers
@@ -30,9 +26,10 @@ namespace OBS_App.Controllers
 
         }
 
-        
+
         public IActionResult Login()
         {
+
             return View();
         }
 
@@ -63,7 +60,7 @@ namespace OBS_App.Controllers
                         }
                         if (User.IsInRole("Ogretmen"))
                         {
-                            return RedirectToAction("Index", "Ogretmen" , new { area = "Ogretmen" });
+                            return RedirectToAction("Index", "Ogretmen", new { area = "Ogretmen" });
                         }
                         if (User.IsInRole("Ogrenci"))
                         {
@@ -71,7 +68,6 @@ namespace OBS_App.Controllers
                         }
 
                         ModelState.AddModelError("", "*Lütfen Yöneticiniz İle Görüşünüz");
-
 
                     }
                     else
@@ -85,7 +81,6 @@ namespace OBS_App.Controllers
                 {
                     ModelState.AddModelError("", "*Bu Email Adresi İle Bir Hesap Bulunumadı");
                 }
-
 
             }
             return View(model);

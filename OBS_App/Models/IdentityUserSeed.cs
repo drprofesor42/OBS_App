@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Models;
-using OBS_App.ViewsModel;
 
 namespace identy_user.Models
 {
@@ -39,7 +37,7 @@ namespace identy_user.Models
                     {
 
                         UserName = userList[i],
-                        Email = emailList[i],
+                        Email = emailList[i]
 
                     };
 
@@ -63,7 +61,7 @@ namespace identy_user.Models
 
             if (ogretmenUser != null)
             {
-                // Admin kullanıcısı bulundu, Admin rolünü atama
+
 
                 await userManager.AddToRoleAsync(ogretmenUser, "Ogretmen");
 
@@ -72,7 +70,7 @@ namespace identy_user.Models
 
             if (ogrenciUser != null)
             {
-                // Admin kullanıcısı bulundu, Admin rolünü atama
+
 
                 await userManager.AddToRoleAsync(ogrenciUser, "Ogrenci");
 

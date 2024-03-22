@@ -1,89 +1,109 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class DersController : Controller
     {
-        private readonly IdentityDataContext _identityDataContext;
+        private readonly IdentityDataContext _context;
 
-        public DersController(IdentityDataContext identityDataContext)
+        public DersController(IdentityDataContext context)
         {
-            _identityDataContext = identityDataContext;
+            _context = context;
         }
 
 
-        // Dersleri Listeleme Sayfası
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var dersler = _identityDataContext.Dersler.ToList();
+            var dersler = await _context.Dersler.Include(x => x.Ogretmens).Include(x => x.Bolum).ThenInclude(x => x.Ogrencisler).ToListAsync();
             return View(dersler);
         }
 
-        // Id 0 gelirse ders ekleme sayfasına, 1 gelirse güncelleme sayfasına yönlendirir (aynı sayfalar ama model gönderiyor)
-		public IActionResult Ekle_Guncelle(int id)
+        public async Task<IActionResult> Ekle_Guncelle(int id)
         {
             if (id == 0)
             {
-				return View();
-			}
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                return View();
+            }
             else
             {
-				var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.Id == id);
-				if (ders == null)
-				{
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                var ders = await _context.Dersler.FirstOrDefaultAsync(x => x.Id == id);
+                if (ders == null)
+                {
                     // Hata Gönder
-					return NotFound();
-				}
-				return View(ders);
-			}
+                    return NotFound();
+                }
+                return View(ders);
+            }
         }
-
-        // type 0 ise aldığı modeli db'e ekliyor, 1 ise modele göre db kayıt güncelliyor
-		[HttpPost]
-        public IActionResult Ekle_Guncelle(Ders model, string type)
+        [HttpPost]
+        public async Task<IActionResult> Ekle_Guncelle(Ders model, int id)
         {
-            if (model == null || type == null)
+            if (ModelState.IsValid)
             {
-                // TempData Hata Gönder
-            }
-            else if (type == "0")
-            {
-                _identityDataContext.Add(model);
-                _identityDataContext.SaveChanges();
+                var bolum = await _context.Bolumler
+                                       .Include(x => x.Fakulte)
+                                       .Include(x => x.Ogrencisler)
+                                       .FirstOrDefaultAsync(x => x.Id == model.BolumId);
+                model.FakulteId = bolum.FakulteId;
+                model.Fakulte = bolum.Fakulte;
 
-            }
-            else if (type == "1")
-            {
-                _identityDataContext.Update(model);
-                _identityDataContext.SaveChanges();
+                if (id == 0)
+                {
+
+                    model.Ogrencisler = bolum.Ogrencisler;
+                    model.OlusturmaTarihi = DateOnly.FromDateTime(DateTime.Today);
+
+                    await _context.AddAsync(model);
+                    _context.SaveChanges();
+                    TempData["success"] = "Kayıt eklendi.";
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    _context.Update(model);
+                    _context.SaveChanges();
+                    TempData["success"] = "Kayıt güncellendi.";
+
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                Console.WriteLine("How it possible?");
-                return RedirectToAction("Index");
-			}
-
-			return RedirectToAction("Index");
+                ViewBag.Bolum = new SelectList(await _context.Bolumler.ToListAsync(), "Id", "BolumAd");
+                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
+                return View(model);
+            }
         }
 
         // id ye göre db'den kayıt siliyor
         public IActionResult Sil(int id)
         {
-            var ders = _identityDataContext.Dersler.FirstOrDefault(x => x.Id == id);
+            var ders = _context.Dersler.FirstOrDefault(x => x.Id == id);
             if (ders == null)
             {
                 // TempData Hata Gönder
-			}
+                return RedirectToAction("Index");
+            }
             else
             {
-                _identityDataContext.Remove(ders);
-                _identityDataContext.SaveChanges();
+                _context.Remove(ders);
+                _context.SaveChanges();
+
             }
 
-			return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }

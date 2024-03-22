@@ -1,19 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
 namespace OBS_App.Areas.Admin.ViewsModel
 {
     public class SifreDegistirViewsModel
     {
-        [EmailAddress]
-        [Required]
-        public string EPosta { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string? Eposta { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Sifre { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare(nameof(Sifre), ErrorMessage = "Parolanız Eşleşmiyor")]
-        public string SifreTekrari { get; set; }
+		[Required(ErrorMessage = "*Zorunlu Alan")]
+		[DataType(DataType.Password)]
+        public string? Parola { get; set; }
+
+		//Confirm Parola için onay 
+
+		[Required(ErrorMessage = "*Zorunlu Alan")]
+		[DataType(DataType.Password)]
+        [Compare(nameof(Parola), ErrorMessage = "Parola eşleşmiyor.")]
+        public string? ParolaOnayla { get; set; }
+
+
     }
 }

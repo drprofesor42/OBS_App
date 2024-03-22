@@ -3,153 +3,164 @@
     ViewData["Title"] = "Ekle";
 }
 
-
-<div class="page-header">
-    <div class="row align-items-center">
-        <div class="col">
-            <h3 class="page-title">Add Teachers</h3>
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="teachers.html">Teachers</a></li>
-                <li class="breadcrumb-item active">Add Teachers</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <form asp-action="Ekle_Guncelle" asp-controller="Ogretmen" method="post">
-                    <div asp-validation-summary="All" class="text-danger">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="form-title"><span>Öğretmen Ekle</span></h5>
+                <form asp-action="Ekle_Guncelle" asp-controller="Ogretmen" enctype="multipart/form-data" method="post" novalidate>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Öğretmen Ekle / Düzenle</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ad<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenAd" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenAd" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Ad<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenAd" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Soyad<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenSoyad" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenSoyad" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Soyad<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenSoyad" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Cinsiyet<span class="login-danger">*</span></label>
+                                <select asp-for="OgretmenCinsiyet" class="form-control select">
+                                    <option>Cinsiyet Seç</option>
+                                    <option>Erkek</option>
+                                    <option>Kadın</option>
+                                </select>
+                                <span asp-validation-for="OgretmenCinsiyet" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Cinsiyet<span class="login-danger">*</span></label>
-                                    <select asp-for="OgretmenCinsiyet" class="form-control select">
-                                        <option>Select Class</option>
-                                        <option>Erkek</option>
-                                        <option>Kadın</option>
-                                        
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Doğum Tarihi<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenDogumTarihi" type="date" class="form-control">
+                                <span asp-validation-for="OgretmenDogumTarihi" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Doğum Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenDogumTarihi" type="date" class="form-control">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Telefon Numarası<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenTelefon" class="form-control" type="text">
+                                <span asp-validation-for="OgretmenTelefon" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Telefon Numarası<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenNumarasi" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Başlama Tarihi<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenBaslamaTarihi" type="date" class="form-control">
+                                <span asp-validation-for="OgretmenBaslamaTarihi" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Başlama Tarihi<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenBaslamaTarihi" type="date" class="form-control">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group  local-forms">
+                                <label>Ünvan<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenUnvan" class="form-control" type="text">
+                                <span asp-validation-for="OgretmenUnvan" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group  local-forms">
-                                    <label>Ünvan<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenUnvan" class="form-control" type="text" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Görüşme Saati Aralığı<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenGorusme" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenGorusme" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>E-Posta<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenEposta" type="email" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ofis Adresi<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenOfis" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenOfis" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Görüşme Saati<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenGorusme" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                @if (Model != null)
+                                {
+                                    <input asp-for="OgretmenFotograf" value="@Model.OgretmenFotograf" type="hidden" />
+                                }
+                                <label for="files" class="btn btn-outline-primary px-4 pb-2 pt-2">Fotoğraf Yükle (150 X 150)</label>
+                                <input id="files" style="display:none;" type="file" name="file">
+                                <span asp-validation-for="OgretmenFotograf" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Ofis Adresi<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenOfis" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Giriş Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>E-Posta<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenEposta" type="email" class="form-control">
+                                <span asp-validation-for="OgretmenEposta" class="text-danger"></span>
                             </div>
-                            <div class="col-12">
-                                <h5 class="form-title"><span>Giriş Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şifre<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenParola" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenParola" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Kullanıcı Adı<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenUsername" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şifre Tekrarı<span class="login-danger">*</span></label>
+                                <input asp-for="OgretmenParolaOnayla" type="text" class="form-control">
+                                <span asp-validation-for="OgretmenParolaOnayla" class="text-danger"></span>
                             </div>
-
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Şifre<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenParola" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Adres</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group local-forms">
+                                <label>Adres<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.AcıkAdres" type="text" class="form-control">
+                                <span asp-validation-for="Adres.AcıkAdres" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Şifre Tekrarı<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenParolaOnayla" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ülke<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.Ulke" type="text" class="form-control">
+                                <span asp-validation-for="Adres.Ulke" class="text-danger"></span>
                             </div>
-                            <div class="col-12">
-                                <h5 class="form-title"><span>Adres</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Şehir<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.Sehir" type="text" class="form-control">
+                                <span asp-validation-for="Adres.Sehir" class="text-danger"></span>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group local-forms">
-                                    <label>Adres<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenAdres" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>İlçe<span class="login-danger">*</span></label>
+                                <input asp-for="Adres.Ilce" type="text" class="form-control">
+                                <span asp-validation-for="Adres.Ilce" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Ülke<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenUlke" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Okul Bilgileri</span></h5>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Bölüm Seç<span class="login-danger">*</span></label>
+                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="BolumId" class="text-danger"></span>
                             </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="form-group local-forms">
-                                    <label>Şehir<span class="login-danger">*</span></label>
-                                    <input asp-for="OgretmenSehir" type="text" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="student-submit">
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
                             </div>
-
-                            <div class="col-12">
-                                <div class="student-submit">
-
-                                    @if (Model == null)
-                                    {
-                                        <button name="Kaydet" value="1" class="btn btn-primary">Kaydet</button>
-                                    }
-                                    else
-                                    {
-                                        <button name="Kaydet" value="2" class="btn btn-primary">Kaydet</button>
-                                    }
-
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </form>
@@ -157,4 +168,12 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    <script>
+        document.querySelector("#files").onchange = function () {
+            const fileName = this.files[0]?.name;
+            const label = document.querySelector("label[for=files]");
+            label.innerText = fileName ?? "FOTOĞRAF YÜKLE (150 X 150)";
+        };
+    </script>
+}

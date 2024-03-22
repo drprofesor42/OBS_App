@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Derslerim";
+}
+@model IEnumerable<Ogrencis>
+
+<div class="student-group-form">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Ders Adına Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Ders Hocasına Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="search-student-btn text-end">
+                <button type="btn" class="btn btn-primary">Ara</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Dersler</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                    <thead class="student-thread">
+                        <tr>
+                            <th>Ders Adı</th>
+                            <th>Ders Hocası</th>
+                            <th>Ders Kredi</th>
+                            <th>Ders Akts</th>
+                            <th>Ders Ödev</th>
+                            <th>Ders Vize</th>
+                            <th>Ders Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var ogrenci in Model)
+                        {
+                            @foreach (var ders in ogrenci.Dersler)
+                            {
+                                <tr>
+                                    <td>@ders.DersAd</td>
+                                    <td>
+                                        <h2>
+                                            <a>@ders.Ogretmens?.OgretmenAd @ders.Ogretmens?.OgretmenSoyad</a>
+                                        </h2>
+                                    </td>
+                                    <td>@ders.DersKredi</td>
+                                    <td>@ders.DersAkts</td>
+
+                                    @foreach (var not in ders.notlar)
+                                    {
+                                        @if (not.NotOdev != null)
+                                        {
+                                            <td>@not.NotOdev</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Girilmedi</td>
+                                        }
+                                        @if (not.NotVize != null)
+                                        {
+                                            <td>@not.NotVize</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Girilmedi</td>
+                                        }
+                                        @if (not.NotFinal != null)
+                                        {
+                                            <td>@not.NotFinal</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Girilmedi</td>
+                                        }
+                                    }
+
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            @if (Model.Count() == 0)
+            {
+                <div class="blog grid-blog flex-fill">
+                    <h3 class="text-danger" style="text-align:center"> Ders Bulunmamaktadır! </h3>
+                </div>
+            }
+        </div>
+    </div>
+</div>

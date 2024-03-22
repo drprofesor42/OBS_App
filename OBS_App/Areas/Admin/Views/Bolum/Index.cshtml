@@ -11,12 +11,12 @@
         </div>
         <div class="col-lg-3 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="İsme Göre Ara ...">
+                <input type="text" class="form-control" placeholder="Bölüm İsmine Göre Ara ...">
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Yıla Göre Ara ...">
+                <input type="text" class="form-control" placeholder="Bölüm Başkanına Göre Ara ...">
             </div>
         </div>
         <div class="col-lg-2">
@@ -39,49 +39,38 @@
                             <h3 class="page-title">Bölümler</h3>
                         </div>
                         <div class="col-auto text-end float-end ms-auto download-grp">
-                            <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-                            <a href="add-department.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                            <a asp-controller="Bolum" asp-action="Ekle_Guncelle" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
                         </div>
                     </div>
                 </div>
 
-                <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
                     <thead class="student-thread">
                         <tr>
-                            <th>
-                                <div class="form-check check-tables">
-                                    <input class="form-check-input" type="checkbox" value="something">
-                                </div>
-                            </th>
                             <th>ID</th>
                             <th>Bölüm Adı</th>
                             <th>Bölüm Başkanı</th>
+                            <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
                             <th>Ders Sayısı</th>
-                            <th>Öğretmen Sayısı</th>
                             <th class="text-end">İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var bolum in Model)
                         {
-
                             <tr>
-                                <td>
-                                    <div class="form-check check-tables">
-                                        <input class="form-check-input" type="checkbox" value="something">
-                                    </div>
-                                </td>
                                 <td>@bolum.Id</td>
                                 <td>
                                     <h2>
-                                        <a>@bolum.BolumIsmi</a>
+                                        <a>@bolum.BolumAd</a>
                                     </h2>
                                 </td>
                                 <td>@bolum.BolumBaskani</td>
-                                <td>@bolum.Ogrencileri.Count</td>
-                                <td>Ders Sayısı</td>
-                                <td>@bolum.Ogretmenleri.Count</td>
+                                
+                                <td>@bolum.Ogretmensler.Count()</td>
+                                <td>@bolum.Ogrencisler.Count()</td>
+                                <td>@bolum.Dersler.Count()</td>
                                 <td class="text-end">
                                     <div class="actions">
                                         <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
@@ -90,13 +79,13 @@
                                         <a asp-action="Ekle_Guncelle" asp-controller="Bolum" asp-route-id="@bolum.Id" class="btn btn-sm bg-danger-light">
                                             <i class="feather-edit"></i>
                                         </a>
-                                        <a asp-action="Sil" asp-controller="Bolum" asp-route-id="@bolum.Id"  class="btn btn-sm bg-danger-light">
+                                        <a onclick="confirmDelete(@bolum.Id)" class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
+
                                     </div>
                                 </td>
                             </tr>
-
                         }
                     </tbody>
                 </table>
@@ -104,4 +93,57 @@
         </div>
     </div>
 </div>
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}
+@section Scripts {
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Silmek İstediğinize Emin Misiniz?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Evet!",
+                cancelButtonText: "İptal!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Sil", "Bolum")', { id: id })
+                        .done(() => swalWithBootstrapButtons.fire(
+                            "İşlem Başarılı!",
+                            "",
+                            "success"
+                        ).then(() => window.location.href = '@Url.Action("Index", "Bolum")'));
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "İşlem İptal Edildi!",
+                        text: "",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    </script>
+} 

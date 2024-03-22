@@ -1,0 +1,169 @@
+﻿@{
+	ViewData["Title"] = "SınavSonuc";
+}
+@model List<Not>
+
+<div class="content container-fluid">
+    <div class="row">
+        @if (Model.Count() != 0)
+        {
+            @foreach (var ders in Model)
+            {
+
+                // Notların ağırlıklı ortalamasını hesapla
+                decimal notOrtalamasi = CalculateWeightedAverage(ders);
+                string harfNotu = CalculateLetterGrade(notOrtalamasi);
+
+                <div class="col-sm-6 col-lg-4 col-xl-4 d-flex">
+                    <div class="card invoices-grid-card w-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <a style="font-weight:bold; font-size:15px; ">@ders.Ders?.DersAd</a>
+                            @if (ders.NotOdev != null && ders.NotVize != null && ders.NotFinal != null)
+                                @if (notOrtalamasi >= 50)
+                                {
+                                    <h6 class="text-end text-success">Geçtiniz</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="text-end text-danger">Kaldınız</h6>
+                                }
+                        </div>
+                        <div class="card-middle">
+                            <h2 class="card-middle-avatar">
+                                
+                                <a><img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="~/img/@ders.Ogretmens?.OgretmenFotograf" alt="User Image"> @ders.Ogretmens?.OgretmenAdSoyad</a>
+                                
+                            </h2>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="progress progress-md">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: @notOrtalamasi%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="font-size:10px;  text-align:center;">
+                                            <div>
+                                                Ortalamanız : <span style="color:#00711b">@notOrtalamasi</span>
+                                            </div>
+                                        </td>
+                                        <td style="font-size:10px; text-align:center;">
+                                            Sınıf Ortalaması : <span style="color:#00711b">x</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+
+                            <table style="text-align:center" class="table">
+                                <tr>
+                                    <td><i class="fas fa-pencil"></i> <b>Sınav<b></td>
+                                    <td><i class="fas fa-square-poll-vertical"></i> <b>Not<b></td>
+                                    <td><i class="far fa-calendar-alt"></i> <b>Tarih<b></td>
+                                    <td><i class="far fa-clock"></i> <b>Saat<b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Ödev<b></td>
+                                    <td>@ders.NotOdev</td>
+                                    <td>@ders.NotOdevTarih</td>
+                                    <td>@ders.NotOdevSaat</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Vize<b></td>
+                                    <td>@ders.NotVize</td>
+                                    <td>@ders.NotVizeTarih</td>
+                                    <td>@ders.NotVizeSaat</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Final<b></td>
+                                    <td>@ders.NotFinal</td>
+                                    <td>@ders.NotFinalTarih</td>
+                                    <td>@ders.NotFinalSaat</td>
+                                </tr>
+                            </table>
+
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    @if (ders.NotOdev != null && ders.NotVize != null && ders.NotFinal != null)
+                                    {
+                                        <span class="badge bg-success-dark">Bitti</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-gradient-warning">Devam Ediyor</span>
+                                    }
+                                </div>
+                                <div class="col text-end">
+                                    <h5 style="color:royalblue">Harf Notu: @CalculateLetterGrade(notOrtalamasi)</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="blog grid-blog flex-fill">
+                <h3 class="text-danger" style="text-align:center"> Sınav Bilgisi Bulunmamaktadır! </h3>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    public decimal CalculateWeightedAverage(Not ders)
+    {
+        decimal toplamNot = 0;
+        decimal toplamAgirlik = 0;
+
+        if (ders.NotOdev.HasValue)
+        {
+            toplamNot += ders.NotOdev.Value * 0.25m;
+            toplamAgirlik += 0.25m;
+        }
+
+        if (ders.NotVize.HasValue)
+        {
+            toplamNot += ders.NotVize.Value * 0.35m;
+            toplamAgirlik += 0.35m;
+        }
+
+        if (ders.NotFinal.HasValue)
+        {
+            toplamNot += ders.NotFinal.Value * 0.40m;
+            toplamAgirlik += 0.40m;
+        }
+
+        decimal ortalama = toplamAgirlik != 0 ? toplamNot / toplamAgirlik : 0;
+        return Math.Round(ortalama); // Ondalık basamakları 2'ye yuvarla
+    }
+
+
+    private string CalculateLetterGrade(decimal ortalama)
+    {
+        if (ortalama >= 90)
+            return "AA";
+        else if (ortalama >= 80)
+            return "BA";
+        else if (ortalama >= 75)
+            return "BB";
+        else if (ortalama >= 70)
+            return "CB";
+        else if (ortalama >= 60)
+            return "CC";
+        else if (ortalama >= 50)
+            return "DC";
+        else if (ortalama >= 40)
+            return "DD";
+        else if (ortalama >= 30)
+            return "FD";
+        else
+            return "FF";
+    }
+}
+

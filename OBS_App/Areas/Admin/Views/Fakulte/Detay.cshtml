@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Detay";
+}
+@model Fakulte
+<div class="row">
+    <div class="col-xl-4 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Bölüm Sayısı</h6>
+                        <h3>
+                            @Model.Bolumler.Count()
+                        </h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/geography-book-8013528-6430667.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Öğretmen Sayısı</h6>
+                        <h3>
+                            @Model.FakulteOgretmenSayisi
+                        </h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-teacher-10074802-8187379.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Öğrenci Sayısı</h6>
+                        <h3>
+                            @Model.FakulteOgrenciSayisi
+                        </h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-graduate-student-9638045-7889079.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

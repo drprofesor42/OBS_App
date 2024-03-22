@@ -18,8 +18,8 @@ namespace OBS_App.Models
 
         private string? _password;
 
-        public SmtpEmailSender(string? host, int port, bool enableSSL, string? username, string? password) 
-        { 
+        public SmtpEmailSender(string? host, int port, bool enableSSL, string? username, string? password)
+        {
             _host = host;
             _port = port;
             _enableSSL = enableSSL;
@@ -35,10 +35,10 @@ namespace OBS_App.Models
                 EnableSsl = _enableSSL
 
             };
-        
 
-            return client.SendMailAsync(new MailMessage(_username ?? "", email, subject, message) { IsBodyHtml=true });
-            
+
+            return client.SendMailAsync(new MailMessage(_username ?? "", email, subject, message) { IsBodyHtml = true });
+
         }
     }
 }

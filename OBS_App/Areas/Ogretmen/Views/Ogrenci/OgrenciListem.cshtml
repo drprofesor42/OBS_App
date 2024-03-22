@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "OgrenciListem";
+}
+@model IEnumerable<Ders>
+
+<div class="student-group-form">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Öğrenci İsmine Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Öğrenci Bölümüne Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="E-Mail Adresine Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="search-student-btn">
+                <button type="button" class="btn btn-primary">Ara</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Öğrencilerim</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                        <thead class="student-thread">
+                            <tr>
+                                <th>Ad-Soyad</th>
+                                <th>Sınıfı</th>
+                                <th>Bölümü</th>
+                                <th>Doğum Tarihi</th>
+                                <th>E-Mail</th>
+                                <th>Telefon Numarası</th>
+                                <th class="text-end">Kayıt Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var ders in Model) // Modeldeki her öğrenci için döngü
+                            {
+                                foreach (var ogr in ders.Ogrencisler)
+                                {
+                                    
+                                    <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/img/@ogr.OgrenciFotograf" alt="User Image"></a>
+                                            <a href="student-details.html">@ogr.OgrenciAd @ogr.OgrenciSoyad</a>
+                                        </h2>
+                                    </td>
+                                    <td>@ogr.OgrenciSinif</td>
+                                    <td>@ogr.Bolum?.BolumAd</td>
+                                    <td>@ogr.OgrenciDogumTarihi</td>
+                                    <td>@ogr.OgrenciEposta</td>
+                                    <td>@ogr.OgrenciTelefon</td>
+                                    <td>@ogr.OgrenciKayitTarihi</td>
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

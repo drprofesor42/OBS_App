@@ -19,7 +19,7 @@ namespace OBS_App.ViewsModel
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage= "Parola eşleşmiyor.")]
+        [Compare(nameof(Password), ErrorMessage = "Parola eşleşmiyor.")]
         public string ConfirmPassword { get; set; } = string.Empty;
 
 

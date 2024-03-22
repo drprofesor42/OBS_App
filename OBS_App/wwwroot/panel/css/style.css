@@ -3499,7 +3499,7 @@ footer {
     }
 
 .activity-awards {
-    margin-bottom: 38px;
+    margin-bottom: 15px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -5129,9 +5129,7 @@ table.table-inbox tbody tr.checked {
         white-space: nowrap
     }
 
-    .custom-file-upload input {
-        display: none
-    }
+
 
 .change-user {
     padding: 14px 21px;
@@ -6023,7 +6021,7 @@ table.table-inbox tbody tr.checked {
     }
 
 .card-middle {
-    padding: 20px;
+    padding: 0px;
     background: #f7f7ff
 }
 
@@ -6031,7 +6029,8 @@ table.table-inbox tbody tr.checked {
     align-items: center;
     display: inline-flex;
     font-size: 16px;
-    margin: 0
+    margin: 10px;
+    margin-left: 20px
 }
 
     .card-middle-avatar a {
@@ -10981,4 +10980,4 @@ ol.breadcrumb.bg-secondary {
         width: 310px;
         height: 355px
     }
-}
+

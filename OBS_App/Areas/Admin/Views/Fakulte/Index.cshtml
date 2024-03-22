@@ -1,105 +1,141 @@
-﻿
+﻿@model IEnumerable<Fakulte>
 @{
     ViewData["Title"] = "Index";
 }
-@model List<Fakulte>
-
 <div class="student-group-form">
-	<div class="row">
-		<div class="col-lg-3 col-md-6">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder=" Fakülte İsmine Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Fakülte Başkanına Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-2">
-			<div class="search-student-btn">
-				<button type="btn" class="btn btn-primary">Ara</button>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-lg-5 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder=" Fakülte İsmine Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="search-student-btn">
+                <button type="button" class="btn btn-primary">Ara</button>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 <div class="row">
-	<div class="col-sm-12">
-		<div class="card card-table">
-			<div class="card-body">
-
-				<div class="page-header">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="page-title">Fakülteler</h3>
-						</div>
-						<div class="col-auto text-end float-end ms-auto download-grp">
-							<a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-							<a asp-controller="fakulte" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-						</div>
-					</div>
-				</div>
-
-				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
-					<thead class="student-thread">
-						<tr>
-							<th>
-								<div class="form-check check-tables">
-									<input class="form-check-input" type="checkbox" value="something">
-								</div>
-							</th>
-							<th>ID</th>
-							<th>Fakülte İsim</th>
-							<th>Fakülte Başkanı</th>
-							<th>Bölüm Sayısı</th>
-							<th class="text-end">İşlemler</th>
-						</tr>
-					</thead>
-					<tbody>
-
-					@foreach (var fakulte in Model)
-					{
-						<tr>
-							<td>
-								<div class="form-check check-tables">
-									<input class="form-check-input" type="checkbox" value="something">
-								</div>
-							</td>
-							<td>@fakulte.Id</td>
-							<td>
-								<h2>
-									<a>@fakulte.fakulteIsim</a>
-								</h2>
-							</td>
-							<td>@fakulte.fakulteProfId</td>
-							<td>X</td>
-							<td class="text-end">
-								<div class="actions">
-									<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
-										<i class="feather-eye"></i>
-									</a>
-										<a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light">
-										<i class="feather-edit"></i>
-									</a>
-									<a asp-controller="Fakulte" asp-action="Sil" asp-route-id="@fakulte.Id" class="btn btn-sm bg-success-light">
-										<i class="feather-trash-2"></i>
-									</a>
-								</div>
-							</td>
-						</tr>
-					}
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Fakülteler</h3>
+                        </div>
+                        <div class="col-auto text-end float-end ms-auto download-grp">
+                            <a asp-controller="fakulte" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                    <thead class="student-thread">
+                        <tr>
+                            <th>ID</th>
+                            <th>Fakülte İsim</th>
+                            <th>Bölüm Sayısı</th>
+                            <th>Ders Sayısı</th>
+                            <th>Öğretmen Sayısı</th>
+                            <th>Öğrenci Sayısı</th>
+                            <th>Oluşturma Tarihi</th>
+                            <th class="text-end">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fakulte in Model)
+                        {
+                            <tr>
+                                <td>@fakulte.Id</td>
+                                <td>
+                                    <h2>
+                                        <a>@fakulte.FakulteAd</a>
+                                    </h2>
+                                </td>
+                                <td>@fakulte.Bolumler.Count()</td>
+                                <td>@fakulte.FakulteDersSayisi</td>
+                                <td>@fakulte.FakulteOgretmenSayisi</td>
+                                <td>@fakulte.FakulteOgrenciSayisi</td>
+                                <td>@fakulte.OlusturmaTarihi</td>
+                                <td class="text-end">
+                                    <div class="actions">
+                                        <a asp-action="Detay" asp-route-id="@fakulte.Id" class="btn btn-sm bg-success-light me-2">
+                                            <i class="feather-eye"></i>
+                                        </a>
+                                        <a asp-controller="Fakulte" asp-action="Ekle_Guncelle" asp-route-id="@fakulte.Id" class="btn btn-sm bg-danger-light">
+                                            <i class="feather-edit"></i>
+                                        </a>
+                                        <a onclick="confirmDelete(@fakulte.Id)" class="btn btn-sm bg-danger-light">
+                                            <i class="feather-trash-2"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}
+@section Scripts {
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Silmek İstediğinize Emin Misiniz?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Evet!",
+                cancelButtonText: "İptal!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Sil", "Fakulte")', { id: id })
+                        .done(() => swalWithBootstrapButtons.fire(
+                            "İşlem Başarılı!",
+                            "",
+                            "success"
+                        ).then(() => window.location.href = '@Url.Action("Index", "Fakulte")'));
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "İşlem İptal Edildi!",
+                        text: "",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    </script>
+}

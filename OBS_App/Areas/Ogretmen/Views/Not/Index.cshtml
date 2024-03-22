@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model IEnumerable<Not>
+
+<div class="student-group-form">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Öğrenci İsmine Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Bölüm İsmine Göre Ara ...">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="search-student-btn">
+                <button type="button" class="btn btn-primary">Ara</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="col-auto text-end float-end ms-auto download-grp">
+                    <a asp-controller="Not" asp-action="Ekle_Guncelle" asp-route-type="0" class="btn btn-primary"><i class="fas fa-plus"></i> Ekle</a>
+                </div>
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Not Bilgileri</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
+                        <thead class="student-thread">
+                            <tr>
+                                <th>Ad-Soyad</th>
+                                <th>Bölüm</th>
+                                <th>Ders</th>
+                                <th>Sınıf</th>
+                                <th>Ödev Notu</th>
+                                <th>Vize Notu</th>
+                                <th>Final Notu</th>
+                                <th class="text-end">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var not in Model) // Modeldeki her öğrenci için döngü
+                            {
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/img/@not.Ogrencis?.OgrenciFotograf" alt="User Image"></a>
+                                            <a href="student-details.html">@not.Ogrencis?.OgrenciAd @not.Ogrencis?.OgrenciSoyad</a>
+                                        </h2>
+                                    </td>
+                                    <td>@not.Ogrencis?.Bolum?.BolumAd</td>
+                                    <td>@not.Ders?.DersAd</td>
+                                    <td>@not.Ogrencis?.OgrenciSinif</td>
+                                    @if (not.NotOdev != null)
+                                    {
+                                        <td>@not.NotOdev</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Girilmedi</td>
+                                    }
+                                    @if (not.NotVize != null)
+                                    {
+                                        <td>@not.NotVize</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Girilmedi</td>
+                                    }
+                                    @if (not.NotFinal != null)
+                                    {
+                                        <td>@not.NotFinal</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Not Girilmedi</td>
+                                    }
+                                    <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a asp-controller="Not" asp-action="Ekle_Guncelle" asp-route-id="@not.Id" class="btn btn-sm bg-danger-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a asp-controller="Not" asp-action="Sil" asp-route-id="@not.Id" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-trash-2"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["success"] != null)
+{
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script>
+        var successMessage = "@TempData["success"]";
+
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
+}
