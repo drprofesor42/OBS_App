@@ -106,5 +106,16 @@ namespace OBS_App.Areas.Admin.Controllers
 
             }
         }
+        public async Task<IActionResult> Detay(int id)
+        {
+            var bolum = await _context.Bolumler
+                    .Include(f => f.Dersler)
+                    .Include(f => f.Ogretmensler)
+                    .Include(f => f.Ogrencisler)
+                    .ToListAsync();
+            var model = bolum.FirstOrDefault(x => x.Id == id);
+
+            return View(model);
+        }
     }
 }

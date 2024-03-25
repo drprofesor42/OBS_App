@@ -1,0 +1,55 @@
+﻿@model Ders
+@{
+    ViewData["Title"] = "Detay";
+}
+<div class="row">
+
+    <div class="col-xl-5 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Öğrenci Sayısı</h6>
+                        <h3>
+                            @Model.Ogrencisler.Count()
+                        </h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-graduate-student-9638045-7889079.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card border border-light">
+                <div class="card-header bg-light text-white">
+                    <h3 class="card-title text-center">ÖĞRENCİLER</h3>
+                </div>
+                <div style="overflow-y: auto; max-height: 420px;">
+                    <table class="table table-bordered table-striped table-custom mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Öğrenci Adı</th>
+                                <th scope="col">Öğrenci E-Posta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ogrencis in Model.Ogrencisler)
+                            {
+                                <tr>
+                                    <td>@ogrencis.OgrenciAdSoyad</td>
+                                    <td>@ogrencis.OgrenciEposta</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

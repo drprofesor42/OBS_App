@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
 using OBS_App.Models;
 
-
 namespace OBS_App.Areas.Admin.Controllers
 {
     [Area("Admin")]

@@ -39,9 +39,9 @@
                             <th>ID</th>
                             <th>Bölüm Adı</th>
                             <th>Bölüm Başkanı</th>
+                            <th>Ders Sayısı</th>
                             <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
-                            <th>Ders Sayısı</th>
                             <th class="text-end">İşlemler</th>
                         </tr>
                     </thead>
@@ -56,13 +56,12 @@
                                     </h2>
                                 </td>
                                 <td>@bolum.BolumBaskani</td>
-                                
+                                <td>@bolum.Dersler.Count()</td>
                                 <td>@bolum.Ogretmensler.Count()</td>
                                 <td>@bolum.Ogrencisler.Count()</td>
-                                <td>@bolum.Dersler.Count()</td>
                                 <td class="text-end">
                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                        <a asp-action="Detay" asp-route-id="@bolum.Id" class="btn btn-sm bg-success-light me-2">
                                             <i class="feather-eye"></i>
                                         </a>
                                         <a asp-action="Ekle_Guncelle" asp-controller="Bolum" asp-route-id="@bolum.Id" class="btn btn-sm bg-danger-light">
