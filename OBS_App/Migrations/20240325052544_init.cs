@@ -480,10 +480,6 @@ namespace OBS_App.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DersKredi = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersGün = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DersSaat = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     DersAkts = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OlusturmaTarihi = table.Column<DateOnly>(type: "date", nullable: false),

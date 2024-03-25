@@ -12,7 +12,15 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
+<<<<<<< HEAD:OBS_App/Migrations/20240325083730_init.Designer.cs
     [Migration("20240325083730_init")]
+=======
+<<<<<<<< HEAD:OBS_App/Migrations/20240322090701_init.Designer.cs
+    [Migration("20240322090701_init")]
+========
+    [Migration("20240325052544_init")]
+>>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
+>>>>>>> NewMaster:OBS_App/Migrations/20240322090701_init.Designer.cs
     partial class init
     {
         /// <inheritdoc />
@@ -198,6 +206,25 @@ namespace OBS_App.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AkademikTakvimler");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Baglantı", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("connectionid")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("eposta")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Baglantılar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
