@@ -34,6 +34,8 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 				                (x.NotOdev.HasValue || x.NotVize.HasValue || x.NotFinal.HasValue))
 	                .Select(x => (x.NotOdev.HasValue ? 1 : 0) + (x.NotVize.HasValue ? 1 : 0) + (x.NotFinal.HasValue ? 1 : 0))
 	                .Sum();
+
+
 				var ogrenciNotlar = _context.Notlar
 					.Where(x => x.OgretmensId == ogretmen.Id &&
 				(x.NotOdev.HasValue || x.NotVize.HasValue || x.NotFinal.HasValue));
@@ -77,7 +79,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 								  x.DersGün == "Salı" ? 2 :
 								  x.DersGün == "Çarşamba" ? 3 :
 								  x.DersGün == "Perşembe" ? 4 :
-								  x.DersGün == "Cuma" ? 5 : 6) // Diğer günler için aynı sıralamaya ekleyebilirsiniz
+								  x.DersGün == "Cuma" ? 5 : 6)
 					.ToListAsync();
 
                 // Son 4 duyuruyu alıyoruz

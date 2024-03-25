@@ -12,6 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
+<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240325073249_asdads.Designer.cs
     [Migration("20240325073249_asdads")]
     partial class asdads
@@ -25,6 +26,9 @@ namespace OBS_App.Migrations
     [Migration("20240325052544_init")]
 >>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
 >>>>>>>> NewMaster:OBS_App/Migrations/20240325052544_init.Designer.cs
+========
+    [Migration("20240325095935_init")]
+>>>>>>>> kagan:OBS_App/Migrations/20240325095935_init.Designer.cs
     partial class init
 >>>>>>>> NewMaster:OBS_App/Migrations/20240325060908_init.Designer.cs
     {
@@ -288,6 +292,41 @@ namespace OBS_App.Migrations
                     b.ToTable("Bolumler");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Bİldirim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BildirimBaslik")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimDuyuru")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("BildirimOkunma")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("BildirimOkunmaEposta")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("OgrencisId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgretmensId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OgrencisId");
+
+                    b.HasIndex("OgretmensId");
+
+                    b.ToTable("Bİldirimler");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
                     b.Property<int>("Id")
@@ -308,11 +347,19 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DersGün")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("DersKod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("DersKredi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DersSaat")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -870,6 +917,21 @@ namespace OBS_App.Migrations
                     b.Navigation("Fakulte");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Bİldirim", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ogrencis", null)
+                        .WithMany("Bildirimler")
+                        .HasForeignKey("OgrencisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OBS_App.Data.Ogretmens", null)
+                        .WithMany("Bildirimler")
+                        .HasForeignKey("OgretmensId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
@@ -1055,11 +1117,15 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
                 {
+                    b.Navigation("Bildirimler");
+
                     b.Navigation("Notlar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
+                    b.Navigation("Bildirimler");
+
                     b.Navigation("Dersler");
 
                     b.Navigation("Duyurular");

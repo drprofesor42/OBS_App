@@ -545,44 +545,51 @@ if ($('#donut-chart').length > 0) {
     donut.render();
 }
 
-// Radial Chart
 if ($('#radial-chart').length > 0) {
-    var radialChart = {
-        chart: {
-            height: 350,
-            type: 'radialBar',
-            toolbar: {
-                show: false,
-            }
-        },
-        // colors: ['#4361ee', '#888ea8', '#e3e4eb', '#d3d3d3'],
-        plotOptions: {
-            radialBar: {
-                dataLabels: {
-                    name: {
-                        fontSize: '22px',
-                    },
-                    value: {
-                        fontSize: '16px',
-                    },
-                    total: {
-                        show: true,
-                        label: 'Total',
-                        formatter: function (w) {
-                            return 249
+    $.ajax({
+        type: 'POST',
+        url: '/Ogrenci/Ogrenci/Chart', // Controller ve Action adý
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({}),
+        success: function (data) {
+            var radialChartOptions = {
+                chart: {
+                    height: 350,
+                    type: 'radialBar',
+                    toolbar: {
+                        show: false,
+                    }
+                },
+                plotOptions: {
+                    radialBar: {
+                        dataLabels: {
+                            name: {
+                                fontSize: '22px',
+                            },
+                            value: {
+                                fontSize: '16px',
+                            },
+                            total: {
+                                show: true,
+                                label: 'Notlar',
+                                color: '#4361ee'
+                            }
+                        },
+                        // Dilim üzerine gelindiðinde etiketlerin görünmesi
+                        value: {
+                            show: true
                         }
                     }
-                }
-            }
+                },
+                series: data.ortalamaNotlar,
+                labels: data.dersler,
+            };
+
+            var radialChart = new ApexCharts(document.querySelector("#radial-chart"), radialChartOptions);
+            radialChart.render();
         },
-        series: [44, 55, 67, 83],
-        labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
-    }
+    });
+}
 
-    var chart = new ApexCharts(
-        document.querySelector("#radial-chart"),
-        radialChart
-    );
 
-    chart.render();
-}	
