@@ -3478,6 +3478,14 @@ footer {
     background: #ebebeb
 }
 
+.circle-pink {
+    background: #DA009A
+}
+
+.circle-dark_blue {
+    background: #005ABC
+}
+
 .chart-list-out.student-ellips {
     margin-left: auto
 }

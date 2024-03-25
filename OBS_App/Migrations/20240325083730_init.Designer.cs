@@ -12,7 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20240322090701_init")]
+    [Migration("20240325083730_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -251,11 +251,19 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DersGün")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("DersKod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("DersKredi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DersSaat")
                         .IsRequired()
                         .HasColumnType("longtext");
 

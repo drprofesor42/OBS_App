@@ -3,7 +3,216 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Ogretmen Area Index</h1>
+
+<div class="row">
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>Öğrencilerim</h6>
+						<h3>@ViewBag.ogrenci_sayım</h3>
+					</div>
+					<div class="db-icon">
+						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/graduate-student-6368706-5250853.png" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>Derslerim</h6>
+						<h3>@ViewBag.ders_sayım</h3>
+					</div>
+					<div class="db-icon">
+						<img width="70px" src="https://cdn3d.iconscout.com/3d/premium/thumb/education-8314627-6634366.png" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>Girilen Notlar</h6>
+						<h3>@ViewBag.not_girilen_ders_sayısı</h3>
+					</div>
+					<div class="db-icon">
+						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/write-content-8292441-6612655.png" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>Girilen Not Ortalaması</h6>
+						<h3>@ViewBag.ortalama_not</h3>
+					</div>
+					<div class="db-icon">
+						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/a-plus-result-8322744-6635111.png" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+
+	<div class="col-md-7">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Derslere Göre Öğrenci Başarısı</h5>
+			</div>
+			<div class="card-body">
+				<div id="s-col-stacked"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-5">
+		<div class="card flex-fill comman-shadow">
+		<div class="card-header d-flex align-items-center">
+			<h5 class="card-title">Ders Programım</h5>
+			<ul class="chart-list-out student-ellips">
+				<li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="teaching-card">
+
+				<ul class="steps-history">
+					@foreach (var ders in ViewBag.derslerim)
+					{
+						<li>@ders.DersGün</li>
+					}
+				</ul>
+
+				<ul class="activity-feed">
+
+					@foreach (var ders in ViewBag.derslerim)
+					{
+						<li class="feed-item d-flex align-items-center">
+							<div class="dolor-activity">
+								<span class="feed-text1"><a>@ders.DersAd</a></span>
+								<ul class="teacher-date-list">
+									<li><i class="fas fa-calendar-alt me-2"></i>@ders.DersGün</li>
+									<li>|</li>
+									<li><i class="fas fa-clock me-2"></i>@ders.DersSaat</li>
+								</ul>
+							</div>
+						</li>
+					}
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-xl-6 d-flex">
+
+		<div class="card flex-fill student-space comman-shadow">
+			<div class="card-header d-flex align-items-center">
+				<h5 class="card-title">Son Akademik Etkinlikler</h5>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table star-student table-hover table-center table-borderless table-striped">
+						<thead class="thead-light">
+							<tr>
+								<th class="text-center">Başlangıç Tarihi</th>
+								<th class="text-center">Bitiş Tarihi</th>
+								<th class="text-center">Aktivite</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							@foreach (var etkinlik in ViewBag.takvim)
+							{
+								<tr>
+									<td class="text-center">@etkinlik.AkademikTakvimBaslangic</td>
+									<td class="text-center">@etkinlik.AkademikTakvimBitis</td>
+									<td>@etkinlik.AkademikTakvimAktivite</td>
+								</tr>
+							}
+
+
+						</tbody>
+					</table>
+				</div>
+				@if (ViewBag.takvim.Count == 0)
+				{
+					<br>
+					<h5 class="text-danger" style="text-align:center"> Akademik Etkinlik Bulunmamaktadır! </h5>
+				}
+			</div>
+		</div>
+
+	</div>
+
+	@* Duyru Kısmı *@
+	<div class="col-xl-6 d-flex">
+
+		<div class="card flex-fill comman-shadow">
+			<div class="card-header d-flex align-items-center">
+				<h5 class="card-title ">Son Duyurular </h5>
+				<ul class="chart-list-out student-ellips">
+					<a asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
+				</ul>
+			</div>
+			<div class="card-body">
+				<div class="activity-groups">
+
+					@if (ViewBag.duyurular != null)
+					{
+						@foreach (var duyuru in ViewBag.duyurular)
+						{
+							<div class="activity-awards">
+								<div class="award-boxs">
+									<img width="30px" src="~/panel/img/icons/award-icon-03.svg">
+								</div>
+								<div class="award-list-outs">
+									<h4>@duyuru.DuyuruBaslik</h4>
+									<h5 class="duyuruMesaj">@duyuru.DuyuruMesaj</h5>
+								</div>
+								<div style="text-align:center; display: flex; justify-content: center;" class="award-time-list">
+									<div class="col">
+										<span>@duyuru.OlusturmaTarihi</span>
+										<br>
+										<a style="margin-top:5px" class="btn btn-primary btn-sm">Duyuruya Git</a>
+									</div>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<h5 class="text-danger" style="text-align:center"> Duyuru Bulunmamaktadır! </h5>
+					}
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
 @if (TempData["success"] != null)
 {
 	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
