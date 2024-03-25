@@ -239,11 +239,6 @@
             const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/SignalRHub").build();
          
             connection.start().then(function () {
-                toastr.success("SignalR İle Bağlantı Sağlandı", "Mesaj", {
-                    closeButton: true,
-                    tapToDismiss: false,
-                    progressBar: true,
-                });
             }).catch(function (err) {
                 return console.error(err.toString());
             });

@@ -55,14 +55,25 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 if (id == 0)
                 {
-                    
+                    var eposta = await _userManager.Users.ToListAsync();
+
+                    foreach (var item in eposta)
+                    {
+                        await _context.Bildirimler.AddAsync(new Bildirim
+                        {
+                            BildirimBaslik = model.DuyuruBaslik,
+                            BildirimDuyuru = model.DuyuruMesaj,
+                            BildirimEposta = item.Email,
+                        });
+                    }
+
                     await _hubContext.Clients.All.SendAsync("ReceiveDuyuru", model.DuyuruBaslik, model.DuyuruMesaj);
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
                     return RedirectToAction("Index");
                 }
-                else 
+                else
                 {
                     _context.Duyurular.Update(model);
                     _context.SaveChanges();
@@ -90,7 +101,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-       
+
 
     }
 }

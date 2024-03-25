@@ -216,6 +216,31 @@ namespace OBS_App.Migrations
                     b.ToTable("Baglantılar");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Bildirim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BildirimBaslik")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimDuyuru")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimEposta")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("BildirimOkunma")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bildirimler");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
                 {
                     b.Property<int>("Id")

@@ -23,6 +23,6 @@ namespace OBS_App.Models
         public DbSet<Donem> Donemler { get; set; }
         public DbSet<Sinif> Siniflar { get; set; }
         public DbSet<Baglantı> Baglantılar { get; set; }
-        public DbSet<Bİldirim> Bİldirimler { get; set; }
+        public DbSet<Bildirim> Bildirimler { get; set; }
     }
 }

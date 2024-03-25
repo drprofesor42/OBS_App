@@ -469,6 +469,38 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Bildirimler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    BildirimBaslik = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BildirimDuyuru = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BildirimOkunma = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    BildirimEposta = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    OgrencisId = table.Column<int>(type: "int", nullable: true),
+                    OgretmensId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bildirimler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bildirimler_Ogrenciler_OgrencisId",
+                        column: x => x.OgrencisId,
+                        principalTable: "Ogrenciler",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Bildirimler_Ogretmenler_OgretmensId",
+                        column: x => x.OgretmensId,
+                        principalTable: "Ogretmenler",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Dersler",
                 columns: table => new
                 {
@@ -679,6 +711,16 @@ namespace OBS_App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bildirimler_OgrencisId",
+                table: "Bildirimler",
+                column: "OgrencisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bildirimler_OgretmensId",
+                table: "Bildirimler",
+                column: "OgretmensId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bolumler_FakulteId",
                 table: "Bolumler",
                 column: "FakulteId");
@@ -817,6 +859,9 @@ namespace OBS_App.Migrations
 
             migrationBuilder.DropTable(
                 name: "Baglantılar");
+
+            migrationBuilder.DropTable(
+                name: "Bildirimler");
 
             migrationBuilder.DropTable(
                 name: "DersOgrencis");

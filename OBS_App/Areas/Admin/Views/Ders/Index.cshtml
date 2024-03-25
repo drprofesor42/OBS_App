@@ -169,32 +169,7 @@
         }
     </script>
     <script>
-        // SignalR hub bağlantısını oluştur
-        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/SignalRHub").build();
-
-        // Bağlantı durumunu konsola yazdır
-        connection.onclose(() => {
-            console.log("SignalR bağlantısı kapandı.");
-        });
-
-        // Bağlantıyı başlat
-        connection.start().then(function () {
-            console.log("SignalR bağlantısı başarıyla kuruldu.");
-        }).catch(function (err) {
-            console.error("SignalR bağlantısı kurulurken bir hata oluştu: " + err);
-        });
-
-        // "ReceiveDuyuru" adında bir olayı dinle
-        connection.on("ReceiveDuyuru", function (duyuruBaslik, duyuruMesaj) {
-            // Sunucudan gelen duyuruyu işle
-            console.log("Yeni bir duyuru alındı:");
-            console.log("Başlık: " + duyuruBaslik);
-            console.log("Mesaj: " + duyuruMesaj);
-
-            // veya istediğiniz herhangi bir işlemi gerçekleştirin
-            // Örneğin, bir HTML öğesine mesajı ekle:
-            // $("#duyuru").append("<p><strong>" + duyuruBaslik + "</strong>: " + duyuruMesaj + "</p>");
-        });
+       
     </script>
 }
      

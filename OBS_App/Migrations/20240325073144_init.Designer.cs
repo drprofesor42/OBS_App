@@ -12,11 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240322090701_init.Designer.cs
-    [Migration("20240322090701_init")]
-========
-    [Migration("20240325052544_init")]
->>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
+    [Migration("20240325073144_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -221,6 +217,41 @@ namespace OBS_App.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Baglantılar");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Bildirim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BildirimBaslik")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimDuyuru")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimEposta")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("BildirimOkunma")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("OgrencisId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OgretmensId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OgrencisId");
+
+                    b.HasIndex("OgretmensId");
+
+                    b.ToTable("Bildirimler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
@@ -821,6 +852,17 @@ namespace OBS_App.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Bildirim", b =>
+                {
+                    b.HasOne("OBS_App.Data.Ogrencis", null)
+                        .WithMany("Bildirimler")
+                        .HasForeignKey("OgrencisId");
+
+                    b.HasOne("OBS_App.Data.Ogretmens", null)
+                        .WithMany("Bildirimler")
+                        .HasForeignKey("OgretmensId");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
                 {
                     b.HasOne("OBS_App.Data.Fakulte", "Fakulte")
@@ -1021,11 +1063,15 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
                 {
+                    b.Navigation("Bildirimler");
+
                     b.Navigation("Notlar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
+                    b.Navigation("Bildirimler");
+
                     b.Navigation("Dersler");
 
                     b.Navigation("Duyurular");

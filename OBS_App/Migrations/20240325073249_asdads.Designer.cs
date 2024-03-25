@@ -12,12 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240322090701_init.Designer.cs
-    [Migration("20240322090701_init")]
-========
-    [Migration("20240325052544_init")]
->>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
-    partial class init
+    [Migration("20240325073249_asdads")]
+    partial class asdads
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,6 +217,31 @@ namespace OBS_App.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Baglantılar");
+                });
+
+            modelBuilder.Entity("OBS_App.Data.Bildirim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BildirimBaslik")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimDuyuru")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BildirimEposta")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("BildirimOkunma")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bildirimler");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
