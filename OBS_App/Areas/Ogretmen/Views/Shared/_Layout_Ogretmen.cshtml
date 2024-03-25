@@ -24,12 +24,16 @@
     <link rel="stylesheet" href="~/panel/plugins/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="~/panel/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
+    <link href="~/panel/plugins/toastr/toatr.css" rel="stylesheet" />
+
 </head>
 
 <body>
 
+
+
     <div class="main-wrapper">
-                
+
         <div class="header">
 
             <div class="header-left">
@@ -65,9 +69,13 @@
                     </div>
                 </li>
 
+
+
+
                 <li class="nav-item dropdown noti-dropdown me-2">
+                    <span class="notification-badge"></span>
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="~/panel/img/icons/header-icon-05.svg" alt>
+                        <img src="~/panel/img/icons/header-icon-05.svg">
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
@@ -76,27 +84,19 @@
                         </div>
                         <div class="noti-content">
                             <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media d-flex">
-                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/panel/img/profiles/avatar-13.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Kağan Muslu</span> size <span class="noti-title">mesaj gönderdi</span></p>
-                                                <p class="noti-time"><span class="notification-time">4 dk önce</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-
                             </ul>
                         </div>
                         <div class="topnav-dropdown-footer">
-                            <a href="#">Tüm Bildirimleri Görüntüle</a>
+                            <a asp-action="Index" asp-controller="Duyuru">Tüm Bildirimleri Görüntüle</a>
                         </div>
                     </div>
                 </li>
+
+
+
+
+
+
 
                 <li class="nav-item zoom-screen me-2">
                     <a href="#" class="nav-link header-nav-list">
@@ -169,9 +169,13 @@
                         </li>
 
                         <li>
-                            <a asp-controller="Fakulte" asp-action="DanısmanOgrenciler"><i class="fas fa-user-graduate"></i><span>Danışmanı Olduğum 
-                                <br />
-                                Öğrenciler</span></a>
+                            <a asp-controller="Fakulte" asp-action="DanısmanOgrenciler">
+                                <i class="fas fa-user-graduate"></i><span>
+                                    Danışmanı Olduğum
+                                    <br />
+                                    Öğrenciler
+                                </span>
+                            </a>
                         </li>
 
                         <li class="menu-title border-bottom my-3">
@@ -213,17 +217,58 @@
     <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="~/panel/plugins/apexchart/apexcharts.min.js"></script>
     <script src="~/panel/plugins/apexchart/chart-data.js"></script>
-
     <script src="~/panel/js/moment.min.js"></script>
     <script src="~/panel/js/bootstrap-datetimepicker.min.js"></script>
-
     <script src="~/panel/js/jquery-ui.min.js"></script>
     <script src="~/panel/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="~/panel/plugins/fullcalendar/jquery.fullcalendar.js"></script>
-
     <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/panel/plugins/toastr/toastr.min.js"></script>
+    <script src="~/panel/plugins/toastr/toastr.js"></script>
     @RenderSection("Scripts", required: false)
+    <script>
 
+
+        $(document).ready(() => {
+            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/SignalRHub").build();
+
+            connection.start().then(function () {
+                toastr.success("SignalR İle Bağlantı Sağlandı", "Mesaj", {
+                    closeButton: true,
+                    tapToDismiss: false,
+                    progressBar: true,
+                });
+            }).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+
+            connection.on("ReceiveDuyuru", function (baslik, mesaj) {
+
+                connection.invoke("DuyuruBildirim", baslik, mesaj)
+                    .then(function () {
+                        console.log("DuyuruBildirim yöntemi başarıyla çağrıldı.");
+                    })
+                    .catch(function (err) {
+                        console.error("DuyuruBildirim yöntemi çağrılırken bir hata oluştu: " + err);
+                    });
+            });
+
+
+            connection.on("Bildirim", function (baslik, mesaj) {
+                
+                const ilkBesKelime = mesaj.split(" ").slice(0, 5).join(" ");
+                toastr.success(ilkBesKelime, "Duyuru", {
+                    closeButton: true,
+                    tapToDismiss: false,
+                    progressBar: true,
+                });
+                $(".notification-list").prepend('<li class="notification-message"><a href="#"><div class="media d-flex"><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + baslik + '</span></p><p class="noti-details"><span class="noti-title">' + ilkBesKelime + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></a></li>');
+
+            });
+        });
+    </script>
 </body>
 </html>

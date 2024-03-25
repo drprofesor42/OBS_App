@@ -197,6 +197,25 @@ namespace OBS_App.Migrations
                     b.ToTable("AkademikTakvimler");
                 });
 
+            modelBuilder.Entity("OBS_App.Data.Baglantı", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("connectionid")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("eposta")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Baglantılar");
+                });
+
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
                 {
                     b.Property<int>("Id")

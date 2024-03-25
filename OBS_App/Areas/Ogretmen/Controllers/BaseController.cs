@@ -34,13 +34,6 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                 }
 
 
-                LayoutViewModel layoutViewModel = new LayoutViewModel
-                {
-                    ImagePath = ogretmen.OgretmenFotograf
-                };
-                
-                ViewBag.LayoutViewModel = layoutViewModel;
-                base.OnActionExecuting(filterContext);
             }
         }
     }
