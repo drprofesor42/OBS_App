@@ -55,6 +55,7 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 if (id == 0)
                 {
+                    
                     await _hubContext.Clients.All.SendAsync("ReceiveDuyuru", model.DuyuruBaslik, model.DuyuruMesaj);
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
@@ -89,6 +90,7 @@ namespace OBS_App.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+       
 
     }
 }

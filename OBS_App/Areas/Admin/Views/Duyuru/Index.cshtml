@@ -110,7 +110,6 @@
                             "success"
                         ).then(() => window.location.href = '@Url.Action("Index", "Duyuru")'));
                 } else if (
-                    /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire({
@@ -123,6 +122,4 @@
         }
     </script>
 
-   
-  
 }

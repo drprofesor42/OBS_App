@@ -31,9 +31,14 @@
                 <input asp-for="OgretmensId" type="hidden">
                 <input asp-for="OlusturmaTarihi" type="hidden" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")">
                 <span asp-validation-for="OlusturmaTarihi" class="text-danger"></span>
-                <button type="submit" class="btn bank-cancel-btn me-2">Duyuru Gönder</button>
+                <button type="submit" class="btn bank-cancel-btn me-2" >Duyuru Gönder</button>
             </div>
         </div>
     </form>
 </div>
- 
+@section Scripts{
+    <script>
+      
+    </script>
+
+}

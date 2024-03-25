@@ -1,226 +1,225 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
 <div class="row">
-	<div class="col-xl-3 col-sm-6 col-12 d-flex">
-		<div class="card bg-comman w-100">
-			<div class="card-body">
-				<div class="db-widgets d-flex justify-content-between align-items-center">
-					<div class="db-info">
-						<h6>Öğrenciler</h6>
-						<h3>@ViewBag.ogrenci_sayısı</h3>
-					</div>
-					<div class="db-icon">
-						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-graduate-student-9638045-7889079.png" alt="Dashboard Icon">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-sm-6 col-12 d-flex">
-		<div class="card bg-comman w-100">
-			<div class="card-body">
-				<div class="db-widgets d-flex justify-content-between align-items-center">
-					<div class="db-info">
-						<h6>Öğretmenler</h6>
-						<h3>@ViewBag.ogretmen_sayısı</h3>
-					</div>
-					<div class="db-icon">
-						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-teacher-10074802-8187379.png" alt="Dashboard Icon">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-sm-6 col-12 d-flex">
-		<div class="card bg-comman w-100">
-			<div class="card-body">
-				<div class="db-widgets d-flex justify-content-between align-items-center">
-					<div class="db-info">
-						<h6>Bölümler</h6>
-						<h3>@ViewBag.bolum_sayısı</h3>
-					</div>
-					<div class="db-icon">
-						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/geography-book-8013528-6430667.png" alt="Dashboard Icon">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-sm-6 col-12 d-flex">
-		<div class="card bg-comman w-100">
-			<div class="card-body">
-				<div class="db-widgets d-flex justify-content-between align-items-center">
-					<div class="db-info">
-						<h6>Fakülteler</h6>
-						<h3>@ViewBag.fakulte_sayısı</h3>
-					</div>
-					<div class="db-icon">
-						<img width="70px" src="https://cdn3d.iconscout.com/3d/premium/thumb/school-building-9609721-7762972.png" alt="Dashboard Icon">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Öğrenciler</h6>
+                        <h3>@ViewBag.ogrenci_sayısı</h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-graduate-student-9638045-7889079.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex" onclick="resetNotificationCount()">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Öğretmenler</h6>
+                        <h3>@ViewBag.ogretmen_sayısı</h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/male-teacher-10074802-8187379.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Bölümler</h6>
+                        <h3>@ViewBag.bolum_sayısı</h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/geography-book-8013528-6430667.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman w-100">
+            <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                    <div class="db-info">
+                        <h6>Fakülteler</h6>
+                        <h3>@ViewBag.fakulte_sayısı</h3>
+                    </div>
+                    <div class="db-icon">
+                        <img width="70px" src="https://cdn3d.iconscout.com/3d/premium/thumb/school-building-9609721-7762972.png" alt="Dashboard Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 <div class="row">
-	<div class="col-md-12 col-lg-6">
+    <div class="col-md-12 col-lg-6">
 
-		<div class="card card-chart">
-			<div class="card-header">
-				<div class="row align-items-center">
-					<div class="col-6">
-						<h5 class="card-title">Bölümlere Göre Öğrenci Sayıları</h5>
-					</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<div id="s-bar"></div>
-			</div>
-		</div>
+        <div class="card card-chart">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <h5 class="card-title">Bölümlere Göre Öğrenci Sayıları</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="s-bar"></div>
+            </div>
+        </div>
 
-	</div>
-	<div class="col-md-12 col-lg-6">
+    </div>
+    <div class="col-md-12 col-lg-6">
 
-		<div class="card card-chart">
-			<div class="card-header">
-				<div class="row align-items-center">
-					<div class="col-6">
-						<h5 class="card-title">Öğrenci Cinsiyetleri Sayısı (Hazır Değil) </h5>
-					</div>
-					<div class="col-6">
-						<ul class="chart-list-out">
-							<li><span class="circle-blue"></span>Kadınlar</li>
-							<li><span class="circle-green"></span>Erkekler</li>
-							<li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<div id="admin_bar"></div>
-			</div>
-		</div>
+        <div class="card card-chart">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <h5 class="card-title">Öğrenci Cinsiyetleri Sayısı (Hazır Değil) </h5>
+                    </div>
+                    <div class="col-6">
+                        <ul class="chart-list-out">
+                            <li><span class="circle-blue"></span>Kadınlar</li>
+                            <li><span class="circle-green"></span>Erkekler</li>
+                            <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="admin_bar"></div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>
 
 <div class="row">
-	<div class="col-xl-6 d-flex">
+    <div class="col-xl-6 d-flex">
 
-		<div class="card flex-fill student-space comman-shadow">
-			<div class="card-header d-flex align-items-center">
-				<h5 class="card-title">Son Akademik Etkinlikler</h5>
-				<ul class="chart-list-out student-ellips">
-					<a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0" style="margin-right:20px" class="btn btn-primary btn-sm">Etkinlik Ekle</a>
-				</ul>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table star-student table-hover table-center table-borderless table-striped">
-						<thead class="thead-light">
-							<tr>
-								<th class="text-center">Başlangıç Tarihi</th>
-								<th class="text-center">Bitiş Tarihi</th>
-								<th class="text-center">Aktivite</th>
-							</tr>
-						</thead>
-						<tbody>
+        <div class="card flex-fill student-space comman-shadow">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title">Son Akademik Etkinlikler</h5>
+                <ul class="chart-list-out student-ellips">
+                    <a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0" style="margin-right:20px" class="btn btn-primary btn-sm">Etkinlik Ekle</a>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table star-student table-hover table-center table-borderless table-striped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center">Başlangıç Tarihi</th>
+                                <th class="text-center">Bitiş Tarihi</th>
+                                <th class="text-center">Aktivite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-							@foreach (var etkinlik in ViewBag.takvim)
-							{
-								<tr>
-									<td class="text-center">@etkinlik.AkademikTakvimBaslangic</td>
-									<td class="text-center">@etkinlik.AkademikTakvimBitis</td>
-									<td>@etkinlik.AkademikTakvimAktivite</td>
-								</tr>
-							}
+                            @foreach (var etkinlik in ViewBag.takvim)
+                            {
+                                <tr>
+                                    <td class="text-center">@etkinlik.AkademikTakvimBaslangic</td>
+                                    <td class="text-center">@etkinlik.AkademikTakvimBitis</td>
+                                    <td>@etkinlik.AkademikTakvimAktivite</td>
+                                </tr>
+                            }
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 
-	@* Duyru Kısmı *@
-	<div class="col-xl-6 d-flex">
+    @* Duyru Kısmı *@
+    <div class="col-xl-6 d-flex">
 
-		<div class="card flex-fill comman-shadow">
-			<div class="card-header d-flex align-items-center">
-				<h5 class="card-title ">Son Duyurular </h5>
-				<ul class="chart-list-out student-ellips">
-					<a asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
-				</ul>
-			</div>
-			<div class="card-body">
-				<div class="activity-groups">
+        <div class="card flex-fill comman-shadow">
+            <div class="card-header d-flex align-items-center">
+                <h5 class="card-title ">Son Duyurular </h5>
+                <ul class="chart-list-out student-ellips">
+                    <a asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="activity-groups">
 
-					@if ( ViewBag.duyurular != null)
-					{
-						@foreach (var duyuru in ViewBag.duyurular)
-						{
-							<div class="activity-awards">
-								<div class="award-boxs">
-									<img width="30px" src="~/panel/img/icons/award-icon-03.svg">
-								</div>
-								<div class="award-list-outs">
-									<h4>@duyuru.DuyuruBaslik</h4>
-									<h5 class="duyuruMesaj">@duyuru.DuyuruMesaj</h5>
-								</div>
-								<div style="text-align:center; display: flex; justify-content: center;" class="award-time-list">
-									<div class="col">
-										<span>@duyuru.OlusturmaTarihi</span>
-										<br>
-										<a style="margin-top:5px" class="btn btn-primary btn-sm">Duyuruya Git</a>
-									</div>
-								</div>
-							</div>
-						}
-					}
-					else
-					{
-						<h5 class="text-danger" style="text-align:center"> Duyuru Bulunmamaktadır! </h5>
-					}
+                    @if (ViewBag.duyurular != null)
+                    {
+                        @foreach (var duyuru in ViewBag.duyurular)
+                        {
+                            <div class="activity-awards">
+                                <div class="award-boxs">
+                                    <img width="30px" src="~/panel/img/icons/award-icon-03.svg">
+                                </div>
+                                <div class="award-list-outs">
+                                    <h4>@duyuru.DuyuruBaslik</h4>
+                                    <h5 class="duyuruMesaj">@duyuru.DuyuruMesaj</h5>
+                                </div>
+                                <div style="text-align:center; display: flex; justify-content: center;" class="award-time-list">
+                                    <div class="col">
+                                        <span>@duyuru.OlusturmaTarihi</span>
+                                        <br>
+                                        <a style="margin-top:5px" class="btn btn-primary btn-sm">Duyuruya Git</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="text-danger" style="text-align:center"> Duyuru Bulunmamaktadır! </h5>
+                    }
 
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>
 
 <script>
-	// Her bir duyuru için kısaltılmış mesajları güncelleyen fonksiyon
-	function kisaltmaYap(duyuruMesajiElementi) {
-		var duyuruMesaji = duyuruMesajiElementi.textContent;
+    // Her bir duyuru için kısaltılmış mesajları güncelleyen fonksiyon
+    function kisaltmaYap(duyuruMesajiElementi) {
+        var duyuruMesaji = duyuruMesajiElementi.textContent;
 
-		if (duyuruMesaji.length > 50) {
-			duyuruMesajiElementi.textContent = duyuruMesaji.substring(0, 60) + "...";
-		}
-	}
+        if (duyuruMesaji.length > 50) {
+            duyuruMesajiElementi.textContent = duyuruMesaji.substring(0, 60) + "...";
+        }
+    }
 
-	// Her bir duyurunun kısaltılmış mesajını güncelleyin
-	var duyuruMesajlar = document.querySelectorAll(".duyuruMesaj");
-	duyuruMesajlar.forEach(kisaltmaYap);
+    // Her bir duyurunun kısaltılmış mesajını güncelleyin
+    var duyuruMesajlar = document.querySelectorAll(".duyuruMesaj");
+    duyuruMesajlar.forEach(kisaltmaYap);
 </script>
 
 @if (TempData["success"] != null)
 {
-	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
-	<script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/panel/plugins/sweetalert/sweetalerts.min.js"></script>
 
-	<script>
-		var successMessage = "@TempData["success"]";
+    <script>
+        var successMessage = "@TempData["success"]";
 
-		Swal.fire({
-			title: successMessage,
-			icon: "success"
-		});
-	</script>
+        Swal.fire({
+            title: successMessage,
+            icon: "success"
+        });
+    </script>
 }
