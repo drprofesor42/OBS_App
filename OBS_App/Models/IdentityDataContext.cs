@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
+using OBS_App.ViewsModel;
 
 namespace OBS_App.Models
 {
@@ -21,6 +22,7 @@ namespace OBS_App.Models
         public DbSet<Ogretmens> Ogretmenler { get; set; }
         public DbSet<Donem> Donemler { get; set; }
         public DbSet<Sinif> Siniflar { get; set; }
-
+        public DbSet<Baglantı> Baglantılar { get; set; }
+        public DbSet<Bİldirim> Bİldirimler { get; set; }
     }
 }

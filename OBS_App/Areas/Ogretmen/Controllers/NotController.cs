@@ -44,7 +44,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
                 ViewBag.Dersler = new SelectList(_context.Dersler.Where(x => x.OgretmensId == ogretmen.Id).ToList(), "Id", "DersAd");
-                ViewBag.Ogrenciler = new SelectList(_context.Ogrenciler.Include(x => x.Ogretmensler).ToList(), "Id", "OgrenciAd");
+                ViewBag.Ogrenciler = new SelectList(_context.Ogrenciler.Where(x => x.BolumId == ogretmen.BolumId).Include(x => x.Ogretmensler).ToList(), "Id", "OgrenciAd");
                 ViewBag.OgretmensId = ogretmen.Id;
 
                 if (id == 0)
@@ -67,7 +67,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
             if (ModelState.IsValid)
             {
-                if (type == 0)
+                if (type == 0 && existingNot == null)
                 {
                     await _context.Notlar.AddAsync(model);
                     await _context.SaveChangesAsync();

@@ -20,7 +20,7 @@ namespace OBS_App.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var bolum = await _context.Bolumler.Include(x => x.Dersler).Include(x => x.Ogrencisler).Include(x => x.Ogretmensler).ToListAsync();
+			var bolum = await _context.Bolumler.Include(x => x.Dersler).Include(x => x.Ogrencisler).Include(x => x.Ogretmensler).ToListAsync();
             return View(bolum);
         }
 

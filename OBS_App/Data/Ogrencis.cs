@@ -76,6 +76,7 @@ namespace OBS_App.Data
         public ICollection<Not> Notlar { get; set; } = new List<Not>();
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
         public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
+        public ICollection<Bİldirim> Bildirimler { get; set; } = new List<Bİldirim>();
 
     }
 

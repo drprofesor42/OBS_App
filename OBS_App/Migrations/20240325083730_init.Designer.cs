@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OBS_App.Models;
 
@@ -11,9 +12,19 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    partial class IdentityDataContextModelSnapshot : ModelSnapshot
+<<<<<<< HEAD:OBS_App/Migrations/20240325083730_init.Designer.cs
+    [Migration("20240325083730_init")]
+=======
+<<<<<<<< HEAD:OBS_App/Migrations/20240322090701_init.Designer.cs
+    [Migration("20240322090701_init")]
+========
+    [Migration("20240325052544_init")]
+>>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
+>>>>>>> NewMaster:OBS_App/Migrations/20240322090701_init.Designer.cs
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
