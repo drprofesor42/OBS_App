@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OBS_App.Areas.Admin.ViewsModel;
+using OBS_App.Data;
 using OBS_App.Models;
 
 namespace OBS_App.Areas.Ogrenci.Controllers
@@ -33,6 +34,83 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 				{
 					var danisman = _context.Ogretmenler.Include(x => x.Bolum).FirstOrDefault(x => x.OgretmenAd + " " + x.OgretmenSoyad == ogrenci.OgrenciDanisman);
 
+					// Son 4 duyuruyu alıyoruz
+					var duyurular = await _context.Duyurular.Include(x => x.Ogretmens).OrderByDescending(x => x.Id).Take(4).ToListAsync();
+					if (duyurular.Count() != 0)
+					{
+						ViewBag.duyurular = duyurular;
+					}
+					else
+					{
+						ViewBag.duyurular = null;
+					}
+
+					// Son 5 Akademik Takvim verileri
+					ViewBag.takvim = _context.AkademikTakvimler.OrderByDescending(x => x.Id).Take(5).ToList();
+					ViewBag.ders_sayısı = _context.Dersler.Where(x => x.BolumId == ogrenci.BolumId).Count();
+
+					// En yüksek en düşük ortalama
+					var ogrenciNotlar = _context.Notlar.Include(not => not.Ders)
+													.Where(not => not.OgrencisId == ogrenci.Id)
+													.ToList();
+
+					decimal enYuksekOrtalama = decimal.MinValue;
+					decimal enDusukOrtalama = decimal.MaxValue;
+
+					decimal toplamNot = 0;
+					decimal toplamAgirlik = 0;
+					decimal toplamOrtalama = 0;
+
+					// Her bir not için dönerek en yüksek ve en düşük ortalama notları bul
+					foreach (var not in ogrenciNotlar)
+					{
+						// Notları ağırlıklı olarak topla, ancak null kontrolü yap
+						if (not.NotOdev.HasValue && not.NotVize.HasValue && not.NotFinal.HasValue)
+						{
+							decimal notOrtalamasi = (not.NotOdev.Value * 0.25m) +
+													(not.NotVize.Value * 0.35m) +
+													(not.NotFinal.Value * 0.40m);
+
+							// En yüksek ve en düşük ortalama notları güncelle
+							enYuksekOrtalama = Math.Max(enYuksekOrtalama, notOrtalamasi);
+							enDusukOrtalama = Math.Min(enDusukOrtalama, notOrtalamasi);
+
+							// Toplam not ve ağırlığı güncelle
+							toplamNot += notOrtalamasi;
+							toplamAgirlik += 1; // Her bir notun ağırlığı 1 olarak kabul ediliyor
+
+							// Genel dönem ortalama notu hesapla
+							decimal genelOrtalama = toplamAgirlik != 0 ? toplamNot / toplamAgirlik : 0;
+
+							if (toplamOrtalama != 0)
+							{
+								toplamOrtalama = (toplamOrtalama + genelOrtalama) / 2;
+							}
+							else
+							{
+								toplamOrtalama = genelOrtalama;
+							}
+						}
+					}
+					if (ogrenciNotlar.Count() == 0)
+					{
+						ViewBag.dönem_ortalama = "Sınav Yok!";
+						ViewBag.sınav_yüksek_ortalama = "Sınav Yok!";
+						ViewBag.sınav_düsük_ortalama = "Sınav Yok!";
+					}
+					else if (toplamOrtalama != 0)
+					{
+						ViewBag.dönem_ortalama = toplamOrtalama;
+						ViewBag.sınav_yüksek_ortalama = enYuksekOrtalama;
+						ViewBag.sınav_düsük_ortalama = enDusukOrtalama;
+					}
+					else
+					{
+						ViewBag.dönem_ortalama = "Biten Sınav Yok!";
+						ViewBag.sınav_yüksek_ortalama = "Biten Sınav Yok!";
+						ViewBag.sınav_düsük_ortalama = "Biten Sınav Yok!";
+					}
+
 					return View(danisman);
 				}
 			}
@@ -41,7 +119,40 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			return View();
 		}
 
-		public async Task<IActionResult> Danisman()
+		[HttpPost]
+		public async Task<IActionResult> Chart()
+		{
+			var user = await _userManager.GetUserAsync(User);
+			if (user != null)
+			{
+				var student = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == user.Email);
+
+				var studentGrades = _context.Notlar
+					.Include(not => not.Ders)
+					.Where(not => not.OgrencisId == student.Id)
+					.ToList();
+
+				var averageGrades = studentGrades
+					.Where(not => not.NotOdev.HasValue && not.NotVize.HasValue && not.NotFinal.HasValue)
+					.Select(not => new
+					{
+						DersAd = not.Ders.DersAd,
+						Ortalama = (not.NotOdev.Value * 0.25m) + (not.NotVize.Value * 0.35m) + (not.NotFinal.Value * 0.40m)
+					})
+					.ToList();
+
+				var dersler = averageGrades.Select(g => g.DersAd).ToList();
+				var ortalamaNotlar = averageGrades.Select(g => g.Ortalama).ToList();
+
+				return Json(new { dersler, ortalamaNotlar });
+			}
+
+			return Json(new { error = "Kullanıcı bulunamadı." });
+		}
+
+
+
+	public async Task<IActionResult> Danisman()
 		{
 			var kullanıcı = await _userManager.GetUserAsync(User);
 			if (kullanıcı != null)

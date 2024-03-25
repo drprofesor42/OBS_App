@@ -64,6 +64,7 @@ namespace OBS_App.Areas.Admin.Controllers
 
             return Json(new { maleData, femaleData, bolumOgrenciSayilari });
         }
+
         public async Task<IActionResult> SifreDegistir(int id)
         {
             if (id == 1)

@@ -4,7 +4,73 @@
 @model Ogretmens
 
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>Derslerim</h6>
+						<h3>@ViewBag.ders_sayısı</h3>
+					</div>
+					<div class="db-icon">
+						<img width="70px" src="https://cdn3d.iconscout.com/3d/premium/thumb/education-8314627-6634366.png" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12 d-flex" onclick="resetNotificationCount()">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>Dönem Ortalaması</h6>
+						<h3>
+							@ViewBag.dönem_ortalama
+						</h3>
+					</div>
+					<div class="db-icon">
+						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/down-and-up-arrow-7252789-5914992.png?f=webp" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>En Yüksek Ortalama</h6>
+						<h3>@ViewBag.sınav_yüksek_ortalama</h3>
+					</div>
+					<div class="db-icon">
+						<img width="50px" src="https://cdn3d.iconscout.com/3d/premium/thumb/a-plus-result-8322744-6635111.png?f=webp" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12 d-flex">
+		<div class="card bg-comman w-100">
+			<div class="card-body">
+				<div class="db-widgets d-flex justify-content-between align-items-center">
+					<div class="db-info">
+						<h6>En Düşük Ortalama</h6>
+						<h3>@ViewBag.sınav_düsük_ortalama</h3>
+					</div>
+					<div class="db-icon">
+						<img width="60px" src="https://cdn3d.iconscout.com/3d/premium/thumb/fail-result-4709520-3915230.png?f=webp" alt="Dashboard Icon">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-lg-6	">
 		<div class="student-personals-grp">
 			<div class="card">
 				@if (Model != null)
@@ -12,7 +78,7 @@
 					<div class="card-body">
 						<div style="text-align:center" class="heading-detail">
 							<h4>Danışman Bilgileri</h4>
-							<span class="avatar avatar-md flex-shrink-0">
+							<span class="avatar avatar-lg flex-shrink-0">
 								<img class="avatar-img rounded-circle" alt="User Image" src="~/img/@Model.OgretmenFotograf">
 							</span>
 						</div>
@@ -73,7 +139,113 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Sınav Ortalamaları</h5>
+			</div>
+			<div class="card-body">
+				<div id="radial-chart"></div>
+			</div>
+		</div>
+	</div>
+
 </div>
+
+<div class="row">
+	<div class="col-xl-6 d-flex">
+
+		<div class="card flex-fill student-space comman-shadow">
+			<div class="card-header d-flex align-items-center">
+				<h5 class="card-title">Son Akademik Etkinlikler</h5>
+				<ul class="chart-list-out student-ellips">
+					<a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0" style="margin-right:20px" class="btn btn-primary btn-sm">Etkinlik Ekle</a>
+				</ul>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table star-student table-hover table-center table-borderless table-striped">
+						<thead class="thead-light">
+							<tr>
+								<th class="text-center">Başlangıç Tarihi</th>
+								<th class="text-center">Bitiş Tarihi</th>
+								<th class="text-center">Aktivite</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							@foreach (var etkinlik in ViewBag.takvim)
+							{
+								<tr>
+									<td class="text-center">@etkinlik.AkademikTakvimBaslangic</td>
+									<td class="text-center">@etkinlik.AkademikTakvimBitis</td>
+									<td>@etkinlik.AkademikTakvimAktivite</td>
+								</tr>
+							}
+
+
+						</tbody>
+					</table>
+				</div>
+				@if (ViewBag.takvim.Count == 0)
+				{
+					<br>
+					<h5 class="text-danger" style="text-align:center"> Akademik Etkinlik Bulunmamaktadır! </h5>
+				}
+			</div>
+		</div>
+
+	</div>
+
+	@* Duyru Kısmı *@
+	<div class="col-xl-6 d-flex">
+
+		<div class="card flex-fill comman-shadow">
+			<div class="card-header d-flex align-items-center">
+				<h5 class="card-title ">Son Duyurular </h5>
+				<ul class="chart-list-out student-ellips">
+					<a asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
+				</ul>
+			</div>
+			<div class="card-body">
+				<div class="activity-groups">
+
+					@if (ViewBag.duyurular != null)
+					{
+						@foreach (var duyuru in ViewBag.duyurular)
+						{
+							<div class="activity-awards">
+								<div class="award-boxs">
+									<img width="30px" src="~/panel/img/icons/award-icon-03.svg">
+								</div>
+								<div class="award-list-outs">
+									<h4>@duyuru.DuyuruBaslik</h4>
+									<h5 class="duyuruMesaj">@duyuru.DuyuruMesaj</h5>
+								</div>
+								<div style="text-align:center; display: flex; justify-content: center;" class="award-time-list">
+									<div class="col">
+										<span>@duyuru.OlusturmaTarihi</span>
+										<br>
+										<a style="margin-top:5px" class="btn btn-primary btn-sm">Duyuruya Git</a>
+									</div>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<h5 class="text-danger" style="text-align:center"> Duyuru Bulunmamaktadır! </h5>
+					}
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
 @if (TempData["success"] != null)
 {
 	<script src="~/panel/plugins/sweetalert/sweetalert2.all.min.js"></script>
