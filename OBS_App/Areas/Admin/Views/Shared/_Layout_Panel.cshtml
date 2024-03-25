@@ -22,9 +22,9 @@
 </head>
 
 <body>
-    <div class="main-wrapper" >
-        
-        <div class="header"  >
+    <div class="main-wrapper">
+
+        <div class="header">
             <div class="header-left">
                 <a asp-controller="Admin" asp-action="index" class="logo">
                     <img src="~/panel/img/profiles/logo.png" alt="Logo">
@@ -237,33 +237,40 @@
     <script>
         $(document).ready(() => {
             const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/SignalRHub").build();
-            let x;
+         
             connection.start().then(function () {
-                // toastr.success("SignalR İle Bağlantı Sağlandı", "Mesaj", {
-                //     closeButton: true,
-                //     tapToDismiss: false,
-                //     progressBar: true,
-                // });
+                toastr.success("SignalR İle Bağlantı Sağlandı", "Mesaj", {
+                    closeButton: true,
+                    tapToDismiss: false,
+                    progressBar: true,
+                });
             }).catch(function (err) {
                 return console.error(err.toString());
             });
 
             connection.on("ReceiveDuyuru", function (baslik, mesaj) {
 
-                x++;
-                bildirimkontrol();
-                let ilkBesKelime = mesaj.split(" ").slice(0, 5).join(" ");
-                $(".notification-list").prepend('<li class="notification-message"><a href="#"><div class="media d-flex"><span class="avatar avatar-sm flex-shrink-0"><img class="avatar-img rounded-circle" alt="User Image" src="~/panel/img/profiles/avatar-13.jpg"></span><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + baslik + '</span></p><p class="noti-details"><span class="noti-title">' + ilkBesKelime + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></a></li>');
+                connection.invoke("DuyuruBildirim", baslik, mesaj)
+                    .then(function () {
+                        console.log("DuyuruBildirim yöntemi başarıyla çağrıldı.");
+                    })
+                    .catch(function (err) {
+                        console.error("DuyuruBildirim yöntemi çağrılırken bir hata oluştu: " + err);
+                    });
             });
 
-            // Bildirim sayısını güncelleyen ve kırmızı noktayı gösteren veya gizleyen bir fonksiyon
-            function bildirimkontrol() {
-                if (x > 0) {
-                    $(".notification-badge").text(notificationCount).show();
-                } else {
-                    $(".notification-badge").hide();
-                }
-            }
+
+            connection.on("Bildirim", function (baslik, mesaj) {
+
+                const ilkBesKelime = mesaj.split(" ").slice(0, 5).join(" ");
+                toastr.success(ilkBesKelime, "Duyuru", {
+                    closeButton: true,
+                    tapToDismiss: false,
+                    progressBar: true,
+                });
+                $(".notification-list").prepend('<li class="notification-message"><a href="#"><div class="media d-flex"><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + baslik + '</span></p><p class="noti-details"><span class="noti-title">' + ilkBesKelime + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></a></li>');
+
+            });
         });
     </script>
 </body>

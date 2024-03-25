@@ -247,6 +247,18 @@
 
             connection.on("ReceiveDuyuru", function (baslik, mesaj) {
 
+                connection.invoke("DuyuruBildirim", baslik, mesaj)
+                    .then(function () {
+                        console.log("DuyuruBildirim yöntemi başarıyla çağrıldı.");
+                    })
+                    .catch(function (err) {
+                        console.error("DuyuruBildirim yöntemi çağrılırken bir hata oluştu: " + err);
+                    });
+            });
+
+
+            connection.on("Bildirim", function (baslik, mesaj) {
+                
                 const ilkBesKelime = mesaj.split(" ").slice(0, 5).join(" ");
                 toastr.success(ilkBesKelime, "Duyuru", {
                     closeButton: true,
@@ -256,9 +268,7 @@
                 $(".notification-list").prepend('<li class="notification-message"><a href="#"><div class="media d-flex"><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + baslik + '</span></p><p class="noti-details"><span class="noti-title">' + ilkBesKelime + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></a></li>');
 
             });
-
         });
     </script>
-
 </body>
 </html>

@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace OBS_App.Hubs
 {
-    public class SignalRHub : Hub<Mesajisim>
+    public class SignalRHub : Hub
     {
         private readonly IdentityDataContext _context;
         public SignalRHub(IdentityDataContext context)
@@ -14,7 +14,7 @@ namespace OBS_App.Hubs
         }
         public async Task DuyuruBildirim(string baslik, string duyuru)
         {
-            await Clients.Others.Duyuru(baslik, duyuru);
+            await Clients.Others.SendAsync("Bildirim",baslik, duyuru);
 
         }
 
