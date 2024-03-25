@@ -15,8 +15,15 @@ namespace OBS_App.Data
 		[Required(ErrorMessage = "*Zorunlu Alan")]
 		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
 		public string DersKredi { get; set; }
+		
+        
+		[Required(ErrorMessage = "*Zorunlu Alan")]
+        public string DersGün { get; set; }
 
-        [Required(ErrorMessage = "*Zorunlu Alan")]
+		[Required(ErrorMessage = "*Zorunlu Alan")]
+		public string DersSaat { get; set; }
+
+		[Required(ErrorMessage = "*Zorunlu Alan")]
 		[RegularExpression("^[0-9]*$", ErrorMessage = "Sadece rakam girebilirsiniz.")]
 		public string DersAkts { get; set; }
         public DateOnly OlusturmaTarihi { get; set; }

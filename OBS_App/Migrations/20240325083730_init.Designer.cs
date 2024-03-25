@@ -12,21 +12,16 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240325073249_asdads.Designer.cs
-    [Migration("20240325073249_asdads")]
-    partial class asdads
-========
-<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.Designer.cs
-    [Migration("20240325060908_init")]
-========
+<<<<<<< HEAD:OBS_App/Migrations/20240325083730_init.Designer.cs
+    [Migration("20240325083730_init")]
+=======
 <<<<<<<< HEAD:OBS_App/Migrations/20240322090701_init.Designer.cs
     [Migration("20240322090701_init")]
 ========
     [Migration("20240325052544_init")]
 >>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
->>>>>>>> NewMaster:OBS_App/Migrations/20240325052544_init.Designer.cs
+>>>>>>> NewMaster:OBS_App/Migrations/20240322090701_init.Designer.cs
     partial class init
->>>>>>>> NewMaster:OBS_App/Migrations/20240325060908_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -232,31 +227,6 @@ namespace OBS_App.Migrations
                     b.ToTable("Baglantılar");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.Bildirim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BildirimBaslik")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("BildirimDuyuru")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("BildirimEposta")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("BildirimOkunma")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Bildirimler");
-                });
-
             modelBuilder.Entity("OBS_App.Data.Bolum", b =>
                 {
                     b.Property<int>("Id")
@@ -308,11 +278,19 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DersGün")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("DersKod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("DersKredi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DersSaat")
                         .IsRequired()
                         .HasColumnType("longtext");
 

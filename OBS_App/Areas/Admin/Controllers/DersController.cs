@@ -105,5 +105,15 @@ namespace OBS_App.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Detay(int id)
+        {
+            var ders = await _context.Dersler
+                    .Include(f => f.Ogrencisler)
+                    .ToListAsync();
+            var model = ders.FirstOrDefault(x => x.Id == id);
+
+            return View(model);
+        }
     }
+
 }

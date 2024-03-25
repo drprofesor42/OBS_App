@@ -1,91 +1,98 @@
 ﻿@{
-	ViewData["Title"] = "Derslerim";
+    ViewData["Title"] = "Derslerim";
 }
 @model IEnumerable<Ders>
 
 <div class="student-group-form">
-	<div class="row">
-		<div class="col-lg-3 col-md-6">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders Koduna Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Ders Adına Göre Ara ...">
-			</div>
-		</div>
-		<div class="col-lg-2">
-			<div class="search-student-btn text-end">
-				<button type="btn" class="btn btn-primary">Ara</button>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-lg-5 col-md-7">
+            <div class="form-group">
+                <input type="text" class="form-control" id="dersKoduAdiArama" placeholder="Ders Koduna Göre Ara ..." oninput="aramaYap()">
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-7">
+            <div class="form-group">
+                <input type="text" class="form-control" id="dersAdiArama" placeholder="Ders Adına Göre Ara ..." oninput="aramaYap()">
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="row">
-	<div class="col-sm-12">
-		<div class="card card-table">
-			<div class="card-body">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
 
-				<div class="page-header">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="page-title">Verilen Dersler</h3>
-						</div>
-						<div class="col-auto text-end float-end ms-auto download-grp">
-							<a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> İndir</a>
-							<a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="0" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-						</div>
-					</div>
-				</div>
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Verilen Dersler</h3>
+                        </div>
+                    </div>
+                </div>
 
-				<table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
-					<thead class="student-thread">
-						<tr>
-							<th>Ders Kodu</th>
-							<th>Ders Adı</th>
-							<th>Dersi Alan Kişi Sayısı</th>
-							<th>Ders Kredi</th>
-							<th>Ders Akts</th>
-							<th class="text-end">İşlemler</th>
-						</tr>
-					</thead>
-					<tbody>
+                <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                    <thead class="student-thread">
+                        <tr>
+                            <th>Ders Kodu</th>
+                            <th>Ders Adı</th>
+                            <th>Dersi Alan Kişi Sayısı</th>
+                            <th>Ders Kredi</th>
+                            <th>Ders Akts</th>
+                            <th class="text-end">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-						@foreach (var ders in Model)
-						{
-							<tr>
-								<td>@ders.DersKod</td>
-								<td>@ders.DersAd</td>
-								<td>@ders.Ogrencisler.Count()</td>
-								<td>@ders.DersKredi</td>
-								<td>@ders.DersAkts</td>
-								<td class="text-end">
-									<div class="actions">
-										<a href="javascript:;" class="btn btn-sm bg-success-light me-2">
-											<i class="feather-eye"></i>
-										</a>
-										<a asp-controller="x" asp-action="x" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light">
-											<i class="feather-edit"></i>
-										</a>
-									</div>
-								</td>
-							</tr>
-							}
+                        @foreach (var ders in Model)
+                        {
+                            <tr>
+                                <td>@ders.DersKod</td>
+                                <td>@ders.DersAd</td>
+                                <td>@ders.Ogrencisler.Count()</td>
+                                <td>@ders.DersKredi</td>
+                                <td>@ders.DersAkts</td>
+                                <td class="text-end">
+                                    <div class="actions">
+                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                            <i class="feather-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
 
-					</tbody>
-				</table>
-			</div>
-			@if (Model.Count() == 0)
-			{
-				<div class="blog grid-blog flex-fill">
-					<h3 class="text-danger" style="text-align:center"> Verilen Ders Bulunmamaktadır! </h3>
-				</div>
-			}
-		</div>
-	</div>
+                    </tbody>
+                </table>
+            </div>
+            @if (Model.Count() == 0)
+            {
+                <div class="blog grid-blog flex-fill">
+                    <h3 class="text-danger" style="text-align:center"> Verilen Ders Bulunmamaktadır! </h3>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
+@section Scripts {
+    <script>
+        function aramaYap() {
+            var dersKodu = document.getElementById("dersKoduAdiArama").value.toLowerCase();
+            var dersAdi = document.getElementById("dersAdiArama").value.toLowerCase();
+            var tableRows = document.querySelectorAll(".datatable tbody tr");
 
+            tableRows.forEach(function (row) {
+                var dersKoduCell = row.cells[0].textContent.toLowerCase();
+                var dersAdiCell = row.cells[1].textContent.toLowerCase();
+
+                if (dersKoduCell.includes(dersKodu) && dersAdiCell.includes(dersAdi)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+}

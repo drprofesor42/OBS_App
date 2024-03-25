@@ -4,29 +4,18 @@
 }
 <div class="student-group-form">
     <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-5 col-md-7">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
+                <input type="text" class="form-control" id="dersArama" placeholder="Ders İsmine Göre Ara ..." oninput="aramaYap()">
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-5 col-md-7">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Ders İsmine Göre Ara ...">
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Ders Hocasına Göre Ara ...">
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="search-student-btn">
-                <button type="button" class="btn btn-primary">Ara</button>
+                <input type="text" class="form-control" id="dersHocasıArama" placeholder="Ders Hocasına Göre Ara ..." oninput="aramaYap()">
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-sm-12">
@@ -95,7 +84,7 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                        <a asp-action="Detay" asp-route-id="@ders.Id" class="btn btn-sm bg-success-light me-2">
                                             <i class="feather-eye"></i>
                                         </a>
                                         <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">

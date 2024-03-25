@@ -292,11 +292,19 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DersGün")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("DersKod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("DersKredi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DersSaat")
                         .IsRequired()
                         .HasColumnType("longtext");
 

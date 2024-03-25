@@ -31,6 +31,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
                     .ThenInclude(q => q.notlar)
                     .Include(x => x.Dersler)
                     .ThenInclude(x => x.Ogretmens)
+                    .Where(x => x.Id == ogrenci.BolumId)
                     .ToList();
 
                 return View(dersler);

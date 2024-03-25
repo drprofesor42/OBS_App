@@ -4,29 +4,18 @@
 }
 <div class="student-group-form">
     <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-5 col-md-7">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="ID'ye Göre Ara ...">
+                <input type="text" class="form-control" id="bolumArama" placeholder="Bölüm İsmine Göre Ara." oninput="aramaYap()">
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-5 col-md-7">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Bölüm İsmine Göre Ara ...">
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Bölüm Başkanına Göre Ara ...">
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="search-student-btn">
-                <button type="btn" class="btn btn-primary">Ara</button>
+                <input type="text" class="form-control" id="bolumBaskaniArama" placeholder="Bölüm Başkanına Göre Ara." oninput="aramaYap()">
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-sm-12">
@@ -50,9 +39,9 @@
                             <th>ID</th>
                             <th>Bölüm Adı</th>
                             <th>Bölüm Başkanı</th>
+                            <th>Ders Sayısı</th>
                             <th>Öğretmen Sayısı</th>
                             <th>Öğrenci Sayısı</th>
-                            <th>Ders Sayısı</th>
                             <th class="text-end">İşlemler</th>
                         </tr>
                     </thead>
@@ -67,13 +56,12 @@
                                     </h2>
                                 </td>
                                 <td>@bolum.BolumBaskani</td>
-                                
+                                <td>@bolum.Dersler.Count()</td>
                                 <td>@bolum.Ogretmensler.Count()</td>
                                 <td>@bolum.Ogrencisler.Count()</td>
-                                <td>@bolum.Dersler.Count()</td>
                                 <td class="text-end">
                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
+                                        <a asp-action="Detay" asp-route-id="@bolum.Id" class="btn btn-sm bg-success-light me-2">
                                             <i class="feather-eye"></i>
                                         </a>
                                         <a asp-action="Ekle_Guncelle" asp-controller="Bolum" asp-route-id="@bolum.Id" class="btn btn-sm bg-danger-light">
@@ -144,6 +132,31 @@
                     });
                 }
             });
+        }
+    </script>
+    <script>
+        function aramaYap() {
+            var bolumAdiInput, bolumBaskaniInput, bolumAdiFilter, bolumBaskaniFilter, table, tr, td, i;
+            bolumAdiInput = document.getElementById("bolumArama");
+            bolumBaskaniInput = document.getElementById("bolumBaskaniArama");
+            bolumAdiFilter = bolumAdiInput.value.toUpperCase();
+            bolumBaskaniFilter = bolumBaskaniInput.value.toUpperCase();
+            table = document.querySelector(".star-student");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                tdBolumAdi = tr[i].getElementsByTagName("td")[1];
+                tdBolumBaskani = tr[i].getElementsByTagName("td")[2];
+                if (tdBolumAdi && tdBolumBaskani) {
+                    bolumAdiValue = tdBolumAdi.textContent || tdBolumAdi.innerText;
+                    bolumBaskaniValue = tdBolumBaskani.textContent || tdBolumBaskani.innerText;
+                    if (bolumAdiValue.toUpperCase().indexOf(bolumAdiFilter) > -1 && bolumBaskaniValue.toUpperCase().indexOf(bolumBaskaniFilter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
         }
     </script>
 } 

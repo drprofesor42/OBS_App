@@ -27,6 +27,27 @@
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
+                                <label>Ders Günü <span class="login-danger">*</span></label>
+                                <select asp-for="DersGün" class="form-control select">
+                                    <option value="">Seçiniz</option>
+                                    <option value="Pazartesi">Pazartesi</option>
+                                    <option value="Salı">Salı</option>
+                                    <option value="Çarşamba">Çarşamba</option>
+                                    <option value="Perşembe">Perşembe</option>
+                                    <option value="Cuma">Cuma</option>
+                                </select>
+                                <span asp-validation-for="DersGün" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
+                                <label>Ders Saati <span class="login-danger">*</span></label>
+                                <input asp-for="DersSaat" class="form-control" type="text">
+                                <span asp-validation-for="DersSaat" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group local-forms">
                                 <label>Ders Kredisi <span class="login-danger">*</span></label>
                                 <input asp-for="DersKredi" class="form-control" type="text">
                                 <span asp-validation-for="DersKredi" class="text-danger"></span>

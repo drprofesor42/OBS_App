@@ -20,12 +20,154 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+			var kullanıcı = await _userManager.GetUserAsync(User);
+            if (kullanıcı != null)
+            {
+                var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
+
+                ViewBag.ogrenci_sayım = _context.Ogrenciler.Where(x => x.BolumId == ogretmen.BolumId).Count();
+                ViewBag.ders_sayım = _context.Dersler.Where(x => x.BolumId == ogretmen.BolumId).Count();
+				ViewBag.not_girilen_ders_sayısı = _context.Notlar
+	                .Where(x => x.OgretmensId == ogretmen.Id &&
+				                (x.NotOdev.HasValue || x.NotVize.HasValue || x.NotFinal.HasValue))
+	                .Select(x => (x.NotOdev.HasValue ? 1 : 0) + (x.NotVize.HasValue ? 1 : 0) + (x.NotFinal.HasValue ? 1 : 0))
+	                .Sum();
+				var ogrenciNotlar = _context.Notlar
+					.Where(x => x.OgretmensId == ogretmen.Id &&
+				(x.NotOdev.HasValue || x.NotVize.HasValue || x.NotFinal.HasValue));
+
+				List<double> ortalamaNotlar = new List<double>();
+				foreach (var not in ogrenciNotlar)
+				{
+					double toplamNot = 0;
+					int notSayisi = 0;
+
+					if (not.NotOdev.HasValue)
+					{
+						toplamNot += not.NotOdev.Value;
+						notSayisi++;
+					}
+					if (not.NotVize.HasValue)
+					{
+						toplamNot += not.NotVize.Value;
+						notSayisi++;
+					}
+					if (not.NotFinal.HasValue)
+					{
+						toplamNot += not.NotFinal.Value;
+						notSayisi++;
+					}
+
+					if (notSayisi > 0)
+					{
+						double ortalama = toplamNot / notSayisi;
+						ortalamaNotlar.Add(ortalama);
+					}
+				}
+
+				double ortalamaNot = ortalamaNotlar.Any() ? ortalamaNotlar.Average() : 0;
+				ViewBag.ortalama_not = Math.Round(ortalamaNot,2);
+
+                // Ders Programım
+                ViewBag.derslerim = await _context.Dersler
+					.Where(x => x.OgretmensId == ogretmen.Id)
+					.OrderBy(x => x.DersGün == "Pazartesi" ? 1 :
+								  x.DersGün == "Salı" ? 2 :
+								  x.DersGün == "Çarşamba" ? 3 :
+								  x.DersGün == "Perşembe" ? 4 :
+								  x.DersGün == "Cuma" ? 5 : 6) // Diğer günler için aynı sıralamaya ekleyebilirsiniz
+					.ToListAsync();
+
+                // Son 4 duyuruyu alıyoruz
+                var duyurular = await _context.Duyurular.Include(x => x.Ogretmens).OrderByDescending(x => x.Id).Take(4).ToListAsync();
+				if (duyurular.Count() != 0)
+				{
+					ViewBag.duyurular = duyurular;
+				}
+				else
+				{
+					ViewBag.duyurular = null;
+				}
+
+				// Son 5 Akademik Takvim verileri
+				ViewBag.takvim = _context.AkademikTakvimler.OrderByDescending(x => x.Id).Take(5).ToList();
+
+
+			}
+
+			return View();
         }
 
-        public IActionResult Duyurular()
+
+		[HttpPost]
+		public IActionResult DersBasarisi()
+		{
+			var dersler = _context.Dersler.ToList(); // Tüm dersleri al
+
+			var dersBasarilari = new List<object>();
+
+			foreach (var ders in dersler)
+			{
+				var dersNotlari = _context.Notlar
+					.Where(n => n.DersId == ders.Id &&
+								(n.NotOdev.HasValue || n.NotVize.HasValue || n.NotFinal.HasValue))
+					.ToList();
+
+				var gecenOgrenciSayisi = 0;
+				var kalanOgrenciSayisi = 0;
+
+				foreach (var not in dersNotlari)
+				{
+
+					decimal toplamNot = 0;
+					decimal toplamAgirlik = 0;
+
+					if (not.NotOdev.HasValue)
+					{
+						toplamNot += not.NotOdev.Value * 0.25m;
+						toplamAgirlik += 0.25m;
+					}
+
+					if (not.NotVize.HasValue)
+					{
+						toplamNot += not.NotVize.Value * 0.35m;
+						toplamAgirlik += 0.35m;
+					}
+
+					if (not.NotFinal.HasValue)
+					{
+						toplamNot += not.NotFinal.Value * 0.40m;
+						toplamAgirlik += 0.40m;
+					}
+
+					decimal ortalama = toplamAgirlik != 0 ? toplamNot / toplamAgirlik : 0;
+					ortalama = Math.Round(ortalama, 2); // Ondalık basamakları 2'ye yuvarla
+
+					if (ortalama >= 50)
+						gecenOgrenciSayisi++;
+					else
+						kalanOgrenciSayisi++;
+				}
+
+				var dersBasarisi = new
+				{
+					DersAdi = ders.DersAd,
+					GecenOgrenciSayisi = gecenOgrenciSayisi,
+					KalanOgrenciSayisi = kalanOgrenciSayisi
+				};
+
+				dersBasarilari.Add(dersBasarisi);
+			}
+
+			return Json(dersBasarilari);
+		}
+
+
+
+
+		public IActionResult Duyurular()
         {
             var duyurular = _context.Duyurular.ToList();
             return View(duyurular);
