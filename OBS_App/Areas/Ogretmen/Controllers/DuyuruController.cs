@@ -34,7 +34,7 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             _context.SaveChanges();
 
             var duyurular = _context.Duyurular.Include(x => x.Ogretmens).ToList();
-           
+
             if (kullanıcı != null)
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
@@ -126,27 +126,31 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Bildirim(int id,int Sil)
+        public async Task<IActionResult> Bildirim(int id)
         {
             var user = _userManager.GetUserAsync(User).Result;
             var bildirim = await _context.Bildirimler.Where(x => x.BildirimEposta == user.Email).ToListAsync();
-            if (Sil == 1)
-            {
-                _context.Bildirimler.RemoveRange(bildirim);
-                await _context.SaveChangesAsync();
 
-            }
             var okundu = await _context.Bildirimler.FirstOrDefaultAsync(x => x.Id == id);
-            if (okundu != null )
+            if (okundu != null)
             {
                 okundu.BildirimOkunma = true;
                 _context.Bildirimler.Update(okundu);
                 await _context.SaveChangesAsync();
-            }
 
+            }
 
             return Json(bildirim);
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Bildirim()
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            var bildirim = await _context.Bildirimler.Where(x => x.BildirimEposta == user.Email).ToListAsync();
+            _context.Bildirimler.RemoveRange(bildirim);
+            await _context.SaveChangesAsync();
+            return Json(bildirim);
         }
     }
 }

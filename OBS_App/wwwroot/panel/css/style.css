@@ -3138,6 +3138,7 @@ footer {
     margin: 0
 }
 
+
 .notifications ul.notification-list > li {
     margin-top: 0;
     border-bottom: 1px solid #f5f5f5
@@ -3153,15 +3154,19 @@ footer {
         border-radius: 2px
     }
 
+
         .notifications ul.notification-list > li a:hover {
-            background-color: #fafafa
+            background-color: #18aeff;
+            cursor: pointer;
         }
 
-    .notifications ul.notification-list > li .list-item {
-        border: 0;
-        padding: 0;
-        position: relative
-    }
+
+
+.notifications ul.notification-list > li .list-item {
+    border: 0;
+    padding: 0;
+    position: relative
+}
 
 .topnav-dropdown-header .notification-title {
     color: #333;
@@ -10988,4 +10993,3 @@ ol.breadcrumb.bg-secondary {
         width: 310px;
         height: 355px
     }
-

@@ -80,7 +80,7 @@
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Bildirimler</span>
-                            <a asp-action="Bildirim" name="sil" id="1" class="clear-noti"> Temizle </a>
+                            <a href="#" id="temizleBtn" class="clear-noti"> Temizle </a>
                         </div>
                         <div class="noti-content">
                             <ul class="notification-list">
@@ -254,11 +254,10 @@
                         } else {
                             $('.notification-badge').hide();
                         }
-
+                        $(".notification-list").empty();
                         data.forEach(function (item) {
 
                             let ilkbeskelime = item.bildirimDuyuru.split(" ").slice(0, 5).join(" ");
-
                             $(".notification-list").prepend('<li class="notification-message"><a  data-id="' + item.id + '"" ><div class="row"><div class="col-10"><div class="media d-flex"><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + (item.bildirimOkunma == false ? '<strong>' + item.bildirimBaslik + '</strong>' : item.bildirimBaslik) + '</span></p><p class="noti-details"><span class="noti-title">' + (item.bildirimOkunma == false ? '<strong>' + ilkbeskelime + '</strong>' : ilkbeskelime) + "..." + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></div></div></a></li>');
 
                         });
@@ -305,9 +304,23 @@
                             throw new Error('Network response was not ok');
                             console.log("Hata");
                         }
-                        bildirimcagir()
-                    })
+                        bildirimcagir();
+                    });
             });
+
+            $('#temizleBtn').click(function () {
+                fetch('@Url.Action("Bildirim", "Duyuru")', {
+                    method: 'POST',
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                            console.log("Hata");
+                        }
+                        bildirimcagir();
+                    });
+            });
+
         });
     </script>
 </body>
