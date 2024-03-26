@@ -48,8 +48,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
-
                             @foreach (var ogr in Model)
                             {
                                 <tr>
@@ -57,7 +55,7 @@
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="student-details.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/img/@ogr.OgretmenFotograf" alt="User Image"></a>
-                                            <a href="student-details.html">@ogr.OgretmenAdSoyad</a>
+                                            <button type="button" class="btn btn-sm bg-success-light me-2" data-bs-toggle="modal" data-bs-target="#@ogr.OgretmenAd@ogr.Id">@ogr.OgretmenAdSoyad</button>
                                         </h2>
                                     </td>
                                     <td>@ogr.OgretmenUnvan</td>
@@ -70,10 +68,8 @@
                                     <td>@ogr.OgretmenBaslamaTarihi</td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
-                                            <a asp-action="Ekle_Guncelle" asp-controller="Ogretmen" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light me-2">
+                                            
+                                            <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             <a onclick="confirmDelete(@ogr.Id)" class="btn btn-sm bg-danger-light">
@@ -82,6 +78,61 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="@ogr.OgretmenAd@ogr.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div style="background-color:ghostwhite,; border-radius: 20px;" class="modal-content">
+                                            <div style="background-color:royalblue" class="modal-header ">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col text-center" style="height:30px;">
+                                                            <h4 style="color:aliceblue" class="modal-title"><b>ÖĞRETMEN DETAY</b></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto profile-image" style="position: absolute; top:10px; left: 0;">
+                                                        <img class="rounded-circle" alt="User Image" src="~/img/@ogr.OgretmenFotograf" width="60" height="60" />
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="col-sm-8" style="margin-left: 75px; margin-top:15px;">
+                                                                    <p class="text-uppercase"><b>@ogr.OgretmenAdSoyad</b></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col" style="margin-top:2px;">
+                                                                <div class=" p-3"><b>@ogr.Bolum?.BolumAd</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>DOĞUM TARİHİ:</b></p>
+                                                        <p class="col-sm-8">@ogr.OgretmenDogumTarihi</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>E-MAİL ADRESİ:</b></p>
+                                                        <p class="col-sm-8">@ogr.OgretmenEposta</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>CİNSİYET:</b></p>
+                                                        <p class="col-sm-8">@ogr.OgretmenCinsiyet</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>ÜNVAN:</b></p>
+                                                        <p class="col-sm-8">@ogr.OgretmenUnvan</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>TELEFON NUMARASI:</b></p>
+                                                        <p class="col-sm-8">@ogr.OgretmenTelefon</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             }
                         </tbody>
                     </table>

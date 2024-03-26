@@ -35,6 +35,7 @@
                 </div>
 
                 <div class="table-responsive">
+
                     <table class="table border-0 star-student table-hover table-center mb-0  table-striped">
                         <thead class="student-thread">
                             <tr>
@@ -57,7 +58,7 @@
                                     <td>
                                         <h2 class="table-avatar">
                                             <a asp-action="Index" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/img/@ogr.OgrenciFotograf" alt="User Image"></a>
-                                            <a asp-action="Index">@ogr.OgrenciAd @ogr.OgrenciSoyad</a>
+                                            <button type="button" class="btn btn-sm bg-success-light me-2" data-bs-toggle="modal" data-bs-target="#@ogr.OgrenciAd@ogr.Id">@ogr.OgrenciAdSoyad</button>
                                         </h2>
                                     </td>
                                     <td>@ogr.OgrenciSinif</td>
@@ -67,10 +68,7 @@
                                     <td>@ogr.OgrenciTelefon</td>
                                     <td>@ogr.OgrenciKayitTarihi</td>
                                     <td class="text-end">
-                                        <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
+                                        <div class="actions ">                                           
                                             <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
@@ -80,6 +78,62 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="@ogr.OgrenciAd@ogr.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div style="background-color:ghostwhite; border-radius:20px;" class="modal-content">
+                                            <div style="background-color:royalblue" class="modal-header ">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col text-center" style="height:30px;">
+                                                            <h4 style="color:aliceblue " class="modal-title"><b>ÖĞRENCİ DETAY</b></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto profile-image" style="position: absolute; top:10px; left: 0;">
+                                                        <img class="rounded-circle" alt="User Image" src="~/img/@ogr.OgrenciFotograf" width="60" height="60" />
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="col-sm-8" style="margin-left: 75px; margin-top:15px;">
+                                                                    <p class="text-uppercase"><b>@ogr.OgrenciAdSoyad</b></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col" style="margin-top:2px;">
+                                                            <div class=" p-3"><b>@ogr.Bolum?.BolumAd</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                                                                        
+                                                        <div class="row mt-4">
+                                                            <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>KİMLİK NUMARASI:</b></p>
+                                                            <p class="col-sm-8">@ogr.OgrenciTc</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>DOĞUM TARİHİ:</b></p>
+                                                            <p class="col-sm-8">@ogr.OgrenciDogumTarihi</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>E-MAİL ADRESİ:</b></p>
+                                                            <p class="col-sm-8">@ogr.OgrenciEposta</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>CİNSİYET:</b></p> 
+                                                            <p class="col-sm-8">@ogr.OgrenciCinsiyet</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <p class="col-sm-4 text-sm-start mb-0 mb-sm-3"><b>TELEFON NUMARASI:</b></p>
+                                                            <p class="col-sm-8">@ogr.OgrenciTelefon</p>
+                                                        </div>                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                              
                             }
                         </tbody>
                     </table>
@@ -142,7 +196,7 @@
             });
         }
     </script>
- <script>
+    <script>
         function aramaYap() {
             var ogrenciAdiInput, bolumAdiInput, ogrenciAdiFilter, bolumAdiFilter, table, tr, td, i;
             ogrenciAdiInput = document.getElementById("ogrenciAdiArama");
@@ -166,5 +220,6 @@
                 }
             }
         }
- </script>
+    </script>
+
 }
