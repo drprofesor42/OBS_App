@@ -58,7 +58,7 @@
                                     <td>
                                         <h2 class="table-avatar">
                                             <a asp-action="Index" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="~/img/@ogr.OgrenciFotograf" alt="User Image"></a>
-                                            <a asp-action="Index">@ogr.OgrenciAd @ogr.OgrenciSoyad</a>
+                                            <button type="button" class="btn btn-sm bg-success-light me-2" data-bs-toggle="modal" data-bs-target="#@ogr.OgrenciAd@ogr.Id">@ogr.OgrenciAdSoyad</button>
                                         </h2>
                                     </td>
                                     <td>@ogr.OgrenciSinif</td>
@@ -68,8 +68,7 @@
                                     <td>@ogr.OgrenciTelefon</td>
                                     <td>@ogr.OgrenciKayitTarihi</td>
                                     <td class="text-end">
-                                        <div class="actions ">
-                                            <button type="button" class="btn btn-sm bg-success-light me-2" data-bs-toggle="modal" data-bs-target="#@ogr.OgrenciAd@ogr.Id"><i class="feather-eye"></i></button>
+                                        <div class="actions ">                                           
                                             <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
@@ -81,12 +80,12 @@
                                 </tr>
                                 <div class="modal fade" id="@ogr.OgrenciAd@ogr.Id" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div style="background-color:white; border: 1px solid   " class="modal-content">
-                                            <div style="background-color:#96C7F8" class="modal-header ">
+                                        <div style="background-color:ghostwhite; border-radius:20px;" class="modal-content">
+                                            <div style="background-color:royalblue" class="modal-header ">
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col text-center" style="height:30px;">
-                                                            <h4 class="modal-title"><b>ÖĞRENCİ DETAYI</b></h4>
+                                                            <h4 style="color:aliceblue " class="modal-title"><b>ÖĞRENCİ DETAY</b></h4>
                                                         </div>
                                                     </div>
                                                 </div>
