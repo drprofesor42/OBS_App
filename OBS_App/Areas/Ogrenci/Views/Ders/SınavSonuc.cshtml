@@ -1,5 +1,6 @@
 ﻿@{
 	ViewData["Title"] = "SınavSonuc";
+    int ders_sayı = 0;
 }
 @model List<Not>
 
@@ -38,7 +39,7 @@
                         <div class="card-body">
 
                             <div class="progress progress-md">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: @notOrtalamasi%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: @Math.Round(notOrtalamasi)%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <table style="width:100%;">
                                 <tbody>
@@ -48,9 +49,19 @@
                                                 Ortalamanız : <span style="color:#00711b">@notOrtalamasi</span>
                                             </div>
                                         </td>
-                                        <td style="font-size:10px; text-align:center;">
-                                            Sınıf Ortalaması : <span style="color:#00711b">x</span>
-                                        </td>
+                                        @if (ViewBag.sınıfNotOrtalamaları[ders_sayı].ToplamOrtalama != null)
+                                        {
+                                            <td style="font-size:10px; text-align:center;">
+                                                Sınıf Ortalaması : <span style="color:#00711b">@Math.Round((ViewBag.sınıfNotOrtalamaları[ders_sayı].ToplamOrtalama), 2)</span>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td style="font-size:10px; text-align:center;">
+                                                Sınıf Ortalaması : <span style="color:#00711b">Girilmedi</span>
+                                            </td>
+                                        }
+                                        @{ders_sayı = ders_sayı + 1;}
                                     </tr>
                                 </tbody>
                             </table>
@@ -140,7 +151,7 @@
         }
 
         decimal ortalama = toplamAgirlik != 0 ? toplamNot / toplamAgirlik : 0;
-        return Math.Round(ortalama); // Ondalık basamakları 2'ye yuvarla
+        return Math.Round(ortalama, 2); // Ondalık basamakları 2'ye yuvarla
     }
 
 

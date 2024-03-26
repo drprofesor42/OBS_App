@@ -572,7 +572,7 @@ if ($('#radial-chart').length > 0) {
                             },
                             total: {
                                 show: true,
-                                label: 'Notlar',
+                                label: 'Not Ortalamalari',
                                 color: '#4361ee'
                             }
                         },
