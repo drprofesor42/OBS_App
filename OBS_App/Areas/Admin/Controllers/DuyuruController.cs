@@ -24,6 +24,16 @@ namespace OBS_App.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            var kullanıcı = await _userManager.GetUserAsync(User);
+            var bildirim = await _context.Bildirimler.Where(x => x.BildirimEposta == kullanıcı.Email).ToListAsync();
+
+            foreach (var bld in bildirim)
+            {
+                bld.BildirimOkunma = true;
+            }
+            _context.Bildirimler.UpdateRange(bildirim);
+            _context.SaveChanges();
+
             var duyurular = await _context.Duyurular.Include(x => x.Ogretmens).ToListAsync();
             return View(duyurular);
         }
@@ -55,7 +65,8 @@ namespace OBS_App.Areas.Admin.Controllers
             {
                 if (id == 0)
                 {
-                    var eposta = await _userManager.Users.ToListAsync();
+                    var kullanıcı = await _userManager.GetUserAsync(User);
+                    var eposta = await _userManager.Users.Where(x => x.Email != kullanıcı.Email).ToListAsync();
 
                     foreach (var item in eposta)
                     {
@@ -67,7 +78,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         });
                     }
 
-                    await _hubContext.Clients.All.SendAsync("ReceiveDuyuru", model.DuyuruBaslik, model.DuyuruMesaj);
+                    await _hubContext.Clients.All.SendAsync("AdminDuyuru", model.DuyuruBaslik, model.DuyuruMesaj);
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
@@ -102,6 +113,31 @@ namespace OBS_App.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Bildirim(int id)
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            var bildirim = await _context.Bildirimler.Where(x => x.BildirimEposta == user.Email).ToListAsync();
 
+            var okundu = await _context.Bildirimler.FirstOrDefaultAsync(x => x.Id == id);
+            if (okundu != null)
+            {
+                okundu.BildirimOkunma = true;
+                _context.Bildirimler.Update(okundu);
+                await _context.SaveChangesAsync();
+
+            }
+
+            return Json(bildirim);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> Bildirim()
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            var bildirim = await _context.Bildirimler.Where(x => x.BildirimEposta == user.Email).ToListAsync();
+            _context.Bildirimler.RemoveRange(bildirim);
+            await _context.SaveChangesAsync();
+            return Json(bildirim);
+        }
     }
 }

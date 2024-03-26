@@ -80,7 +80,7 @@
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Bildirimler</span>
-                            <a href="#" id="temizleBtn" class="clear-noti"> Temizle </a>
+                            <a href="javascript:void(0)" id="temizleBtn" class="clear-noti"> Temizle </a>
                         </div>
                         <div class="noti-content">
                             <ul class="notification-list">
@@ -271,16 +271,11 @@
                 });
             }
 
-
-            connection.on("ReceiveDuyuru", function (baslik, mesaj) {
+            
+            connection.on("OgretmenDuyuru", function (baslik, mesaj) {
 
                 connection.invoke("DuyuruBildirim", baslik, mesaj)
-                    .then(function () {
-                        console.log("Başarılı");
-                    })
-                    .catch(function (err) {
-                        console.error("Hata:" + err);
-                    });
+                   
             });
 
 

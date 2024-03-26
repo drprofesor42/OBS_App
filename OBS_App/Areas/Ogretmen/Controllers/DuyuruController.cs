@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using OBS_App.Data;
+using OBS_App.Hubs;
 using OBS_App.Models;
 using System.Security.Claims;
 
@@ -14,14 +16,16 @@ namespace OBS_App.Areas.Ogretmen.Controllers
     {
         private readonly IdentityDataContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IHubContext<SignalRHub> _hubContext;
 
-        public DuyuruController(UserManager<AppUser> userManager, IdentityDataContext context) : base(userManager, context)
+        public DuyuruController(UserManager<AppUser> userManager, IdentityDataContext context, IHubContext<SignalRHub> hubContext) : base(userManager, context)
         {
             _userManager = userManager;
             _context = context;
+            _hubContext = hubContext;
         }
 
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index()
         {
             var kullanıcı = await _userManager.GetUserAsync(User);
             var bildirim = await _context.Bildirimler.Where(x => x.BildirimEposta == kullanıcı.Email).ToListAsync();
@@ -93,6 +97,19 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             {
                 if (type == "0")
                 {
+                    var kullanıcı = await _userManager.GetUserAsync(User);
+                    var eposta = await _userManager.Users.Where(x=> x.Email !=kullanıcı.Email).ToListAsync();
+
+                    foreach (var item in eposta)
+                    {
+                        await _context.Bildirimler.AddAsync(new Bildirim
+                        {
+                            BildirimBaslik = model.DuyuruBaslik,
+                            BildirimDuyuru = model.DuyuruMesaj,
+                            BildirimEposta = item.Email,
+                        });
+                    }
+                    await _hubContext.Clients.All.SendAsync("OgretmenDuyuru", model.DuyuruBaslik, model.DuyuruMesaj);
                     await _context.Duyurular.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";

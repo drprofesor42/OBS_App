@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/panel/plugins/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="~/panel/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
+    <link href="~/panel/plugins/toastr/toatr.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -58,34 +59,27 @@
                 </li>
 
                 <li class="nav-item dropdown noti-dropdown me-2">
+                    <span class="notification-badge"></span>
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
                         <img src="~/panel/img/icons/header-icon-05.svg">
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Bildirimler</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Temizle </a>
+                            <a href="javascript:void(0)" id="temizleBtn" class="clear-noti"> Temizle </a>
                         </div>
+
+
                         <div class="noti-content">
                             <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media d-flex">
-                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/img/profiles/avatar-13.jpg">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details"><span class="noti-title">Kağan Muslu</span> size <span class="noti-title">mesaj gönderdi</span></p>
-                                                <p class="noti-time"><span class="notification-time">4 dk önce</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-
+                               
                             </ul>
                         </div>
+
+
+
                         <div class="topnav-dropdown-footer">
-                            <a href="#">Tüm Bildirimleri Görüntüle</a>
+                            <a asp-action="Index" asp-controller="Duyuru">Tüm Bildirimleri Görüntüle</a>
                         </div>
                     </div>
                 </li>
@@ -167,7 +161,7 @@
                             <a asp-controller="Ogrenci" asp-action="Danisman"><i class="fas fa-user "></i><span>Danışman Bilgileri</span></a>
                         </li>
                         <li>
-                            <a asp-controller="Ogrenci" asp-action="Duyurular"><i class="fas fa-bullhorn"></i> <span>Duyurular</span></a>
+                            <a asp-controller="Duyuru" asp-action="Index"><i class="fas fa-bullhorn"></i> <span>Duyurular</span></a>
                         </li>
 
                     </ul>
@@ -178,7 +172,7 @@
         <div class="page-wrapper">
             <div class="content container-fluid">
 
-               
+
 
                 @RenderBody()
 
@@ -194,16 +188,103 @@
     <script src="~/panel/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="~/panel/plugins/apexchart/apexcharts.min.js"></script>
     <script src="~/panel/plugins/apexchart/chart-data.js"></script>
-
     <script src="~/panel/js/moment.min.js"></script>
     <script src="~/panel/js/bootstrap-datetimepicker.min.js"></script>
-
     <script src="~/panel/js/jquery-ui.min.js"></script>
     <script src="~/panel/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="~/panel/plugins/fullcalendar/jquery.fullcalendar.js"></script>
-
     <script src="~/panel/js/script.js"></script>
     <script src="~/panel/js/rocket-loader.min.js" data-cf-settings="d3e9fe501045cc33aa3e5f15-|49" defer></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/panel/plugins/toastr/toastr.min.js"></script>
+    <script src="~/panel/plugins/toastr/toastr.js"></script>
     @RenderSection("Scripts", required: false)
+    <script>
+
+
+        $(document).ready(() => {
+            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7274/SignalRHub").build();
+
+            connection.start().then(function () {
+                bildirimcagir()
+            }).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            function bildirimcagir() {
+                $.ajax({
+                    url: '@Url.Action("Bildirim", "Duyuru")',
+                    type: 'GET',
+                    success: function (data) {
+                        var okunmamisbildirim = data.filter(function (item) {
+                            return item.bildirimOkunma === false;
+                        });
+                        var okunmamissayi = okunmamisbildirim.length;
+                        if (okunmamissayi > 0) {
+                            $('.notification-badge').text(okunmamissayi).show();
+                        } else {
+                            $('.notification-badge').hide();
+                        }
+                        $(".notification-list").empty();
+                        data.forEach(function (item) {
+
+                            let ilkbeskelime = item.bildirimDuyuru.split(" ").slice(0, 5).join(" ");
+                            $(".notification-list").prepend('<li class="notification-message"><a  data-id="' + item.id + '"" ><div class="row"><div class="col-10"><div class="media d-flex"><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + (item.bildirimOkunma == false ? '<strong>' + item.bildirimBaslik + '</strong>' : item.bildirimBaslik) + '</span></p><p class="noti-details"><span class="noti-title">' + (item.bildirimOkunma == false ? '<strong>' + ilkbeskelime + '</strong>' : ilkbeskelime) + "..." + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></div></div></a></li>');
+
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        // Hata durumunda yapılacak işlemler
+                        console.error(error);
+                    }
+
+                });
+            }
+            connection.on("ReceiveDuyuru", function (baslik, mesaj) {
+
+                connection.invoke("DuyuruBildirim", baslik, mesaj)
+
+            });
+
+            connection.on("Bildirim", function (baslik, mesaj) {
+
+                var ilkBesKelime = mesaj.split(" ").slice(0, 5).join(" ");
+                toastr.success(ilkBesKelime + "...", "Duyuru Var!!", {
+                    closeButton: true,
+                    tapToDismiss: false,
+                    progressBar: true,
+                });
+                bildirimcagir()
+            });
+
+            $(document).on('click', '.notification-message a', function () {
+
+                var id = $(this).data('id');
+                fetch('@Url.Action("Bildirim", "Duyuru")/' + id)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                            console.log("Hata");
+                        }
+                        bildirimcagir();
+                    });
+            });
+
+            $('#temizleBtn').click(function () {
+                fetch('@Url.Action("Bildirim", "Duyuru")', {
+                    method: 'POST',
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                            console.log("Hata");
+                        }
+                        bildirimcagir();
+                    });
+            });
+
+        });
+    </script>
 </body>
 </html>

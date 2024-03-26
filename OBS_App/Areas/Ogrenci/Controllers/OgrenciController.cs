@@ -181,13 +181,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			var takvimler = await _context.AkademikTakvimler.ToListAsync();
 			return View(takvimler);
 		}
-
-		public IActionResult Duyurular()
-		{
-			var duyurular = _context.Duyurular.Include(x => x.Ogretmens).ToList();
-			return View(duyurular);
-
-		}
 		public IActionResult SifreDegistir()
 		{
 			return View();
