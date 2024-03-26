@@ -58,8 +58,9 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 					decimal enDusukOrtalama = decimal.MaxValue;
 
 					decimal toplamNot = 0;
-					decimal toplamAgirlik = 0;
-					decimal toplamOrtalama = 0;
+					decimal genelOrtalama = 0;
+					decimal genelAgirlik = 0;
+
 
 					// Her bir not için dönerek en yüksek ve en düşük ortalama notları bul
 					foreach (var not in ogrenciNotlar)
@@ -67,9 +68,31 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 						// Notları ağırlıklı olarak topla, ancak null kontrolü yap
 						if (not.NotOdev.HasValue && not.NotVize.HasValue && not.NotFinal.HasValue)
 						{
-							decimal notOrtalamasi = (not.NotOdev.Value * 0.25m) +
-													(not.NotVize.Value * 0.35m) +
-													(not.NotFinal.Value * 0.40m);
+							decimal notOrtalamasi = 0m;
+							decimal toplamAgirlik = 0m;
+
+							if (not.NotOdev.HasValue)
+							{
+								notOrtalamasi += not.NotOdev.Value * 0.25m;
+								toplamAgirlik += 0.25m;
+							}
+
+							if (not.NotVize.HasValue)
+							{
+								notOrtalamasi += not.NotVize.Value * 0.35m;
+								toplamAgirlik += 0.35m;
+							}
+
+							if (not.NotFinal.HasValue)
+							{
+								notOrtalamasi += not.NotFinal.Value * 0.40m;
+								toplamAgirlik += 0.40m;
+							}
+
+							if (toplamAgirlik > 0)
+							{
+								notOrtalamasi /= toplamAgirlik;
+							}
 
 							// En yüksek ve en düşük ortalama notları güncelle
 							enYuksekOrtalama = Math.Max(enYuksekOrtalama, notOrtalamasi);
@@ -77,19 +100,10 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
 							// Toplam not ve ağırlığı güncelle
 							toplamNot += notOrtalamasi;
-							toplamAgirlik += 1; // Her bir notun ağırlığı 1 olarak kabul ediliyor
+							genelAgirlik += 1; // Her bir notun ağırlığı 1 olarak kabul ediliyor
 
 							// Genel dönem ortalama notu hesapla
-							decimal genelOrtalama = toplamAgirlik != 0 ? toplamNot / toplamAgirlik : 0;
-
-							if (toplamOrtalama != 0)
-							{
-								toplamOrtalama = (toplamOrtalama + genelOrtalama) / 2;
-							}
-							else
-							{
-								toplamOrtalama = genelOrtalama;
-							}
+							genelOrtalama = genelAgirlik != 0 ? toplamNot / genelAgirlik : 0;
 						}
 					}
 					if (ogrenciNotlar.Count() == 0)
@@ -98,9 +112,9 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 						ViewBag.sınav_yüksek_ortalama = "Sınav Yok!";
 						ViewBag.sınav_düsük_ortalama = "Sınav Yok!";
 					}
-					else if (toplamOrtalama != 0)
+					else if (genelOrtalama != 0)
 					{
-						ViewBag.dönem_ortalama = toplamOrtalama;
+						ViewBag.dönem_ortalama = genelOrtalama;
 						ViewBag.sınav_yüksek_ortalama = enYuksekOrtalama;
 						ViewBag.sınav_düsük_ortalama = enDusukOrtalama;
 					}
@@ -151,8 +165,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 		}
 
 
-
-	public async Task<IActionResult> Danisman()
+		public async Task<IActionResult> Danisman()
 		{
 			var kullanıcı = await _userManager.GetUserAsync(User);
 			if (kullanıcı != null)
@@ -188,6 +201,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 			return View(duyurular);
 
 		}
+
 		public IActionResult SifreDegistir()
 		{
 			return View();

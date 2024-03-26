@@ -48,9 +48,9 @@
                     <thead class="student-thread">
                         <tr>
                             <th>ID</th>
-                            <th>Bölüm</th>
+                            <th>Ders Adı</th>
                             <th>Ders Kod</th>
-                            <th>Ders İsim</th>
+                            <th>Bölüm</th>
                             <th>Ders Hocası</th>
                             <th>Ders Kredi</th>
                             <th>Ders Akts</th>
@@ -64,13 +64,13 @@
                         {
                             <tr>
                                 <td>@ders.Id</td>
-                                <td>@ders.Bolum?.BolumAd</td>
-                                <td>@ders.DersKod</td>
                                 <td>
                                     <h2>
                                         <a>@ders.DersAd</a>
                                     </h2>
                                 </td>
+                                <td>@ders.DersKod</td>
+                                <td>@ders.Bolum?.BolumAd</td>
                                 <td>
                                     @if (@ders.Ogretmens == null)
                                     {
