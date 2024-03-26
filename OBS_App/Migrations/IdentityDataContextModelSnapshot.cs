@@ -272,41 +272,6 @@ namespace OBS_App.Migrations
                     b.ToTable("Bolumler");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.Bİldirim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BildirimBaslik")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("BildirimDuyuru")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("BildirimOkunma")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("BildirimOkunmaEposta")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("OgrencisId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OgretmensId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OgrencisId");
-
-                    b.HasIndex("OgretmensId");
-
-                    b.ToTable("Bİldirimler");
-                });
-
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
                     b.Property<int>("Id")
@@ -897,21 +862,6 @@ namespace OBS_App.Migrations
                     b.Navigation("Fakulte");
                 });
 
-            modelBuilder.Entity("OBS_App.Data.Bİldirim", b =>
-                {
-                    b.HasOne("OBS_App.Data.Ogrencis", null)
-                        .WithMany("Bildirimler")
-                        .HasForeignKey("OgrencisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OBS_App.Data.Ogretmens", null)
-                        .WithMany("Bildirimler")
-                        .HasForeignKey("OgretmensId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("OBS_App.Data.Ders", b =>
                 {
                     b.HasOne("OBS_App.Data.Bolum", "Bolum")
@@ -1097,15 +1047,11 @@ namespace OBS_App.Migrations
 
             modelBuilder.Entity("OBS_App.Data.Ogrencis", b =>
                 {
-                    b.Navigation("Bildirimler");
-
                     b.Navigation("Notlar");
                 });
 
             modelBuilder.Entity("OBS_App.Data.Ogretmens", b =>
                 {
-                    b.Navigation("Bildirimler");
-
                     b.Navigation("Dersler");
 
                     b.Navigation("Duyurular");
