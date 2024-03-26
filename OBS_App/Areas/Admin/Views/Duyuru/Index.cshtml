@@ -19,13 +19,13 @@
             <div class="col-md-6 col-xl-4 col-sm-12 d-flex">
                 <div class="blog grid-blog flex-fill">
                     <div class="blog-image">
-                        <a href="blog-details.html"><img style="height: 250px; width:600px" class="img-fluid" src="https://www.creativefabrica.com/wp-content/uploads/2019/04/University-icon-by-marco.livolsi2014-5-580x386.jpg" alt="Ana Resim"></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#duyuruModal_@duyuru.Id"><img style="height: 250px; width:600px" class="img-fluid" src="https://www.creativefabrica.com/wp-content/uploads/2019/04/University-icon-by-marco.livolsi2014-5-580x386.jpg" alt="Ana Resim"></a>
                     </div>
                     <div class="blog-content">
                         <ul class="entry-meta meta-item">
                             <li>
                                 <div class="post-author">
-                                    <a href="profile.html">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#duyuruModal_@duyuru.Id">
                                         <img src="https://webupload.gazi.edu.tr/upload/30/2022/8/12/1e7b0909-dabc-49c6-8ae3-b03b3fd19928-ogrenci-bilgi-sistemi.png" alt="Yazar Resim">
                                         <span>
                                             @if (duyuru.OgretmensId != null)
@@ -42,7 +42,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <h3 class="blog-title"><a href="blog-details.html">@duyuru.DuyuruBaslik </a></h3>
+                        <h3 class="blog-title"><a href="#" data-bs-toggle="modal" data-bs-target="#duyuruModal_@duyuru.Id">@duyuru.DuyuruBaslik </a></h3>
                         <p>@duyuru.DuyuruMesaj</p>
                     </div>
                     <div class="row">
@@ -58,15 +58,30 @@
                 </div>
             </div>
 
-		}
-	}
-	else
-	{
-		<div class="blog grid-blog flex-fill">
-			<h4 class="text-danger" style="text-align:center"> Duyuru Bulunmamaktadır! </h4>
-		</div>
-	}
+            <!-- Duyuru Modal -->
+            <div class="modal fade text-center" id="duyuruModal_@duyuru.Id" tabindex="-1" role="dialog" aria-labelledby="duyuruModalLabel_@duyuru.Id" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div style="background-color:ghostwhite; border-radius:20px" class="modal-content">
+                        <div style="background-color:royalblue;" class="modal-header">
+                            <h5 style="flex: 50%; color:aliceblue" class="modal-title" id="duyuruModalLabel_@duyuru.Id">@duyuru.DuyuruBaslik</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>@duyuru.DuyuruMesaj</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="blog grid-blog flex-fill">
+            <h4 class="text-danger" style="text-align:center">Duyuru Bulunmamaktadır!</h4>
+        </div>
+    }
 </div>
+
 
 @if (TempData["success"] != null)
 {
