@@ -51,7 +51,20 @@ namespace OBS_App.Areas.Ogrenci.Controllers
                 var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
                 var dersler = _context.Notlar.Include(x => x.Ogretmens).Include(x => x.Ders).Where(x => x.OgrencisId == ogrenci.Id).ToList();
 
-                return View(dersler);
+				ViewBag.sınıfNotOrtalamaları = _context.Notlar
+	                .Where(x => x.Ogrencis.BolumId == ogrenci.BolumId)
+	                .GroupBy(x => x.Ders)
+	                .Select(group => new
+	                {
+		                DersAdi = group.Key,
+		                NotOdevOrtalamasi = group.Average(x => x.NotOdev),
+		                NotVizeOrtalamasi = group.Average(x => x.NotVize),
+		                NotFinalOrtalamasi = group.Average(x => x.NotFinal),
+                        ToplamOrtalama = (group.Average(x => x.NotOdev) * 0.25 + group.Average(x => x.NotVize) * 0.35 + group.Average(x => x.NotFinal) * 0.40)
+	                })
+	                .ToList();
+
+				return View(dersler);
             }
 
             // Hata Gönder

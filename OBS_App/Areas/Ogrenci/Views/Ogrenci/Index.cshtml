@@ -143,7 +143,7 @@
 	<div class="col-lg-6">
 		<div class="card">
 			<div class="card-header">
-				<h5 class="card-title">Sınav Ortalamaları</h5>
+				<h5 class="card-title text-center">Sınav Ortalamaları</h5>
 			</div>
 			<div class="card-body">
 				<div id="radial-chart"></div>
@@ -159,9 +159,6 @@
 		<div class="card flex-fill student-space comman-shadow">
 			<div class="card-header d-flex align-items-center">
 				<h5 class="card-title">Son Akademik Etkinlikler</h5>
-				<ul class="chart-list-out student-ellips">
-					<a asp-controller="Takvim" asp-action="Ekle_Guncelle" asp-route-id="0" style="margin-right:20px" class="btn btn-primary btn-sm">Etkinlik Ekle</a>
-				</ul>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -205,7 +202,7 @@
 			<div class="card-header d-flex align-items-center">
 				<h5 class="card-title ">Son Duyurular </h5>
 				<ul class="chart-list-out student-ellips">
-					<a asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
+					<a  asp-controller="Ogrenci" asp-action="Duyurular" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
 				</ul>
 			</div>
 			<div class="card-body">
@@ -245,6 +242,20 @@
 	</div>
 </div>
 
+<script>
+	// Her bir duyuru için kısaltılmış mesajları güncelleyen fonksiyon
+	function kisaltmaYap(duyuruMesajiElementi) {
+		var duyuruMesaji = duyuruMesajiElementi.textContent;
+
+		if (duyuruMesaji.length > 50) {
+			duyuruMesajiElementi.textContent = duyuruMesaji.substring(0, 60) + "...";
+		}
+	}
+
+	// Her bir duyurunun kısaltılmış mesajını güncelleyin
+	var duyuruMesajlar = document.querySelectorAll(".duyuruMesaj");
+	duyuruMesajlar.forEach(kisaltmaYap);
+</script>
 
 @if (TempData["success"] != null)
 {
