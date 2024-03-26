@@ -164,10 +164,10 @@
                 right: 'month,agendaWeek,agendaDay'
             },
             events: defaultEvents,
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar !!!
-            eventLimit: true, // allow "more" link when too many events
-            selectable: true,
+            editable: false,
+            droppable: false, // this allows things to be dropped onto the calendar !!!
+            eventLimit: false, // allow "more" link when too many events
+            selectable: false,
             drop: function(date) { $this.onDrop($(this), date); },
             select: function (start, end, allDay) { $this.onSelect(start, end, allDay); },
             eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }

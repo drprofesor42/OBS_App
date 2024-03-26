@@ -12,21 +12,8 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-<<<<<<<< HEAD:OBS_App/Migrations/20240325073249_asdads.Designer.cs
-    [Migration("20240325073249_asdads")]
-    partial class asdads
-========
-<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.Designer.cs
-    [Migration("20240325060908_init")]
-========
-<<<<<<<< HEAD:OBS_App/Migrations/20240322090701_init.Designer.cs
-    [Migration("20240322090701_init")]
-========
-    [Migration("20240325052544_init")]
->>>>>>>> Bilimist:OBS_App/Migrations/20240325052544_init.Designer.cs
->>>>>>>> NewMaster:OBS_App/Migrations/20240325052544_init.Designer.cs
+    [Migration("20240326075006_init")]
     partial class init
->>>>>>>> NewMaster:OBS_App/Migrations/20240325060908_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -308,11 +295,19 @@ namespace OBS_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("DersGün")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("DersKod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("DersKredi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DersSaat")
                         .IsRequired()
                         .HasColumnType("longtext");
 

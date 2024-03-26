@@ -25,6 +25,7 @@
     <Folder Include="Areas\Ogrenci\Models\" />
     <Folder Include="Areas\Ogretmen\Data\" />
     <Folder Include="Areas\Ogretmen\Models\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>

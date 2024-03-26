@@ -30,9 +30,27 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             return View();
         }
 
-        public IActionResult DersProgramı()
+        public async Task<IActionResult> DersProgramı()
         {
-            return View();
+            var kullanıcı = await _userManager.GetUserAsync(User);
+            if (kullanıcı != null)
+            {
+                var ogretmen = _context.Ogretmenler.FirstOrDefault(d => d.OgretmenEposta == kullanıcı.Email);
+                var dersler = _context.Dersler
+                    .Include(x => x.Fakulte)
+                    .Include(x => x.Bolum)
+					.OrderBy(x => x.DersGün == "Pazartesi" ? 1 :
+								  x.DersGün == "Salı" ? 2 :
+								  x.DersGün == "Çarşamba" ? 3 :
+								  x.DersGün == "Perşembe" ? 4 :
+								  x.DersGün == "Cuma" ? 5 : 6)
+					.Where(x => x.OgretmensId == ogretmen.Id)
+                    .ToList();
+
+                return View(dersler);
+			}
+
+			return View();
         }
 
     }

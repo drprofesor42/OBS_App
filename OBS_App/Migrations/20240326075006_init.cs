@@ -125,6 +125,26 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Bildirimler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    BildirimBaslik = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BildirimDuyuru = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BildirimOkunma = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    BildirimEposta = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bildirimler", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Donemler",
                 columns: table => new
                 {
@@ -469,65 +489,6 @@ namespace OBS_App.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.cs
-                name: "Bildirimler",
-========
-                name: "Bİldirimler",
->>>>>>>> kagan:OBS_App/Migrations/20240325095935_init.cs
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    BildirimBaslik = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    BildirimDuyuru = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    BildirimOkunma = table.Column<bool>(type: "tinyint(1)", nullable: false),
-<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.cs
-                    BildirimEposta = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgrencisId = table.Column<int>(type: "int", nullable: true),
-                    OgretmensId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bildirimler", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Bildirimler_Ogrenciler_OgrencisId",
-                        column: x => x.OgrencisId,
-                        principalTable: "Ogrenciler",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Bildirimler_Ogretmenler_OgretmensId",
-                        column: x => x.OgretmensId,
-                        principalTable: "Ogretmenler",
-                        principalColumn: "Id");
-========
-                    BildirimOkunmaEposta = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OgrencisId = table.Column<int>(type: "int", nullable: false),
-                    OgretmensId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bİldirimler", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Bİldirimler_Ogrenciler_OgrencisId",
-                        column: x => x.OgrencisId,
-                        principalTable: "Ogrenciler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Bİldirimler_Ogretmenler_OgretmensId",
-                        column: x => x.OgretmensId,
-                        principalTable: "Ogretmenler",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
->>>>>>>> kagan:OBS_App/Migrations/20240325095935_init.cs
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Dersler",
                 columns: table => new
                 {
@@ -742,26 +703,6 @@ namespace OBS_App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.cs
-                name: "IX_Bildirimler_OgrencisId",
-                table: "Bildirimler",
-                column: "OgrencisId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bildirimler_OgretmensId",
-                table: "Bildirimler",
-========
-                name: "IX_Bİldirimler_OgrencisId",
-                table: "Bİldirimler",
-                column: "OgrencisId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bİldirimler_OgretmensId",
-                table: "Bİldirimler",
->>>>>>>> kagan:OBS_App/Migrations/20240325095935_init.cs
-                column: "OgretmensId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bolumler_FakulteId",
                 table: "Bolumler",
                 column: "FakulteId");
@@ -902,11 +843,7 @@ namespace OBS_App.Migrations
                 name: "Baglantılar");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:OBS_App/Migrations/20240325060908_init.cs
                 name: "Bildirimler");
-========
-                name: "Bİldirimler");
->>>>>>>> kagan:OBS_App/Migrations/20240325095935_init.cs
 
             migrationBuilder.DropTable(
                 name: "DersOgrencis");

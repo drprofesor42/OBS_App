@@ -212,6 +212,20 @@
 	</div>
 </div>
 
+<script>
+	// Her bir duyuru için kısaltılmış mesajları güncelleyen fonksiyon
+	function kisaltmaYap(duyuruMesajiElementi) {
+		var duyuruMesaji = duyuruMesajiElementi.textContent;
+
+		if (duyuruMesaji.length > 50) {
+			duyuruMesajiElementi.textContent = duyuruMesaji.substring(0, 60) + "...";
+		}
+	}
+
+	// Her bir duyurunun kısaltılmış mesajını güncelleyin
+	var duyuruMesajlar = document.querySelectorAll(".duyuruMesaj");
+	duyuruMesajlar.forEach(kisaltmaYap);
+</script>
 
 @if (TempData["success"] != null)
 {
