@@ -26,6 +26,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
                 var ogrenci = _context.Ogrenciler.FirstOrDefault(d => d.OgrenciEposta == kullanıcı.Email);
                 var dersler = _context.Ogrenciler
                     .Include(x => x.Dersler)
+                    .ThenInclude(x => x.Ogretmens)
                     .Include(x => x.Notlar)
                     .Where(x => x.Id == ogrenci.Id)
                     .ToList();
