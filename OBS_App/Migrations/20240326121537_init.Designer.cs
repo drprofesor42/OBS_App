@@ -12,6 +12,7 @@ using OBS_App.Models;
 namespace OBS_App.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
+<<<<<<< HEAD:OBS_App/Migrations/20240325144620_init.Designer.cs
 <<<<<<<< HEAD:OBS_App/Migrations/20240326055923_init.Designer.cs
     [Migration("20240326055923_init")]
 ========
@@ -21,6 +22,9 @@ namespace OBS_App.Migrations
     [Migration("20240326075006_init")]
 >>>>>>>> NewMaster:OBS_App/Migrations/20240326075006_init.Designer.cs
 >>>>>>>> NewMaster:OBS_App/Migrations/20240325144620_init.Designer.cs
+=======
+    [Migration("20240326121537_init")]
+>>>>>>> kagan:OBS_App/Migrations/20240326121537_init.Designer.cs
     partial class init
     {
         /// <inheritdoc />
