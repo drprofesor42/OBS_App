@@ -39,6 +39,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
         public IActionResult DersProgramı()
         {
+
             return View();
         }
 
