@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OBS_App.Data;
 using OBS_App.Hubs;
 using OBS_App.Models;
@@ -132,6 +133,6 @@ namespace OBS_App.Areas.Admin.Controllers
             _context.Bildirimler.RemoveRange(bildirim);
             await _context.SaveChangesAsync();
             return Json(bildirim);
-        }
+        }       
     }
 }

@@ -22,6 +22,7 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var dersler = await _context.Dersler.Include(x => x.Ogretmens).Include(x => x.Bolum).ThenInclude(x => x.Ogrencisler).ToListAsync();
+            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
             return View(dersler);
         }
 
