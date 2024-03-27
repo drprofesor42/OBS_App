@@ -83,7 +83,7 @@
                             <span class="notification-title">Bildirimler</span>
                             <a href="javascript:void(0)" id="temizleBtn" class="clear-noti"> Temizle </a>
                         </div>
-                        <div class="noti-content">
+                        <div class="noti-content ">
                             <ul class="notification-list">
                             </ul>
                         </div>
@@ -200,7 +200,7 @@
         </div>
 
         <div class="page-wrapper">
-            <div class="content container-fluid">
+            <div class="content container-fluid modal-bildirim">
 
                 @RenderBody()
 
@@ -310,7 +310,7 @@
                 bildirimcagir()
             });
 
-            (document).on('click', '.notification-message a', function () {
+            $(document).on('click', '.notification-message a', function () {
 
                 var id = $(this).data('id');
                 fetch('@Url.Action("Bildirim", "Duyuru")/' + id)
@@ -329,7 +329,6 @@
                     .catch(error => {
                         console.error('Hata:', error);
                     });
-
             });
 
             $('#temizleBtn').click(function () {

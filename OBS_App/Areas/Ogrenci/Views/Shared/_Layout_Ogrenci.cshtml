@@ -170,7 +170,7 @@
         </div>
 
         <div class="page-wrapper">
-            <div class="content container-fluid">
+            <div class="content container-fluid modal-bildirim">
 
 
 
@@ -273,7 +273,7 @@
                 bildirimcagir()
             });
 
-            (document).on('click', '.notification-message a', function () {
+            $(document).on('click', '.notification-message a', function () {
 
                 var id = $(this).data('id');
                 fetch('@Url.Action("Bildirim", "Duyuru")/' + id)
