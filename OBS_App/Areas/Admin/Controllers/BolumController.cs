@@ -21,6 +21,7 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
 			var bolum = await _context.Bolumler.Include(x => x.Dersler).Include(x => x.Ogrencisler).Include(x => x.Ogretmensler).ToListAsync();
+            ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
             return View(bolum);
         }
 
@@ -41,6 +42,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(bolum);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int id)
         {
@@ -103,7 +105,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-
             }
         }
         public async Task<IActionResult> Detay(int id)

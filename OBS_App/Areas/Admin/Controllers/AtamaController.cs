@@ -86,9 +86,21 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BaskanAtaGuncelle(Bolum model, int id)
+        public async Task<IActionResult> BaskanAtaGuncelle(Bolum model, int id, int modal, string bolumBaskani)
         {
+            if (modal != 0)
+            {
+                var deneme = _context.Bolumler.FirstOrDefault(b => b.Id == modal);
+                if (deneme != null)
+                {
+                    deneme.BolumBaskani = bolumBaskani;
+                    _context.Bolumler.Update(deneme);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "İşlem Başarılı!";
+                    return RedirectToAction("Index", "Bolum");
+                }
 
+            }
             var bolum = _context.Bolumler.FirstOrDefault(b => b.Id == id);
             if (bolum != null)
             {
