@@ -21,7 +21,6 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> OgretmenAta(int id)
         {
             var ders = await _context.Dersler.Include(x => x.Ogretmens).ToListAsync();
-
             return View(ders);
         }
 
@@ -42,8 +41,21 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> DersAtaGuncelle(Ders model, int id)
+        public async Task<IActionResult> DersAtaGuncelle(Ders model, int id, int modal, int ogretmenAdSoyad)
         {
+            if (modal != 0)
+            {
+                var deneme = _context.Dersler.FirstOrDefault(b => b.Id == modal);
+                if (deneme != null)
+                {
+                    deneme.OgretmensId = ogretmenAdSoyad;
+                    _context.Dersler.Update(deneme);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "İşlem Başarılı!";
+                    return RedirectToAction("Index", "Ders");
+                }
+
+            }
 
             var ders = _context.Dersler.FirstOrDefault(a => a.Id == id);
 
@@ -151,29 +163,42 @@ namespace OBS_App.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> DanismanAtaGuncelle(Ogrencis model, int id)
+        public async Task<IActionResult> DanismanAtaGuncelle(Ogrencis model, int id, int modal, string ogretmenAdSoyad)
         {
-
-            var ogrenci = _context.Ogrenciler.FirstOrDefault(a => a.Id == id);
-
-            if (ogrenci != null)
+            if (modal != 0)
             {
-                ogrenci.OgrenciDanisman = model.OgrenciDanisman;
-                _context.Ogrenciler.Update(ogrenci);
-                await _context.SaveChangesAsync();
-                TempData["success"] = "İşlem Başarılı!";
-                return RedirectToAction("DanismanIndex");
-            }
-            else
-            {
-                ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.ToList(), "Id", "OgrenciAd");
-                ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
-                return View(model);
+                var deneme = _context.Ogrenciler.FirstOrDefault(b => b.Id == modal);
+                if (deneme != null)
+                {
+                    deneme.OgrenciDanisman = ogretmenAdSoyad;
+                    _context.Ogrenciler.Update(deneme);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "İşlem Başarılı!";
+                    return RedirectToAction("Index", "Ogrenci");
+                }
+
             }
 
+                var ogrenci = _context.Ogrenciler.FirstOrDefault(a => a.Id == id);
+
+                if (ogrenci != null)
+                {
+                    ogrenci.OgrenciDanisman = model.OgrenciDanisman;
+                    _context.Ogrenciler.Update(ogrenci);
+                    await _context.SaveChangesAsync();
+                    TempData["success"] = "İşlem Başarılı!";
+                    return RedirectToAction("DanismanIndex");
+                }
+                else
+                {
+                    ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.ToList(), "Id", "OgrenciAd");
+                    ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
+                    return View(model);
+                }
+
+            }
         }
+
     }
 
-
-}
 

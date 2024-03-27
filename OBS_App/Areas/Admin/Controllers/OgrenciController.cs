@@ -25,6 +25,7 @@ namespace OBS_App.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var ogrenciler = await _context.Ogrenciler.Include(x => x.Bolum).ToListAsync();
+            ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
             return View(ogrenciler);
         }
 
