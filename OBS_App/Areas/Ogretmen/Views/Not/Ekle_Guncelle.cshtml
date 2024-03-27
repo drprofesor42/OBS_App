@@ -88,7 +88,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Ders <span class="login-danger">*</span></label>
-                                <select asp-for="DersId" asp-items="ViewBag.Dersler" class="form-control select">
+                                <select asp-for="DersId" asp-items="ViewBag.Dersler" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="DersId" class="text-danger"></span>
@@ -97,7 +97,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Öğrenci <span class="login-danger">*</span></label>
-                                <select asp-for="OgrencisId" asp-items="ViewBag.Ogrenciler" class="form-control select">
+                                <select asp-for="OgrencisId" asp-items="ViewBag.Ogrenciler" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="OgrencisId" class="text-danger"></span>
