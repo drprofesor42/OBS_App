@@ -100,11 +100,7 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             var fakulte = _context.Fakulteler.FirstOrDefault(x => x.Id == id);
 
-            if (id == 0 || fakulte == null)
-            {
-                // Hata Gönder
-            }
-            else
+            if (id != 0 || fakulte != null)
             {
                 _context.Remove(fakulte);
                 _context.SaveChanges();

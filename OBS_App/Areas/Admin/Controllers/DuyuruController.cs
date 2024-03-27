@@ -42,7 +42,6 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
-
                 return View();
             }
             else
@@ -101,11 +100,7 @@ namespace OBS_App.Areas.Admin.Controllers
         public IActionResult Sil(int id)
         {
             var duyuru = _context.Duyurular.FirstOrDefault(x => x.Id == id);
-            if (duyuru == null)
-            {
-                // Hata gönder
-            }
-            else
+            if (duyuru != null)
             {
                 _context.Remove(duyuru);
                 _context.SaveChanges();
@@ -126,10 +121,9 @@ namespace OBS_App.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
 
             }
-
             return Json(bildirim);
-
         }
+
         [HttpPost]
         public async Task<IActionResult> Bildirim()
         {

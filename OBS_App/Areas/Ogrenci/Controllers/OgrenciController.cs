@@ -24,7 +24,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-
 			var kullanıcı = await _userManager.GetUserAsync(User);
 			if (kullanıcı != null)
 			{
@@ -128,7 +127,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 					return View(danisman);
 				}
 			}
-
 			// Hata Gönder
 			return View();
 		}
@@ -178,7 +176,6 @@ namespace OBS_App.Areas.Ogrenci.Controllers
 
 					return View(danisman);
 				}
-
 			}
 			// Hata Gönder
 			return View();

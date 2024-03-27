@@ -26,6 +26,7 @@ namespace OBS_App.Areas.Admin.Controllers
             var ogretmenler = await _context.Ogretmenler.Include(x => x.Adres).ToListAsync();
             return View(ogretmenler);
         }
+
         public async Task<IActionResult> Ekle_Guncelle(int id)
         {
             if (id == 0)
@@ -40,6 +41,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(ogrt);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogretmens model, int id, IFormFile? file)
         {
@@ -106,8 +108,7 @@ namespace OBS_App.Areas.Admin.Controllers
                         await _userManager.AddToRoleAsync(ogretmen, "Ogretmen");
                     }
  
-                      
-                    
+
                     await _context.Ogretmenler.AddAsync(model);
                     await _context.SaveChangesAsync();
                     TempData["success"] = "Kayıt eklendi.";
@@ -169,6 +170,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(model);
             }
         }
+
         public async Task<IActionResult> Sil(int? id)
         {
 

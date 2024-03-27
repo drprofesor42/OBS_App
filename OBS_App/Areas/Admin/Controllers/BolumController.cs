@@ -31,7 +31,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 ViewBag.Fakulteler = new SelectList(await _context.Fakulteler.ToListAsync(), "Id", "FakulteAd");
                 ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 return View();
-
             }
             else
             {
@@ -41,6 +40,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(bolum);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Bolum model, int id)
         {
@@ -82,14 +82,10 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(model);
             }
         }
+
         public async Task<IActionResult> Sil(int? id)
         {
-            if (id == null)
-            {
-                //Hata mesajı bolum bulunamadı
-                return RedirectToAction("Index");
-            }
-            else
+            if (id != null)
             {
                 var bolum = await _context.Bolumler.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -97,14 +93,9 @@ namespace OBS_App.Areas.Admin.Controllers
                 {
                     _context.Bolumler.Remove(bolum);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-
             }
+            return RedirectToAction("Index");
         }
         public async Task<IActionResult> Detay(int id)
         {

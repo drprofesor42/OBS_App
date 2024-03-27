@@ -29,22 +29,20 @@ namespace OBS_App.Areas.Admin.Controllers
         {
             if (id == 0)
             {
-
                 ViewBag.Ders = new SelectList(_context.Dersler.Where(d => d.OgretmensId == null).ToList(), "Id", "DersAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
-                return View();
             }
             else
             {
                 ViewBag.Ders = new SelectList(_context.Dersler.Where(x => x.Id == id), "Id", "DersAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "Id", "OgretmenAdSoyad");
-                return View();
             }
+            return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> DersAtaGuncelle(Ders model, int id)
         {
-
             var ders = _context.Dersler.FirstOrDefault(a => a.Id == id);
 
             if (ders != null)
@@ -68,27 +66,25 @@ namespace OBS_App.Areas.Admin.Controllers
             var bolum = await _context.Bolumler.ToListAsync();
             return View(bolum);
         }
+
         public async Task<IActionResult> BaskanAtaGuncelle(int id)
         {
             if (id == 0)
             {
                 ViewBag.Bolumler = new SelectList(_context.Bolumler.Where(b => b.BolumBaskani == "Seçiniz").ToList(), "Id", "BolumAd");
                 ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
-                return View();
-
             }
             else
             {
                 ViewBag.Bolumler = new SelectList(_context.Bolumler.Where(x => x.Id == id), "Id", "BolumAd");
                 ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
-                return View();
             }
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> BaskanAtaGuncelle(Bolum model, int id)
         {
-
             var bolum = _context.Bolumler.FirstOrDefault(b => b.Id == id);
             if (bolum != null)
             {
@@ -122,6 +118,7 @@ namespace OBS_App.Areas.Admin.Controllers
             var ogrenci = await _context.Ogrenciler.ToListAsync();
             return View(ogrenci);
         }
+
         public async Task<IActionResult> DanismanAtaGuncelle(int id)
         {
             if (id == 0)
@@ -129,15 +126,15 @@ namespace OBS_App.Areas.Admin.Controllers
 
                 ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.Where(d => d.OgrenciDanisman == null).ToList(), "Id", "OgrenciAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
-                return View();
             }
             else
             {
                 ViewBag.Ogrenci = new SelectList(_context.Ogrenciler.Where(x => x.Id == id), "Id", "OgrenciAd");
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
-                return View();
             }
+            return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> DanismanAtaGuncelle(Ogrencis model, int id)
         {
@@ -158,7 +155,6 @@ namespace OBS_App.Areas.Admin.Controllers
                 ViewBag.Ogretmen = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenAdSoyad", "OgretmenAdSoyad");
                 return View(model);
             }
-
         }
     }
 

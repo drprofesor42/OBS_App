@@ -48,6 +48,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(ogrenci);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(Ogrencis model, int id, IFormFile? file)
         {
