@@ -47,7 +47,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Telefon Numarası<span class="login-danger">*</span></label>
-                                <input asp-for="OgretmenTelefon" class="form-control" type="text">
+                                <input id="telefon" asp-for="OgretmenTelefon" class="form-control" type="text">
                                 <span asp-validation-for="OgretmenTelefon" class="text-danger"></span>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Görüşme Saati Aralığı<span class="login-danger">*</span></label>
-                                <input asp-for="OgretmenGorusme" type="text" class="form-control">
+                                <input id="saat_aralık" asp-for="OgretmenGorusme" type="text" class="form-control">
                                 <span asp-validation-for="OgretmenGorusme" class="text-danger"></span>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>E-Posta<span class="login-danger">*</span></label>
-                                <input asp-for="OgretmenEposta" type="email" class="form-control">
+                                <input asp-for="OgretmenEposta" id="email" type="email" class="form-control">
                                 <span asp-validation-for="OgretmenEposta" class="text-danger"></span>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Bölüm Seç<span class="login-danger">*</span></label>
-                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select">
+                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="BolumId" class="text-danger"></span>
@@ -168,6 +168,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script>
         document.querySelector("#files").onchange = function () {
@@ -175,5 +176,7 @@
             const label = document.querySelector("label[for=files]");
             label.innerText = fileName ?? "FOTOĞRAF YÜKLE (150 X 150)";
         };
+
     </script>
+    
 }

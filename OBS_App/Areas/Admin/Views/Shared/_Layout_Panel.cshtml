@@ -17,7 +17,10 @@
     <link rel="stylesheet" href="~/panel/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="~/panel/css/ckeditor.css">
     <link rel="stylesheet" href="~/panel/css/style.css">
-    <link href="~/panel/plugins/toastr/toatr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/panel/plugins/toastr/toatr.css" />
+
+
+
 
 </head>
 
@@ -207,11 +210,12 @@
         </div>
 
         <div class="page-wrapper">
-            <div class="content container-fluid">
+            <div class="content container-fluid modal-bildirim">
 
 
 
                 @RenderBody()
+
 
             </div>
         </div>
@@ -231,6 +235,7 @@
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/panel/plugins/toastr/toastr.min.js" type="text/javascript"></script>
     <script src="~/panel/plugins/toastr/toastr.js" type="text/javascript"></script>
+    <script src="~/panel/js/jquery.maskedinput.min.js"></script>
     @RenderSection("Scripts", required: false)
 
     <script>
@@ -262,6 +267,22 @@
 
                             let ilkbeskelime = item.bildirimDuyuru.split(" ").slice(0, 5).join(" ");
                             $(".notification-list").prepend('<li class="notification-message"><a  data-id="' + item.id + '"" ><div class="row"><div class="col-10"><div class="media d-flex"><div class="media-body flex-grow-1"><p class="noti-details"><span class="noti-title">' + (item.bildirimOkunma == false ? '<strong>' + item.bildirimBaslik + '</strong>' : item.bildirimBaslik) + '</span></p><p class="noti-details"><span class="noti-title">' + (item.bildirimOkunma == false ? '<strong>' + ilkbeskelime + '</strong>' : ilkbeskelime) + "..." + '</span></p><p class="noti-time"><span class="notification-time">' + new Date().toLocaleString() + '</span></p></div></div></div></div></a></li>');
+
+                            $(".modal-bildirim").after(' \
+                                    <div class="modal fade text-center" id="duyuru_' + item.id + '" tabindex="-1" role="dialog" aria-hidden="true"> \
+                                        <div class="modal-dialog modal-dialog-centered"> \
+                                            <div style="background-color: ghostwhite; border-radius: 20px" class="modal-content"> \
+                                                <div style="background-color: royalblue;" class="modal-header"> \
+                                                    <h5 style="flex: 50%; color: aliceblue" class="modal-title">' + item.bildirimBaslik + '</h5> \
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> \
+                                                </div> \
+                                                <div class="modal-body"> \
+                                                    <p>' + item.bildirimDuyuru + '</p> \
+                                                </div> \
+                                            </div> \
+                                        </div> \
+                                    </div>'
+                            );
 
                         });
 
@@ -298,10 +319,18 @@
                 fetch('@Url.Action("Bildirim", "Duyuru")/' + id)
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                            console.log("Hata");
+                            console.log("Duyuru okuma Hatası");
                         }
+                        return response.json(); // Yanıtı JSON olarak dönüştür
+                    })
+                    .then(data => {
+                        // Burada veriyi işle
+                        console.log(data);
                         bildirimcagir();
+                        $('#duyuru_' + id).modal('show');
+                    })
+                    .catch(error => {
+                        console.error('Hata:', error);
                     });
             });
 
@@ -316,8 +345,38 @@
                         }
                         bildirimcagir();
                     });
+
             });
         });
+
+        // jquery mask
+        $(document).ready(function (){
+            $("input[id=saat]").mask("99:99")
+            $("input[id=akts]").mask("99")
+            $("input[id=derskod]").mask("aaa999"/* , {placeholder: "KODXXX"} */ )
+            $("input[id=telefon]").mask("0 (999) 999 99 99")
+            $("input[id=tc]").mask("99999999999")
+            $("input[id=saat_aralık]").mask("99:99 - 99:99")
+        })
+
+        document.querySelector("form").addEventListener("submit", function (event) {
+            // Telefon numarasını al
+            var telefonInput = document.getElementById("telefon");
+            var telefonNumarasi = telefonInput.value;
+
+            // Telefon numarasını formatla
+            var formatliTelefon = formatPhoneNumber(telefonNumarasi);
+
+            // Formatlanmış telefon numarasını input'a geri yaz
+            telefonInput.value = formatliTelefon;
+        });
+
+        function formatPhoneNumber(phoneNumber) {
+            // Telefon numarasından parantezleri ve boşlukları kaldır
+            return phoneNumber.replace(/\D/g, '');
+        }
+
+
     </script>
 </body>
 </html>

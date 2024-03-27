@@ -64,21 +64,21 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Ödev Saat </label>
-                                <input asp-for="NotOdevSaat" class="form-control" type="text">
+                                <input name="saat" asp-for="NotOdevSaat" class="form-control" type="text">
                                 <span asp-validation-for="NotOdevSaat" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Vize Saat </label>
-                                <input asp-for="NotVizeSaat" class="form-control" type="text">
+                                <input name="saat" asp-for="NotVizeSaat" class="form-control" type="text">
                                 <span asp-validation-for="NotVizeSaat" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Final Saat</label>
-                                <input asp-for="NotFinalSaat" class="form-control" type="text">
+                                <input name="saat" asp-for="NotFinalSaat" class="form-control" type="text">
                                 <span asp-validation-for="NotFinalSaat" class="text-danger"></span>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Ders <span class="login-danger">*</span></label>
-                                <select asp-for="DersId" asp-items="ViewBag.Dersler" class="form-control select">
+                                <select asp-for="DersId" asp-items="ViewBag.Dersler" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="DersId" class="text-danger"></span>
@@ -97,7 +97,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Öğrenci <span class="login-danger">*</span></label>
-                                <select asp-for="OgrencisId" asp-items="ViewBag.Ogrenciler" class="form-control select">
+                                <select asp-for="OgrencisId" asp-items="ViewBag.Ogrenciler" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="OgrencisId" class="text-danger"></span>

@@ -16,7 +16,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>TC Kimlik Numarası<span class="login-danger">*</span></label>
-                                <input asp-for="OgrenciTc" class="form-control">
+                                <input id="tc" asp-for="OgrenciTc" class="form-control">
                                 <span asp-validation-for="OgrenciTc" class="text-danger"></span>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Telefon Numarası<span class="login-danger">*</span></label>
-                                <input asp-for="OgrenciTelefon" class="form-control" type="text">
+                                <input id="telefon" asp-for="OgrenciTelefon" class="form-control" type="text">
                                 <span asp-validation-for="OgrenciTelefon" class="text-danger"></span>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Bölüm Seç<span class="login-danger">*</span></label>
-                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select">
+                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="BolumId" class="text-danger"></span>
@@ -163,7 +163,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Danışman Seç<span class="login-danger">*</span></label>
-                                <select asp-for="OgrenciDanisman" asp-items="ViewBag.Ogretmen" class="form-control select">
+                                <select asp-for="OgrenciDanisman" asp-items="ViewBag.Ogretmen" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="OgrenciDanisman" class="text-danger"></span>
