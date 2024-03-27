@@ -230,6 +230,7 @@
     <script src="~/panel/plugins/toastr/toastr.js"></script>
     <script src="~/panel/plugins/simple-calendar/jquery.simple-calendar.js"></script>
     <script src="~/panel/js/calander.js"></script>
+    <script src="~/panel/js/jquery.maskedinput.min.js"></script>
 
     @RenderSection("Scripts", required: false)
     <script>
@@ -313,6 +314,11 @@
                     })
             });
         });
+
+        // jquery mask
+        $(document).ready(function () {
+            $("input[name=saat]").mask("99:99")
+        })
     </script>
 </body>
 </html>

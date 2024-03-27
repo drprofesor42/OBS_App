@@ -232,6 +232,7 @@
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/panel/plugins/toastr/toastr.min.js" type="text/javascript"></script>
     <script src="~/panel/plugins/toastr/toastr.js" type="text/javascript"></script>
+    <script src="~/panel/js/jquery.maskedinput.min.js"></script>
     @RenderSection("Scripts", required: false)
 
     <script>
@@ -267,6 +268,35 @@
 
             });
         });
+
+        // jquery mask
+        $(document).ready(function (){
+            $("input[id=saat]").mask("99:99")
+            $("input[id=akts]").mask("99")
+            $("input[id=derskod]").mask("aaa999"/* , {placeholder: "KODXXX"} */ )
+            $("input[id=telefon]").mask("0 (999) 999 99 99")
+            $("input[id=tc]").mask("99999999999")
+            $("input[id=saat_aralık]").mask("99:99 - 99:99")
+        })
+
+        document.querySelector("form").addEventListener("submit", function (event) {
+            // Telefon numarasını al
+            var telefonInput = document.getElementById("telefon");
+            var telefonNumarasi = telefonInput.value;
+
+            // Telefon numarasını formatla
+            var formatliTelefon = formatPhoneNumber(telefonNumarasi);
+
+            // Formatlanmış telefon numarasını input'a geri yaz
+            telefonInput.value = formatliTelefon;
+        });
+
+        function formatPhoneNumber(phoneNumber) {
+            // Telefon numarasından parantezleri ve boşlukları kaldır
+            return phoneNumber.replace(/\D/g, '');
+        }
+
+
     </script>
 </body>
 </html>
