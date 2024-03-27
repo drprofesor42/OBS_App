@@ -60,7 +60,6 @@ namespace OBS_App.Data
         public ICollection<Ders> Dersler { get; set; } = new List<Ders>();
         public ICollection<Duyuru> Duyurular { get; set; } = new List<Duyuru>();
         public ICollection<Ogrencis> Ogrencisler { get; set; } = new List<Ogrencis>();
-        public ICollection<Ogretmens> Ogretmensler { get; set; } = new List<Ogretmens>();
         public ICollection<Not> Notlar { get; set; } = new List<Not>();
 
 

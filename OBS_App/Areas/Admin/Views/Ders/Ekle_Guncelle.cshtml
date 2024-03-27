@@ -28,7 +28,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Ders Günü <span class="login-danger">*</span></label>
-                                <select asp-for="DersGün" class="form-control select">
+                                <select asp-for="DersGün" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                     <option value="Pazartesi">Pazartesi</option>
                                     <option value="Salı">Salı</option>
@@ -63,7 +63,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Bolümünü Seçiniz<span class="login-danger">*</span></label>
-                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select">
+                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="BolumId" class="text-danger"></span>
@@ -72,7 +72,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Öğretmenini Seçiniz</label>
-                                <select asp-for="OgretmensId" asp-items="ViewBag.Ogretmen" class="form-control select">
+                                <select asp-for="OgretmensId" asp-items="ViewBag.Ogretmen" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="OgretmensId" class="text-danger"></span>

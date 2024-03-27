@@ -151,7 +151,7 @@
                         <div class="col-12 col-sm-4">
                             <div class="form-group local-forms">
                                 <label>Bölüm Seç<span class="login-danger">*</span></label>
-                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select">
+                                <select asp-for="BolumId" asp-items="ViewBag.Bolum" class="form-control select2">
                                     <option value="">Seçiniz</option>
                                 </select>
                                 <span asp-validation-for="BolumId" class="text-danger"></span>
@@ -176,4 +176,5 @@
             label.innerText = fileName ?? "FOTOĞRAF YÜKLE (150 X 150)";
         };
     </script>
+    
 }
