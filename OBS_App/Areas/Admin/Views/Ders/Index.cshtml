@@ -112,7 +112,7 @@
                                                         <div class="form-group local-forms">
                                                             <input type="hidden" name="modal" value="@ders.Id" />
                                                             <label>Öğretmen Seçiniz.<span class="login-danger">*</span></label>
-                                                            <select name="ogretmenAdSoyad" asp-items="ViewBag.Ogretmen" class="form-control select2">
+                                                            <select name="ogretmenAdSoyad" asp-items="ViewBag.Ogretmen" class="form-control">
                                                                 <option>Seçiniz</option>
                                                             </select>
                                                             <span asp-validation-for="@ders.OgretmensId" class="text-danger"></span>
