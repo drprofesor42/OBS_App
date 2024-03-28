@@ -95,13 +95,9 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
 				// Son 5 Akademik Takvim verileri
 				ViewBag.takvim = _context.AkademikTakvimler.OrderByDescending(x => x.Id).Take(5).ToList();
-
-
 			}
-
 			return View();
         }
-
 
 		[HttpPost]
 		public IActionResult DersBasarisi()
@@ -122,7 +118,6 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
 				foreach (var not in dersNotlari)
 				{
-
 					decimal toplamNot = 0;
 					decimal toplamAgirlik = 0;
 
@@ -159,10 +154,8 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 					GecenOgrenciSayisi = gecenOgrenciSayisi,
 					KalanOgrenciSayisi = kalanOgrenciSayisi
 				};
-
 				dersBasarilari.Add(dersBasarisi);
 			}
-
 			return Json(dersBasarilari);
 		}
 
@@ -200,7 +193,6 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
 		public async Task<IActionResult> Profilim()
         {
-
             var users = await _userManager.GetUserAsync(User);
 
             var ogretmen = _context.Ogretmenler

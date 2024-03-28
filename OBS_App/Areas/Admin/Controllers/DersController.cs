@@ -92,16 +92,10 @@ namespace OBS_App.Areas.Admin.Controllers
         public IActionResult Sil(int id)
         {
             var ders = _context.Dersler.FirstOrDefault(x => x.Id == id);
-            if (ders == null)
-            {
-                // TempData Hata Gönder
-                return RedirectToAction("Index");
-            }
-            else
+            if (ders != null)
             {
                 _context.Remove(ders);
                 _context.SaveChanges();
-
             }
 
             return RedirectToAction("Index");

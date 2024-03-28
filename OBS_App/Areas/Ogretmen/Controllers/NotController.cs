@@ -100,18 +100,12 @@ namespace OBS_App.Areas.Ogretmen.Controllers
         public IActionResult Sil(int id)
         {
             var not = _context.Notlar.FirstOrDefault(x => x.Id == id);
-            if (not == null)
-            {
-                // TempData Hata Gönder
-            }
-            else
+            if (not != null)
             {
                 _context.Remove(not);
                 _context.SaveChanges();
             }
-
             return RedirectToAction("Index");
         }
-
     }
 }

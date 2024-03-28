@@ -70,19 +70,18 @@ namespace OBS_App.Areas.Admin.Controllers
             if (id == 1)
             {
                 ViewBag.user = new SelectList(await _context.Ogrenciler.ToListAsync(), "OgrenciEposta", "OgrenciEposta");
-                return View();
             }
             else if (id == 2)
             {
                 ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
-                return View();
             }
             else
             {
                 TempData["success"] = "Şifre başarıyla değiştirildi.";
-                return View();
             }
+            return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> SifreDegistir(SifreDegistirViewsModel model, int id)
         {
@@ -100,8 +99,6 @@ namespace OBS_App.Areas.Admin.Controllers
                         TempData["success"] = "Şifre başarıyla değiştirildi!";
                     }
                     ViewBag.user = new SelectList(await _context.Ogrenciler.ToListAsync(), "OgrenciEposta", "OgrenciEposta");
-
-                    return RedirectToAction("Index");
                 }
 
                 //ogretmen
@@ -116,7 +113,6 @@ namespace OBS_App.Areas.Admin.Controllers
                         TempData["success"] = "Şifre başarıyla değiştirildi!";
                     }
                     ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
-                    return RedirectToAction("Index");
                 }
 
                 else//admin
@@ -140,12 +136,10 @@ namespace OBS_App.Areas.Admin.Controllers
             if (id == 1)
             {
                 ViewBag.user = new SelectList(await _context.Ogrenciler.ToListAsync(), "OgrenciEposta", "OgrenciEposta");
-                return View(model);
             }
             else if (id == 2)
             {
                 ViewBag.user = new SelectList(await _context.Ogretmenler.ToListAsync(), "OgretmenEposta", "OgretmenEposta");
-                return View(model);
             }
             return View(model);
         }
