@@ -105,6 +105,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 var deneme = _context.Bolumler.FirstOrDefault(b => b.Id == modal);
                 if (deneme != null)
                 {
+
                     deneme.BolumBaskani = bolumBaskani;
                     _context.Bolumler.Update(deneme);
                     await _context.SaveChangesAsync();
