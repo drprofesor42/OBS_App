@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using OBS_App.Models;
+using System.Text.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace OBS_App.Areas.Ogrenci.Controllers
 {
@@ -44,13 +47,14 @@ namespace OBS_App.Areas.Ogrenci.Controllers
             return View();
 
         }
-        [HttpPost]
-        public async Task<IActionResult> DersProgrami(int id)
+        public async Task<IActionResult> DersProgramiTakvim()
         {
             var kullanıcı = await _userManager.GetUserAsync(User);
-            var ogrenci = await _context.Ogrenciler.Include(x => x.Dersler).FirstOrDefaultAsync(x => x.OgrenciEposta == kullanıcı.Email);
+            var ogrenci = await _context.Ogrenciler.FirstOrDefaultAsync(x => x.OgrenciEposta == kullanıcı.Email);
+            var dersler = await _context.Dersler.Where(x => x.Bolum.Id == ogrenci.BolumId).ToListAsync();
+            return Json(dersler);
 
-            return Json(ogrenci);
+
         }
 
         public async Task<IActionResult> SınavSonuc()

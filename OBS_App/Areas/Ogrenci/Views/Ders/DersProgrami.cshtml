@@ -17,8 +17,92 @@
 </div>
 @section Scripts {
     <script>
+        !function ($) {
+            "use strict";
+
+            // CalendarApp sınıfı tanımlanıyor
+            var CalendarApp = function () {
+                // Takvim öğesini seçmek için jQuery ile DOM öğesi seçici atanıyor
+                this.$calendar = $('#calendar');
+            };
 
 
+            // CalendarApp sınıfının prototipine init() metodu ekleniyor
+            CalendarApp.prototype.init = function () {
+
+                $.ajax({
+                    url: '@Url.Action("DersProgramiTakvim", "Ders")',
+                    method: 'GET',
+                    success: function (data) {
+
+                        console.log(data);
+
+
+                        var defaultEvents = [];
+                        var today = new Date($.now());
+
+                        data.forEach(function (ders) {
+                            var event = {
+                                title: ders.dersAd,
+                                start: today,
+                                end: today,
+                                className: 'bg-success'
+                            };
+                            defaultEvents.push(event);
+                        });
+                        $('#calendar').fullCalendar('renderEvents', events, true);
+                    },
+                    error: function (xhr, status, error) {
+
+                        console.error(error);
+
+                    }
+                });
+
+
+                this.$calendar.fullCalendar({
+                    // Takvim görünümü ve düzenlemeye izin verilmeyen diğer ayarlar belirleniyor
+                    defaultView: 'month',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    events: defaultEvents, // Varsayılan etkinlikler takvime atanıyor
+                    editable: false, // Takvimde düzenlemeye izin verilmiyor
+                    droppable: false, // Etkinliklerin sürüklenip bırakılmasına izin verilmiyor
+                    eventLimit: false, // Etkinlik sınırlaması devre dışı bırakılıyor
+                    selectable: false // Etkinlik seçilebilirliği devre dışı bırakılıyor
+                });
+
+                // Yeni etkinlik eklemek için düğmeye tıklama olayı ekleniyor
+                $('#addEventBtn').on('click', function () {
+                    // Kullanıcıdan etkinlik adını almak için bir iletişim kutusu açılıyor
+                    var categoryName = prompt("Etkinlik adı girin:");
+                    if (categoryName && categoryName.trim().length > 0) {
+                        // Kullanıcının girdiği adı kullanarak yeni bir etkinlik oluşturuluyor
+                        var newEvent = {
+                            title: categoryName,
+                            start: today, // Yeni etkinliğin başlangıç tarihi bugün
+                            className: 'bg-primary' // Yeni etkinliğin sınıfı (renk)
+                        };
+                        // Yeni etkinlik takvime ekleniyor
+                        $('#calendar').fullCalendar('renderEvent', newEvent, true);
+                    }
+                });
+            };
+
+            // CalendarApp sınıfı ve prototipi tanımlandıktan sonra, bir örneği oluşturuluyor
+            $.CalendarApp = new CalendarApp;
+            $.CalendarApp.Constructor = CalendarApp;
+
+        }(window.jQuery),
+
+            // Oluşturulan CalendarApp örneği başlatılıyor
+            function ($) {
+                "use strict";
+                $.CalendarApp.init(); // CalendarApp başlatılıyor
+            }(window.jQuery);
 
 
     </script>
