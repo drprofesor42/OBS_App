@@ -89,7 +89,7 @@
                                                         <div class="form-group local-forms">
                                                             <input type="hidden" name="modal" value="@bolum.Id" />
                                                             <label>Bölüm Başkanı Seçiniz.<span class="login-danger">*</span></label>
-                                                            <select name="bolumBaskani" asp-items="ViewBag.Ogretmenler" class="form-control select2">
+                                                            <select name="bolumBaskani" asp-items="ViewBag.Ogretmenler" class="form-control">
                                                                 <option>Seçiniz</option>
                                                             </select>
                                                             <span asp-validation-for="@bolum.BolumBaskani" class="text-danger"></span>
