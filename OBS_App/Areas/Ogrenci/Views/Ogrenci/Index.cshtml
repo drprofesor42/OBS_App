@@ -202,7 +202,7 @@
 			<div class="card-header d-flex align-items-center">
 				<h5 class="card-title ">Son Duyurular </h5>
 				<ul class="chart-list-out student-ellips">
-					<a  asp-controller="Ogrenci" asp-action="Duyurular" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
+					<a  asp-controller="Duyuru" asp-action="Index" style="margin-right:20px" class="btn btn-primary btn-sm">Tüm Duyurular</a>
 				</ul>
 			</div>
 			<div class="card-body">
@@ -217,14 +217,27 @@
 									<img width="30px" src="~/panel/img/icons/award-icon-03.svg">
 								</div>
 								<div class="award-list-outs">
-									<h4>@duyuru.DuyuruBaslik</h4>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#duyuruModal_@duyuru.Id">@duyuru.DuyuruBaslik</a>
 									<h5 class="duyuruMesaj">@duyuru.DuyuruMesaj</h5>
 								</div>
 								<div style="text-align:center; display: flex; justify-content: center;" class="award-time-list">
 									<div class="col">
 										<span>@duyuru.OlusturmaTarihi</span>
 										<br>
-										<a style="margin-top:5px" class="btn btn-primary btn-sm">Duyuruya Git</a>
+									</div>
+								</div>
+							</div>
+					//Modal
+							<div class="modal fade text-center" id="duyuruModal_@duyuru.Id" tabindex="-1" role="dialog" data-bs-toggle="modal" data-bs-target="#duyuruModal_@duyuru.Id" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div style="background-color:ghostwhite; border-radius:20px" class="modal-content">
+										<div style="background-color:royalblue;" class="modal-header">
+											<h5 style="flex: 50%; color:aliceblue" class="modal-title" id="duyuruModalLabel_@duyuru.Id">@duyuru.DuyuruBaslik</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<p>@duyuru.DuyuruMesaj</p>
+										</div>
 									</div>
 								</div>
 							</div>

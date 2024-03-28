@@ -72,6 +72,8 @@
                                             <a asp-action="Ekle_Guncelle" asp-route-id="@ogr.Id" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
+                                            <button type="button" class="btn btn-sm bg-success-light me-2" data-bs-toggle="modal" data-bs-target="#asdf_@ogr.Id"><i class="fas fa-user"></i></button>
+
                                             <a onclick="confirmDelete(@ogr.Id)" class="btn btn-sm bg-danger-light">
                                                 <i class="feather-trash-2"></i>
                                             </a>
@@ -133,7 +135,37 @@
                                             </div>
                                         </div>
                                     </div>
-                              
+                                <div id="asdf_@ogr.Id" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div style="background-color:ghostwhite; border-radius:20px;" class="modal-content">
+                                            <div style="background-color:royalblue" class="modal-header">
+                                                <h4 class="modal-title">Danışman Atama İşlemleri</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-4">
+                                                <div class="row">
+                                                    <form asp-action="DanismanAtaGuncelle" asp-controller="Atama" method="post">
+                                                        <div class="col-12 col-sm-12">
+                                                            <div class="form-group local-forms">
+                                                                <input type="hidden" name="modal" value="@ogr.Id" />
+                                                                <label>Danışman Seçiniz.<span class="login-danger">*</span></label>
+                                                                <select name="ogretmenAdSoyad" asp-items="ViewBag.Ogretmen" class="form-control">
+                                                                    <option>Seçiniz</option>
+                                                                </select>
+                                                                <span asp-validation-for="@ogr.OgrenciDanisman" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <div class="student-submit">
+                                                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                              
                             }
                         </tbody>
                     </table>

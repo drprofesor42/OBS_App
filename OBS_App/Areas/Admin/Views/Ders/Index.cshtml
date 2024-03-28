@@ -90,12 +90,45 @@
                                         <a asp-controller="Ders" asp-action="Ekle_Guncelle" asp-route-id="@ders.Id" class="btn btn-sm bg-danger-light me-2">
                                             <i class="feather-edit"></i>
                                         </a>
+                                        <button type="button" class="btn btn-sm bg-success-light me-2" data-bs-toggle="modal" data-bs-target="#asdf_@ders.Id"><i class="fas fa-user"></i></button>
+
                                         <a onclick="confirmDelete(@ders.Id)" class="btn btn-sm bg-danger-light">
                                             <i class="feather-trash-2"></i>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
+                            <div id="asdf_@ders.Id" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div style="background-color:ghostwhite; border-radius:20px;" class="modal-content">
+                                        <div style="background-color:royalblue" class="modal-header">
+                                            <h4 class="modal-title">Öğretmen Atama İşlemleri</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            <div class="row">
+                                                <form asp-action="DersAtaGuncelle" asp-controller="Atama" method="post">
+                                                    <div class="col-12 col-sm-12">
+                                                        <div class="form-group local-forms">
+                                                            <input type="hidden" name="modal" value="@ders.Id" />
+                                                            <label>Öğretmen Seçiniz.<span class="login-danger">*</span></label>
+                                                            <select name="ogretmenAdSoyad" asp-items="ViewBag.Ogretmen" class="form-control">
+                                                                <option>Seçiniz</option>
+                                                            </select>
+                                                            <span asp-validation-for="@ders.OgretmensId" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 text-center">
+                                                        <div class="student-submit">
+                                                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
                     </tbody>
                 </table>
