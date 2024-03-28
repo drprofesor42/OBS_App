@@ -43,7 +43,6 @@ namespace OBS_App.Areas.Ogretmen.Controllers
             {
                 var ogretmen = _context.Ogretmenler.FirstOrDefault(x => x.OgretmenEposta == kullanıcı.Email);
                 ViewBag.kullanıcıId = ogretmen.Id;
-
             }
 
             return View(duyurular);
@@ -123,8 +122,6 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                     return RedirectToAction("Index");
                 }
             }
-
-
             return View(model);
         }
 
@@ -154,12 +151,10 @@ namespace OBS_App.Areas.Ogretmen.Controllers
                 okundu.BildirimOkunma = true;
                 _context.Bildirimler.Update(okundu);
                 await _context.SaveChangesAsync();
-
             }
-
             return Json(bildirim);
-
         }
+
         [HttpPost]
         public async Task<IActionResult> Bildirim()
         {

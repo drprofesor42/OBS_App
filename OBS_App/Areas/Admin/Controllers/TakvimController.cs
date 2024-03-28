@@ -35,6 +35,7 @@ namespace OBS_App.Areas.Admin.Controllers
                 return View(takvim);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Ekle_Guncelle(AkademikTakvim model, int id)
         {
@@ -64,7 +65,6 @@ namespace OBS_App.Areas.Admin.Controllers
         }
 
 
-
         public async Task<IActionResult> Sil(int? id)
         {
 
@@ -78,16 +78,7 @@ namespace OBS_App.Areas.Admin.Controllers
                     return RedirectToAction("Index");
 
                 }
-                else
-                {
-                    //Kullanıcı bulunamadı
-                }
             }
-            else
-            {
-                //hata mesajı
-            }
-
             return View();
         }
 

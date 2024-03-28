@@ -15,6 +15,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
             _context = context;
             _userManager = userManager;
         }
+
         public async  Task<IActionResult> Index()
         {
             var kullanıcı = await _userManager.GetUserAsync(User);
@@ -29,6 +30,7 @@ namespace OBS_App.Areas.Ogrenci.Controllers
             var duyurular = _context.Duyurular.Include(x => x.Ogretmens).ToList();
             return View(duyurular);
         }
+
         public async Task<IActionResult> Bildirim(int id)
         {
             var user = _userManager.GetUserAsync(User).Result;
@@ -42,10 +44,9 @@ namespace OBS_App.Areas.Ogrenci.Controllers
                 await _context.SaveChangesAsync();
 
             }
-
             return Json(bildirim);
-
         }
+
         [HttpPost]
         public async Task<IActionResult> Bildirim()
         {

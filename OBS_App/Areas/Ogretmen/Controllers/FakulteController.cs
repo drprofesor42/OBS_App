@@ -37,7 +37,5 @@ namespace OBS_App.Areas.Ogretmen.Controllers
 
             return View(takvimler);
         }
-
-
     }
 }
