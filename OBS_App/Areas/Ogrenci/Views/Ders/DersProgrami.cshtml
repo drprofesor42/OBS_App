@@ -29,28 +29,26 @@
 
             // CalendarApp sınıfının prototipine init() metodu ekleniyor
             CalendarApp.prototype.init = function () {
-
+                var defaultEventss = [];
                 $.ajax({
                     url: '@Url.Action("DersProgramiTakvim", "Ders")',
                     method: 'GET',
                     success: function (data) {
-
                         console.log(data);
 
-
-                        var defaultEvents = [];
                         var today = new Date($.now());
 
                         data.forEach(function (ders) {
-                            var event = {
+                            var events = {
+
                                 title: ders.dersAd,
                                 start: today,
                                 end: today,
-                                className: 'bg-success'
+                                className: 'bg-primary'
                             };
-                            defaultEvents.push(event);
+                            defaultEventss.push(events);
                         });
-                        $('#calendar').fullCalendar('renderEvents', events, true);
+                        createCalendar();
                     },
                     error: function (xhr, status, error) {
 
@@ -59,21 +57,24 @@
                     }
                 });
 
+                function createCalendar() {
+                    console.log(defaultEventss);
 
-                this.$calendar.fullCalendar({
-                    // Takvim görünümü ve düzenlemeye izin verilmeyen diğer ayarlar belirleniyor
-                    defaultView: 'month',
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    events: defaultEvents, // Varsayılan etkinlikler takvime atanıyor
-                    editable: false, // Takvimde düzenlemeye izin verilmiyor
-                    droppable: false, // Etkinliklerin sürüklenip bırakılmasına izin verilmiyor
-                    eventLimit: false, // Etkinlik sınırlaması devre dışı bırakılıyor
-                    selectable: false // Etkinlik seçilebilirliği devre dışı bırakılıyor
-                });
+                    $('#calendar').fullCalendar({
+                        // Takvim görünümü ve düzenlemeye izin verilmeyen diğer ayarlar belirleniyor
+                        defaultView: 'month',
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        events: defaultEventss, // Varsayılan etkinlikler takvime atanıyor
+                        editable: false, // Takvimde düzenlemeye izin verilmiyor
+                        droppable: false, // Etkinliklerin sürüklenip bırakılmasına izin verilmiyor
+                        eventLimit: false, // Etkinlik sınırlaması devre dışı bırakılıyor
+                        selectable: false // Etkinlik seçilebilirliği devre dışı bırakılıyor
+                    });
+                }
 
                 // Yeni etkinlik eklemek için düğmeye tıklama olayı ekleniyor
                 $('#addEventBtn').on('click', function () {
